@@ -70,7 +70,7 @@
         "@mantine/hooks": "^8.3.6",
         "@mui/icons-material": "^7.3.1",
         "@mui/lab": "^7.0.0-beta.16",
-        "@mui/material": "^7.3.1",
+        "@mui/material": "^7.3.7",
         "@nozbe/watermelondb": "^0.28.0",
         "@opentelemetry/api": "1.9.0",
         "@opentelemetry/core": "1.30.1",

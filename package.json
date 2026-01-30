@@ -82,7 +82,7 @@
         "@supabase/sentry-js-integration": "^0.3.0",
         "@supabase/ssr": "^0.7.0",
         "@supabase/supabase-js": "^2.93.3",
-        "@tiptap/extensions": "^3.7.2",
+        "@tiptap/extensions": "^3.18.0",
         "@types/dompurify": "^3.0.5",
         "@uploadcare/react-uploader": "^1.11.0",
         "@uploadcare/rest-client": "^6.17.0",

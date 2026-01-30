@@ -81,7 +81,7 @@
         "@serwist/next": "^9.2.3",
         "@supabase/sentry-js-integration": "^0.3.0",
         "@supabase/ssr": "^0.7.0",
-        "@supabase/supabase-js": "^2.86.0",
+        "@supabase/supabase-js": "^2.93.3",
         "@tiptap/extensions": "^3.7.2",
         "@types/dompurify": "^3.0.5",
         "@uploadcare/react-uploader": "^1.11.0",

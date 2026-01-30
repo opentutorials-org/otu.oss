@@ -122,7 +122,7 @@
         "react-router-dom": "^7.8.2",
         "ulid": "^2.3.0",
         "use-immer": "^0.11.0",
-        "zod": "^3.25.56"
+        "zod": "^4.3.6"
     },
     "devDependencies": {
         "@builder.io/partytown": "^0.10.3",

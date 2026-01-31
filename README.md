@@ -220,12 +220,6 @@ npm run supabase-stop              # Supabase 로컬 중지
 npm run supabase-generate-database-types  # 타입 정의 파일 생성
 ```
 
-#### 개발 유틸리티
-
-```bash
-npm run dev:cron:usage           # 사용량 초기화 (개발)
-```
-
 ### 브랜치 전략
 
 Git Flow를 따릅니다:
@@ -794,7 +788,6 @@ https://github.com/opentutorials-org/otu.ai/issues?q=is%3Aissue+label%3Atraining
 ### 알게 된 것
 
 - @supabase/ssr는 service role key를 지원하지 않습니다. 관리자 권한이 필요하다면 @supabase/supabase-js를 사용합니다.
-- vercel의 cron은 deploy를 한 후에 일정 시간(관찰 결과 약 6분)동안 실행이 되지 않습니다.
 - localStorage, cookie와 같이 브라우저에만 존재하는 api를 이용하는 코드는 useEffect 안에서만 사용해야 합니다.
 - anon은 익명 role이기 때문에 로그인 된 사용자와 관련된 RLS를 지정하려면 authenicated role을 사용해야 합니다.
 

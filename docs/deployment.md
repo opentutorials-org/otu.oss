@@ -45,7 +45,7 @@ npm run build
     - **Region**: 사용자에게 가장 가까운 지역 선택 (한국: `Northeast Asia (Seoul)`)
 4. **Create new project** 버튼을 클릭하고 프로젝트가 생성될 때까지 기다립니다 (약 2분 소요).
 
-[스크린샷 필요: Supabase 프로젝트 생성 화면]
+> 📖 **참고**: [Supabase 프로젝트 생성 가이드](https://supabase.com/docs/guides/getting-started)에서 자세한 단계별 안내를 확인하세요.
 
 ### 2단계: 데이터베이스 스키마 설정
 
@@ -85,7 +85,7 @@ npx supabase db push
     - 프로덕션: **활성화** (이메일 확인 필수)
     - 개발: **비활성화** (빠른 테스트용)
 
-[스크린샷 필요: Supabase 이메일 인증 설정 화면]
+> 📖 **참고**: [Supabase 이메일 인증 설정 가이드](https://supabase.com/docs/guides/auth/passwords)에서 자세한 설정 방법을 확인하세요.
 
 #### GitHub OAuth 설정 (선택)
 
@@ -98,7 +98,7 @@ npx supabase db push
 4. Supabase Dashboard에서 **Authentication** > **Providers** > **GitHub**로 이동합니다.
 5. **Enable GitHub provider**를 활성화하고 Client ID와 Secret을 입력합니다.
 
-[스크린샷 필요: GitHub OAuth 앱 생성 화면]
+> 📖 **참고**: [GitHub OAuth 앱 생성 가이드](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)에서 자세한 생성 방법을 확인하세요.
 
 #### Google OAuth 설정 (선택)
 
@@ -121,7 +121,7 @@ npx supabase db push
         - `https://your-domain.com`
         - `https://your-domain.com/**` (모든 경로 허용)
 
-[스크린샷 필요: Supabase URL 설정 화면]
+> 📖 **참고**: [Supabase Redirect URL 설정 가이드](https://supabase.com/docs/guides/auth/redirect-urls)에서 자세한 설정 방법을 확인하세요.
 
 ### 5단계: Row Level Security (RLS) 정책
 
@@ -145,7 +145,7 @@ Supabase Dashboard에서 **Project Settings** > **API**로 이동하여 다음 �
 - **anon/public key**: 클라이언트에서 사용 (공개 가능)
 - **service_role key**: 서버에서만 사용 (**절대 노출 금지**)
 
-[스크린샷 필요: Supabase API 키 확인 화면]
+> 📖 **참고**: [Supabase API 키 가이드](https://supabase.com/docs/guides/api/api-keys)에서 각 키의 용도와 보안 주의사항을 확인하세요.
 
 ---
 
@@ -160,7 +160,7 @@ Supabase Dashboard에서 **Project Settings** > **API**로 이동하여 다음 �
 3. GitHub 저장소 목록에서 `otu.oss` (또는 포크한 저장소)를 선택합니다.
 4. **Import**를 클릭합니다.
 
-[스크린샷 필요: Vercel 프로젝트 임포트 화면]
+> 📖 **참고**: [Vercel 프로젝트 시작 가이드](https://vercel.com/docs/getting-started-with-vercel)에서 자세한 단계별 안내를 확인하세요.
 
 #### 방법 B: Vercel CLI 사용
 
@@ -233,7 +233,7 @@ NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY=<your-public-key>
 UPLOADCARE_PRIVATE_KEY=<your-private-key>
 ```
 
-[스크린샷 필요: Vercel 환경 변수 설정 화면]
+> 📖 **참고**: [Vercel 환경 변수 설정 가이드](https://vercel.com/docs/projects/environment-variables)에서 자세한 설정 방법을 확인하세요.
 
 ### 4단계: 배포 실행
 
@@ -250,7 +250,7 @@ UPLOADCARE_PRIVATE_KEY=<your-private-key>
     - **CNAME 레코드**: `cname.vercel-dns.com`
 4. SSL 인증서가 자동으로 발급됩니다.
 
-[스크린샷 필요: Vercel 도메인 설정 화면]
+> 📖 **참고**: [Vercel 도메인 설정 가이드](https://vercel.com/docs/projects/domains)에서 자세한 설정 방법을 확인하세요.
 
 ---
 
@@ -276,11 +276,13 @@ UPLOADCARE_PRIVATE_KEY=<your-private-key>
 
 ### 환경별 설정 권장 사항
 
-| 환경       | ENABLE_AI | ENABLE_SENTRY | EMAIL_LOGIN | PWA               |
-| ---------- | --------- | ------------- | ----------- | ----------------- |
-| 로컬 개발  | `false`   | `false`       | `true`      | `true` (비활성화) |
-| Preview    | `true`    | `false`       | `false`     | `true` (비활성화) |
-| Production | `true`    | `true`        | `false`     | `false` (활성화)  |
+| 환경       | ENABLE_AI | SOCIAL_LOGIN | PWA               |
+| ---------- | --------- | ------------ | ----------------- |
+| 로컬 개발  | `false`   | `false`      | `true` (비활성화) |
+| Preview    | `true`    | `true`       | `true` (비활성화) |
+| Production | `true`    | `true`       | `false` (활성화)  |
+
+> **참고**: `NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN`은 소셜 로그인(Google/GitHub/Apple) 표시 여부를 제어합니다. 이메일 로그인은 항상 활성화되어 있습니다.
 
 ---
 

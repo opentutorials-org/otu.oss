@@ -4,104 +4,139 @@
 
 ## 📊 전체 현황
 
-- **테스트 스위트**: 31개 (Jest)
-- **테스트 케이스**: **171개** (Jest 171개 통과)
+- **테스트 파일**: 23개 (Jest)
 - **DB 테스트** (pgTAP):
     - `get_dynamic_pages_chunk` 함수 테스트: 9개
 - **통합 테스트** (자체 프레임워크):
     - 미들웨어 통합 테스트: 3개
-- **통과율**: 100% ✅ (Jest 171개 + DB 9개 모두 통과)
-- **평균 실행 시간**: ~5초 (Jest), ~2초 (미들웨어)
 - **실행 명령어**:
     - `npm test` - Jest 테스트 전체 + DB 테스트
     - `npm run test:middleware` - 미들웨어 통합 테스트
 
 ## 🗂️ 테스트 구조
 
-### 1. 훅 테스트 (8개)
+### 1. API 테스트
 
-**`src/hooks/useReminderList.test.tsx`**
-
-- 리마인더 목록 관리 훅의 전체 라이프사이클 테스트
-- 초기 로드, 페이지네이션, 새로고침, 에러 처리 검증
-- WatermelonDB observe를 mock 처리하여 테스트 간섭 방지
-- waitFor 타임아웃 3초 설정으로 비동기 타이밍 이슈 해결
-
-**주요 테스트 케이스**:
-
-- 사용자 ID 가져오기 및 초기 데이터 로드
-- 페이지네이션 (다음 페이지 로드 및 데이터 누적)
-- 새로고침 (전체 데이터 리셋 및 재로드)
-- 에러 핸들링
-- 커스텀 페이지 크기 설정
-
-### 2. API 테스트 (60+개)
-
-#### Reminder API (50+개)
-
-**위치**: `app/api/reminder/renew-alarms/*.test.ts`
-
-테스트 파일별 역할:
-
-- `route.next_alarm_time_update.test.ts` (15+개)
-
-    - 알람 시간 계산 로직 (승수 간격, 수면시간 회피)
-    - 과거 알람 처리 및 보정
-    - 다음 알람 시간 업데이트
-
-- `route.reminder_processed_at_concurrency.test.ts` (7개)
-
-    - 동시성 제어 (processed_at 락 메커니즘)
-    - fetch_limit에 따른 배치 처리
-    - 좀비 레코드 구제 (6시간 타임아웃)
-    - 여러 사용자의 독립적 처리
-
-- `calculate_progressive_interval.test.ts` (5+개)
-
-    - 점진적 간격 계산 로직
-    - 승수(multiplier) 기반 알람 간격
-    - 경계값 및 엣지 케이스
-
-- `notificationPayload.test.ts` (5+개)
-
-    - 알림 페이로드 생성 및 검증
-    - 다국어 처리 (한국어/영어)
-    - 페이로드 크기 제한
-
-- `updateNotificationIdsBatch.test.ts` (5+개)
-    - notification ID 배치 업데이트
-    - 최초 전송 시 스킵 로직
-    - DB 업데이트 실패 처리
-
-#### Sync API (10+개)
+#### Sync API
 
 **위치**: `app/api/sync/__tests__/*.test.ts`
 
-- `sync-database.test.ts`
+- `sync-database.test.ts` - WatermelonDB와 Supabase 간 동기화
 
-    - WatermelonDB와 Supabase 간 동기화
-    - push/pull 로직 검증
-    - 충돌 해결
+**위치**: `app/api/sync/pull/all/`
 
-- `route.folder-page-order.integration.test.ts`
-    - 폴더-페이지 순서 통합 테스트
-    - 드래그 앤 드롭 시나리오
+- `route.test.ts` - Pull All API 테스트
 
-#### Setting API (5개)
+**위치**: `app/api/sync/push/`
 
-**위치**: `app/api/setting/withdraw/route.test.ts`
+- `route.folder-page-order.integration.test.ts` - 폴더-페이지 순서 통합 테스트
 
-- 회원 탈퇴 API 전체 플로우
-- 사용자 데이터 삭제 검증
-- 관련 리소스 정리 확인
+#### Setting API
 
-#### Middleware API (3개) - 자체 테스트 시스템
+**위치**: `app/api/setting/withdraw/`
 
-**위치**: `src/test/middleware-webhook-exclusion.test.js`
+- `route.test.ts` - 회원 탈퇴 API 전체 플로우
 
-> **미들웨어 제외 검증**: webhook 엔드포인트들이 미들웨어 처리에서 제외되었는지 확인
+### 2. 컴포넌트 테스트
 
-**테스트 케이스**: 미들웨어 실행 여부 검증을 위한 API 대조군 테스트
+#### Chat 컴포넌트
+
+**위치**: `src/components/Chat/`
+
+- `model.test.ts` - AI 채팅 모델 로직 (RAG 모드 선택, 메시지 처리)
+
+#### BlockNote 에디터
+
+**위치**: `src/components/common/BlockNoteEditor/__tests__/`
+
+- `BlockNoteWrapper.unmount.test.tsx` - 에디터 언마운트 처리
+
+#### Home 컴포넌트
+
+**위치**: `src/components/home/logined/page/CreateUpdate/components/__tests__/`
+
+- `LinkifiedTitle.test.tsx` - 링크화된 제목 컴포넌트
+
+#### Home2 컴포넌트 (React Router 기반)
+
+**위치**: `src/components/home2/editor/__tests__/`
+
+- `title-auto-generation.test.tsx` - 자동 제목 생성
+
+**위치**: `src/components/home2/sections/__tests__/`
+
+- `section-routing.test.tsx` - 섹션 라우팅
+
+#### Layout 컴포넌트
+
+**위치**: `src/components/layout/__tests__/`
+
+- `Login.oauth.test.tsx` - OAuth 로그인
+
+### 3. 훅 테스트
+
+**위치**: `src/functions/hooks/__tests__/`
+
+- `useSync.concurrent.test.tsx` - 동기화 훅 동시성 테스트
+
+**위치**: `src/hooks/`
+
+- `useReminderList.test.tsx` - 리마인더 목록 훅
+
+### 4. 유틸리티/함수 테스트
+
+#### 사용량 관리
+
+**위치**: `src/functions/usage/__tests__/`
+
+- `usageService.get.test.ts` - 사용량 조회 테스트
+
+#### 유효성 검사
+
+**위치**: `src/functions/validation/__tests__/`
+
+- `textLength.test.ts` - 텍스트 길이 검증
+
+#### 샘플 데이터
+
+**위치**: `src/functions/sample/`
+
+- `seedSamplePageIfNeeded.server.test.ts` - 샘플 페이지 생성
+
+#### 썸네일
+
+**위치**: `src/functions/`
+
+- `thumbnail.test.ts` - 썸네일 처리
+
+### 5. WatermelonDB 테스트
+
+**위치**: `src/watermelondb/`
+
+- `sync.test.ts` - 동기화 로직
+- `sync.concurrent.test.ts` - 동시성 동기화
+
+### 6. 기타 테스트
+
+**위치**: `src/__tests__/`
+
+- `pr1223-usertype-removal.test.ts` - PR 관련 테스트
+- `snackbar.duplication.test.tsx` - 스낵바 중복 방지
+- `theme.navigation.test.ts` - 테마 네비게이션
+
+**위치**: `src/test/`
+
+- `http-429-error-handling.test.ts` - HTTP 429 에러 처리
+
+**위치**: `src/utils/__tests__/`
+
+- `pageCloseHandler.test.ts` - 페이지 닫기 핸들러
+
+### 7. 미들웨어 통합 테스트
+
+**위치**: `src/test/`
+
+- `middleware-webhook-exclusion.test.js` - 미들웨어 제외 검증
 
 **실행 방법**:
 
@@ -112,43 +147,6 @@ npm run dev
 # 별도 터미널에서 테스트
 npm run test:middleware
 ```
-
-**검증 방법**:
-
-- `x-request-id` 헤더 존재 여부로 미들웨어 실행 여부 판단
-- 일반 API는 헤더가 있어야 함 (미들웨어 실행)
-
-### 3. 함수/유틸리티 테스트 (70+개)
-
-#### 사용량 관리 (45+개)
-
-**UsageService 단위 테스트** (65개):
-
-- `setQuota.test.ts` (20개) - 과금 계산, 한도 초과, 경계값, 부동소수점 정확도
-- `updateToSub.test.ts` (10개) - 플랜 업데이트, keepQuota 옵션, 필드 검증
-- `resolvePlanStore.test.ts` (10개) - Stripe/Play/App Store 플랜 파싱
-- `checkQuota.test.ts` (12개) - 할당량 체크, 초과 처리, 리셋 로직
-- `setToFree.test.ts` (7개) - FREE 플랜 전환, 필드 초기화
-- `get.test.ts` (6개) - 사용량 정보 조회, 에러 케이스
-
-**위치**: `src/functions/usage/__tests__/*.test.ts`
-
-**통합 테스트** (5개):
-
-- `src/test/usage-service.integration.test.ts` - 실제 DB 연동 사용량 할당량 검증
-- 무료/유료 플랜별 한도 초과 시나리오
-- increment_quota RPC 함수 검증
-
-**테스트 케이스 정의**:
-
-- `src/test/usage-quota.case.ts` - 6개 시나리오 (1개 스킵)
-
-#### WatermelonDB (5개)
-
-- `src/watermelondb/sync.test.ts`
-    - 로컬 DB 동기화 로직
-    - 오프라인 데이터 처리
-    - 변경사항 추적
 
 ## 🔧 테스트 환경
 
@@ -178,12 +176,14 @@ npm run test:middleware
 
 ### 사용 가능한 로거
 
+`src/debug/` 디렉토리에 42개 로거 파일:
+
 - `alarm` - 알람 관련 로그
 - `sync` - 동기화 관련 로그
 - `usage` - 사용량 추적 로그
 - `test` - 테스트 관련 로그
 - `editor` - 에디터 관련 로그
-- 기타 45개 이상의 카테고리 (`src/debug/` 디렉토리 참조)
+- 기타 37개 카테고리
 
 ### 테스트 시 로거 활성화 방법
 
@@ -205,9 +205,6 @@ npm run test -- --debug usage    # usage 로그만 출력
 npm run test -- --debug "alarm,sync"     # alarm과 sync 로그 출력
 npm run test -- --debug "alarm:*"        # alarm 네임스페이스의 모든 로그
 npm run test -- --debug "*"              # 모든 로그 출력
-
-# 특정 테스트 파일과 함께 사용
-npm run test -- --debug alarm app/api/reminder/renew-alarms/route.test.ts
 ```
 
 ### 개발 중 로거 활성화
@@ -222,7 +219,7 @@ localStorage.debug = 'alarm,sync'
 
 ### 로거 구현
 
-모든 로거는 `src/debug/` 디렉토리에 정의되어 있으며, [debug](https://www.npmjs.com/package/debug) 라이브러리를 사용합니다. 각 로거는 `console.log.bind(console)`로 바인딩되어 색상과 타임스탬프를 포함한 포맷팅된 출력을 제공합니다.
+모든 로거는 `src/debug/` 디렉토리에 정의되어 있으며, [debug](https://www.npmjs.com/package/debug) 라이브러리를 사용합니다.
 
 예시:
 
@@ -230,19 +227,7 @@ localStorage.debug = 'alarm,sync'
 import { alarmLogger } from '@/debug/alarm';
 
 alarmLogger('알람 갱신 요청 수신', { requestId, timestamp });
-// 출력: 2024-10-24T12:00:00.000Z alarm 알람 갱신 요청 수신 { requestId: 'xxx', timestamp: '...' }
 ```
-
-#### 로거 파일 구조
-
-```typescript
-//@ts-ignore
-import debug from 'debug';
-export const alarmLogger = debug('alarm');
-alarmLogger.log = console.log.bind(console);
-```
-
-`.log = console.log.bind(console)` 설정은 외부 디버깅 툴(예: VS Code의 debug console)에서 색상 및 포맷팅 지원을 위해 필수입니다.
 
 ## 🎯 테스트 전략
 
@@ -270,57 +255,17 @@ alarmLogger.log = console.log.bind(console);
 
 - observe 로직이 테스트 데이터를 덮어쓸 수 있음
 - 반드시 WatermelonDB mock 추가 필요
-- 참고: `src/hooks/useReminderList.test.tsx:19-34`
+- 참고: `src/hooks/useReminderList.test.tsx`
 
 ### 타임아웃 설정
 
 - 비동기 테스트는 명시적 타임아웃 설정 권장 (3초 이상)
 - 기본 1초는 로컬 Supabase 연동 시 부족할 수 있음
 
-### 동시성 테스트
-
-- processed_at 락 메커니즘 의존
-- 테스트 간 간섭 방지를 위해 `--runInBand`로 실행
-
 ### 테스트 데이터 정리
 
 - E2E 테스트는 반드시 try-finally로 cleanup 보장
 - 테스트 실패 시에도 데이터 정리되도록 구현
-
-## 📈 최근 개선 사항
-
-### 2025-11-11: 사용량 통합 테스트 추가 ✅
-
-**추가된 테스트**: 5개 (1개 스킵)
-
-**목적**: UsageService와 Supabase increment_quota RPC 함수의 실제 연동 검증
-
-**테스트 케이스**:
-
-- 무료 플랜 한도 이하/초과 시나리오
-- 유료 플랜 한도 이하/초과 시나리오
-- 플랜 업그레이드 중 한도 초과 (스킵)
-
-**효과**:
-
-- ✅ 실제 DB 환경에서 사용량 로직 검증
-- ✅ increment_quota RPC 함수 동작 확인
-- ✅ 단위 테스트와 통합 테스트의 균형
-
-**관련 파일**:
-
-- `src/test/usage-service.integration.test.ts` - Jest 통합 테스트
-- `src/test/usage-quota.case.ts` - 테스트 케이스 정의
-
----
-
-## 📈 향후 개선 방향
-
-- 나머지 UsageService 메서드 테스트 완료 (refreshSub, setToCancel 등)
-- 테스트 커버리지 측정 설정
-- CI/CD 파이프라인 통합
-- Playwright를 활용한 브라우저 E2E 테스트 추가
-- 테스트 성능 최적화 (병렬 실행)
 
 ## 🚀 테스트 실행 명령어 요약
 
@@ -331,30 +276,21 @@ npm run test
 # 특정 로거 활성화
 npm run test -- --debug alarm        # alarm 로그만
 npm run test -- --debug sync         # sync 로그만
-npm run test -- --debug usage        # usage 로그만
 npm run test -- --debug "*"          # 모든 로그
 
 # 특정 테스트 파일 실행
-npm run test -- app/api/reminder/renew-alarms/route.test.ts
-npm run test -- --debug alarm app/api/reminder/renew-alarms/route.test.ts
-
-# E2E 테스트
-npm run test:e2e
-npm run test:e2e:cron
+npm run test -- src/hooks/useReminderList.test.tsx
 
 # 미들웨어 통합 테스트 (개발 서버 실행 필수)
 npm run test:middleware
 
 # Watch 모드 (Jest)
 npm run test -- --watch
-
-# 특정 파일만 watch
-npm run test -- --watch app/api/reminder/renew-alarms/route.test.ts
 ```
 
 ---
 
-**마지막 업데이트**: 2026-01-30
+**마지막 업데이트**: 2026-01-31
 **테스트 프레임워크**: Jest 30.0.4 (⚠️ Vitest는 사용하지 않음)
 
 **관련 문서**: [CLAUDE.md](../../CLAUDE.md)

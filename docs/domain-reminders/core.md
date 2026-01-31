@@ -32,7 +32,9 @@
 - `user_id` (unique): 사용자 식별자
 - `timezone`: 사용자 시간대 (기본값: 'Asia/Seoul')
 
-## 알람 처리 흐름
+## API 엔드포인트
+
+현재 사용 가능한 리마인더 관련 API:
 
 ### 1. 등록 (register-by-page)
 
@@ -42,27 +44,21 @@
 - `next_alarm_time = now` (즉시 발송 대상)
 - `sent_count = 1`로 초기화 (이미 존재하면 유지)
 
-### 2. 갱신 (renew-alarms)
+### 2. 스케줄 (schedule/v2)
 
-**API**: `/api/reminder/renew-alarms`
+**API**: `/api/reminder/schedule/v2`
 
-CRON이 주기적으로 호출하여 알람을 발송하고 다음 시간을 계산합니다.
+- 리마인더 스케줄링 관련 API
 
-**처리 순서**:
+## 알람 처리 흐름
 
-1. `next_alarm_time`이 현재 시간 이전인 알람 조회 (배치 단위)
-2. 각 알람에 대해 푸시 알림 전송 (오픈소스 버전에서는 비활성화)
-3. 지수 백오프 간격으로 `next_alarm_time` 업데이트
-4. `sent_count` 증가
+### 등록 흐름
 
-### 3. 취소 (cancel-by-page)
+1. 사용자가 페이지에서 알람 설정
+2. `/api/reminder/register-by-page` API 호출
+3. alarm 테이블에 레코드 생성/업데이트
 
-**API**: `/api/reminder/cancel-by-page`
-
-- 개발/프리뷰 환경에서만 사용
-- DB에서 알람 레코드 삭제
-
-### 4. 동기화 중 삭제 (sync)
+### 동기화 중 삭제
 
 WatermelonDB 푸시 단계에서:
 
@@ -163,24 +159,6 @@ private async releaseProcessingLock(pageId: string): Promise<void> {
 - 처리 시간 측정 (`processing_time_ms`)
 - 배치 크기별 성능 추적
 - 동시성 레벨 모니터링
-
-## 테스트
-
-### 커버리지
-
-- 좀비 레코드 복구 테스트
-- 다중 사용자 독립 처리 검증
-- 푸시 서비스 모킹 테스트
-- 알림 ID 배치 업데이트 테스트
-- 간격 계산 테스트
-
-### 테스트 파일
-
-- `route.reminder_processed_at_concurrency.test.ts` - 동시성 테스트
-- `route.next_alarm_time_update.test.ts` - 시간 업데이트 테스트
-- `calculate_progressive_interval.test.ts` - 간격 계산 테스트
-- `notificationPayload.test.ts` - 알림 페이로드 테스트
-- `updateNotificationIdsBatch.test.ts` - 배치 업데이트 테스트
 
 ## 확장성
 

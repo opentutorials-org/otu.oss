@@ -139,7 +139,7 @@ src/
 #### 국제화
 
 - Next-intl (한국어/영어)
-- `messages/` 디렉토리
+- `src/messages/` 디렉토리
 - 사용법: `const t = useTranslations('namespace')`
 
 ## 코드 스타일

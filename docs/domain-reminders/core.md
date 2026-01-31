@@ -48,7 +48,12 @@
 
 CRON이 주기적으로 호출하여 알람을 발송하고 다음 시간을 계산합니다.
 
-상세한 처리 순서는 `scheduling.md` 참조.
+**처리 순서**:
+
+1. `next_alarm_time`이 현재 시간 이전인 알람 조회 (배치 단위)
+2. 각 알람에 대해 푸시 알림 전송 (오픈소스 버전에서는 비활성화)
+3. 지수 백오프 간격으로 `next_alarm_time` 업데이트
+4. `sent_count` 증가
 
 ### 3. 취소 (cancel-by-page)
 
@@ -143,6 +148,8 @@ private async releaseProcessingLock(pageId: string): Promise<void> {
 - **로거 함수**: `alarmLogger` (`src/debug/alarm`)
 
 ### Sentry 보고
+
+> **선택적 기능**: `NEXT_PUBLIC_ENABLE_SENTRY=true` 설정 시 활성화됩니다.
 
 다음 상황에서 Sentry로 보고:
 

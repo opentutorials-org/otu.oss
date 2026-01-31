@@ -73,6 +73,10 @@ OPENAI_API_KEY=sk-your-openai-api-key       # ENABLE_AI=true일 때 필요 (개�
 NEXT_PUBLIC_ENABLE_SENTRY=false
 NEXT_PUBLIC_SENTRY_DSN=your_sentry_dsn      # ENABLE_SENTRY=true일 때 필요
 
+# 소셜 로그인 (기본값: false)
+# OAuth 앱 설정이 완료된 경우에만 true로 설정하세요.
+NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN=false       # true: Google/GitHub/Apple 로그인 표시
+
 # 디버그 로깅 (기본값: 비활성화)
 # 개발 중 특정 모듈의 로그를 보려면 활성화하세요.
 # 예: DEBUG=sync (동기화), DEBUG=sync,chat (동기화+채팅), DEBUG=* (전체)

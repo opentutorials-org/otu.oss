@@ -96,7 +96,7 @@
 
 - **주기**: 앱 시작 시, 동기화 완료 후
 - **방법**: 각 테이블의 레코드 개수 비교
-- **불일치 시**: Sentry 경고 + 사용자 알림
+- **불일치 시**: Sentry 경고 (선택적 기능, `NEXT_PUBLIC_ENABLE_SENTRY=true` 시 활성화) + 사용자 알림
 
 ### FailOver (자동 복구)
 
@@ -188,6 +188,8 @@ localStorage.debug = 'sync'
 ```
 
 ### Sentry 확인
+
+> **선택적 기능**: `NEXT_PUBLIC_ENABLE_SENTRY=true` 설정 시 활성화됩니다.
 
 - Breadcrumb 추적으로 동기화 흐름 확인
 - 에러 발생 시 상세 컨텍스트 확인

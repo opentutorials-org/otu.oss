@@ -1,5 +1,5 @@
 import { deleteFiles } from '@/functions/uploadcare';
-import { Database } from '@/database.types';
+import { Database } from '@/lib/database/types';
 import errorResponse, { successResponse } from '@/functions/response';
 import { createClient } from '@/supabase/utils/server';
 import { cookies } from 'next/headers';

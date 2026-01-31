@@ -1,10 +1,10 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { updateSession } from './supabase/utils/middleware';
 import { captureException, setContext, setTag } from '@sentry/nextjs';
-import { generateIdentifier } from './functions/logHeader';
+import { generateIdentifier } from './src/functions/logHeader';
 import { reportValue } from '@vercel/flags';
-import { middleWareLogger } from './debug/middleware';
-import { defaultLanguage, supportedLanguages } from './functions/constants';
+import { middleWareLogger } from './src/debug/middleware';
+import { defaultLanguage, supportedLanguages } from './src/functions/constants';
 
 export async function middleware(req: NextRequest) {
     try {

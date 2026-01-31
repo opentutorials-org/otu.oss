@@ -1,4 +1,4 @@
-import { Database } from '@/database.types';
+import { Database } from '@/lib/database/types';
 import { createBrowserClient } from '@supabase/ssr';
 import { createServerClient } from '@supabase/ssr';
 import * as Sentry from '@sentry/nextjs';
@@ -14,8 +14,8 @@ export function createClient() {
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         {
             auth: {
-                debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABELED
-                    ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABELED === 'true'
+                debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED
+                    ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED === 'true'
                     : false,
             },
         }

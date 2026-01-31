@@ -1,4 +1,4 @@
-import { Database } from '@/database.types';
+import { Database } from '@/lib/database/types';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
@@ -10,8 +10,8 @@ export async function createClient(
 
     return createServerClient<Database>(url, key, {
         auth: {
-            debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABELED
-                ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABELED === 'true'
+            debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED
+                ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED === 'true'
                 : false,
         },
         cookies: {

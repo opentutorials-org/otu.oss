@@ -93,3 +93,6 @@ playwright/.auth
 *.orig
 certificates
 copilot-instructions.md
+# Build/cache
+.swc/
+.playwright-mcp/

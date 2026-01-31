@@ -144,8 +144,8 @@ export async function updateSession(request: NextRequest) {
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         {
             auth: {
-                debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABELED
-                    ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABELED === 'true'
+                debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED
+                    ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED === 'true'
                     : false,
             },
             cookies: {

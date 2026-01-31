@@ -124,7 +124,7 @@ const nextConfig = {
     productionBrowserSourceMaps: false,
 };
 
-const withNextIntl = createNextIntlPlugin('./i18n.ts');
+const withNextIntl = createNextIntlPlugin('./src/i18n.ts');
 
 const revision = crypto.randomUUID();
 

@@ -1,7 +1,7 @@
 'use client';
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
-import { themeModeState } from '@/jotai';
+import { themeModeState } from '@/lib/jotai';
 import { themeLogger } from '@/debug/theme';
 
 /**

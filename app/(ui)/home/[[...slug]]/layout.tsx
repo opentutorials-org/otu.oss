@@ -14,7 +14,7 @@ import useCheckWatermelondb from '@/functions/hooks/useCheckWatermelondb';
 import { useDeepLinkWebView } from '@/functions/hooks/useDeepLinkWebView';
 import { syncLogger } from '@/debug/sync';
 import { database } from '@/watermelondb';
-import { runSyncState } from '@/jotai';
+import { runSyncState } from '@/lib/jotai';
 import { useSetAtom } from 'jotai';
 import { usePathname } from 'next/navigation';
 import { navPageLogger } from '@/debug/nav';

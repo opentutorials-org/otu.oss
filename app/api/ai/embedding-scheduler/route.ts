@@ -10,7 +10,7 @@ import { addBreadcrumb, captureCheckIn, captureMessage, flush } from '@sentry/ne
 import { createClient } from '@/supabase/utils/server';
 import { createSuperClient } from '@/supabase/utils/super';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { Database } from '@/database.types';
+import { Database } from '@/lib/database/types';
 import {
     RAG_SEARCH_MIN_LENGTH_THRESHOLD,
     parseLocaleFromAcceptLanguage,

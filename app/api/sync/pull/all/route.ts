@@ -1,7 +1,7 @@
 import { createClient } from '@/supabase/utils/server';
 import { syncLogger } from '@/debug/sync';
 import { type NextRequest, NextResponse } from 'next/server';
-import { Database } from '@/database.types';
+import { Database } from '@/lib/database/types';
 import { TARGET_SIZE, MAX_LIMIT } from '@/functions/constants';
 
 type Page = Database['public']['Tables']['page']['Row'];

@@ -2,9 +2,11 @@
 
 > AI 기반 스마트 메모 애플리케이션 - 생각을 기록하고, AI가 기억을 돕습니다
 
+[English](README.en.md)
+
 [![Version](https://img.shields.io/badge/version-0.5.201-blue.svg)](https://github.com/opentutorials-org/otu.oss)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript)](https://www.typescriptlang.org/)
 
@@ -94,7 +96,7 @@ npm run dev
 
 브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 애플리케이션을 확인하세요.
 
-> 💡 **팁**: 개발 환경에서는 `/login` 경로에서 이메일 로그인을 사용할 수 있습니다.
+> 💡 **팁**: 개발 환경에서는 `/signin` 경로에서 이메일 로그인을 사용할 수 있습니다.
 
 📖 **상세 설치 가이드**: [docs/installation.md](docs/installation.md) - 환경 변수, 문제 해결 등 자세한 내용
 
@@ -216,12 +218,6 @@ npm run db-sync                    # 로컬 DB 초기화 및 타입 생성
 npm run supabase-start             # Supabase 로컬 시작
 npm run supabase-stop              # Supabase 로컬 중지
 npm run supabase-generate-database-types  # 타입 정의 파일 생성
-```
-
-#### 개발 유틸리티
-
-```bash
-npm run dev:cron:usage           # 사용량 초기화 (개발)
 ```
 
 ### 브랜치 전략
@@ -460,6 +456,12 @@ npm run test:integration
 - 알람 API 테스트
 - 회원 탈퇴 API 테스트
 
+### API 테스트
+
+- `node test/api.js`로 원큐에 테스트 가능합니다.
+- test/case.ts에 시나리오별 데이터가 담겨 있습니다.
+- 테스트 유저를 변경하려면 test/case.ts의 target_user 변경하면 됩니다.
+
 ---
 
 ## 🚀 배포
@@ -673,56 +675,6 @@ with check (
 
 ---
 
-## 테스트
-
-### Jest 단위 테스트
-
-프로젝트에서는 Jest를 사용하여 단위 테스트를 진행합니다.
-
-#### 테스트 실행
-
-```bash
-# 모든 테스트 실행
-npm test
-
-# 특정 테스트 파일 실행
-npx jest path/to/test.test.ts
-```
-
-#### 테스트 환경 설정
-
-Jest는 파일 상단의 주석을 통해 자동으로 실행 환경을 구분합니다:
-
-- **브라우저 환경 (jsdom)**: React 컴포넌트, DOM 조작 테스트
-
-```typescript
-/** @jest-environment jsdom */
-import { render } from '@testing-library/react';
-// 브라우저 환경이 필요한 테스트
-```
-
-- **Node.js 환경**: API, 서버 로직 테스트
-
-```typescript
-/** @jest-environment node */
-import { POST } from './route';
-// Node.js 환경이 필요한 테스트
-```
-
-#### 테스트 파일 명명 규칙
-
-- 테스트 파일은 `*.test.ts` 또는 `*.test.tsx` 확장자를 사용합니다
-- 테스트 대상 파일과 같은 디렉토리에 위치시킵니다
-- 예: `useReminderList.tsx` → `useReminderList.test.tsx`
-
-### API 테스트
-
-- `node test/api.js`로 원큐에 테스트 가능합니다.
-- test/case.ts에 시나리오별 데이터가 담겨 있습니다.
-- 테스트 유저를 변경하려면 test/case.ts의 target_user 변경하면 됩니다.
-
----
-
 ## API 및 서비스
 
 ### BlockNote 에디터
@@ -836,7 +788,6 @@ https://github.com/opentutorials-org/otu.ai/issues?q=is%3Aissue+label%3Atraining
 ### 알게 된 것
 
 - @supabase/ssr는 service role key를 지원하지 않습니다. 관리자 권한이 필요하다면 @supabase/supabase-js를 사용합니다.
-- vercel의 cron은 deploy를 한 후에 일정 시간(관찰 결과 약 6분)동안 실행이 되지 않습니다.
 - localStorage, cookie와 같이 브라우저에만 존재하는 api를 이용하는 코드는 useEffect 안에서만 사용해야 합니다.
 - anon은 익명 role이기 때문에 로그인 된 사용자와 관련된 RLS를 지정하려면 authenicated role을 사용해야 합니다.
 

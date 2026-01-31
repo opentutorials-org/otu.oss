@@ -4,7 +4,7 @@ import { atom } from 'jotai';
 import { atomWithImmer } from 'jotai-immer';
 import { atomWithStorage } from 'jotai/utils';
 import { Database } from '@/lib/database/types';
-import { getSearchKeywordFromUrl } from '@/utils/navigation';
+import { getSearchKeywordFromUrl } from '@/utils/urlUtils';
 import { syncLogger } from '@/debug/sync';
 
 export type finderAtomType = {
@@ -86,7 +86,7 @@ export type similarityResponse = {
 };
 
 export type LLM_ask_data = {
-    llm_id: 'openai' | 'cohere';
+    llm_id: 'openai' | 'cohere' | 'google';
     message: string;
     references: similarityResponse[];
     contextMessages: string[];

@@ -215,14 +215,16 @@ OPENAI_API_KEY=sk-<your-openai-key>
 # 프로덕션에서는 Vercel AI Gateway를 통해 AI 및 임베딩 기능이 제공됩니다.
 ```
 
-#### Sentry 환경 변수 (선택)
+#### Sentry 환경 변수 (선택 - 별도 설정 필요)
+
+> **참고**: 현재 코드베이스에서 Sentry SDK가 제거되었습니다. Sentry를 사용하려면 SDK를 별도로 설치하고 설정해야 합니다.
 
 ```bash
-# Sentry 에러 모니터링
-NEXT_PUBLIC_ENABLE_SENTRY=true
-NEXT_PUBLIC_SENTRY_DSN=<your-sentry-dsn>
-SENTRY_AUTH_TOKEN=<your-sentry-auth-token>
-NEXT_PUBLIC_SENTRY_PROJECT=<your-sentry-project-name>
+# Sentry 에러 모니터링 (SDK 설치 후 사용 가능)
+# NEXT_PUBLIC_ENABLE_SENTRY=true
+# NEXT_PUBLIC_SENTRY_DSN=<your-sentry-dsn>
+# SENTRY_AUTH_TOKEN=<your-sentry-auth-token>
+# NEXT_PUBLIC_SENTRY_PROJECT=<your-sentry-project-name>
 ```
 
 #### 이미지 업로드 환경 변수 (선택)
@@ -267,9 +269,9 @@ UPLOADCARE_PRIVATE_KEY=<your-private-key>
 | `NEXT_PUBLIC_SOCIAL_LOGIN_REDIRECT_TO` | O                 | 소셜 로그인 후 리디렉션 URL                      |
 | `ENABLE_AI`                            | -                 | AI 기능 활성화 (`true`/`false`, 기본값: `false`) |
 | `OPENAI_API_KEY`                       | AI 사용 시 (개발) | OpenAI API 키 (프로덕션은 Gateway 사용)          |
-| `NEXT_PUBLIC_ENABLE_SENTRY`            | -                 | Sentry 활성화 (`true`/`false`, 기본값: `false`)  |
-| `NEXT_PUBLIC_SENTRY_DSN`               | Sentry 사용 시    | Sentry DSN                                       |
-| `SENTRY_AUTH_TOKEN`                    | Sentry 사용 시    | Sentry 인증 토큰                                 |
+| `NEXT_PUBLIC_ENABLE_SENTRY`            | -                 | Sentry 활성화 (SDK 별도 설치 필요)               |
+| `NEXT_PUBLIC_SENTRY_DSN`               | -                 | Sentry DSN (SDK 별도 설치 필요)                  |
+| `SENTRY_AUTH_TOKEN`                    | -                 | Sentry 인증 토큰 (SDK 별도 설치 필요)            |
 | `NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY`    | 이미지 업로드 시  | Uploadcare 공개 키                               |
 | `UPLOADCARE_PRIVATE_KEY`               | 이미지 삭제 시    | Uploadcare 비공개 키                             |
 | `NEXT_PUBLIC_PWA_DISABLED`             | -                 | PWA 비활성화 (`true`/`false`, 기본값: `true`)    |
@@ -302,17 +304,6 @@ UPLOADCARE_PRIVATE_KEY=<your-private-key>
 - [ ] PWA 설치 (모바일)
 
 ### 모니터링 설정
-
-#### Sentry 에러 모니터링
-
-```bash
-# 최근 에러 확인
-npx sentry-cli issues list \
-  --org <your-org> \
-  --project <your-project> \
-  --status unresolved \
-  --auth-token $SENTRY_AUTH_TOKEN
-```
 
 #### Vercel Analytics
 

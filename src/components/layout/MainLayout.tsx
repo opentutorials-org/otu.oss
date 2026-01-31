@@ -15,7 +15,6 @@ import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import s from './MainLayout.module.css';
 import { DocumentTitleUpdater } from '../home/logined/page/DocumentTitleUpdater';
-import { isCurrentlyNavigating } from '@/utils/navigation';
 import { navPageLogger } from '@/debug/nav';
 import { Top } from './top';
 import { chatOpenState, drawerWidthState } from '@/lib/jotai';
@@ -84,7 +83,6 @@ const SideArticleLayout = memo(function SideArticleLayout({
             navPageLogger('watchingPathChange called:', {
                 pathname,
                 currentPagePath: currentPageRef.current.path,
-                isCurrentlyNavigating: isCurrentlyNavigating(),
             });
 
             if (pathname !== currentPageRef.current.path) {

@@ -25,7 +25,7 @@ export const privacyPolicy: docs = {
         <li>텍스트 데이터: supabase database (SOC 2 Type 2)</li>
         <li>이미지 파일: uploadcare (SOC 2 Type 2 및 ISO 27001)</li>
         <li>AI 채팅, AI를 통해 컨텐츠 생성: openai (SOC 2 Type 2)</li>
-        <li>임베딩: AI 기반의 답변을 제공하기 위해 사용자의 데이터를 벡터화하여 저장하며, cohere를 사용합니다. (SOC 2 Type II, ISO 27001)</li>
+        <li>임베딩: AI 기반의 답변을 제공하기 위해 사용자의 데이터를 벡터화하여 저장하며, Vercel AI Gateway를 사용합니다. (SOC 2 Type II)</li>
         <li>사용자 인증 정보: apple, google, github 소셜 로그인을 사용하여 운영자가 사용자의 인증 정보를 저장하지 않습니다.</li>
     </ol>
     

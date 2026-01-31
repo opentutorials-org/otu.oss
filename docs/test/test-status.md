@@ -4,7 +4,7 @@
 
 ## 📊 전체 현황
 
-- **테스트 파일**: 23개 (Jest)
+- **테스트 파일**: 22개 (Jest)
 - **DB 테스트** (pgTAP):
     - `get_dynamic_pages_chunk` 함수 테스트: 9개
 - **통합 테스트** (자체 프레임워크):
@@ -38,12 +38,6 @@
 - `route.test.ts` - 회원 탈퇴 API 전체 플로우
 
 ### 2. 컴포넌트 테스트
-
-#### Chat 컴포넌트
-
-**위치**: `src/components/Chat/`
-
-- `model.test.ts` - AI 채팅 모델 로직 (RAG 모드 선택, 메시지 처리)
 
 #### BlockNote 에디터
 

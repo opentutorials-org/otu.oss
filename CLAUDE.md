@@ -9,7 +9,7 @@
 ### 핵심 규칙 (from 01_general.mdc)
 
 - **모든 답변은 한국어로 작성**
-- **절대 add, commit 작업 금지** - 사용자 명시 없이 Git 작업 수행 불가
+- **add, commit 작업** - 사용자 요청 시 Git 작업 수행 가능
 - **Prettier 포맷팅 필수** - 코드 작성 후 반드시 `npm run prettier` 실행
 - **변경사항 영향 분석**: 작업 후 영향받을 수 있는 기능을 나열하고 테스트 방법 제시 (중요도별로 "반드시", "가급적", "참고" 등급으로 구분)
 - **문서화**: `/docs/meta-guides/functionality.md`, `/docs/` 참고 및 업데이트
@@ -18,7 +18,6 @@
 
 ### 절대 금지 작업
 
-- 커밋 작업
 - `npx supabase db push` (데이터베이스 푸시)
 
 ---

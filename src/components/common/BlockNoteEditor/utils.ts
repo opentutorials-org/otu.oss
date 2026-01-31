@@ -112,14 +112,9 @@ export const initializeBlockNoteFromHTML = async (
         } catch (error) {
             blocknoteLogger('❌ HTML 파싱 오류 발생', { error });
             editorViewLogger('loadInitialHTML - HTML 파싱 오류 발생', { error });
-            Sentry.captureMessage(
-                'blocknote에서 본문을 읽는(tryParseHTMLToBlocks) 과정에서 오류가 발생했고, 사용자는 본문을 볼 수 없는 상황이 발생했습니다. <table><tr><th><ht></tr><tr><td><td><td><td></tr></table> 와 같이 잘못된 형식의 html을 blocknote가 해석하는 과정에서 이런 문제가 발송할 수 있습니다. 이 문제가 계속되면 blocknote가 잘못된 태그로인해서 출력을 못하는 문제와 blocknote가 잘못된 태그를 생산하는 문제를 해결해야 합니다.',
-                {
-                    level: 'error',
-                    extra: {
-                        error,
-                    },
-                }
+            console.error(
+                '[BlockNote] HTML 파싱 오류 - 사용자가 본문을 볼 수 없는 상황 발생. 잘못된 형식의 HTML로 인한 문제일 수 있음.',
+                { error }
             );
 
             // 대체 표시를 위해 원본 HTML을 오류에 첨부

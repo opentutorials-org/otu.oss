@@ -12,11 +12,10 @@ import { EMBEDDING_MODEL_NAME } from './constants';
  * 개발 환경에서는 OpenAI 직접 호출, 프로덕션에서는 Gateway 사용
  *
  * @param {string} text - 임베딩할 텍스트
- * @param {string} input_type - 입력 타입 (호환성을 위해 유지, 실제로는 사용되지 않음)
  * @returns {Promise<{embeddings: number[][], texts: string[], meta: {billed_units: {input_tokens: number}}}>}
  */
 // @ts-ignore
-export async function createEmbeddingUsingCohere(text, input_type = 'search_query') {
+export async function createEmbedding(text) {
     try {
         const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -52,7 +51,6 @@ export async function createEmbeddingUsingCohere(text, input_type = 'search_quer
                 provider: process.env.NODE_ENV === 'development' ? 'openai' : 'gateway',
             },
             extra: {
-                input_type,
                 message: e.message,
             },
         });

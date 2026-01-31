@@ -69,9 +69,11 @@ ENABLE_AI=false
 OPENAI_API_KEY=sk-your-openai-api-key       # ENABLE_AI=true일 때 필요 (개발 환경)
 # 프로덕션에서는 Vercel AI Gateway를 통해 AI 기능이 제공됩니다.
 
-# Sentry 에러 모니터링 (기본값: false)
-NEXT_PUBLIC_ENABLE_SENTRY=false
-NEXT_PUBLIC_SENTRY_DSN=your_sentry_dsn      # ENABLE_SENTRY=true일 때 필요
+# Sentry 에러 모니터링 (선택 - 별도 설정 필요)
+# 현재 코드베이스에서 Sentry SDK가 제거되었습니다.
+# Sentry를 사용하려면 SDK를 별도로 설치하고 설정해야 합니다.
+# NEXT_PUBLIC_ENABLE_SENTRY=false
+# NEXT_PUBLIC_SENTRY_DSN=your_sentry_dsn
 
 # 소셜 로그인 (기본값: false)
 # OAuth 앱 설정이 완료된 경우에만 true로 설정하세요.

@@ -14,7 +14,7 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { BellIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import { CircleIcon } from '@/components/common/icons/CircleIcon';
 import { useParams } from 'next/navigation';
-import { getSearchKeywordFromUrl } from '@/utils/navigation';
+import { getSearchKeywordFromUrl } from '@/utils/urlUtils';
 import { currentPageState } from '@/lib/jotai';
 import { requestHapticFeedback } from '@/utils/hapticFeedback';
 import useInfiniteScroll from 'react-infinite-scroll-hook';

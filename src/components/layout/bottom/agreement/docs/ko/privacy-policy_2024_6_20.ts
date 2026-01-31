@@ -38,7 +38,7 @@ export const privacyPolicy: docs = {
       <li>이미지 파일 저장: uploadcare (SOC 2 Type 2 및 ISO 27001)</li>
       <li>AI 채팅, AI를 통한 콘텐츠 생성: openai (SOC 2 Type 2)</li>
       <li>
-        AI 기반의 답변 제공을 위한 데이터 임베딩: cohere (SOC 2 Type II, ISO 27001)
+        AI 기반의 답변 제공을 위한 데이터 임베딩: Vercel AI Gateway (SOC 2 Type II)
       </li>
       <li>
         서비스 성능 모니터링 및 오류 분석:

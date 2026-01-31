@@ -25,7 +25,7 @@ export const privacyPolicy: docs = {
         <li>Text data: supabase database (SOC 2 Type 2)</li>
         <li>Image files: uploadcare (SOC 2 Type 2 and ISO 27001)</li>
         <li>AI chat, AI content generation: openai (SOC 2 Type 2)</li>
-        <li>Embeddings: User data is vectorized and stored for AI-based responses using cohere (SOC 2 Type II, ISO 27001)</li>
+        <li>Embeddings: User data is vectorized and stored for AI-based responses using Vercel AI Gateway (SOC 2 Type II)</li>
         <li>User authentication information: Using social login through apple, google, and github, the Operator does not store user authentication information.</li>
     </ol>
     

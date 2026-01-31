@@ -341,4 +341,4 @@ Vercel Dashboard의 **Analytics** 탭에서 다음을 확인할 수 있습니다
 - [Supabase Documentation](https://supabase.com/docs)
 - [Next.js Deployment](https://nextjs.org/docs/deployment)
 - [프로젝트 설치 가이드](./installation.md)
-- [기능 명세](./meta-guides/functionality.md)
+- [기능 명세](./functionality.md)

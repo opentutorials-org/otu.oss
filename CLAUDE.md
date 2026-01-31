@@ -342,6 +342,6 @@ OPENAI_API_KEY=                 # ENABLE_AI=true일 때 필요 (개발 환경)
 - 동기화: `src/watermelondb/sync.ts`
 - 폴더: `src/watermelondb/model/Folder.ts`
 - 테마: `app/RootLayoutProvider.tsx`
-- 자동저장: `src/components/home2/Editor/hooks/useAutoSave.ts`
+- 자동저장: `src/components/home2/editor/hooks/useAutoSave.ts`
 - RAG 검색: `app/api/ai/similaritySearch/route.tsx`
 - 리마인더: `app/api/reminder/register-by-page/route.ts`

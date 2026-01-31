@@ -25,13 +25,16 @@
 
 ### AI 에이전트와 함께 설치하기
 
-Claude Code, Cursor, Windsurf 등 AI 코딩 에이전트를 사용한다면:
+Claude Code, Cursor, Windsurf 등 AI 코딩 에이전트를 사용한다면, 아래 프롬프트를 복사해서 붙여넣으세요:
 
 ```
-OTU 프로젝트를 설치하고 설정해줘. README.md의 "빠른 시작" 섹션을 참고해.
+다음 설치 가이드를 따라 OTU 프로젝트를 설치하고 설정해줘:
+https://raw.githubusercontent.com/opentutorials-org/otu.oss/main/docs/installation.md
 ```
 
 ### 직접 설치하기
+
+새로운 개발자를 위한 최소 설정 가이드입니다.
 
 ```bash
 # 1. 저장소 클론
@@ -48,7 +51,15 @@ cp .env.template .env.local
 npx supabase start
 ```
 
-Supabase가 시작되면 터미널에 키 정보가 출력됩니다. `.env.local` 파일에 설정하세요:
+Supabase가 시작되면 터미널에 다음과 같은 키 정보가 출력됩니다:
+
+```
+API URL: http://127.0.0.1:54321
+anon key: eyJhbGci...
+service_role key: eyJhbGci...
+```
+
+`.env.local` 파일을 열어 출력된 키를 설정하세요:
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
@@ -67,6 +78,8 @@ npm run dev
 브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 애플리케이션을 확인하세요.
 
 > **팁**: 개발 환경에서는 `/signin` 경로에서 이메일 로그인을 사용할 수 있습니다.
+
+**상세 설치 가이드**: OAuth 설정, 모바일 테스트, AI 기능 활성화 등은 [docs/installation.md](docs/installation.md) 참조
 
 ## 환경 요구사항
 
@@ -179,7 +192,8 @@ locales/                # 다국어 지원 (LinguiJS)
     ├── installation.md        # 상세 설치 가이드
     ├── functionality.md       # 전체 기능 명세
     ├── CONTRIBUTING.md        # 기여 가이드
-    └── CODE_OF_CONDUCT.md     # 행동 강령
+    ├── CODE_OF_CONDUCT.md     # 행동 강령
+    └── SECURITY.md            # 보안 정책
 ```
 
 ## 라이선스

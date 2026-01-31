@@ -216,17 +216,6 @@ function Content() {
                 </Accordion>
                 <Accordion sx={accordionStyle}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon sx={iconStyle} />}>
-                        <div className="text-[19px] text-color">{t('home.pricing.title')}</div>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Pa>{t('home.pricing.free-note')}</Pa>
-                        <Pa>{t('home.pricing.free-credits')}</Pa>
-                        <Pa>{t('home.pricing.paid-credits')}</Pa>
-                        <Pa>{t('home.pricing.price-notice')}</Pa>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion sx={accordionStyle}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon sx={iconStyle} />}>
                         <div className="text-[19px] text-color">{t('home.about-otu.title')}</div>
                     </AccordionSummary>
                     <AccordionDetails>

@@ -232,12 +232,7 @@ services:
                 condition: service_started
         expose:
             - '8000'
-        entrypoint: >
-            bash -c "
-            envsubst '\$ANON_KEY \$SERVICE_ROLE_KEY' < /var/lib/kong/kong.yml.template > /tmp/kong.yml;
-            export KONG_DECLARATIVE_CONFIG=/tmp/kong.yml;
-            exec /docker-entrypoint.sh kong docker-start
-            "
+        entrypoint: /var/lib/kong/entrypoint.sh
         environment:
             KONG_DATABASE: 'off'
             KONG_DECLARATIVE_CONFIG: /var/lib/kong/kong.yml
@@ -249,6 +244,7 @@ services:
             SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
         volumes:
             - ./docker/kong/kong.yml:/var/lib/kong/kong.yml.template:ro
+            - ./docker/kong/entrypoint.sh:/var/lib/kong/entrypoint.sh:ro
         networks:
             - otu-network
         restart: unless-stopped

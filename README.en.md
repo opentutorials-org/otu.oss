@@ -489,7 +489,6 @@ npm run deploy
 - [ ] Local build succeeds (`npm run build`)
 - [ ] Review migration files
 - [ ] Verify environment variable updates
-- [ ] Check CHANGELOG.md
 
 ---
 

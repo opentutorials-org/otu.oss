@@ -497,7 +497,6 @@ npm run deploy
 - [ ] 로컬 빌드 성공 (`npm run build`)
 - [ ] 마이그레이션 파일 검토
 - [ ] 환경 변수 업데이트 확인
-- [ ] CHANGELOG.md 확인
 
 ---
 

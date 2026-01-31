@@ -24,7 +24,7 @@ const customJestConfig = {
         '^@/i18n$': '<rootDir>/src/i18n',
         '^@/i18n-server$': '<rootDir>/src/i18n-server',
         '^@/(.*)$': '<rootDir>/$1',
-        '^next-intl/server$': '<rootDir>/test/mocks/next-intl-server.ts',
+        '^next-intl/server$': '<rootDir>/src/test/mocks/next-intl-server.ts',
     },
     testMatch: [
         '**/__tests__/**/*.test.ts',

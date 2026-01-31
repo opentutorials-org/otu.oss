@@ -10,61 +10,8 @@
  *
  * @see https://watermelondb.dev/docs/Advanced/Migrations
  */
-import { createTable, schemaMigrations } from '@nozbe/watermelondb/Schema/migrations';
+import { schemaMigrations } from '@nozbe/watermelondb/Schema/migrations';
 
 export default schemaMigrations({
-    migrations: [
-        {
-            // 최초 스키마: 모든 테이블 생성
-            toVersion: 1,
-            steps: [
-                // page 테이블
-                createTable({
-                    name: 'page',
-                    columns: [
-                        { name: 'title', type: 'string', isOptional: true },
-                        { name: 'body', type: 'string', isOptional: true },
-                        { name: 'is_public', type: 'boolean', isOptional: true },
-                        { name: 'child_count', type: 'number', isOptional: true },
-                        { name: 'parent_count', type: 'number', isOptional: true },
-                        { name: 'last_viewed_at', type: 'number', isOptional: true },
-                        { name: 'img_url', type: 'string', isOptional: true },
-                        { name: 'length', type: 'number', isOptional: true },
-                        { name: 'created_at', type: 'number' },
-                        { name: 'updated_at', type: 'number' },
-                        { name: 'user_id', type: 'string' },
-                        { name: 'type', type: 'string' },
-                        { name: 'folder_id', type: 'string', isOptional: true },
-                    ],
-                }),
-                // folder 테이블
-                createTable({
-                    name: 'folder',
-                    columns: [
-                        { name: 'name', type: 'string' },
-                        { name: 'description', type: 'string', isOptional: true },
-                        { name: 'thumbnail_url', type: 'string', isOptional: true },
-                        { name: 'page_count', type: 'number', isOptional: true },
-                        { name: 'created_at', type: 'number' },
-                        { name: 'updated_at', type: 'number' },
-                        { name: 'last_page_added_at', type: 'number', isOptional: true },
-                        { name: 'user_id', type: 'string' },
-                    ],
-                }),
-                // alarm 테이블
-                createTable({
-                    name: 'alarm',
-                    columns: [
-                        { name: 'user_id', type: 'string' },
-                        { name: 'page_id', type: 'string' },
-                        { name: 'next_alarm_time', type: 'number', isOptional: true },
-                        { name: 'sent_count', type: 'number' },
-                        { name: 'last_notification_id', type: 'string', isOptional: true },
-                        { name: 'created_at', type: 'number' },
-                        { name: 'updated_at', type: 'number' },
-                    ],
-                }),
-            ],
-        },
-    ],
+    migrations: [],
 });

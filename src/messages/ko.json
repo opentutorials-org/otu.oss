@@ -87,10 +87,7 @@
             "queue-creation-error": "큐를 생성하는 과정에서 오류가 발생했습니다."
         },
         "usage": {
-            "fetch-failed": "결제 내역을 가져오는데 실패했습니다.",
-            "no-payment-history": "결제 내역이 없습니다.",
             "monthly-usage-exceeded": "월간 사용량이 초과되었습니다. 다음 초기화 일자: {resetDate} ({daysRemaining}일 남음)",
-            "subscription-renewal-failed": "구독 갱신에 실패했습니다. 결제 정보를 확인해주세요.",
             "reset": {
                 "reset-complete": "{count}명의 사용량을 초기화했습니다.",
                 "reset-test-initialized": "리셋 테스트를 리셋했습니다.",
@@ -102,14 +99,10 @@
         "account-deactivated": "계정이 비활성화되었습니다. 고객 지원에 문의하세요.",
         "close": "닫기",
         "confirm": "확인",
-        "free-usage-exceeded": "<h1>이번 달 무료 사용량이 모두 소진되었어요</h1><p><strong>2025년 10월 24일까지</strong> 일부 기능이 잠시 제한됩니다.</p><section> <h2>계속 사용 가능한 기능</h2> <ul><li>텍스트 메모</li></ul> <h2>제한되는 기능</h2><ul><li>AI 채팅</li><li>AI 글쓰기</li><li>이미지 업로드 및 이미지 OCR</li></ul> </section>",
+        "free-usage-exceeded": "<h1>이번 달 무료 사용량이 모두 소진되었어요</h1><p><strong>{nextResetDate}</strong>까지 일부 기능이 잠시 제한됩니다.</p><section> <h2>계속 사용 가능한 기능</h2> <ul><li>텍스트 메모</li></ul> <h2>제한되는 기능</h2><ul><li>AI 채팅</li><li>AI 글쓰기</li><li>이미지 업로드 및 이미지 OCR</li></ul> </section>",
         "later": "나중에",
-        "payment-info-update": "결제 정보 수정",
-        "payment-renewal-failed": "구독 갱신에 실패했습니다. 결제 수단을 확인한 후 변경해주세요.",
         "signed-out": "로그아웃 되었습니다.",
-        "subscription-usage-exceeded": "<h1>이번 달 유료 사용량이 모두 소진되었어요</h1><p>{nextResetDate}까지 일부 기능이 잠시 제한됩니다.</p><section><h2>계속 사용 가능한 기능</h2><ul><li>텍스트 메모</li></ul><h2>제한되는 기능 ({nextResetDate}까지)</h2><ul><li>AI 채팅</li><li>AI 글쓰기</li><li>이미지 업로드 및 OCR</li></ul></section><section><h2>사용 한도를 늘리고 싶으신가요?</h2><p>help@opentutorials.org로 연락주시면 무료로 이번 달 한도를 늘려드립니다.</p></section>",
         "view-details": "자세히보기",
-        "view-paid-benefits": "플러스로 업그레이드",
         "callback-error": "인증 처리 중 오류가 발생했습니다. 불편을 드려 죄송합니다. 앱으로 돌아가 다시 시도해 주세요."
     },
     "beta-test": {
@@ -378,13 +371,6 @@
             "slogan": "남이 할 수 있는 걸 나도 할 수 있게<br></br>내가 할 수 있는 걸 남도 할 수 있게"
         },
         "login": "Login",
-        "pricing": {
-            "free-credits": "매달 AI, OCR, 파일업로드 기능을 사용할 수 있는 무료 크래딧이 제공됩니다.",
-            "free-note": "메모 작성은 무료입니다.",
-            "paid-credits": "유료 구독을 하면 매월 갱신되는 충분한 양의 크래딧을 제공합니다.",
-            "price-notice": "정확한 가격은 곧 공지 할 예정입니다.",
-            "title": "가격정책"
-        },
         "register": "회원가입",
         "signin": "로그인"
     },
@@ -399,9 +385,6 @@
         "confirm": "확인",
         "login": "로그인",
         "logout": "로그아웃",
-        "upgrade-to-premium": "플러스로 업그레이드",
-        "preparing": "유료 구독 서비스는 현재 준비 중입니다.<br/>관심 가져주셔서 감사합니다! 🙌",
-        "manage-subscription": "요금제 관리",
         "report-bug": "문제 신고",
         "help-center": "고객 센터",
         "settings": "설정",
@@ -480,61 +463,6 @@
         "select": "선택",
         "close": "닫기"
     },
-    "pricing-table": {
-        "features": {
-            "ai-functions": "AI 기능",
-            "image-upload": "이미지 업로드",
-            "memo": "메모",
-            "price": "가격"
-        },
-        "values": {
-            "credits": "500 크레딧",
-            "monthly-uploads": "월 100개 업로드",
-            "sufficient": "충분한"
-        },
-        "tiers": {
-            "basic": {
-                "name": "Basic",
-                "price": "Free",
-                "features": [
-                    "무제한 텍스트 메모",
-                    "제한된 AI 기능(채팅/검색/자동제목/편집)",
-                    "제한된 이미지 업로드 및 OCR 기능"
-                ]
-            },
-            "plus-monthly": {
-                "name": "Plus",
-                "price": "$5",
-                "sufixPrice": "/ month",
-                "features": [
-                    "무제한 텍스트 메모",
-                    "AI 기능 (채팅, 검색, 자동제목, 편집기)",
-                    "이미지 업로드 및 OCR 기능 "
-                ]
-            },
-            "plus-annually": {
-                "name": "Plus",
-                "price": "$50",
-                "sufixPrice": "/ year",
-                "features": [
-                    "무제한 텍스트 메모",
-                    "AI 기능 (채팅, 검색, 자동제목, 편집기)",
-                    "이미지 업로드 및 OCR 기능"
-                ]
-            },
-            "plus-weekly": {
-                "name": "주간 플러스",
-                "price": "$2.5",
-                "sufixPrice": "/ week",
-                "features": [
-                    "무제한 텍스트 메모",
-                    "AI 기능 (채팅, 검색, 자동제목, 편집기)",
-                    "이미지 업로드 및 OCR 기능"
-                ]
-            }
-        },
-        "close": "닫기"
-    },
     "profile": {
         "title": "프로필",
         "loading": "로딩 중...",
@@ -561,12 +489,6 @@
         "delete-complete": "삭제 완료",
         "delete-failed": "삭제에 실패했습니다.",
         "edit": "수정",
-        "features": {
-            "ai-functions": "AI 기능",
-            "image-upload": "이미지 업로드",
-            "memo": "메모",
-            "price": "가격"
-        },
         "go-to-home": "홈으로 이동",
         "https-required": "이 기능은 HTTPS 혹은 localhost 환경에서만 사용할 수 있습니다.",
         "images-online-only": "이미지는 온라인에서만 보여집니다.",
@@ -669,24 +591,8 @@
             "photo-prompt-description": "이미지 업로드 시 AI가 이미지를 분석해 정보를 제공합니다. 여기서 AI의 이미지 설명 방식을 설정할 수 있습니다."
         }
     },
-    "subscription": {
-        "billing-history": {
-            "billing-info": "시작일: {startDate}<br></br>다음 결제일: {endDate}<br></br>결제 금액: {amount} {currency}",
-            "fetch-failed": "결제 내역을 가져오는데 실패했습니다.",
-            "no-payment-history": "결제 내역이 없습니다.",
-            "payment-history": "결제 내역",
-            "close": "닫기"
-        },
-        "cancel": {
-            "cancel": "구독취소",
-            "error": "구독 취소를 위한 페이지를 열 수 없습니다. 관리자에게 문의 해주세요.",
-            "unpause": "구독 일시 정지 철회",
-            "withdraw": "구독 취소 철회",
-            "success": "구독이 취소되었습니다. 다음 결제일까지 사용 가능하며, 이후에는 요금이 청구되지 않습니다.",
-            "fail": "구독 취소에 실패했습니다. 다시 시도해 주세요.",
-            "canceled": "구독이 취소된 상태입니다."
-        },
-        "checking-status": "구독 상태를 체크 중입니다. 잠시만 기다려 주세요.",
+    "usage": {
+        "title": "사용량",
         "close": "닫기",
         "contact-support": {
             "usage-exceeded": "사용량이 초과되었습니다. 초기화를 원하시면 <email>help@opentutorials.org</email>로 연락해주세요."
@@ -694,29 +600,19 @@
         "error": {
             "contact": "문의사항: help@opentutorials.org",
             "generic": "죄송합니다. 오류가 발생했습니다. 신속하게 문제를 해결하겠습니다.",
-            "load-failed": "죄송합니다. 구독 정보를 불러오지 못했습니다. 문제가 반복되면 지원팀에 문의해 주세요. help@opentutorials.org"
+            "load-failed": "죄송합니다. 사용량 정보를 불러오지 못했습니다. 문제가 반복되면 지원팀에 문의해 주세요. help@opentutorials.org"
         },
         "error-contact-message": "연락을 취하고 싶다면 <email>help@opentutorials.org</email>로 연락해주세요.",
-        "failed-message": "구독에 실패했습니다. 다시 시도해 주세요.",
         "info": {
-            "canceled-notice": "구독을 취소했기 때문에 만료일까지 사용 가능하며, 앞으로 결제가 되지 않습니다.",
             "current-status": "현재 상태: {status}",
             "current-usage": "현재 사용량: {percentage}%",
             "current-usage-help": "일부 기능은 월별 사용량 제한이 있으며, 사용량이 100%에 도달하면 해당 기능이 일시적으로 비활성화됩니다. 다음 사용량 초기화까지 남은 시간: {daysRemaining}",
-            "free-plan": "무료 요금제",
-            "loading": "구독 정보를 불러오는 중입니다...",
-            "monthly-plan": "월간 요금제",
-            "paused-notice": "정기 결제가 일시정지되었습니다.",
+            "free-plan": "무료",
+            "loading": "사용량 정보를 불러오는 중입니다...",
             "status": {
                 "active": "현재 활성 상태입니다.",
-                "inactive-free-exceeded": "사용량 초과로 비활성화되었습니다.",
-                "inactive-payment-failed": "여러분 덕분에 서비스를 성장시킬 수 있었습니다. 구독이 만료되어 무료 플랜으로 전환되었지만, 핵심 기능은 그대로 제공됩니다. 프리미엄 기능이 그리우시다면 한 번의 클릭으로 구독을 연장하실 수 있어요!",
-                "inactive-subscription-exceeded": "구독 사용량 초과로 비활성화되었습니다."
+                "inactive-free-exceeded": "사용량 초과로 비활성화되었습니다."
             },
-            "store": "결제처: {store}",
-            "yearly-plan": "년간 요금제",
-            "next-payment": "다음 결제",
-            "weekly-plan": "주간 요금제",
             "limit-reached": {
                 "title": "이번 달 무료 사용량이 모두 소진되었어요.",
                 "desc": "{date}까지 일부 기능이 잠시 제한됩니다.",
@@ -731,37 +627,6 @@
                     "image-upload": "이미지 업로드 및 이미지 OCR"
                 }
             }
-        },
-        "install-app": {
-            "close": "닫기",
-            "install-guide": "아래 버튼을 눌러 앱을 설치해 주세요. 설치 후 자동으로 결제 페이지로 이동됩니다.",
-            "title": "앱 설치 안내",
-            "web-payment-notice": "현재 웹에서는 결제를 진행할 수 없습니다. 앱을 설치하시면 모든 기기(앱과 웹)에서 유료 혜택을 누리실 수 있습니다. 앱은 더 많은 기능을 제공합니다."
-        },
-        "payment-issue": {
-            "billing-page-error": "결제 수단 변경을 위한 페이지를 열 수 없습니다. 관리자에게 문의 해주세요.",
-            "change-to-free": "무료 회원으로 변경",
-            "change-to-free-error": "무료 회원 전환 중 오류가 발생했습니다. 추가 결제가 이루어지지 않으니 안심하셔도 되며, 해당 오류는 담당자에게 전달되었습니다. 문의사항이 있으시면 언제든지 help@opentutorials.org로 연락해 주세요.",
-            "change-to-free-success": "무료 회원으로 전환되었습니다. 그동안 지원해 주셔서 감사합니다.",
-            "close": "닫기",
-            "fetch-error": "결제 정보를 조회하는 과정에서 오류가 발생했습니다. 문제가 지속되면 관리자에게 문의 해주세요.",
-            "payment-method-change": "결제 수단 변경",
-            "retry": "재시도",
-            "store-info-error": "결제 정보를 가져오는 중 오류가 발생했습니다. 문제가 지속되면 관리자에게 문의 해주세요.",
-            "store-missing": "store 정보가 없습니다.",
-            "cancel-request": "구독 취소 및 환불을 원하시면 help@opentutorials.org로 문의해 주세요. 즉시 처리해 드리겠습니다.",
-            "retry-payment": "다시 결제하기",
-            "switch-to-free": "무료 사용자로 전환"
-        },
-        "retry-check": "다시 확인 시도",
-        "success-message": "구독에 성공했습니다! 지원에 감사드립니다.",
-        "title": "내 요금제",
-        "upgrade": "유료 요금제로 업그레이드",
-        "pricing-info": "업그레이드 및 요금안내",
-        "start": "시작하기",
-        "title-plans": "요금제",
-        "pricing-header": {
-            "title": "가격"
         },
         "terms": "서비스 약관",
         "privacy": "개인정보 보호정책"

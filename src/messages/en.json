@@ -87,10 +87,7 @@
             "queue-creation-error": "An error occurred while creating the queue."
         },
         "usage": {
-            "fetch-failed": "Failed to fetch payment history.",
-            "no-payment-history": "No payment history found.",
             "monthly-usage-exceeded": "Monthly usage limit exceeded. Next reset date: {resetDate} ({daysRemaining} days remaining)",
-            "subscription-renewal-failed": "Subscription renewal failed. Please check your payment information.",
             "reset": {
                 "reset-complete": "Reset usage for {count} users.",
                 "reset-test-initialized": "Reset test has been reset.",
@@ -104,12 +101,8 @@
         "confirm": "Confirm",
         "free-usage-exceeded": "<h1>You've used up all your free credits for this month</h1><p>Some features will be temporarily limited until <strong>{nextResetDate}</strong>.</p><section><h2>Features still available</h2><ul><li>Text memo</li></ul><h2>Features that will be limited</h2><ul><li>AI Chat</li><li>AI Write</li><li>Image Upload and OCR</li></ul></section>",
         "later": "Later",
-        "payment-info-update": "Update payment information",
-        "payment-renewal-failed": "Subscription renewal failed. Please check and update your payment method.",
         "signed-out": "You have been signed out.",
-        "subscription-usage-exceeded": "<h1>You've used up all your paid credits for this month</h1><p>Some features will be temporarily limited until {nextResetDate}.</p><section><h2>Features still available</h2><ul><li>Text memo</li></ul><h2>Features that will be limited (until {nextResetDate})</h2><ul><li>AI Chat</li><li>AI Write</li><li>Image Upload and OCR</li></ul></section><section><h2>Need to increase your usage limit?</h2><p>Contact us at help@opentutorials.org, and we'll increase this month's limit for free.</p></section>",
         "view-details": "View Details",
-        "view-paid-benefits": "Upgrade to Plus",
         "callback-error": "An authentication error has occurred. We apologize for the inconvenience. Please return to the app and try again."
     },
     "beta-test": {
@@ -378,13 +371,6 @@
             "slogan": "What others can do, I can do too<br></br>What I can do, others can do too"
         },
         "login": "Login",
-        "pricing": {
-            "free-credits": "Free credits are provided monthly for AI, OCR, and file upload features.",
-            "free-note": "Note-taking is free.",
-            "paid-credits": "Paid subscriptions provide ample monthly renewable credits.",
-            "price-notice": "Exact pricing will be announced at official launch. (Expected $5)",
-            "title": "Pricing"
-        },
         "register": "Register",
         "signin": "Sign in"
     },
@@ -399,9 +385,6 @@
         "confirm": "Confirm",
         "login": "Login",
         "logout": "Logout",
-        "upgrade-to-premium": "Upgrade to Plus",
-        "preparing": "Subscription service is currently being prepared.<br/>Thank you for your interest! 🙌",
-        "manage-subscription": "Manage Subscription",
         "report-bug": "Report Issue",
         "help-center": "Help Center",
         "settings": "Settings",
@@ -480,61 +463,6 @@
         "select": "Select",
         "close": "Close"
     },
-    "pricing-table": {
-        "features": {
-            "ai-functions": "AI Functions",
-            "image-upload": "Image Upload",
-            "memo": "Memo",
-            "price": "Price"
-        },
-        "values": {
-            "credits": "500 Credits",
-            "monthly-uploads": "100 Monthly Uploads",
-            "sufficient": "Sufficient"
-        },
-        "tiers": {
-            "basic": {
-                "name": "Basic",
-                "price": "Free",
-                "features": [
-                    "Unlimited text notes",
-                    "Limited AI features (chat/search/auto title/editing)",
-                    "Limited image upload and OCR features"
-                ]
-            },
-            "plus-monthly": {
-                "name": "Plus",
-                "price": "$5",
-                "sufixPrice": "/ month",
-                "features": [
-                    "Unlimited text notes",
-                    "AI features (chat, search, auto title, editor)",
-                    "Image upload and OCR features"
-                ]
-            },
-            "plus-annually": {
-                "name": "Plus",
-                "price": "$50",
-                "sufixPrice": "/ year",
-                "features": [
-                    "Unlimited text notes",
-                    "AI features (chat, search, auto title, editor)",
-                    "Image upload and OCR features"
-                ]
-            },
-            "plus-weekly": {
-                "name": "Plus",
-                "price": "$2.5",
-                "sufixPrice": "/ week",
-                "features": [
-                    "Unlimited text notes",
-                    "AI features (chat, search, auto title, editor)",
-                    "Image upload and OCR features "
-                ]
-            }
-        },
-        "close": "Close"
-    },
     "profile": {
         "title": "Profile",
         "loading": "Loading...",
@@ -561,12 +489,6 @@
         "delete-complete": "Delete complete",
         "delete-failed": "Failed to delete.",
         "edit": "Edit",
-        "features": {
-            "ai-functions": "AI Functions",
-            "image-upload": "Image Upload",
-            "memo": "Memo",
-            "price": "Price"
-        },
         "go-to-home": "Go to Home",
         "https-required": "This feature is only available in HTTPS or localhost environments.",
         "images-online-only": "Images are only visible online.",
@@ -669,24 +591,8 @@
             "photo-prompt-description": "AI analyzes uploaded images and provides information about them. Configure how AI should describe your images here."
         }
     },
-    "subscription": {
-        "billing-history": {
-            "billing-info": "Start date: {startDate}<br></br>Next payment date: {endDate}<br></br>Payment amount: {amount} {currency}",
-            "fetch-failed": "Failed to fetch payment history.",
-            "no-payment-history": "No payment history found.",
-            "payment-history": "Payment history",
-            "close": "Close"
-        },
-        "cancel": {
-            "cancel": "Cancel subscription",
-            "error": "Cannot open subscription cancellation page. Please contact administrator.",
-            "unpause": "Cancel subscription pause",
-            "withdraw": "Withdraw subscription cancellation",
-            "success": "Your subscription has been canceled. You can continue to use the service until the next billing date, and you will not be charged further.",
-            "fail": "Failed to cancel subscription. Please contact administrator.",
-            "canceled": "Subscription has been canceled."
-        },
-        "checking-status": "Checking subscription status. Please wait.",
+    "usage": {
+        "title": "Usage",
         "close": "Close",
         "contact-support": {
             "usage-exceeded": "Usage limit exceeded. For reset, please contact <email>help@opentutorials.org</email>."
@@ -694,29 +600,19 @@
         "error": {
             "contact": "Contact: help@opentutorials.org",
             "generic": "Sorry, an error occurred. We will fix it promptly.",
-            "load-failed": "Sorry, we couldn't load your subscription information. Please contact support if the problem persists. help@opentutorials.org"
+            "load-failed": "Sorry, we couldn't load your usage information. Please contact support if the problem persists. help@opentutorials.org"
         },
         "error-contact-message": "If you wish to contact us, please email <email>help@opentutorials.org</email>.",
-        "failed-message": "Subscription failed. Please try again.",
         "info": {
-            "canceled-notice": "Your subscription is canceled and will be available until expiration date. No further charges will be made.",
             "current-status": "Current status: {status}",
             "current-usage": "Current usage: {percentage}%",
             "current-usage-help": "Some features have monthly usage limits. Once usage reaches 100%, the feature will be temporarily disabled. Time remaining until the next usage reset: {daysRemaining}",
-            "free-plan": "Free plan",
-            "loading": "Loading subscription information...",
-            "monthly-plan": "Monthly plan",
-            "paused-notice": "Recurring payment is paused.",
+            "free-plan": "Free",
+            "loading": "Loading usage information...",
             "status": {
                 "active": "Currently active.",
-                "inactive-free-exceeded": "Deactivated due to usage limit.",
-                "inactive-payment-failed": "Thanks to your support, we've been able to grow our service. Your subscription has expired and you've been switched to the free plan, but core features remain available. If you miss premium features, you can extend your subscription with just one click!",
-                "inactive-subscription-exceeded": "Deactivated due to subscription usage limit."
+                "inactive-free-exceeded": "Deactivated due to usage limit."
             },
-            "store": "Payment store: {store}",
-            "yearly-plan": "Yearly plan",
-            "next-payment": "Next payment",
-            "weekly-plan": "Weekly plan",
             "limit-reached": {
                 "title": "You have used up all your free usage for this month.",
                 "desc": "Some features will be temporarily restricted until {date}.",
@@ -731,37 +627,6 @@
                     "image-upload": "Image Upload & Image OCR"
                 }
             }
-        },
-        "install-app": {
-            "close": "Close",
-            "install-guide": "Please click the button below to install the app. You'll be automatically redirected to the payment page after installation.",
-            "title": "App Installation Guide",
-            "web-payment-notice": "Payment cannot be processed on the web. Install the app to enjoy paid benefits on all devices (app and web). The app provides more features."
-        },
-        "payment-issue": {
-            "billing-page-error": "Cannot open payment method change page. Please contact administrator.",
-            "change-to-free": "Switch to free membership",
-            "change-to-free-error": "Error during free membership conversion. No additional charges will be made. This error has been reported. For inquiries, please contact help@opentutorials.org anytime.",
-            "change-to-free-success": "Successfully converted to free membership. Thank you for your support.",
-            "close": "Close",
-            "fetch-error": "Error occurred while retrieving payment information. Please contact administrator if the problem persists.",
-            "payment-method-change": "Change payment method",
-            "retry": "Retry",
-            "store-info-error": "Error occurred while fetching payment information. Please contact administrator if the problem persists.",
-            "store-missing": "Store information is missing.",
-            "cancel-request": "If you would like to cancel your subscription and request a refund, please contact us at help@opentutorials.org. We will process your request immediately.",
-            "retry-payment": "Retry Payment",
-            "switch-to-free": "Switch to Free User"
-        },
-        "retry-check": "Try checking again",
-        "success-message": "Successfully subscribed! Thank you for your support.",
-        "title": "My plans",
-        "upgrade": "Upgrade to paid plan",
-        "pricing-info": "Upgrade and Pricing Information",
-        "start": "Get Started",
-        "title-plans": "Plans",
-        "pricing-header": {
-            "title": "Pricing"
         },
         "terms": "Terms of Service",
         "privacy": "Privacy Policy"

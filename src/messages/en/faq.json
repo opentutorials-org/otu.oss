@@ -2,84 +2,64 @@
     "title": "Frequently Asked Questions",
     "items": [
         {
-            "question": "How can I cancel or change my payment?",
-            "answer": "You can request a cancellation or change within 7 days of payment through customer support. For more details, refer to the terms of use."
+            "question": "What is OTU?",
+            "answer": "OTU is an AI-powered note-taking app created by OpenTutorials. It helps you easily create notes while AI connects related content and sends you reminders."
         },
         {
-            "question": "What is the fee in KRW (South Korean Won)?",
-            "answer": "The current fee in KRW starts at 9,900 KRW per month for the basic plan. Detailed pricing is available on the plan page."
+            "question": "Can I use it without signing up?",
+            "answer": "Yes, you can start immediately as an anonymous user. However, in anonymous mode, your data is only stored on your device and cannot be accessed from other devices. Logging in saves your data securely to the server and allows access from all your devices."
         },
         {
-            "question": "What is the refund policy?",
-            "answer": "Refunds are available only within 7 days of payment and if the service has not been used. Additional conditions may apply based on the terms of use."
+            "question": "How is my data synchronized?",
+            "answer": "Logged-in users' data is automatically synchronized with the server. You can access the same notes from web, iOS, and Android apps."
         },
         {
-            "question": "How can I stop auto-renewal?",
-            "answer": "You can disable the auto-renewal option in the account settings page. The cancellation will take effect after the current subscription period ends."
+            "question": "Can I use it offline?",
+            "answer": "Yes, pages you've accessed once can be viewed offline. Content created offline will automatically sync when you reconnect."
         },
         {
-            "question": "What payment methods are supported?",
-            "answer": "We currently support various payment methods such as credit cards, debit cards, PayPal, and KakaoPay."
+            "question": "What AI features are available?",
+            "answer": "We offer AI chat (answers based on your notes), automatic title generation, AI writing assistance (sentence completion, summarization, tone adjustment, etc.), and image OCR (text extraction)."
         },
         {
-            "question": "How can I upgrade my subscription?",
-            "answer": "Subscription upgrades can be done in the account settings under the plan change menu. The new plan will take effect immediately."
+            "question": "Are there limits on AI feature usage?",
+            "answer": "AI, OCR, and image upload features have monthly usage limits. When exceeded, these features are temporarily restricted until the next month's reset, but text note features remain available."
         },
         {
-            "question": "How can I check my subscription status?",
-            "answer": "After logging in, you can check your current subscription status and the remaining period on the account settings page."
+            "question": "How do I use the reminder feature?",
+            "answer": "Set a reminder on any note to receive notifications at scheduled times. Recurring reminders are also supported to help you periodically review important content."
         },
         {
-            "question": "Are taxes included in the price?",
-            "answer": "The displayed price does not include taxes. Additional taxes may apply depending on your region."
+            "question": "Can I organize notes with folders?",
+            "answer": "Yes, you can create folders to categorize your notes. A single note can also be added to multiple folders."
         },
         {
-            "question": "Can I use the service overseas?",
-            "answer": "Yes, the service is available overseas. However, some payment options may be restricted in certain regions."
+            "question": "Can I share my notes with others?",
+            "answer": "When you 'publish' a note, a public link is generated for sharing. Unpublishing deactivates the link."
         },
         {
-            "question": "Can I share my account with others?",
-            "answer": "Account sharing is prohibited by the terms of use. Each user should create their own account."
+            "question": "Can I backup or export my data?",
+            "answer": "You can download all your notes in JSON format through the 'Export Data' feature in Settings."
         },
         {
-            "question": "Is there a way to get a discount?",
-            "answer": "Discounts may be available during promotional periods or by using certain payment methods. Check your email notifications for updates."
+            "question": "How do I delete my account?",
+            "answer": "You can delete your account in the 'Service Withdrawal' menu in Settings. All data is permanently deleted, so please backup if needed beforehand."
         },
         {
-            "question": "How can I downgrade to a different plan?",
-            "answer": "You can downgrade by selecting the plan change option in account settings. Changes will take effect in the next billing cycle."
+            "question": "What login methods are supported?",
+            "answer": "You can log in with Google, GitHub, or Apple accounts."
         },
         {
-            "question": "Will my data be retained after I cancel my subscription?",
-            "answer": "Your data will be retained for 30 days after cancellation. After that, it may be deleted, so please back up your data in advance if needed."
+            "question": "Where can I download the app?",
+            "answer": "Search for 'OTU' on the App Store for iOS or Google Play for Android."
         },
         {
-            "question": "What should I do if my payment fails?",
-            "answer": "If your payment fails, please check the registered payment information and contact customer support if the issue persists."
+            "question": "Is this open source?",
+            "answer": "Yes, OTU is an open source project. You can view the source code and contribute on GitHub."
         },
         {
-            "question": "Does the plan include family sharing features?",
-            "answer": "Family sharing features are available for premium plans or higher. Up to 5 members can share an account."
-        },
-        {
-            "question": "Where can I check my payment history?",
-            "answer": "You can check your payment history in the 'Payment Information' section of account settings."
-        },
-        {
-            "question": "What should I do if I forget my password and can't access my subscription?",
-            "answer": "You can regain access to your account by resetting your password. Additional support is available through customer service."
-        },
-        {
-            "question": "Is there a plan specifically for corporate users?",
-            "answer": "Yes, a corporate plan is available. For more details, contact the sales team or check the plan page."
-        },
-        {
-            "question": "Will I be charged automatically after a free trial?",
-            "answer": "After the free trial ends, the subscription will start automatically. If you don't want auto-renewal, cancel before the trial ends."
-        },
-        {
-            "question": "Can I pay in other currencies?",
-            "answer": "Supported currencies vary by region. You can check the available currencies on the payment page."
+            "question": "I found a bug or have a feature suggestion.",
+            "answer": "Please submit bug reports or feature suggestions on GitHub Issues. Your feedback helps make OTU better."
         }
     ]
 }

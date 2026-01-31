@@ -372,35 +372,11 @@ NEXT_PUBLIC_ENABLE_SENTRY=false # Sentry 활성화 여부 (true: 활성화, fals
 
 - **메커니즘 문서**: `/docs/` (카테고리 prefix 기반 분류)
 
-    **메타 문서 (meta-guides/)**:
-
     - `meta-guides/functionality.md` - 전체 기능 명세
-
-    **도메인 시스템 (domain-\*)**:
-
-    - `domain-authentication/fetch-user-id.md` - 인증 및 사용자 ID 관리
-    - `domain-authentication/supabase-token-fragments.md` - Supabase 토큰 최적화
     - `domain-reminders/core.md` - 알람 시스템 핵심 구조
-    - `domain-reminders/scheduling.md` - 스케줄링 및 CRON 작업
-
-    **기능 (feature-\*)**:
-
     - `feature-editor/autosave.md` - 에디터 자동저장 및 임베딩
     - `feature-chat/rag-modes.md` - AI 채팅 RAG 모드 및 참조 문서 필터링
-    - `feature-chat/embeddings.md` - 임베딩 생성 및 Vector DB
-
-    **핵심 메커니즘 (core-\*)**:
-
     - `core-data/sync.md` - WatermelonDB 동기화 메커니즘
-    - `core-data/sample-seed.md` - 샘플 페이지 자동 생성
     - `core-data/folders.md` - 폴더 시스템
-    - `core-routing/navigation.md` - React Router 기반 빠른 페이지 전환
-    - `core-routing/components.md` - URL 기반 컴포넌트 렌더링
     - `core-ui/theme.md` - 테마 시스템 (gray/white/black)
-    - `core-ui/z-index.md` - z-index 계층 관리
-    - `core-ui/safe-area.md` - 모바일 Safe Area
-    - `core-ui/infinite-scroll.md` - 무한 스크롤
-    - `core-ui/chat-layout.md` - 채팅 반응형 레이아웃
-    - `core-architecture/performance.md` - 성능 최적화 전략
-    - `core-architecture/motion-hoc.md` - Motion HOC 사용 가이드
-    - `core-architecture/sharing.md` - 페이지 공유 메커니즘
+    - `test/test-status.md` - 테스트 현황

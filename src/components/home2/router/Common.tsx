@@ -1,7 +1,7 @@
 import { useReminderTicker } from '@/hooks/useReminderTicker';
 import { useNavigation } from '@/hooks/useNavigation';
 import { useCallback } from 'react';
-import { getSearchKeywordFromUrl } from '@/utils/navigation';
+import { getSearchKeywordFromUrl } from '@/utils/urlUtils';
 import { requestHapticFeedback } from '@/utils/hapticFeedback';
 import GlobalUI from '@/components/core/GlobalUI';
 import ReminderTicker from '@/components/common/ReminderTicker';

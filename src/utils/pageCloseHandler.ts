@@ -1,6 +1,6 @@
 import { currentPageType } from '@/lib/jotai';
+import { getSearchKeywordFromUrl } from '@/utils/urlUtils';
 import {
-    getSearchKeywordFromUrl,
     navigateToFolderDetail as legacyNavigateToFolderDetail,
     navigateToFolderList as legacyNavigateToFolderList,
     navigateToHome as legacyNavigateToHome,

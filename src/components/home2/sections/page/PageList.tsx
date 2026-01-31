@@ -5,7 +5,7 @@ import Container from './Container';
 import { enhancedRenderLogger } from '@/debug/render';
 import { useCallback, useEffect } from 'react';
 import { useNavigation } from '@/hooks/useNavigation';
-import { getSearchKeywordFromUrl } from '@/utils/navigation';
+import { getSearchKeywordFromUrl } from '@/utils/urlUtils';
 import { list } from '@/watermelondb/control/Page';
 import TopControls from '@/components/home/shared/TopControls';
 import { useSetAtom } from 'jotai';

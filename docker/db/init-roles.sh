@@ -13,20 +13,23 @@ fi
 
 echo "[otu-init] Setting passwords for Supabase roles..."
 
-psql -v ON_ERROR_STOP=1 --username "${POSTGRES_USER:-supabase_admin}" --dbname "${POSTGRES_DB:-postgres}" <<-EOSQL
+psql -v ON_ERROR_STOP=1 \
+    --username "${POSTGRES_USER:-supabase_admin}" \
+    --dbname "${POSTGRES_DB:-postgres}" \
+    -v password="$POSTGRES_PASSWORD" <<-'EOSQL'
     -- PostgREST 연결용
-    ALTER USER authenticator WITH PASSWORD '$POSTGRES_PASSWORD';
+    ALTER USER authenticator WITH PASSWORD :'password';
 
     -- GoTrue (Auth) 연결용
-    ALTER USER supabase_auth_admin WITH PASSWORD '$POSTGRES_PASSWORD';
+    ALTER USER supabase_auth_admin WITH PASSWORD :'password';
     GRANT ALL PRIVILEGES ON SCHEMA auth TO supabase_auth_admin;
     ALTER USER supabase_auth_admin SET search_path = 'auth';
 
     -- Storage 연결용
-    ALTER USER supabase_storage_admin WITH PASSWORD '$POSTGRES_PASSWORD';
+    ALTER USER supabase_storage_admin WITH PASSWORD :'password';
 
     -- supabase_admin 비밀번호 설정
-    ALTER USER supabase_admin WITH PASSWORD '$POSTGRES_PASSWORD';
+    ALTER USER supabase_admin WITH PASSWORD :'password';
 
     -- 필요한 추가 권한
     ALTER USER supabase_auth_admin WITH CREATEROLE CREATEDB;

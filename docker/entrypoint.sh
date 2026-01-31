@@ -58,6 +58,12 @@ if [ -d "$MIGRATIONS_DIR" ]; then
         # 타임스탬프 추출 (예: 20230807174141_remote_commit.sql → 20230807174141)
         VERSION="${FILENAME%%_*}"
 
+        # VERSION이 숫자만 포함하는지 검증 (SQL Injection 방지)
+        if [[ ! "$VERSION" =~ ^[0-9]+$ ]]; then
+            echo "[entrypoint] WARNING: Invalid version format: ${VERSION}. Skipping ${FILENAME}."
+            continue
+        fi
+
         # 이미 적용된 마이그레이션 건너뛰기
         ALREADY=$(psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -tAc \
             "SELECT 1 FROM supabase_migrations.schema_migrations WHERE version = '${VERSION}'" 2>/dev/null || echo "")

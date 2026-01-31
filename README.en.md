@@ -6,7 +6,7 @@
 
 [![Version](https://img.shields.io/badge/version-0.5.201-blue.svg)](https://github.com/opentutorials-org/otu.oss)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript)](https://www.typescriptlang.org/)
 
@@ -96,7 +96,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-> 💡 **Tip**: In development, you can use email login at the `/login` path.
+> 💡 **Tip**: In development, you can use email login at the `/signin` path.
 
 📖 **Detailed Installation Guide**: [docs/installation.md](docs/installation.md) - Environment variables, troubleshooting, and more
 

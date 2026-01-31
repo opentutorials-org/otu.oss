@@ -6,7 +6,7 @@
 
 [![Version](https://img.shields.io/badge/version-0.5.201-blue.svg)](https://github.com/opentutorials-org/otu.oss)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript)](https://www.typescriptlang.org/)
 
@@ -462,6 +462,12 @@ npm run test:integration
 - 알람 API 테스트
 - 회원 탈퇴 API 테스트
 
+### API 테스트
+
+- `node test/api.js`로 원큐에 테스트 가능합니다.
+- test/case.ts에 시나리오별 데이터가 담겨 있습니다.
+- 테스트 유저를 변경하려면 test/case.ts의 target_user 변경하면 됩니다.
+
 ---
 
 ## 🚀 배포
@@ -672,56 +678,6 @@ with check (
   true
 );
 ```
-
----
-
-## 테스트
-
-### Jest 단위 테스트
-
-프로젝트에서는 Jest를 사용하여 단위 테스트를 진행합니다.
-
-#### 테스트 실행
-
-```bash
-# 모든 테스트 실행
-npm test
-
-# 특정 테스트 파일 실행
-npx jest path/to/test.test.ts
-```
-
-#### 테스트 환경 설정
-
-Jest는 파일 상단의 주석을 통해 자동으로 실행 환경을 구분합니다:
-
-- **브라우저 환경 (jsdom)**: React 컴포넌트, DOM 조작 테스트
-
-```typescript
-/** @jest-environment jsdom */
-import { render } from '@testing-library/react';
-// 브라우저 환경이 필요한 테스트
-```
-
-- **Node.js 환경**: API, 서버 로직 테스트
-
-```typescript
-/** @jest-environment node */
-import { POST } from './route';
-// Node.js 환경이 필요한 테스트
-```
-
-#### 테스트 파일 명명 규칙
-
-- 테스트 파일은 `*.test.ts` 또는 `*.test.tsx` 확장자를 사용합니다
-- 테스트 대상 파일과 같은 디렉토리에 위치시킵니다
-- 예: `useReminderList.tsx` → `useReminderList.test.tsx`
-
-### API 테스트
-
-- `node test/api.js`로 원큐에 테스트 가능합니다.
-- test/case.ts에 시나리오별 데이터가 담겨 있습니다.
-- 테스트 유저를 변경하려면 test/case.ts의 target_user 변경하면 됩니다.
 
 ---
 

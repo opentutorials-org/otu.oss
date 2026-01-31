@@ -321,6 +321,9 @@ COHERE_API_KEY=                 # ENABLE_AI=true일 때 필요 (임베딩/RAG �
 
 # Sentry 설정
 NEXT_PUBLIC_ENABLE_SENTRY=false # Sentry 활성화 여부 (true: 활성화, false: 비활성화, 기본값 false)
+
+# 디버그 설정 (선택)
+# DEBUG=                        # 기본값 비활성화 (예: sync, chat, editor, alarm, * 전체)
 ```
 
 ### 주요 고려사항

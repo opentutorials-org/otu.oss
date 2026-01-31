@@ -9,8 +9,10 @@ import { cookies } from 'next/headers';
 function safeReportValue(key: string, value: any) {
     try {
         require('@vercel/flags').safeReportValue(key, value);
-    } catch {
-        // @vercel/flags 미설치 시 무시
+    } catch (error: any) {
+        if (error?.code !== 'MODULE_NOT_FOUND') {
+            console.warn('[middleware] safeReportValue failed:', error);
+        }
     }
 }
 
@@ -28,8 +30,10 @@ function getUserIp(request: NextRequest): string {
     try {
         const vercelIp = require('@vercel/functions').ipAddress(request);
         if (vercelIp) return vercelIp;
-    } catch {
-        // @vercel/functions 미설치 시 무시 (셀프호스팅)
+    } catch (error: any) {
+        if (error?.code !== 'MODULE_NOT_FOUND') {
+            console.warn('[middleware] getUserIp failed:', error);
+        }
     }
     return request.headers.get('x-real-ip') || '0.0.0.0';
 }

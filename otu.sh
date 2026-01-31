@@ -47,24 +47,9 @@ warn()    { echo -e "${YELLOW}!${NC} $1"; }
 error()   { echo -e "${RED}✗${NC} $1"; }
 
 # ---------------------------------------------------------------
-# JWT 생성 (순수 bash + openssl)
+# JWT 생성 (공통 라이브러리)
 # ---------------------------------------------------------------
-base64url_encode() {
-    if [ -n "$1" ]; then
-        printf '%s' "$1" | openssl base64 -A | tr '+/' '-_' | tr -d '='
-    else
-        openssl base64 -A | tr '+/' '-_' | tr -d '='
-    fi
-}
-
-generate_jwt() {
-    local payload_json="$1" secret="$2"
-    local header payload signature
-    header=$(base64url_encode '{"alg":"HS256","typ":"JWT"}')
-    payload=$(base64url_encode "$payload_json")
-    signature=$(printf '%s' "${header}.${payload}" | openssl dgst -sha256 -hmac "$secret" -binary | base64url_encode)
-    echo "${header}.${payload}.${signature}"
-}
+source "${SCRIPT_DIR}/docker/lib-jwt.sh"
 
 # ---------------------------------------------------------------
 # 사전 요구사항 확인

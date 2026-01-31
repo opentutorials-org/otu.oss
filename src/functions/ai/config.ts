@@ -87,8 +87,9 @@ export function canUseEmbeddings(): boolean {
 
 /**
  * AI 비활성화 이유를 반환
+ * canUseAI()가 true이면 null을 반환
  */
-export function getAIDisabledReason(): string {
+export function getAIDisabledReason(): string | null {
     if (!isAIEnabled()) {
         return 'AI_DISABLED';
     }
@@ -102,13 +103,14 @@ export function getAIDisabledReason(): string {
         return 'TEXT_MODEL_NAME_NOT_SET';
     }
 
-    return 'UNKNOWN';
+    return null;
 }
 
 /**
  * 임베딩 비활성화 이유를 반환
+ * canUseEmbeddings()가 true이면 null을 반환
  */
-export function getEmbeddingsDisabledReason(): string {
+export function getEmbeddingsDisabledReason(): string | null {
     if (!isAIEnabled()) {
         return 'AI_DISABLED';
     }
@@ -118,5 +120,5 @@ export function getEmbeddingsDisabledReason(): string {
         return 'OPENAI_API_KEY_NOT_SET';
     }
 
-    return 'UNKNOWN';
+    return null;
 }

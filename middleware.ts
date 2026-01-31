@@ -5,8 +5,10 @@ import { generateIdentifier } from './src/functions/logHeader';
 function safeReportValue(key: string, value: any) {
     try {
         require('@vercel/flags').safeReportValue(key, value);
-    } catch {
-        // @vercel/flags 미설치 시 무시
+    } catch (error: any) {
+        if (error?.code !== 'MODULE_NOT_FOUND') {
+            console.warn('[middleware] safeReportValue failed:', error);
+        }
     }
 }
 import { middleWareLogger } from './src/debug/middleware';

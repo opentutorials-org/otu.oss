@@ -51,6 +51,7 @@ if [ -d "$MIGRATIONS_DIR" ]; then
 
     APPLIED=0
     SKIPPED=0
+    FAILED=0
 
     for f in "$MIGRATIONS_DIR"/*.sql; do
         [ -f "$f" ] || continue
@@ -74,18 +75,21 @@ if [ -d "$MIGRATIONS_DIR" ]; then
         fi
 
         echo "[entrypoint] Applying migration: ${FILENAME}"
-        if psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" \
-            -v ON_ERROR_STOP=1 -f "$f" > /dev/null 2>&1; then
+        MIGRATION_ERR=$(psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" \
+            -v ON_ERROR_STOP=1 -f "$f" 2>&1)
+        if [ $? -eq 0 ]; then
             # 성공 시 기록
             psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -q -c \
                 "INSERT INTO supabase_migrations.schema_migrations (version, name) VALUES ('${VERSION}', '${FILENAME}') ON CONFLICT DO NOTHING;"
             APPLIED=$((APPLIED + 1))
         else
-            echo "[entrypoint] WARNING: Migration ${FILENAME} failed. Continuing..."
+            FAILED=$((FAILED + 1))
+            echo "[entrypoint] WARNING: Migration ${FILENAME} failed:"
+            echo "  ${MIGRATION_ERR}" | head -5
         fi
     done
 
-    echo "[entrypoint] Migrations complete: ${APPLIED} applied, ${SKIPPED} skipped."
+    echo "[entrypoint] Migrations complete: ${APPLIED} applied, ${SKIPPED} skipped, ${FAILED} failed."
 fi
 
 # ---------------------------------------------------------------------------

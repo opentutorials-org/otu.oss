@@ -11,32 +11,10 @@
 set -e
 
 # ---------------------------------------------------------------
-# Base64url 인코딩 (순수 openssl, Node.js 불필요)
+# JWT 생성 (공통 라이브러리)
 # ---------------------------------------------------------------
-base64url_encode() {
-    # stdin 또는 인자로 입력 받아 base64url 인코딩
-    if [ -n "$1" ]; then
-        printf '%s' "$1" | openssl base64 -A | tr '+/' '-_' | tr -d '='
-    else
-        openssl base64 -A | tr '+/' '-_' | tr -d '='
-    fi
-}
-
-hmac_sha256_sign() {
-    # $1: data, $2: secret → base64url encoded HMAC-SHA256
-    printf '%s' "$1" | openssl dgst -sha256 -hmac "$2" -binary | base64url_encode
-}
-
-generate_jwt() {
-    # $1: payload JSON, $2: secret
-    local header
-    header=$(base64url_encode '{"alg":"HS256","typ":"JWT"}')
-    local payload
-    payload=$(base64url_encode "$1")
-    local signature
-    signature=$(hmac_sha256_sign "${header}.${payload}" "$2")
-    echo "${header}.${payload}.${signature}"
-}
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/lib-jwt.sh"
 
 # ---------------------------------------------------------------
 # 키 생성

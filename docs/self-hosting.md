@@ -234,11 +234,11 @@ OAuth Callback URL: `https://<API_DOMAIN>/auth/v1/callback`
 
 ### 고급 설정
 
-| 변수                  | 설명                                         | 기본값    |
-| --------------------- | -------------------------------------------- | --------- |
-| `DB_EXTERNAL_PORT`    | 외부에서 PostgreSQL에 접근할 포트            | `54322`   |
-| `DISABLE_SIGNUP`      | 회원가입 비활성화                            | `false`   |
-| `ADDITIONAL_REDIRECT_URLS` | 추가 OAuth 리디렉션 URL (쉼표 구분)    | —         |
+| 변수                       | 설명                                | 기본값  |
+| -------------------------- | ----------------------------------- | ------- |
+| `DB_EXTERNAL_PORT`         | 외부에서 PostgreSQL에 접근할 포트   | `54322` |
+| `DISABLE_SIGNUP`           | 회원가입 비활성화                   | `false` |
+| `ADDITIONAL_REDIRECT_URLS` | 추가 OAuth 리디렉션 URL (쉼표 구분) | —       |
 
 ### 이메일 (SMTP)
 

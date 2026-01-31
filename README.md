@@ -2,6 +2,8 @@
 
 > AI 기반 스마트 메모 애플리케이션 - 생각을 기록하고, AI가 기억을 돕습니다
 
+[English](README.en.md)
+
 [![Version](https://img.shields.io/badge/version-0.5.201-blue.svg)](https://github.com/opentutorials-org/otu.oss)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)

@@ -14,6 +14,14 @@
     "author": "OpenTutorials <contact@opentutorials.org>",
     "private": true,
     "version": "0.5.201",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/opentutorials-org/otu.oss.git"
+    },
+    "bugs": {
+        "url": "https://github.com/opentutorials-org/otu.oss/issues"
+    },
+    "homepage": "https://github.com/opentutorials-org/otu.oss#readme",
     "scripts": {
         "postinstall": "patch-package",
         "dev:turbo": "git config commit.template commit.template; npm run check-updates; next dev  --turbopack",

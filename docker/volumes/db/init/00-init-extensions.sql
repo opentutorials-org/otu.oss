@@ -1,0 +1,9 @@
+-- OTU 필수 PostgreSQL 확장
+-- Supabase 셀프호스팅 시 초기 DB 설정
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS "pgcrypto" WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS "pgjwt" WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS "moddatetime" WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS "vector" WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS "pgroonga";

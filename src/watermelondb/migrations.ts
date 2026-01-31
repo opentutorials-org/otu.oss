@@ -10,61 +10,16 @@
  *
  * @see https://watermelondb.dev/docs/Advanced/Migrations
  */
-import { createTable, schemaMigrations } from '@nozbe/watermelondb/Schema/migrations';
+import { schemaMigrations } from '@nozbe/watermelondb/Schema/migrations';
 
 export default schemaMigrations({
     migrations: [
-        {
-            // 최초 스키마: 모든 테이블 생성
-            toVersion: 1,
-            steps: [
-                // page 테이블
-                createTable({
-                    name: 'page',
-                    columns: [
-                        { name: 'title', type: 'string', isOptional: true },
-                        { name: 'body', type: 'string', isOptional: true },
-                        { name: 'is_public', type: 'boolean', isOptional: true },
-                        { name: 'child_count', type: 'number', isOptional: true },
-                        { name: 'parent_count', type: 'number', isOptional: true },
-                        { name: 'last_viewed_at', type: 'number', isOptional: true },
-                        { name: 'img_url', type: 'string', isOptional: true },
-                        { name: 'length', type: 'number', isOptional: true },
-                        { name: 'created_at', type: 'number' },
-                        { name: 'updated_at', type: 'number' },
-                        { name: 'user_id', type: 'string' },
-                        { name: 'type', type: 'string' },
-                        { name: 'folder_id', type: 'string', isOptional: true },
-                    ],
-                }),
-                // folder 테이블
-                createTable({
-                    name: 'folder',
-                    columns: [
-                        { name: 'name', type: 'string' },
-                        { name: 'description', type: 'string', isOptional: true },
-                        { name: 'thumbnail_url', type: 'string', isOptional: true },
-                        { name: 'page_count', type: 'number', isOptional: true },
-                        { name: 'created_at', type: 'number' },
-                        { name: 'updated_at', type: 'number' },
-                        { name: 'last_page_added_at', type: 'number', isOptional: true },
-                        { name: 'user_id', type: 'string' },
-                    ],
-                }),
-                // alarm 테이블
-                createTable({
-                    name: 'alarm',
-                    columns: [
-                        { name: 'user_id', type: 'string' },
-                        { name: 'page_id', type: 'string' },
-                        { name: 'next_alarm_time', type: 'number', isOptional: true },
-                        { name: 'sent_count', type: 'number' },
-                        { name: 'last_notification_id', type: 'string', isOptional: true },
-                        { name: 'created_at', type: 'number' },
-                        { name: 'updated_at', type: 'number' },
-                    ],
-                }),
-            ],
-        },
+        // 스키마 버전 1은 초기 스키마입니다.
+        // schema.ts의 appSchema가 모든 테이블을 정의하므로 마이그레이션이 필요 없습니다.
+        // WatermelonDB에서 마이그레이션의 최소 toVersion은 2입니다.
+        //
+        // 새 마이그레이션 추가 시:
+        // 1. schema.ts의 version을 N+1로 증가
+        // 2. 여기에 { toVersion: N+1, steps: [...] } 추가
     ],
 });

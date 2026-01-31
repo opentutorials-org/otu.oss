@@ -41,7 +41,7 @@ export default function useCheckWatermelondb() {
                             message: _t('testDeletionError'),
                             yesLabel: _t('confirm'),
                         } as ConfirmOptions);
-                        Sentry.captureMessage('IndexedDB 테스트 DB 삭제 실패');
+                        console.error('IndexedDB 테스트 DB 삭제 실패');
                         resolve(false);
                     };
 
@@ -61,7 +61,7 @@ export default function useCheckWatermelondb() {
                     message: _t('testCreationError'),
                     yesLabel: _t('confirm'),
                 } as ConfirmOptions);
-                Sentry.captureMessage('IndexedDB 테스트 DB 생성 실패');
+                console.error('IndexedDB 테스트 DB 생성 실패');
                 resolve(false);
             };
         });
@@ -73,7 +73,7 @@ export default function useCheckWatermelondb() {
                 message: _t('unsupportedBrowser'),
                 yesLabel: _t('confirm'),
             } as ConfirmOptions);
-            Sentry.captureMessage('IndexedDB 테스트 DB 생성에 실패');
+            console.error('IndexedDB 테스트 DB 생성에 실패');
             return false;
         }
 

@@ -1,7 +1,14 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { updateSession } from './supabase/utils/middleware';
 import { generateIdentifier } from './src/functions/logHeader';
-import { reportValue } from '@vercel/flags';
+// Vercel 전용: 셀프호스팅 환경에서는 @vercel/flags가 없을 수 있음
+function safeReportValue(key: string, value: any) {
+    try {
+        require('@vercel/flags').safeReportValue(key, value);
+    } catch {
+        // @vercel/flags 미설치 시 무시
+    }
+}
 import { middleWareLogger } from './src/debug/middleware';
 import { defaultLanguage, supportedLanguages } from './src/functions/constants';
 
@@ -9,7 +16,7 @@ export async function middleware(req: NextRequest) {
     try {
         const requestId = generateIdentifier();
         middleWareLogger(`MIDDLEWARE : ${requestId} → ${new URL(req.url).pathname}`);
-        reportValue('requestId', requestId);
+        safeReportValue('requestId', requestId);
         if (req.nextUrl.pathname === '/') {
             const requestedLang = req.nextUrl.searchParams.get('lang');
             if (requestedLang) {

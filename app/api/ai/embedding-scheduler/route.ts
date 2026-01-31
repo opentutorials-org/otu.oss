@@ -111,7 +111,7 @@ export async function GET(request: Request) {
 
     interface Job {
         id: string;
-        job_name: string;
+        job_name: string | null;
         payload: string | null;
         user_id: string;
         created_at: string | null;

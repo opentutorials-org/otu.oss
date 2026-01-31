@@ -1,11 +1,18 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
-import { ipAddress } from '@vercel/functions';
 // @ts-ignore
 import { authLogger } from '@/debug/auth';
 import { utf8Logger, cookieLogger } from '@/debug/middleware';
 import { cookies } from 'next/headers';
-import { reportValue } from '@vercel/flags';
+
+// Vercel 전용: 셀프호스팅 환경에서는 @vercel/flags가 없을 수 있음
+function safeReportValue(key: string, value: any) {
+    try {
+        require('@vercel/flags').safeReportValue(key, value);
+    } catch {
+        // @vercel/flags 미설치 시 무시
+    }
+}
 
 function getUserIp(request: NextRequest): string {
     const xForwardedFor = request.headers.get('x-forwarded-for');
@@ -17,8 +24,14 @@ function getUserIp(request: NextRequest): string {
             return ips[0];
         }
     }
-    // x-forwarded-for이 없거나 비어 있을 경우, request.ip 사용
-    return ipAddress(request) || '0.0.0.0'; // 기본값으로 '0.0.0.0' 반환
+    // x-forwarded-for이 없거나 비어 있을 경우, Vercel ipAddress 또는 x-real-ip 사용
+    try {
+        const vercelIp = require('@vercel/functions').ipAddress(request);
+        if (vercelIp) return vercelIp;
+    } catch {
+        // @vercel/functions 미설치 시 무시 (셀프호스팅)
+    }
+    return request.headers.get('x-real-ip') || '0.0.0.0';
 }
 
 // 토큰 조각을 점진적으로 파싱하는 함수
@@ -273,7 +286,7 @@ export async function updateSession(request: NextRequest) {
     // 로그인되어 있지 않고 OTUID 쿠키가 있는 경우
     if (!user.data.user && otuidCookie && otuidCookie.value.length > 0) {
         // 로그인 풀림 이슈 보고 및 OTUID 쿠키 삭제
-        reportValue('auth_terminated', true);
+        safeReportValue('auth_terminated', true);
         const cookiesAll = await cookieStore.getAll();
         console.error('미들웨어에서 로그인 풀림이 발생했습니다.', { cookies: cookiesAll });
         supabaseResponse.cookies.set('OTUID', '', {

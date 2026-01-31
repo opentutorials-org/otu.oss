@@ -7,7 +7,7 @@ import { getTranslations } from 'next-intl/server';
 import { parseLocaleFromAcceptLanguage } from '@/functions/constants';
 import { canUseEmbeddings, getEmbeddingsDisabledReason } from '@/functions/ai/config';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function POST(req: Request) {
     const locale = parseLocaleFromAcceptLanguage(req.headers.get('accept-language'));

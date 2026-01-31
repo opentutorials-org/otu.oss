@@ -6,6 +6,8 @@ import { gateway } from '@ai-sdk/gateway';
 import { createOpenAI } from '@ai-sdk/openai';
 // @ts-ignore
 import { EMBEDDING_MODEL_NAME } from './constants';
+// @ts-ignore
+import { getAIProvider } from './ai/config';
 
 /**
  * Vercel AI Gateway를 사용하여 텍스트 임베딩을 생성합니다.
@@ -18,14 +20,13 @@ import { EMBEDDING_MODEL_NAME } from './constants';
 // @ts-ignore
 export async function createEmbeddingUsingCohere(text, input_type = 'search_query') {
     try {
-        const isDevelopment = process.env.NODE_ENV === 'development';
-
-        // 개발 환경에서는 OpenAI 직접 사용, 프로덕션에서는 Gateway 사용
-        const embeddingModel = isDevelopment
-            ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY }).textEmbeddingModel(
-                  'text-embedding-3-small'
-              )
-            : gateway.textEmbeddingModel(EMBEDDING_MODEL_NAME);
+        // AI_PROVIDER에 따라 OpenAI 직접 사용 또는 Gateway 사용
+        const embeddingModel =
+            getAIProvider() === 'openai'
+                ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY }).textEmbeddingModel(
+                      'text-embedding-3-small'
+                  )
+                : gateway.textEmbeddingModel(EMBEDDING_MODEL_NAME);
 
         const result = await embed({
             model: embeddingModel,
@@ -49,7 +50,7 @@ export async function createEmbeddingUsingCohere(text, input_type = 'search_quer
         console.error('AI error:', new Error(errorText), {
             tags: {
                 api: 'embedding',
-                provider: process.env.NODE_ENV === 'development' ? 'openai' : 'gateway',
+                provider: getAIProvider(),
             },
             extra: {
                 input_type,

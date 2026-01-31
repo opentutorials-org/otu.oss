@@ -18,9 +18,9 @@ import { TEXT_MODEL_NAME } from '@/functions/constants';
 import { getTranslations } from 'next-intl/server';
 import { logHeader } from '@/functions/logHeader';
 import { parseLocaleFromAcceptLanguage } from '@/functions/constants';
-import { canUseAI, getAIDisabledReason } from '@/functions/ai/config';
+import { canUseAI, getAIDisabledReason, getAIProvider } from '@/functions/ai/config';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
@@ -88,12 +88,11 @@ export async function POST(req: NextRequest) {
     try {
         aiLogger(`Before streamText: ${Date.now() - startTime}ms`);
 
-        // 로컬 환경에서는 OpenAI 직접 사용, 프로덕션에서는 Gateway 사용
-        const isDevelopment = process.env.NODE_ENV === 'development';
-
-        const model = isDevelopment
-            ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })('gpt-4o')
-            : gateway(TEXT_MODEL_NAME);
+        // AI_PROVIDER에 따라 OpenAI 직접 사용 또는 Gateway 사용
+        const model =
+            getAIProvider() === 'openai'
+                ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })('gpt-4o')
+                : gateway(TEXT_MODEL_NAME);
 
         const result = streamText({
             model: model as any,

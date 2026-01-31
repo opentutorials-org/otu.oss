@@ -398,40 +398,44 @@ export function Login() {
                     </div>
                 </div>
 
-                {/* 구분선 */}
-                <div className="text-[13px] opacity-50 mt-4">{t('or')}</div>
+                {/* 소셜 로그인 옵션 (환경변수로 제어) */}
+                {process.env.NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN === 'true' && (
+                    <>
+                        {/* 구분선 */}
+                        <div className="text-[13px] opacity-50 mt-4">{t('or')}</div>
 
-                {/* 소셜 로그인 옵션 (하단) */}
-                <Btn
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        setAppleLoading(true);
-                        signInWithApple();
-                    }}
-                    loading={appleLoading}
-                >
-                    <Apple className="w-[18px]" /> {t('login-with-apple')}
-                </Btn>
-                <Btn
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        setGoogleLoading(true);
-                        signInWithGoogle();
-                    }}
-                    loading={googleLoading}
-                >
-                    <Google className="w-[17px] mr-1" /> {t('login-with-google')}
-                </Btn>
-                <Btn
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        setGithubLoading(true);
-                        signInWithGitHub();
-                    }}
-                    loading={githubLoading}
-                >
-                    <GitHub className="w-[17px] mr-1" /> {t('login-with-github')}
-                </Btn>
+                        <Btn
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                setAppleLoading(true);
+                                signInWithApple();
+                            }}
+                            loading={appleLoading}
+                        >
+                            <Apple className="w-[18px]" /> {t('login-with-apple')}
+                        </Btn>
+                        <Btn
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                setGoogleLoading(true);
+                                signInWithGoogle();
+                            }}
+                            loading={googleLoading}
+                        >
+                            <Google className="w-[17px] mr-1" /> {t('login-with-google')}
+                        </Btn>
+                        <Btn
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                setGithubLoading(true);
+                                signInWithGitHub();
+                            }}
+                            loading={githubLoading}
+                        >
+                            <GitHub className="w-[17px] mr-1" /> {t('login-with-github')}
+                        </Btn>
+                    </>
+                )}
                 <div className="text-[13px] opacity-50 mt-3">
                     {t.rich('by-signing-up-or-logging-in-terms-of-service-are-considered-agreed', {
                         'terms-of-service': (chunk) => (

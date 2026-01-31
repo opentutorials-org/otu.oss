@@ -40,5 +40,5 @@
         ".next/dev/types/**/*.ts"
     ],
     "exclude": ["node_modules", "supabase/functions", "public/sw.js"],
-    "types": ["@uploadcare/blocks/types/jsx", "@serwist/next/typings"]
+    "types": ["@uploadcare/blocks/types/jsx"]
 }

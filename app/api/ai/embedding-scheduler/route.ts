@@ -1,5 +1,5 @@
 export const maxDuration = 300;
-import { createEmbeddingUsingCohere } from '@/functions/ai';
+import { createEmbedding } from '@/functions/ai';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { Document } from 'langchain/document';
 const { convert } = require('html-to-text');
@@ -249,7 +249,7 @@ async function embedAndInsertDocuments(
     user_id
 ) {
     for (const doc of docOutput) {
-        const result = await createEmbeddingUsingCohere(doc.pageContent);
+        const result = await createEmbedding(doc.pageContent);
         const origin = result.texts[0];
         const converted = result.embeddings[0];
         const tokens = result.meta.billed_units.input_tokens;

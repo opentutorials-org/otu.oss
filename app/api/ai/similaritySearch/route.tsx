@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { createEmbeddingUsingCohere } from '@/functions/ai';
+import { createEmbedding } from '@/functions/ai';
 import errorResponse, { successResponse } from '@/functions/response';
 import { chatLogger } from '@/debug/chat';
 import { createClient } from '@/supabase/utils/server';
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
 
     let embedQuery;
     try {
-        const embeddings = await createEmbeddingUsingCohere(body.inputMessage, 'search_query');
+        const embeddings = await createEmbedding(body.inputMessage);
         embedQuery = embeddings.embeddings[0];
     } catch (error) {
         return errorResponse(

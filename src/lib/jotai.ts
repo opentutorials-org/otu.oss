@@ -86,7 +86,7 @@ export type similarityResponse = {
 };
 
 export type LLM_ask_data = {
-    llm_id: 'openai' | 'cohere';
+    llm_id: 'openai' | 'cohere' | 'google';
     message: string;
     references: similarityResponse[];
     contextMessages: string[];

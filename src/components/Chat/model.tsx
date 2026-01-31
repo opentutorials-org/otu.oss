@@ -14,10 +14,10 @@ export const aiOptions: OptionItem[] = [
         provider: 'openai',
     },
     {
-        description: '빠르고,저렴해요',
-        value: 'command-r',
-        displayLabel: 'Cohere Command R',
-        provider: 'cohere',
+        description: '빠르고, 저렴해요',
+        value: 'google/gemini-2.5-flash',
+        displayLabel: 'Google Gemini 2.5 Flash',
+        provider: 'google',
     },
 ];
 

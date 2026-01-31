@@ -23,10 +23,9 @@ export function isOpenAIConfigured(): boolean {
 
 /**
  * 임베딩 API가 설정되어 있는지 확인
- * 개발 환경에서는 OpenAI API 키, 프로덕션에서는 Gateway 사용
- * @deprecated COHERE_API_KEY는 더 이상 사용되지 않습니다. Vercel AI Gateway를 통해 임베딩을 사용합니다.
+ * 개발 환경에서는 OpenAI API 키, 프로덕션에서는 Vercel AI Gateway 사용
  */
-export function isCohereConfigured(): boolean {
+export function isEmbeddingConfigured(): boolean {
     const isDevelopment = process.env.NODE_ENV === 'development';
     if (isDevelopment) {
         return !!process.env.OPENAI_API_KEY;
@@ -57,7 +56,7 @@ export function canUseAI(): boolean {
  * RAG/임베딩 기능을 사용할 수 있는지 확인
  */
 export function canUseEmbeddings(): boolean {
-    return isAIEnabled() && isCohereConfigured();
+    return isAIEnabled() && isEmbeddingConfigured();
 }
 
 /**

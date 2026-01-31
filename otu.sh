@@ -226,6 +226,9 @@ ENABLE_AI=${enable_ai}
 AI_PROVIDER=openai
 OPENAI_API_KEY=${openai_api_key}
 
+# 앱 호스트 URL
+NEXT_PUBLIC_HOST=${site_url}
+
 # 소셜 로그인 (필요 시 활성화)
 ENABLE_GITHUB_AUTH=false
 ENABLE_GOOGLE_AUTH=false

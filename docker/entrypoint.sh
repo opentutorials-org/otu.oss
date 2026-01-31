@@ -131,6 +131,9 @@ fi
 if [ -n "$NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY" ]; then
     replace_env_placeholder "__NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY__" "$NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY"
 fi
+if [ -n "$NEXT_PUBLIC_HOST" ]; then
+    replace_env_placeholder "__NEXT_PUBLIC_HOST__" "$NEXT_PUBLIC_HOST"
+fi
 
 # ---------------------------------------------------------------------------
 # 5. Next.js 서버 시작

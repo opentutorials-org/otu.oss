@@ -49,6 +49,7 @@ services:
                 NEXT_PUBLIC_SUPABASE_URL: ${API_EXTERNAL_URL}
                 NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
                 NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY: ${NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY:-}
+                NEXT_PUBLIC_HOST: ${SITE_URL:-http://localhost}
         # 포트는 Caddy를 통해서만 외부 접근 (직접 노출하지 않음)
         expose:
             - '3000'
@@ -78,6 +79,7 @@ services:
             # 기타
             NODE_ENV: production
             SITE_URL: ${SITE_URL:-http://localhost}
+            NEXT_PUBLIC_HOST: ${SITE_URL:-http://localhost}
         depends_on:
             db:
                 condition: service_healthy

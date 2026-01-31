@@ -61,6 +61,7 @@ services:
             UPLOADCARE_PRIVATE_KEY: ${UPLOADCARE_PRIVATE_KEY:-}
             NODE_ENV: production
             SITE_URL: ${SITE_URL:-http://localhost}
+            NEXT_PUBLIC_HOST: ${SITE_URL:-http://localhost}
         depends_on:
             db:
                 condition: service_healthy

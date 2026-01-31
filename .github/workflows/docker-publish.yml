@@ -52,6 +52,7 @@ jobs:
                       NEXT_PUBLIC_SUPABASE_URL=__NEXT_PUBLIC_SUPABASE_URL__
                       NEXT_PUBLIC_SUPABASE_ANON_KEY=__NEXT_PUBLIC_SUPABASE_ANON_KEY__
                       NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY=__NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY__
+                      NEXT_PUBLIC_HOST=__NEXT_PUBLIC_HOST__
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
 

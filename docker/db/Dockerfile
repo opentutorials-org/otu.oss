@@ -13,3 +13,6 @@ RUN apt-get update && \
      echo "pgroonga not available — skipping") && \
     rm -f /tmp/groonga.deb && \
     rm -rf /var/lib/apt/lists/*
+
+# OTU 확장 초기화 스크립트 (Supabase 기본 init-scripts 이후 실행)
+COPY init-extensions.sql /docker-entrypoint-initdb.d/init-scripts/99-otu-extensions.sql

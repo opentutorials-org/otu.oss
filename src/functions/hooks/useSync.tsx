@@ -291,11 +291,9 @@ export const useSync = () => {
                         const checkSyncResult2 = await checkSync();
                         if (checkSyncResult2.isSuccess === true) {
                             syncLogger('file over success');
-                            Sentry.captureMessage(
-                                '두번째 체크 후에도 동기화 오류가 발생했습니다. 온라인과 오프라인의 데이터가 다른 것입니다. 일단 사용자에게 불편을 주지 않도록 사용은 가능하게 처리했습니다만, 원인을 조사하십시오.',
-                                {
-                                    extra: checkSyncResult2,
-                                }
+                            console.error(
+                                '[Sync] failover 후 동기화 검증 성공. 온라인/오프라인 데이터 불일치가 있었으나 복구됨.',
+                                { checkSyncResult2 }
                             );
                             refreshList({
                                 source: 'functions/hooks/useSync:performSync',

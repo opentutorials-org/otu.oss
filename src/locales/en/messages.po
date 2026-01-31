@@ -1,0 +1,2783 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-01-31T14:38:54.790Z\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+#. next-intl key: SharePage.error.description
+msgid "요청하신 페이지를 찾을 수 없습니다. 페이지가 삭제되었거나 비공개 상태일 수 있습니다."
+msgstr ""
+"The page you're looking for doesn't exist. It may have been deleted or is pr"
+"ivate."
+
+#. next-intl key: SharePage.error.home
+msgid "홈으로 돌아가기"
+msgstr "Go to Home"
+
+#. next-intl key: SharePage.error.meta-error-description
+msgid "페이지를 불러오는 중 문제가 발생했습니다."
+msgstr "There was a problem loading the page."
+
+#. next-intl key: content-list.error_occurred
+#. next-intl key: SharePage.error.meta-error-title
+msgid "오류가 발생했습니다"
+msgstr "An error occurred"
+
+#. next-intl key: SharePage.error.private
+msgid "비공개 페이지"
+msgstr "Private Page"
+
+#. next-intl key: SharePage.error.private-description
+msgid "이 페이지는 작성자가 비공개로 설정한 페이지입니다. 페이지 접근 권한이 필요합니다."
+msgstr ""
+"This page has been set to private by its author. You need permission to acce"
+"ss this page."
+
+#. next-intl key: SharePage.error.title
+msgid "존재하지 않는 페이지"
+msgstr "Page Not Found"
+
+#. next-intl key: SharePage.meta.default-description
+msgid "OTU에서 공유된 페이지입니다."
+msgstr "A page shared via OTU"
+
+#. next-intl key: SharePage.meta.default-title
+msgid "공유된 페이지"
+msgstr "Shared Page"
+
+#. next-intl key: agreement-form.implicit-consent-notice
+msgid "기능을 사용하면, 이용약관과 개인정보 보호 정책에 동의한 것으로 간주합니다."
+msgstr ""
+"By using the features, you are deemed to agree to the Terms of Service and P"
+"rivacy Policy."
+
+#. next-intl key: agreement-form.marketing-consent
+msgid "마케팅 수신"
+msgstr "Marketing Communications"
+
+#. next-intl key: agreement-form.optional
+msgid "동의 (옵션)"
+msgstr "Agree (Optional)"
+
+#. next-intl key: agreement-form.privacy-policy
+msgid "개인정보 수집 및 이용"
+msgstr "Privacy Policy"
+
+#. next-intl key: agreement-form.required
+msgid "동의 (필수)"
+msgstr "Agree (Required)"
+
+#. next-intl key: agreement-form.terms-of-service
+msgid "약관"
+msgstr "Terms of Service"
+
+#. next-intl key: alarm.alarm-save-failed
+msgid "리마인더 설정 저장에 실패했습니다"
+msgstr "Failed to save reminder settings"
+
+#. next-intl key: alarm.alarm-saved
+msgid "리마인더 설정이 저장되었습니다"
+msgstr "Reminder settings have been saved"
+
+#. next-intl key: alarm.alarm_pending
+msgid "알람 대기 중"
+msgstr "Alarm pending"
+
+#. next-intl key: alarm.cancel-notification-failed
+msgid "알람 취소 요청에 실패했습니다. 설정은 저장되었지만 예약된 알람이 남아있을 수 있습니다."
+msgstr ""
+"Failed to cancel alarm request. Settings have been saved but scheduled alarm"
+"s may remain."
+
+#. next-intl key: alarm.cancel-notification-network-error
+msgid "네트워크 오류로 알람 취소에 실패했습니다. 설정은 저장되었습니다."
+msgstr "Failed to cancel alarm due to network error. Settings have been saved."
+
+#. next-intl key: alarm.confirm-turn-off-multiple
+msgid "선택한 {count}개 페이지의 알림을 끄시겠습니까?"
+msgstr "Turn off reminders for {count} selected pages?"
+
+#. next-intl key: alarm.exact_time_format
+msgid "{year}년 {month}월 {day}일 {hours}:{minutes}"
+msgstr "{month}/{day}/{year} {hours}:{minutes}"
+
+#. next-intl key: alarm.in_days
+msgid "{count}일 후"
+msgstr "in {count}d"
+
+#. next-intl key: alarm.in_hours
+msgid "{count}시간 후"
+msgstr "in {count}h"
+
+#. next-intl key: alarm.in_minutes
+msgid "{count}분 후"
+msgstr "in {count}m"
+
+#. next-intl key: alarm.in_weeks
+msgid "{count}주 후"
+msgstr "in {count}w"
+
+#. next-intl key: alarm.loading
+#. next-intl key: profile.loading
+msgid "로딩 중..."
+msgstr "Loading..."
+
+#. next-intl key: alarm.no_alarm_set
+msgid "알람 미설정"
+msgstr "No alarm set"
+
+#. next-intl key: alarm.no_reminders
+msgid "설정된 리마인더가 없습니다"
+msgstr "No reminders set"
+
+#. next-intl key: alarm.reminder-disabled
+msgid "리마인더 비활성화됨"
+msgstr "Reminder Disabled"
+
+#. next-intl key: alarm.reminder-enable
+msgid "리마인더 활성화"
+msgstr "Enable Reminder"
+
+#. next-intl key: alarm.reminder-enabled
+msgid "리마인더 활성화됨"
+msgstr "Reminder Enabled"
+
+#. next-intl key: alarm.reminder-guide-url
+msgid "https://otu.ai/share/01K293BXD01DMFZ6DZV5DSZXE6"
+msgstr "https://otu.ai/share/01K293DPE5G0ZD3YMJYS1NNXYX"
+
+#. next-intl key: alarm.reminder-setting-cancel
+#. next-intl key: common.cancel
+#. next-intl key: editor.cancel
+#. next-intl key: loggedin-menu.cancel
+#. next-intl key: navigation.cancel
+#. next-intl key: read.cancel
+#. next-intl key: setting.cancel
+#. next-intl key: folder.cancel
+msgid "취소"
+msgstr "Cancel"
+
+#. next-intl key: alarm.reminder-setting-disabled-message
+msgid "리마인더 설정이 꺼져있습니다. 켜드릴까요?"
+msgstr "Reminder settings are turned off. Would you like to turn them on?"
+
+#. next-intl key: alarm.reminder-setting-disabled-title
+msgid "리마인더 설정 확인"
+msgstr "Check Reminder Settings"
+
+#. next-intl key: alarm.reminder-setting-enable
+msgid "켜기"
+msgstr "Turn On"
+
+#. next-intl key: alarm.sent_count
+msgid "{count}회 전송됨"
+msgstr "Sent {count} time(s)"
+
+#. next-intl key: alarm.title
+#. next-intl key: content-list.reminder
+#. next-intl key: editor.reminder
+#. next-intl key: read.reminder
+msgid "리마인더"
+msgstr "Reminder"
+
+#. next-intl key: alarm.turn-off
+msgid "알림 끄기"
+msgstr "Turn Off"
+
+#. next-intl key: alarm.turn-off-failed
+msgid "알림을 끄는데 실패했습니다."
+msgstr "Failed to turn off reminders."
+
+#. next-intl key: alarm.turned-off-multiple
+msgid "{count}개 페이지의 알림이 꺼졌습니다."
+msgstr "Reminders turned off for {count} pages."
+
+#. next-intl key: api.ai.general-error
+#. next-intl key: api.errors.general-error
+msgid "죄송합니다. 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+msgstr "Sorry, an error occurred. Please try again later."
+
+#. next-intl key: api.ai.login-required
+msgid "로그인이 필요합니다."
+msgstr "Login required."
+
+#. next-intl key: api.ai.request-error
+#. next-intl key: api.errors.ai-request-failed
+msgid "AI 요청 중 오류가 발생했습니다. 잠시 후 다시 시도해보세요."
+msgstr "An error occurred during the AI request. Please try again later."
+
+#. next-intl key: api.ai.search.ai-not-understand
+msgid "말씀하신 내용을 AI가 이해하지 못했습니다. 다시 한번 말씀해주세요."
+msgstr "AI couldn't understand what you said. Please try again."
+
+#. next-intl key: api.ai.search.related-content-error
+msgid "관련된 글을 찾는 과정에서 오류가 발생했습니다. 잠시 후 다시 시도해보세요."
+msgstr "An error occurred while finding related content. Please try again later."
+
+#. next-intl key: api.ai.search.success
+#. next-intl key: api.general.success
+msgid "성공적으로 처리했습니다."
+msgstr "Successfully processed."
+
+#. next-intl key: api.ai.system-prompt
+msgid "답변의 형식이 아니라,작문의 형식을 취해주세요. 최대 3개의 단락을 넘지 않게 적당한 길이로 해주세요."
+msgstr ""
+"Please use a composition format rather than a response format. Keep it to a "
+"moderate length, not exceeding 3 paragraphs."
+
+#. next-intl key: api.ai.titling.disabled
+msgid "AI 제목 생성 기능이 비활성화되어 있습니다."
+msgstr "AI title generation is disabled."
+
+#. next-intl key: api.ai.titling.failed
+msgid "AI가 제목을 짓지 못했습니다."
+msgstr "AI couldn't generate a title."
+
+#. next-intl key: api.ai.titling.login-required
+msgid "AI 제목을 짓기 위해서는 로그인이 필요합니다. 이 문제는 로그인이 되어 있지 않아서 발생했습니다."
+msgstr ""
+"Login is required to generate AI titles. This issue occurred because you are"
+" not logged in."
+
+#. next-intl key: api.embedding-scheduler.unauthorized
+msgid "인증에 실패했습니다."
+msgstr "Authentication failed."
+
+#. next-intl key: api.errors.ai-not-configured
+msgid "AI 기능이 설정되지 않았습니다. 관리자에게 문의하세요."
+msgstr "AI feature is not configured. Please contact the administrator."
+
+#. next-intl key: api.errors.external-rate-limit
+#. next-intl key: api.errors.external-rate-limit-fallback
+msgid "일시적으로 요청이 많아 처리할 수 없습니다. 잠시 후 다시 시도해주세요."
+msgstr "Service is temporarily busy. Please try again in a moment."
+
+#. next-intl key: api.errors.login-required
+msgid "채팅 기능을 사용하기 위해서는 로그인이 필요합니다."
+msgstr "Login is required to use the chat feature."
+
+#. next-intl key: api.errors.model-invalid
+msgid "모델 정보가 잘못되었습니다."
+msgstr "Model information is invalid."
+
+#. next-intl key: api.errors.subscriber-fetch-failed
+msgid "구독자 데이터를 읽는 데 실패했습니다: {errorDetails}"
+msgstr "Failed to fetch subscriber data: {errorDetails}"
+
+#. next-intl key: api.errors.user-quota-exceeded-fallback
+msgid "월간 AI 사용량이 초과되었습니다. 다음 달에 다시 시도해주세요."
+msgstr "Monthly AI usage limit exceeded. Please try again next month."
+
+#. next-intl key: api.export.fetch-failed
+msgid "데이터를 가져오는 중 오류가 발생했습니다."
+msgstr "An error occurred while fetching data."
+
+#. next-intl key: api.export.login-required
+#. next-intl key: setting.withdraw.login-required
+msgid "로그인이 필요합니다. 사용자 정보를 찾지 못했습니다."
+msgstr "Login required. User information not found."
+
+#. next-intl key: api.export.success
+msgid "성공"
+msgstr "Success"
+
+#. next-intl key: api.sync.auth-error-investigation
+msgid "전체 페이지를 가져오는 과정에서 인증에는 성공했지만, 사용자 ID를 찾을 수 없습니다. 이 문제는 조사가 필요합니다."
+msgstr ""
+"Authentication succeeded while fetching all pages, but user ID could not be "
+"found. This issue needs investigation."
+
+#. next-intl key: api.sync.page-deleted
+msgid "페이지가 이미 삭제되었습니다."
+msgstr "Page has already been deleted."
+
+#. next-intl key: api.sync.queue-creation-error
+msgid "큐를 생성하는 과정에서 오류가 발생했습니다."
+msgstr "An error occurred while creating the queue."
+
+#. next-intl key: api.usage.fetch-failed
+#. next-intl key: subscription.billing-history.fetch-failed
+msgid "결제 내역을 가져오는데 실패했습니다."
+msgstr "Failed to fetch payment history."
+
+#. next-intl key: api.usage.monthly-usage-exceeded
+msgid "월간 사용량이 초과되었습니다. 다음 초기화 일자: {resetDate} ({daysRemaining}일 남음)"
+msgstr ""
+"Monthly usage limit exceeded. Next reset date: {resetDate} ({daysRemaining} "
+"days remaining)"
+
+#. next-intl key: api.usage.no-payment-history
+#. next-intl key: subscription.billing-history.no-payment-history
+msgid "결제 내역이 없습니다."
+msgstr "No payment history found."
+
+#. next-intl key: api.usage.reset.reset-complete
+msgid "{count}명의 사용량을 초기화했습니다."
+msgstr "Reset usage for {count} users."
+
+#. next-intl key: api.usage.reset.reset-test-initialized
+msgid "리셋 테스트를 리셋했습니다."
+msgstr "Reset test has been reset."
+
+#. next-intl key: api.usage.reset.test-db-error
+msgid "테스트 준비작업을 위한 데이터베이스 쿼리 중 오류가 발생했습니다: {error}"
+msgstr "Database query error during test preparation: {error}"
+
+#. next-intl key: api.usage.subscription-renewal-failed
+msgid "구독 갱신에 실패했습니다. 결제 정보를 확인해주세요."
+msgstr "Subscription renewal failed. Please check your payment information."
+
+#. next-intl key: auth.account-deactivated
+msgid "계정이 비활성화되었습니다. 고객 지원에 문의하세요."
+msgstr "Account has been deactivated. Please contact customer support."
+
+#. next-intl key: auth.callback-error
+msgid "인증 처리 중 오류가 발생했습니다. 불편을 드려 죄송합니다. 앱으로 돌아가 다시 시도해 주세요."
+msgstr ""
+"An authentication error has occurred. We apologize for the inconvenience. Pl"
+"ease return to the app and try again."
+
+#. next-intl key: auth.close
+#. next-intl key: chat.close
+#. next-intl key: common.close
+#. next-intl key: docs-dialog.close
+#. next-intl key: editor.close
+#. next-intl key: login.close
+#. next-intl key: page-search.close
+#. next-intl key: pricing-table.close
+#. next-intl key: read.close
+#. next-intl key: setting.close
+#. next-intl key: subscription.billing-history.close
+#. next-intl key: subscription.close
+#. next-intl key: subscription.install-app.close
+#. next-intl key: subscription.payment-issue.close
+msgid "닫기"
+msgstr "Close"
+
+#. next-intl key: auth.confirm
+#. next-intl key: editor.confirm
+#. next-intl key: loggedin-menu.confirm
+#. next-intl key: login.confirm
+#. next-intl key: notice.confirm
+#. next-intl key: setting.confirm
+#. next-intl key: setting.delete-all.confirm
+msgid "확인"
+msgstr "Confirm"
+
+#. next-intl key: auth.free-usage-exceeded
+msgid ""
+"<h1>이번 달 무료 사용량이 모두 소진되었어요</h1><p><strong>2025년 10월 24일까지</strong> 일부 기능이 잠시"
+" 제한됩니다.</p><section> <h2>계속 사용 가능한 기능</h2> <ul><li>텍스트 메모</li></ul> <h2>제한되는"
+" 기능</h2><ul><li>AI 채팅</li><li>AI 글쓰기</li><li>이미지 업로드 및 이미지 OCR</li></ul> </s"
+"ection>"
+msgstr ""
+"<h1>You've used up all your free credits for this month</h1><p>Some features"
+" will be temporarily limited until <strong>{nextResetDate}</strong>.</p><sec"
+"tion><h2>Features still available</h2><ul><li>Text memo</li></ul><h2>Feature"
+"s that will be limited</h2><ul><li>AI Chat</li><li>AI Write</li><li>Image Up"
+"load and OCR</li></ul></section>"
+
+#. next-intl key: auth.later
+msgid "나중에"
+msgstr "Later"
+
+#. next-intl key: auth.payment-info-update
+msgid "결제 정보 수정"
+msgstr "Update payment information"
+
+#. next-intl key: auth.payment-renewal-failed
+msgid "구독 갱신에 실패했습니다. 결제 수단을 확인한 후 변경해주세요."
+msgstr "Subscription renewal failed. Please check and update your payment method."
+
+#. next-intl key: auth.signed-out
+msgid "로그아웃 되었습니다."
+msgstr "You have been signed out."
+
+#. next-intl key: auth.subscription-usage-exceeded
+msgid ""
+"<h1>이번 달 유료 사용량이 모두 소진되었어요</h1><p>{nextResetDate}까지 일부 기능이 잠시 제한됩니다.</p><sec"
+"tion><h2>계속 사용 가능한 기능</h2><ul><li>텍스트 메모</li></ul><h2>제한되는 기능 ({nextResetDat"
+"e}까지)</h2><ul><li>AI 채팅</li><li>AI 글쓰기</li><li>이미지 업로드 및 OCR</li></ul></sect"
+"ion><section><h2>사용 한도를 늘리고 싶으신가요?</h2><p>help@opentutorials.org로 연락주시면 무료로 "
+"이번 달 한도를 늘려드립니다.</p></section>"
+msgstr ""
+"<h1>You've used up all your paid credits for this month</h1><p>Some features"
+" will be temporarily limited until {nextResetDate}.</p><section><h2>Features"
+" still available</h2><ul><li>Text memo</li></ul><h2>Features that will be li"
+"mited (until {nextResetDate})</h2><ul><li>AI Chat</li><li>AI Write</li><li>I"
+"mage Upload and OCR</li></ul></section><section><h2>Need to increase your us"
+"age limit?</h2><p>Contact us at help@opentutorials.org, and we'll increase t"
+"his month's limit for free.</p></section>"
+
+#. next-intl key: auth.view-details
+msgid "자세히보기"
+msgstr "View Details"
+
+#. next-intl key: auth.view-paid-benefits
+#. next-intl key: loggedin-menu.upgrade-to-premium
+msgid "플러스로 업그레이드"
+msgstr "Upgrade to Plus"
+
+#. next-intl key: beta-test.preparing-welcome
+msgid "열심히 손님맞이 준비 중입니다."
+msgstr "We are working hard to prepare for your arrival."
+
+#. next-intl key: beta-test.thanks-for-interest
+msgid "OTU에 관심을 가져주셔서 감사합니다."
+msgstr "Thank you for your interest in OTU."
+
+#. next-intl key: beta-test.thanks-for-waiting
+msgid "기다려주셔서 감사합니다!"
+msgstr "Thank you for waiting!"
+
+#. next-intl key: chat.ai-anonymous-user-warning
+msgid ""
+"익명 사용자는 AI 채팅 기능을 이용할 수 없습니다. AI 채팅을 이용하려면 회원가입해야 합니다. 로그인 버튼을 누르면 로그인 페이지로 "
+"이동 후에 지금까지 작성한 내용을 서버로 이전 시켜드립니다."
+msgstr ""
+"Anonymous users cannot use AI chat features. You must sign up to use AI chat"
+". Click the login button to move to the login page and transfer your current"
+" content to the server."
+
+#. next-intl key: chat.ai-disabled-message
+msgid ""
+"AI 기능이 비활성화되어 있습니다. AI 기능을 사용하려면 환경 변수 설정이 필요합니다. (ENABLE_AI=true, OPENAI_AP"
+"I_KEY) 메모 기능은 정상적으로 사용할 수 있습니다."
+msgstr ""
+"AI features are disabled. To enable AI features, configure environment varia"
+"bles (ENABLE_AI=true, OPENAI_API_KEY). Note-taking features work normally."
+
+#. next-intl key: chat.ai-disabled-title
+msgid "AI 기능 비활성화"
+msgstr "AI Features Disabled"
+
+#. next-intl key: chat.anonymous-user-notice
+msgid "익명 사용자는 AI Chat 기능을 사용할 수 없습니다. 로그인 후 이용해주세요."
+msgstr "Anonymous users cannot use AI Chat features. Please login to use."
+
+#. next-intl key: chat.copy-to-clipboard
+msgid "채팅 내용을 클립보드로 복사"
+msgstr "Copy chat content to clipboard"
+
+#. next-intl key: chat.copy-to-page
+msgid "채팅 내용을 페이지로 복사"
+msgstr "Copy chat content to page"
+
+#. next-intl key: chat.delete-chat
+#. next-intl key: editor.delete
+#. next-intl key: read.delete
+#. next-intl key: setting.delete-all.delete
+#. next-intl key: folder.delete
+msgid "삭제"
+msgstr "Delete"
+
+#. next-intl key: chat.delete-chat-tooltip
+msgid "채팅 내용 삭제"
+msgstr "Delete chat content"
+
+#. next-intl key: chat.found-results
+msgid "찾았습니다!"
+msgstr "Found!"
+
+#. next-intl key: chat.login
+#. next-intl key: home.signin
+#. next-intl key: loggedin-menu.login
+#. next-intl key: navigation.login
+#. next-intl key: user.login
+msgid "로그인"
+msgstr "Login"
+
+#. next-intl key: chat.me
+msgid "나"
+msgstr "Me"
+
+#. next-intl key: chat.open-original
+msgid "본문열기"
+msgstr "Open original"
+
+#. next-intl key: chat.save-all-chat
+msgid "전체 채팅 내용을 페이지로 복사"
+msgstr "Copy all chat content to page"
+
+#. next-intl key: chat.save-page
+#. next-intl key: editor.save
+msgid "저장"
+msgstr "Save"
+
+#. next-intl key: chat.search-all
+msgid "전체 글을 검색해서 답변"
+msgstr "Search all posts for answer"
+
+#. next-intl key: chat.search-current
+msgid "페이지의 내용에 대해서 답변"
+msgstr "Answer about page content"
+
+#. next-intl key: chat.search-hint
+msgid "#을 누르면 검색 결과에 대해서 질문할 수 있습니다.<br></br>"
+msgstr "Press # to ask questions about search results.<br></br>"
+
+#. next-intl key: chat.search-scope
+msgid "검색 범위 설정"
+msgstr "Set search scope"
+
+#. next-intl key: chat.similarity.no-llm-response
+msgid "언어모델의 응답이 없습니다."
+msgstr "No response from language model."
+
+#. next-intl key: chat.similarity.not-found
+msgid "요청하신 자료는 찾을 수 없었지만, 알고 있는 내용에 바탕해 답변 드릴게요."
+msgstr ""
+"Could not find the requested information, but I'll answer based on what I kn"
+"ow."
+
+#. next-intl key: chat.similarity.searching
+msgid "질문과 관련된 자료를 찾고 있어요."
+msgstr "Searching for relevant materials."
+
+#. next-intl key: chat.upload-anonymous-user-warning
+msgid ""
+"익명 사용자는 파일 업로드 기능을 이용할 수 없습니다. 로그인 버튼을 누르면 지금까지 작성한 내용을 로그인 한 계정으로 이전 시켜드립니다"
+"."
+msgstr ""
+"Anonymous users cannot use file upload features. Click the login button to t"
+"ransfer your current content to your logged-in account."
+
+#. next-intl key: common.apply
+msgid "적용"
+msgstr "Apply"
+
+#. next-intl key: common.learn-more
+msgid "알아보기"
+msgstr "Learn More"
+
+#. next-intl key: reminder.untitled
+#. next-intl key: common.no-title
+#. next-intl key: editor.untitled
+#. next-intl key: page-search.untitled
+#. next-intl key: uploader.untitled
+msgid "제목 없음"
+msgstr "Untitled"
+
+#. next-intl key: common.oops
+msgid "앗!"
+msgstr "Oops!"
+
+#. next-intl key: common.please-wait
+#. next-intl key: login.please-wait
+msgid "잠시만 기다려주세요."
+msgstr "Please wait."
+
+#. next-intl key: common.profile-image
+#. next-intl key: profile.profile-image
+msgid "프로필 이미지"
+msgstr "Profile Image"
+
+#. next-intl key: common.screenshot
+msgid "스크린샷"
+msgstr "screenshot"
+
+#. next-intl key: common.screenshots
+msgid "스크린샷들"
+msgstr "screenshots"
+
+#. next-intl key: common.signup
+#. next-intl key: home.register
+msgid "회원가입"
+msgstr "Sign Up"
+
+#. next-intl key: common.url-copied
+msgid "URL이 복사되었습니다!"
+msgstr "URL copied!"
+
+#. next-intl key: common.will-contact-by-email
+msgid "모실 준비가 되면 이메일로 연락드리겠습니다."
+msgstr "We will contact you by email when we're ready."
+
+#. next-intl key: content-list.create_first_folder
+msgid "첫 번째 폴더 만들기"
+msgstr "Create your first folder"
+
+#. next-intl key: content-list.folder
+msgid "폴더"
+msgstr "Folder"
+
+#. next-intl key: content-list.language.english
+msgid "English"
+msgstr "English"
+
+#. next-intl key: content-list.language.korean
+msgid "한국어"
+msgstr "한국어"
+
+#. next-intl key: content-list.no_folders
+msgid "폴더가 없습니다"
+msgstr "No folders"
+
+#. next-intl key: content-list.page
+msgid "페이지"
+msgstr "Page"
+
+#. next-intl key: content-list.sort
+#. next-intl key: editor.search.sort
+msgid "정렬"
+msgstr "Sort"
+
+#. next-intl key: content-list.sort-by-latest
+msgid "최신 순"
+msgstr "Latest first"
+
+#. next-intl key: content-list.sort-by-oldest
+msgid "오래된 순"
+msgstr "Oldest first"
+
+#. next-intl key: content-list.sort-by-title
+msgid "제목 순"
+msgstr "Sort by title"
+
+#. next-intl key: documentTitle.default
+msgid "OTU"
+msgstr "OTU"
+
+#. next-intl key: documentTitle.folderDetail
+msgid "{folderName}"
+msgstr "{folderName}"
+
+#. next-intl key: documentTitle.folderList
+msgid "폴더 목록"
+msgstr "Folders"
+
+#. next-intl key: documentTitle.pageList
+msgid "페이지 목록"
+msgstr "Pages"
+
+#. next-intl key: documentTitle.reminderList
+msgid "리마인더 목록"
+msgstr "Reminders"
+
+#. next-intl key: editor.search.search
+#. next-intl key: editor.search.title
+#. next-intl key: navigation.search
+#. next-intl key: documentTitle.search
+msgid "검색"
+msgstr "Search"
+
+#. next-intl key: editor.added
+msgid "추가됨"
+msgstr "Added"
+
+#. next-intl key: editor.ai-complete
+msgid "문장 완성"
+msgstr "Complete the sentence"
+
+#. next-intl key: editor.ai-detailed
+msgid "상세하게"
+msgstr "Detailed"
+
+#. next-intl key: editor.ai-easy
+msgid "더 쉽게"
+msgstr "Make it easier"
+
+#. next-intl key: editor.ai-fix
+msgctxt "ai-correction"
+msgid "수정"
+msgstr "Correct"
+
+#. next-intl key: editor.ai-improve
+msgid "개선"
+msgstr "Improve"
+
+#. next-intl key: editor.ai-oneline
+msgid "한 줄로 요약"
+msgstr "Summarize in one line"
+
+#. next-intl key: editor.ai-prompt-complete
+msgid "원문과 같은 언어로 문장 완성"
+msgstr "Complete the sentence in the same language as the original"
+
+#. next-intl key: editor.ai-prompt-detailed
+msgid "원문과 같은 언어로 약 두 배 길이로 더 상세하게 설명"
+msgstr ""
+"Explain in more detail, about twice as long, in the same language as the ori"
+"ginal"
+
+#. next-intl key: editor.ai-prompt-fix
+msgid "원문과 같은 언어로 오류 수정"
+msgstr "Correct errors in the same language as the original"
+
+#. next-intl key: editor.ai-prompt-improve
+msgid "원문과 같은 언어로 위 내용 개선"
+msgstr "Improve the above content in the same language as the original"
+
+#. next-intl key: editor.ai-prompt-oneline
+msgid "원문과 같은 언어로 한 줄로 요약"
+msgstr "Summarize in one line in the same language as the original"
+
+#. next-intl key: editor.ai-prompt-simplify
+msgid "원문과 같은 언어로 간략하게 요약"
+msgstr "Summarize briefly in the same language as the original"
+
+#. next-intl key: editor.ai-simplify
+msgid "간략하게"
+msgstr "Simplify"
+
+#. next-intl key: editor.ai-spelling
+msgid "맞춤법"
+msgstr "Spelling"
+
+#. next-intl key: editor.ai-tone
+msgid "톤 변경"
+msgstr "Change tone"
+
+#. next-intl key: editor.ai-tone-academic
+msgid "학술적"
+msgstr "Academic"
+
+#. next-intl key: editor.ai-tone-casual
+msgid "일상적"
+msgstr "Casual"
+
+#. next-intl key: editor.ai-tone-confident
+msgid "자신감 있는"
+msgstr "Confident"
+
+#. next-intl key: editor.ai-tone-constructive
+msgid "건설적인"
+msgstr "Constructive"
+
+#. next-intl key: editor.ai-tone-empathetic
+msgid "공감적인"
+msgstr "Empathetic"
+
+#. next-intl key: editor.ai-tone-exciting
+msgid "흥미로운"
+msgstr "Exciting"
+
+#. next-intl key: editor.ai-tone-firm
+msgid "단호한"
+msgstr "Firm"
+
+#. next-intl key: editor.ai-tone-fluent
+msgid "유창한"
+msgstr "Fluent"
+
+#. next-intl key: editor.ai-tone-formal
+msgid "격식적인"
+msgstr "Formal"
+
+#. next-intl key: editor.ai-tone-friendly
+msgid "친근한"
+msgstr "Friendly"
+
+#. next-intl key: editor.ai-tone-inspiring
+msgid "영감을 주는"
+msgstr "Inspiring"
+
+#. next-intl key: editor.ai-tone-oneline
+msgid "한 줄"
+msgstr "One line"
+
+#. next-intl key: editor.ai-tone-professional
+msgid "전문적인"
+msgstr "Professional"
+
+#. next-intl key: editor.ai-translate
+msgid "번역"
+msgstr "Translate"
+
+#. next-intl key: editor.all-images-uploaded
+msgid "모든 이미지 업로드 완료"
+msgstr "All images uploaded"
+
+#. next-intl key: editor.anonymous-user-app-notice
+msgid ""
+"현재 익명 사용자로 콘텐츠를 작성 중입니다. 데이터는 서버가 아닌 앱에 저장되며, 다른 기기에서 접근할 수 없습니다. 로그인하여 데이터를"
+" 서버에 안전하게 저장하세요."
+msgstr ""
+"You are currently writing content as an anonymous user. Data is stored in th"
+"e app, not on the server, and cannot be accessed from other devices. Login t"
+"o safely store your data on the server."
+
+#. next-intl key: editor.anonymous-user-browser-notice
+msgid ""
+"현재 익명 사용자로 콘텐츠를 작성 중입니다. 데이터는 서버가 아닌 브라우저에 저장되며, 다른 기기나 브라우저에서 접근할 수 없습니다. 로"
+"그인하여 데이터를 서버에 안전하게 저장하세요."
+msgstr ""
+"You are currently writing content as an anonymous user. Data is stored in th"
+"e browser, not on the server, and cannot be accessed from other devices or b"
+"rowsers. Login to safely store your data on the server."
+
+#. next-intl key: editor.anonymous-user-notice
+msgid "현재 익명 사용자로 사용 중입니다. 이미지의 경우 서버에 업로드됩니다. 참고해 주세요."
+msgstr ""
+"You are currently using as an anonymous user. For images, data will be uploa"
+"ded to the server. Please note."
+
+#. next-intl key: editor.append
+msgid "끝에 추가"
+msgstr "Append to the end"
+
+#. next-intl key: editor.backup-body-changes-message
+msgid ""
+"본문: {lineCount, plural, =0 {변경 없음} one {{lineCount}줄 변경됨} other {{lineCount}"
+"줄 변경됨}}"
+msgstr ""
+"Body: {lineCount, plural, =0 {No changes} one {{lineCount} line changed} oth"
+"er {{lineCount} lines changed}}"
+
+#. next-intl key: editor.backup-content-date
+msgid "저장되지 않은 문서를 복원합니다"
+msgstr "Restore unsaved document"
+
+#. next-intl key: editor.backup-info-message
+msgid "이전에 작업한 내용이 있습니다. 저장된 시간: {timeAgo}"
+msgstr "You have previous work. Saved time: {timeAgo}"
+
+#. next-intl key: editor.backup-restore-prompt
+msgid "이전에 작업 중이던 내용이 있습니다. 복원하시겠습니까?"
+msgstr "You have previous work in progress. Would you like to restore it?"
+
+#. next-intl key: editor.backup-title-changes-message
+msgid "제목: {originalTitle} → {modifiedTitle}"
+msgstr "Title: {originalTitle} → {modifiedTitle}"
+
+#. next-intl key: editor.body
+#. next-intl key: setting.body
+msgid "본문"
+msgstr "Body"
+
+#. next-intl key: editor.changed-in-backup-message
+msgid "백업에서 변경된 내용"
+msgstr "Changes in backup"
+
+#. next-intl key: editor.compare-backup
+msgid "백업과 비교하기"
+msgstr "Compare with backup"
+
+#. next-intl key: editor.confirm-delete
+#. next-intl key: read.confirm-delete
+msgid "정말 삭제하시겠습니까?"
+msgstr "Are you sure you want to delete?"
+
+#. next-intl key: editor.confirm-delete-multiple
+msgid "선택된 {count}개의 페이지를 삭제하시겠습니까?"
+msgstr "Are you sure you want to delete the selected {count} pages?"
+
+#. next-intl key: editor.content-too-big-error
+msgid "이미지가 너무 큽니다. {size} MB / {maxSize} MB"
+msgstr "Image is too large. {size} MB / {maxSize} MB"
+
+#. next-intl key: editor.content-too-many-error
+msgid "한 번에 {maxCount}개까지만 업로드할 수 있습니다."
+msgstr "You can only upload up to {maxCount} files at once."
+
+#. next-intl key: editor.copy
+#. next-intl key: read.copy
+msgid "복사"
+msgstr "Copy"
+
+#. next-intl key: editor.create
+#. next-intl key: folder.create
+msgid "생성"
+msgstr "Create"
+
+#. next-intl key: editor.created
+msgid "생성됨"
+msgstr "Created"
+
+#. next-intl key: editor.current-length
+msgid "현재 길이"
+msgstr "Current length"
+
+#. next-intl key: editor.delete-prompt
+msgid "'삭제'를 클릭하여 저장되지 않은 변경사항을 제거합니다."
+msgstr "Click 'Delete' to remove the unsaved changes."
+
+#. next-intl key: editor.delete-success
+msgid "삭제가 완료되었습니다."
+msgstr "Deletion completed."
+
+#. next-intl key: editor.deleted-notice
+msgid "삭제되었습니다."
+msgstr "Deleted."
+
+#. next-intl key: editor.dont-show-again
+msgid "다시 표시하지 않음"
+msgstr "Don't show again"
+
+#. next-intl key: editor.draft
+msgid "초안"
+msgstr "Draft"
+
+#. next-intl key: editor.edit
+#. next-intl key: read.edit
+msgid "수정"
+msgstr "Edit"
+
+#. next-intl key: editor.edit-deleted-page
+msgid ""
+"다른 탭에서 삭제된 페이지를 편집하려고 했습니다.<br></br>새 페이지로 편집하려면 복원을 클릭하고,<br></br>홈으로 이동하려면"
+" 무시를 클릭하세요."
+msgstr ""
+"You attempted to edit a page that was deleted in another tab.<br></br>Click "
+"restore to edit as a new page,<br></br>or click ignore to go home."
+
+#. next-intl key: editor.edited
+msgid "편집됨"
+msgstr "Edited"
+
+#. next-intl key: editor.exit
+#. next-intl key: navigation.exit
+msgid "나가기"
+msgstr "Exit"
+
+#. next-intl key: editor.ignore
+msgid "무시"
+msgstr "Ignore"
+
+#. next-intl key: editor.image
+#. next-intl key: editor.images
+#. next-intl key: navigation.images
+msgid "이미지"
+msgstr "Images"
+
+#. next-intl key: editor.insert-image
+msgid "이미지 삽입"
+msgstr "Insert image"
+
+#. next-intl key: editor.ios-enter-problem-description
+msgid "iOS에서 한국어 입력 시 발생하는 버그입니다. 곧 수정하겠습니다!"
+msgstr "This is a bug that occurs when entering Korean on iOS. We will fix it soon!"
+
+#. next-intl key: editor.ios-enter-problem-step1
+msgid "커서를 다른 곳으로 이동한 후 다시 줄바꿈을 시도해보세요."
+msgstr "Try moving the cursor to another place and then breaking the line again."
+
+#. next-intl key: editor.ios-enter-problem-step2
+msgid "앞으로는 Enter를 누르기 전에 마지막에 마침표나 공백을 입력하세요."
+msgstr "In the future, enter a period or space at the end before pressing Enter."
+
+#. next-intl key: editor.ios-enter-problem-title
+msgid "줄바꿈에 문제가 있나요?"
+msgstr "Is there a problem with line breaks?"
+
+#. next-intl key: editor.ios-enter-problem-video
+msgid "동영상 설명"
+msgstr "Video explanation"
+
+#. next-intl key: editor.loading
+msgid "로딩중"
+msgstr "Loading"
+
+#. next-intl key: editor.loading_error_fallback_message
+msgid "에디터를 불러오지 못해 내용만 표시합니다. 불편을 드려 죄송합니다. 관리자에게 자동으로 문제가 보고되었습니다."
+msgstr ""
+"Couldn't load the editor. Your content is displayed below. We apologize for "
+"the inconvenience. The issue has been automatically reported."
+
+#. next-intl key: editor.login-required-for-feature
+msgid "이 기능은 로그인이 필요합니다."
+msgstr "This feature requires login."
+
+#. next-intl key: editor.manual-save
+msgid "수동 저장"
+msgstr "Manual save"
+
+#. next-intl key: editor.max-length
+msgid "최대 길이"
+msgstr "Max length"
+
+#. next-intl key: editor.more-changes
+msgid "{count}개의 추가 변경사항이 있습니다."
+msgstr "There are {count} more changes."
+
+#. next-intl key: editor.new-page
+msgid "새 페이지"
+msgstr "New page"
+
+#. next-intl key: editor.no-changes
+msgid "변경사항 없음"
+msgstr "No changes"
+
+#. next-intl key: editor.no-changes-in-backup-message
+msgid "변경사항이 없습니다."
+msgstr "No changes."
+
+#. next-intl key: editor.no-images-notice
+msgid "이미지가 없습니다."
+msgstr "No images."
+
+#. next-intl key: editor.non-supported-file-error
+msgid "지원하지 않는 파일 형식입니다. 이미지 파일만 업로드할 수 있습니다."
+msgstr "Unsupported file format. You can only upload image files."
+
+#. next-intl key: editor.please-enter-title-or-content
+msgid "제목이나 내용을 입력하세요."
+msgstr "Please enter a title or content."
+
+#. next-intl key: editor.please-write-simple-notes-here
+msgid "간단한 메모는 여기에 작성하세요."
+msgstr "Write your quick notes here."
+
+#. next-intl key: editor.prepend
+msgid "맨 앞에 추가"
+msgstr "Prepend"
+
+#. next-intl key: editor.rapid-input-limit
+msgid "너무 빠른 입력입니다. {seconds}초 후에 다시 시도해주세요."
+msgstr "Input is too frequent. Please try again in {seconds} seconds."
+
+#. next-intl key: editor.read-mode
+msgid "읽기 모드"
+msgstr "Read"
+
+#. next-intl key: editor.reminder-off
+#. next-intl key: read.reminder-off
+msgid "리마인더 끄기"
+msgstr "Disable Reminder"
+
+#. next-intl key: editor.reminder-on
+#. next-intl key: read.reminder-on
+msgid "리마인더 시작"
+msgstr "Enable Reminder"
+
+#. next-intl key: editor.reminder-started
+#. next-intl key: read.reminder-started
+msgid "리마인더가 시작되었습니다."
+msgstr "Reminder has started."
+
+#. next-intl key: editor.reminder-stopped
+#. next-intl key: read.reminder-stopped
+msgid "리마인더가 중지되었습니다."
+msgstr "Reminder has stopped."
+
+#. next-intl key: editor.removed
+msgid "제거됨."
+msgstr "Removed."
+
+#. next-intl key: editor.report
+#. next-intl key: loggedin-menu.report-bug
+msgid "문제 신고"
+msgstr "Report Issue"
+
+#. next-intl key: editor.restore
+msgid "복원"
+msgstr "Restore"
+
+#. next-intl key: editor.restore-prompt
+msgid "'복원'을 클릭하여 저장되지 않은 변경사항을 적용합니다."
+msgstr "You have previous work in progress. Would you like to restore it?"
+
+#. next-intl key: editor.saved
+msgid "저장됨"
+msgstr "Saved"
+
+#. next-intl key: editor.saving
+msgid "저장 중..."
+msgstr "Saving..."
+
+#. next-intl key: editor.search.end
+msgid "마지막"
+msgstr "End"
+
+#. next-intl key: editor.search.keyword
+msgid "검색어"
+msgstr "Search term"
+
+#. next-intl key: editor.search.match-case
+msgid "대소문자 구분"
+msgstr "Match Case"
+
+#. next-intl key: editor.search.match-count
+msgid "{count, plural, =0 {일치하는 항목 없음} one {1개 항목 일치} other {{count}개 항목 일치}}"
+msgstr "{count, plural, =0 {No matches} one {1 match} other {{count} matches}}"
+
+#. next-intl key: editor.search.no-matches
+msgid "일치하는 항목 없음"
+msgstr "No matches"
+
+#. next-intl key: editor.search.order
+msgid "순서"
+msgstr "Order"
+
+#. next-intl key: editor.search.replace
+msgid "바꾸기"
+msgstr "Replace"
+
+#. next-intl key: editor.search.replace-all
+msgid "모두 바꾸기"
+msgstr "Replace All"
+
+#. next-intl key: editor.search.start
+msgid "시작"
+msgstr "Start"
+
+#. next-intl key: editor.search.with
+msgid "다음으로:"
+msgstr "With:"
+
+#. next-intl key: editor.slash-menu.group.media
+msgid "미디어"
+msgstr "Media"
+
+#. next-intl key: editor.slash-menu.media
+msgid "미디어 & 파일"
+msgstr "Media & File"
+
+#. next-intl key: editor.slash-menu.media-description
+msgid "이미지, 동영상, PDF 및 기타 파일 업로드"
+msgstr "Upload images, videos, PDFs and other files"
+
+#. next-intl key: editor.title
+#. next-intl key: setting.title
+msgid "제목"
+msgstr "Title"
+
+#. next-intl key: editor.translate-to
+msgid "번역하기"
+msgstr "Translate to"
+
+#. next-intl key: editor.unsaved
+msgid "저장전"
+msgstr "Unsaved"
+
+#. next-intl key: editor.unsaved-changes-exist
+msgid "저장되지 않은 변경사항이 있습니다."
+msgstr "There are unsaved changes."
+
+#. next-intl key: editor.unsaved-changes-warning
+msgid "저장되지 않은 변경사항이 있습니다. 지금 나가면 변경사항이 사라집니다."
+msgstr "You have unsaved changes. Exiting now will lose those changes."
+
+#. next-intl key: editor.uploading-files
+#. next-intl key: uploader.uploading-files
+msgid "파일 업로드 중..."
+msgstr "Uploading files..."
+
+#. next-intl key: editor.weve-found-a-similar-note
+msgid "비슷한 메모에 내용을 추가해보세요."
+msgstr "Add similar content to the node."
+
+#. next-intl key: editor.writing-title
+msgid "제목 짓는 중..."
+msgstr "Writing a title..."
+
+#. next-intl key: error.an-error-occurred
+msgid "오류가 발생했습니다."
+msgstr "An error occurred."
+
+#. next-intl key: error.append-to-page
+#. next-intl key: error.prepend-to-page
+msgid "{title}"
+msgstr "{title}."
+
+#. next-intl key: error.contact
+msgid "문의하기"
+msgstr "Contact"
+
+#. next-intl key: error.logout
+#. next-intl key: loggedin-menu.logout
+msgid "로그아웃"
+msgstr "Logout"
+
+#. next-intl key: error.retry
+msgid "다시시도"
+msgstr "Retry"
+
+#. next-intl key: fallback.offline-message
+msgid "해당 페이지를 온라인에서 한번 접속해 주세요.{br}한번 접속하면 페이지가 저장돼 오프라인에서도 접속 가능해집니다."
+msgstr ""
+"Please access this page online once.{br}After accessing it once, the page wi"
+"ll be saved and accessible offline."
+
+#. next-intl key: folder.add-page
+#. next-intl key: folder.add-pages
+msgid "페이지 추가"
+msgstr "Add Page"
+
+#. next-intl key: folder.add-page-to-folder
+msgid "폴더에 페이지 추가"
+msgstr "Add Page to Folder"
+
+#. next-intl key: folder.add-pages-failed
+msgid "페이지 추가에 실패했습니다"
+msgstr "Failed to add pages"
+
+#. next-intl key: folder.add-pages-to-folder
+msgid "페이지를 폴더에 추가"
+msgstr "Add Pages to Folder"
+
+#. next-intl key: folder.add-to-folder
+msgid "폴더 이동"
+msgstr "Move to Folder"
+
+#. next-intl key: folder.confirm-add-pages
+msgid "선택된 {count}개의 페이지를 '{folderName}' 폴더에 추가하시겠습니까?"
+msgstr "Add the selected {count} pages to '{folderName}' folder?"
+
+#. next-intl key: folder.confirm-delete
+msgid "정말 이 폴더를 삭제하시겠습니까?
+
+폴더가 삭제되면 폴더 안의 페이지들은 폴더 없음 상태로 변경됩니다. "
+msgstr ""
+"Are you sure you want to delete this folder?
+
+When the folder is deleted, th"
+"e pages in the folder will be changed to 'no folder' status. "
+
+#. next-intl key: folder.confirm-delete-multiple
+msgid "정말 선택한 {count}개의 폴더를 삭제하시겠습니까?
+
+폴더가 삭제되면 폴더 안의 페이지들은 폴더 없음 상태로 변경됩니다."
+msgstr ""
+"Are you sure you want to delete the selected {count} folders?
+
+When the fold"
+"ers are deleted, the pages in the folders will be changed to 'no folder' sta"
+"tus. "
+
+#. next-intl key: folder.confirm-remove-pages
+msgid "선택된 {count}개의 페이지를 현재 폴더에서 제거하시겠습니까? 페이지가 삭제되지는 않습니다."
+msgstr ""
+"Do you want to remove the selected {count} pages from the current folder? Pa"
+"ges will not be deleted."
+
+#. next-intl key: folder.create-failed
+msgid "폴더 생성에 실패했습니다"
+msgstr "Failed to create folder"
+
+#. next-intl key: folder.create-folder
+msgid "폴더 생성"
+msgstr "Create Folder"
+
+#. next-intl key: folder.create-new-folder
+msgid "새 폴더 만들기"
+msgstr "Create New Folder"
+
+#. next-intl key: folder.creating
+msgid "생성 중..."
+msgstr "Creating..."
+
+#. next-intl key: folder.current-page-folder
+msgid "현재 페이지 폴더"
+msgstr "Current Page Folder"
+
+#. next-intl key: folder.delete-failed
+msgid "폴더 삭제에 실패했습니다"
+msgstr "Failed to delete folder"
+
+#. next-intl key: folder.delete-folder
+msgid "폴더 삭제"
+msgstr "Delete Folder"
+
+#. next-intl key: folder.deleting
+msgid "삭제 중..."
+msgstr "Deleting..."
+
+#. next-intl key: folder.edit-folder-name
+msgid "폴더명 수정"
+msgstr "Edit Folder Name"
+
+#. next-intl key: folder.enter-folder-name
+msgid "폴더명을 입력해주세요"
+msgstr "Please enter folder name"
+
+#. next-intl key: folder.existing-folders
+msgid "기존 폴더"
+msgstr "Existing Folders"
+
+#. next-intl key: folder.folder-actions
+msgctxt "folder-actions"
+msgid "폴더 관리"
+msgstr "Folder Actions"
+
+#. next-intl key: folder.folder-created
+msgid "폴더가 생성되었습니다"
+msgstr "Folder created successfully"
+
+#. next-intl key: folder.folder-deleted
+msgid "폴더가 삭제되었습니다"
+msgstr "Folder deleted successfully"
+
+#. next-intl key: folder.folder-description
+msgid "설명 (선택사항)"
+msgstr "Description (Optional)"
+
+#. next-intl key: folder.folder-name
+msgid "폴더명"
+msgstr "Folder Name"
+
+#. next-intl key: folder.folder-name-placeholder
+msgid "폴더 이름을 입력하세요"
+msgstr "Enter folder name"
+
+#. next-intl key: folder.folder-not-found
+msgid "폴더를 찾을 수 없습니다"
+msgstr "Folder not found"
+
+#. next-intl key: folder.folder-sync-failed
+msgid "폴더 정보 동기화에 실패했습니다. 잠시 후 다시 시도해주세요."
+msgstr "Folder information sync failed. Please try again later."
+
+#. next-intl key: folder.folder-updated
+msgid "폴더가 수정되었습니다"
+msgstr "Folder updated successfully"
+
+#. next-intl key: folder.folders-deleted-multiple
+msgid "{count}개의 폴더가 삭제되었습니다."
+msgstr "Deleted {count} folders."
+
+#. next-intl key: folder.load-failed
+msgid "폴더 목록을 불러오는데 실패했습니다"
+msgstr "Failed to load folder list"
+
+#. next-intl key: folder.manage-folders
+msgid "폴더 관리"
+msgstr "Manage Folders"
+
+#. next-intl key: folder.new-folder
+msgid "새 폴더"
+msgstr "New Folder"
+
+#. next-intl key: folder.no-folder
+msgid "지정안함"
+msgstr "None"
+
+#. next-intl key: folder.no-folder-assigned
+msgid "폴더가 지정되지 않음"
+msgstr "No folder assigned"
+
+#. next-intl key: folder.no-folders
+msgid "생성된 폴더가 없습니다"
+msgstr "No folders created"
+
+#. next-intl key: folder.page-added-to-folder
+msgid "페이지가 폴더에 추가되었습니다"
+msgstr "Page added to folder"
+
+#. next-intl key: folder.page-count
+msgid "{count}개 페이지"
+msgstr "{count} pages"
+
+#. next-intl key: folder.page-count-short
+msgid "({count})"
+msgstr "({count})"
+
+#. next-intl key: folder.page-count-simple
+msgid "{count}개"
+msgstr "{count} items"
+
+#. next-intl key: folder.page-removed-from-folder
+msgid "페이지가 폴더에서 제거되었습니다"
+msgstr "Page removed from folder"
+
+#. next-intl key: folder.pages-added-to-folder
+msgid "{count}개의 페이지가 폴더에 추가되었습니다"
+msgstr "{count} pages have been added to the folder"
+
+#. next-intl key: folder.pages-removed-from-folder
+msgid "{count}개의 페이지가 폴더에서 제거되었습니다"
+msgstr "{count} pages have been removed from the folder"
+
+#. next-intl key: folder.remove-failed
+msgid "페이지를 폴더에서 제거하는데 실패했습니다"
+msgstr "Failed to remove pages from folder"
+
+#. next-intl key: folder.remove-from-folder
+msgid "폴더에서 제외"
+msgstr "Remove from Folder"
+
+#. next-intl key: folder.remove-pages-from-folder
+msgid "페이지를 폴더에서 제거"
+msgstr "Remove Pages from Folder"
+
+#. next-intl key: folder.removing
+msgid "제거 중..."
+msgstr "Removing..."
+
+#. next-intl key: folder.search-and-add-page
+msgid "페이지 검색 및 추가"
+msgstr "Search and Add Page"
+
+#. next-intl key: folder.select-folder
+msgid "폴더 선택"
+msgstr "Select Folder"
+
+#. next-intl key: folder.select-folder-for-pages
+msgid "선택된 {count}개의 페이지를 추가할 폴더를 선택하세요"
+msgstr "Select a folder to add the selected {count} pages"
+
+#. next-intl key: folder.select-folder-instruction
+msgid "선택한 페이지가 소속될 폴더를 선택하세요"
+msgstr "Select a folder for the selected page"
+
+#. next-intl key: folder.select-folder-instruction-multiple
+msgid "선택한 {count}개의 페이지가 소속될 폴더를 선택하세요"
+msgstr "Select a folder for the selected {count} pages"
+
+#. next-intl key: folder.toggle-failed
+msgid "작업에 실패했습니다"
+msgstr "Operation failed"
+
+#. next-intl key: folder.update-failed
+msgid "폴더 수정에 실패했습니다"
+msgstr "Failed to update folder"
+
+#. next-intl key: home.about-opentutorials.desc-1
+msgid "OTU는 오픈튜토리얼스에서 개발하고 운영하는 지식 공유 및 메모 서비스입니다."
+msgstr ""
+"OTU is a knowledge sharing and note-taking service developed and operated by"
+" OpenTutorials."
+
+#. next-intl key: home.about-opentutorials.desc-2
+msgid ""
+"오픈튜토리얼스는 2016년 4월 15일 한국에서 설립된 비영리 단체로, 기술을 활용하여 지식의 자유로운 공유를 촉진하고자 합니다. 우리의"
+" 목표는 \"남이 할 수 있는 걸 나도 할 수 있게, 내가 할 수 있는 걸 남도 할 수 있게\"라는 슬로건 아래, 서로 배움과 성장을 지"
+"원하는 것입니다."
+msgstr ""
+"OpenTutorials, established on April 15, 2016, in Korea as a non-profit organ"
+"ization, aims to promote the free sharing of knowledge through technology. O"
+"ur goal is to support mutual learning and growth under the slogan \"What oth"
+"ers can do, I can do too; what I can do, others can do too.\""
+
+#. next-intl key: home.about-opentutorials.desc-3
+msgid ""
+"다양한 분야의 전문가들, 특히 소프트웨어 엔지니어들이 모여 오픈튜토리얼스의 서비스 개발과 운영을 이끌고 있으며, 주요 서비스로는 지식 공"
+"유 플랫폼 <openTutorialsLink>opentutorials.org</openTutorialsLink>와 메모 서비스 <otuL"
+"ink>OTU</otuLink> 등이 있습니다."
+msgstr ""
+"Experts from various fields, especially software engineers, lead the develop"
+"ment and operation of OpenTutorials' services. Our main services include the"
+" knowledge sharing platform <openTutorialsLink>opentutorials.org</openTutori"
+"alsLink> and the note-taking service <otuLink>OTU</otuLink>."
+
+#. next-intl key: home.about-opentutorials.desc-4
+msgid ""
+"오픈튜토리얼스는 비영리 단체로서 주주가 존재하지 않으며, 잉여 수익은 서비스 운영비를 제외하고 사용자와 사회를 위한 사업에 재투자됩니다."
+" 이익을 위해 서비스와 사용자의 데이터를 매각하지 않을 것을 약속 합니다."
+msgstr ""
+"As a non-profit organization, OpenTutorials has no shareholders, and surplus"
+" revenue, excluding operational costs, is reinvested in projects benefiting "
+"users and society. We promise never to sell our services or user data for pr"
+"ofit."
+
+#. next-intl key: home.about-opentutorials.title
+msgid "오픈튜토리얼스 소개"
+msgstr "About OpenTutorials"
+
+#. next-intl key: home.about-otu.desc-1
+msgid "OTU는 메모장입니다."
+msgstr "OTU is a notepad."
+
+#. next-intl key: home.about-otu.desc-2
+msgid "거기에 AI를 보탰습니다."
+msgstr "We added AI to it."
+
+#. next-intl key: home.about-otu.desc-3
+msgid "더 쉽게 넣고, 더 유용하게 꺼낼 수 있습니다. <newline></newline><helpLink>도움말 보기</helpLink>"
+msgstr ""
+"Put in more easily, take out more usefully. <newline></newline> <helpLink>Vi"
+"ew Help</helpLink>"
+
+#. next-intl key: home.about-otu.slogan
+msgid "기록에서 기억까지"
+msgstr "From Records to Memories"
+
+#. next-intl key: home.about-otu.title
+msgid "OTU 소개"
+msgstr "About OTU"
+
+#. next-intl key: home.coming-soon
+msgid "곧 출시합니다."
+msgstr "Coming Soon"
+
+#. next-intl key: home.features.ai-chatbot.desc
+msgid "내 기록을 바탕으로 AI가 답변해줍니다."
+msgstr "AI responds based on your records."
+
+#. next-intl key: home.features.ai-chatbot.title
+msgid "AI 챗봇"
+msgstr "AI Chatbot"
+
+#. next-intl key: home.features.auto-title.desc
+msgid "제목 고민은 이제 그만, 자동으로 생성해 드립니다."
+msgstr "No more title worries, we generate them automatically."
+
+#. next-intl key: home.features.auto-title.title
+msgid "자동 제목 생성"
+msgstr "Automatic Title Generation"
+
+#. next-intl key: home.features.cross-platform.desc
+msgid "다양한 기기에서 동일한 경험을 제공합니다."
+msgstr "Provides the same experience across various devices."
+
+#. next-intl key: home.features.cross-platform.title
+msgid "크로스 플랫폼 메모장"
+msgstr "Cross-Platform Notepad"
+
+#. next-intl key: home.features.editing.desc
+msgid "워드프로세서 수준의 고급 편집 기능을 지원합니다."
+msgstr "Supports advanced editing features at word processor level."
+
+#. next-intl key: home.features.editing.title
+msgid "강력한 편의 기능"
+msgstr "Powerful Editing Features"
+
+#. next-intl key: home.features.fast-loading.desc
+msgid "클릭과 동시에 즉시 메모가 열립니다."
+msgstr "Notes open instantly upon clicking."
+
+#. next-intl key: home.features.fast-loading.title
+msgid "빠른 로딩"
+msgstr "Fast Loading"
+
+#. next-intl key: home.features.ocr.desc
+msgid "이미지의 텍스트를 추출하여 메모로 저장합니다."
+msgstr "Extract text from images and save as notes."
+
+#. next-intl key: home.features.ocr.title
+msgid "OCR"
+msgstr "OCR"
+
+#. next-intl key: home.features.quick-note.desc
+msgid "순간적으로 메모하고 바로 일상으로 돌아가세요."
+msgstr "Take notes instantly and get back to your routine."
+
+#. next-intl key: home.features.quick-note.title
+msgid "빠른 기록"
+msgstr "Quick Note-Taking"
+
+#. next-intl key: home.features.title
+msgid "기능"
+msgstr "Features"
+
+#. next-intl key: home.footer.address
+msgid "경기도 의정부시 새롬안길 105"
+msgstr "105 Saerom-an-gil, Uijeongbu-si, Gyeonggi-do"
+
+#. next-intl key: home.footer.org-number
+msgid "단체 고유번호 619-82-61277"
+msgstr "Organization Number 619-82-61277"
+
+#. next-intl key: home.footer.organization
+msgid "비영리단체 오픈튜토리얼스"
+msgstr "Non-Profit Organization OpenTutorials"
+
+#. next-intl key: home.footer.slogan
+msgid "남이 할 수 있는 걸 나도 할 수 있게<br></br>내가 할 수 있는 걸 남도 할 수 있게"
+msgstr "What others can do, I can do too<br></br>What I can do, others can do too"
+
+#. next-intl key: home.login
+msgid "Login"
+msgstr "Login"
+
+#. next-intl key: home.pricing.free-credits
+msgid "매달 AI, OCR, 파일업로드 기능을 사용할 수 있는 무료 크래딧이 제공됩니다."
+msgstr "Free credits are provided monthly for AI, OCR, and file upload features."
+
+#. next-intl key: home.pricing.free-note
+msgid "메모 작성은 무료입니다."
+msgstr "Note-taking is free."
+
+#. next-intl key: home.pricing.paid-credits
+msgid "유료 구독을 하면 매월 갱신되는 충분한 양의 크래딧을 제공합니다."
+msgstr "Paid subscriptions provide ample monthly renewable credits."
+
+#. next-intl key: home.pricing.price-notice
+msgid "정확한 가격은 곧 공지 할 예정입니다."
+msgstr "Exact pricing will be announced at official launch. (Expected $5)"
+
+#. next-intl key: home.pricing.title
+msgid "가격정책"
+msgstr "Pricing"
+
+#. next-intl key: images-are-only-visible-online
+#. next-intl key: read.images-online-only
+msgid "이미지는 온라인에서만 보여집니다."
+msgstr "Images are only visible online."
+
+#. next-intl key: loggedin-menu.anonymous-user
+msgid "익명 사용자"
+msgstr "Anonymous User"
+
+#. next-intl key: loggedin-menu.are-you-sure-you-want-to-log-out
+msgid "로그아웃하시겠습니까?"
+msgstr "Are you sure you want to log out?"
+
+#. next-intl key: loggedin-menu.clear-storage
+msgid "로그아웃 버튼을 클릭"
+msgstr "Click logout button"
+
+#. next-intl key: loggedin-menu.help-center
+msgid "고객 센터"
+msgstr "Help Center"
+
+#. next-intl key: loggedin-menu.logout-from-all-devices
+msgid "모든 장치에서 로그아웃"
+msgstr "Logout from all devices"
+
+#. next-intl key: loggedin-menu.manage-subscription
+msgid "요금제 관리"
+msgstr "Manage Subscription"
+
+#. next-intl key: loggedin-menu.preparing
+msgid "유료 구독 서비스는 현재 준비 중입니다.<br/>관심 가져주셔서 감사합니다! 🙌"
+msgstr ""
+"Subscription service is currently being prepared.<br/>Thank you for your int"
+"erest! 🙌"
+
+#. next-intl key: loggedin-menu.provider-logout-github
+msgid ""
+"OTU는 로그아웃 되지만, Github는 로그아웃 되지 않습니다. <br /><a href='https://github.com/logou"
+"t' target='_blank'>GitHub 로그아웃 하기</a>"
+msgstr ""
+"OTU is logged out, but Github is not logged out. <br /><a href='https://gith"
+"ub.com/logout' target='_blank'>GitHub logout</a>"
+
+#. next-intl key: loggedin-menu.provider-logout-google
+msgid ""
+"OTU는 로그아웃 되지만, Google는 로그아웃 되지 않습니다. <a href='https://accounts.google.com/Lo"
+"gout' target='_blank'>Google 로그아웃 하기</a>"
+msgstr ""
+"OTU is logged out, but Google is not logged out. <a href='https://accounts.g"
+"oogle.com/Logout' target='_blank'>Google logout</a>"
+
+#. next-intl key: loggedin-menu.settings
+#. next-intl key: setting.settings
+msgid "설정"
+msgstr "Settings"
+
+#. next-intl key: loggedin-menu.theme
+msgid "테마"
+msgstr "Theme"
+
+#. next-intl key: loggedin-menu.theme-black
+msgid "검정"
+msgstr "Black"
+
+#. next-intl key: loggedin-menu.theme-gray
+msgid "회색"
+msgstr "Gray"
+
+#. next-intl key: loggedin-menu.theme-white
+msgid "흰색"
+msgstr "White"
+
+#. next-intl key: loggedin-menu.usage
+msgid "사용량"
+msgstr "Usage"
+
+#. next-intl key: loggedin-menu.when-you-log-in-your-data-is-safely-stored-on-the-server-if-there-is-data-in-your-existing-account-it-will-be-automatically-merged-with-the-current-data-would-you-like-to-continue
+msgid "로그인하면 데이터가 서버에 안전하게 저장됩니다. 기존 계정에 데이터가 있는 경우 현재 데이터와 자동으로 병합됩니다. 계속하시겠습니까?"
+msgstr ""
+"When you log in, your data is safely stored on the server. If there is data "
+"in your existing account, it will be automatically merged with the current d"
+"ata. Would you like to continue?"
+
+#. next-intl key: login.agree
+msgid "전체동의 후 가입"
+msgstr "Agree to all and sign up"
+
+#. next-intl key: login.by-signing-up-or-logging-in-terms-of-service-are-considered-agreed
+msgid "회원가입/로그인을 하면 <terms-of-service>서비스 이용 약관</terms-of-service>에 동의 한 것으로 간주합니다."
+msgstr ""
+"By signing up or logging in <terms-of-service>terms of service</terms-of-ser"
+"vice> are considered agreed."
+
+#. next-intl key: login.clear-storage-before-login
+msgid "로그인을 시작하기 전에 스토리지를 초기화"
+msgstr "Clear storage before login"
+
+#. next-intl key: login.continue-with-apple
+msgid "Apple로 시작하기"
+msgstr "Continue with Apple"
+
+#. next-intl key: login.continue-with-email
+msgid "이메일로 로그인"
+msgstr "Log in with Email"
+
+#. next-intl key: login.continue-with-github
+msgid "GitHub로 시작하기"
+msgstr "Continue with GitHub"
+
+#. next-intl key: login.continue-with-google
+msgid "Google로 시작하기"
+msgstr "Continue with Google"
+
+#. next-intl key: login.continue-without-logging-in
+msgid "회원가입 없이 시작하기"
+msgstr "Continue without signing up"
+
+#. next-intl key: login.google-login-is-not-supported
+msgid "현재 앱에서는 구글 로그인 기능을 지원하지 않습니다. 브라우저나 다른 로그인 방법을 이용해 주세요."
+msgstr ""
+"Google login is not supported in this app. Please use your browser or anothe"
+"r login method."
+
+#. next-intl key: login.log-in-or-sign-up
+#. next-intl key: login.login-or-signup
+msgid "로그인 또는 회원가입"
+msgstr "Log in or Sign up"
+
+#. next-intl key: login.log-in-to-transfer-data
+msgid "데이터 이전을 위한 로그인"
+msgstr "Log in to transfer data"
+
+#. next-intl key: login.login-failed
+msgid "로그인에 실패했습니다. 다시 시도해 주세요."
+msgstr "Login failed. Please try again."
+
+#. next-intl key: login.login-with-apple
+msgid "Apple로 로그인"
+msgstr "Login with Apple"
+
+#. next-intl key: login.login-with-github
+msgid "Github로 로그인"
+msgstr "Login with Github"
+
+#. next-intl key: login.login-with-google
+msgid "Google로 로그인"
+msgstr "Login with Google"
+
+#. next-intl key: login.or
+msgid "또는"
+msgstr "or"
+
+#. next-intl key: login.please-agree-to-all-terms-and-conditions
+msgid "약관과 개인정보 수집 및 이용에 동의해 주세요."
+msgstr ""
+"Please agree to the terms and the collection and use of personal information"
+"."
+
+#. next-intl key: migration.sync
+msgid "데이터를 동기화하고 있습니다.<br/>{progress}"
+msgstr "Syncing your data.<br/>{progress}"
+
+#. next-intl key: navigation.back
+msgid "뒤로"
+msgstr "Back"
+
+#. next-intl key: navigation.chat
+msgid "채팅"
+msgstr "Chat"
+
+#. next-intl key: navigation.home
+msgid "홈"
+msgstr "Home"
+
+#. next-intl key: navigation.write
+msgid "글쓰기"
+msgstr "Write"
+
+#. next-intl key: notice.ai-chat-enhanced
+msgid "AI 채팅 강화"
+msgstr "AI Chat Enhanced"
+
+#. next-intl key: notice.anonymous-user-launch
+msgid "익명 사용자 기능 출시"
+msgstr "Anonymous User Feature Launch"
+
+#. next-intl key: notice.browser-storage-explanation
+msgid "브라우저에 데이터를 저장하기 때문에 서버에서 데이터를 가져오는 것 보다 훨씬 빠릅니다."
+msgstr ""
+"Since data is stored in the browser, it's much faster than fetching from the"
+" server."
+
+#. next-intl key: notice.cache-cleared-manually
+msgid "캐시가 성공적으로 삭제되었습니다."
+msgstr "Cache has been successfully cleared."
+
+#. next-intl key: notice.hide
+msgid "그만 보기"
+msgstr "Hide"
+
+#. next-intl key: notice.insufficientStorage
+msgid ""
+"디바이스의 저장 공간이 부족하여 IndexedDB 기능에 문제가 발생할 수 있습니다. 필요하지 않은 파일을 삭제하거나 기기를 업그레이드해"
+" 주세요."
+msgstr ""
+"Your device's storage is insufficient, which may cause issues with IndexedDB"
+" functionality. Please delete unnecessary files or upgrade your device."
+
+#. next-intl key: notice.language-model-selection
+msgid "1. 언어모델을 선택할 수 있게 되었습니다."
+msgstr "1. You can now select the language model."
+
+#. next-intl key: notice.reference-selection
+msgid "2. 참조 대상을 선택할 수 있게 되었습니다."
+msgstr "2. You can now select reference targets."
+
+#. next-intl key: notice.refresh
+msgid "새로고침"
+msgstr "refresh"
+
+#. next-intl key: notice.speed-improved
+msgid "속도가 빨라졌습니다."
+msgstr "Speed has been improved."
+
+#. next-intl key: notice.storageError
+msgid "저장 공간 확인 중 오류가 발생했습니다. 기기 설정을 확인해주세요."
+msgstr ""
+"An error occurred while checking storage space. Please check your device set"
+"tings."
+
+#. next-intl key: notice.testCreationError
+msgid "IndexedDB 테스트 데이터베이스 생성 중 문제가 발생했습니다. 브라우저나 기기 설정을 확인해주세요."
+msgstr ""
+"An error occurred while creating the IndexedDB test database. Please check y"
+"our browser or device settings."
+
+#. next-intl key: notice.testDeletionError
+msgid "디바이스가 앱의 일부 기능을 지원하지 않고 있습니다. 다른 장치를 사용해주세요."
+msgstr ""
+"Your device does not support some features of the app. Please try using a di"
+"fferent device."
+
+#. next-intl key: notice.testSuccess
+msgid "IndexedDB 테스트 완료"
+msgstr "IndexedDB test completed"
+
+#. next-intl key: notice.unsupportedBrowser
+msgid "앱 사용을 위해 브라우저 업데이트가 필요합니다. 최신 버전으로 변경해 주시면 모든 기능을 원활하게 이용하실 수 있습니다."
+msgstr ""
+"Browser update required for full app functionality. Please update to the lat"
+"est version to enjoy all features smoothly."
+
+#. next-intl key: notice.update-so-reload
+msgid "최신 버전을 사용하려면 새로고침해주세요"
+msgstr ""
+"A new update is available! Please refresh the page to use the latest version"
+"."
+
+#. next-intl key: notice.use-without-signup
+msgid "회원가입 없이, 서버로 데이터를 전송하지 않고 사용할 수 있게 되었습니다."
+msgstr "You can now use without signing up, and without sending data to the server."
+
+#. next-intl key: page-search.dialog-title
+msgid "페이지 검색"
+msgstr "Search Pages"
+
+#. next-intl key: page-search.enter-search-keyword
+msgid "검색어를 입력하세요"
+msgstr "Enter search keyword"
+
+#. next-intl key: page-search.no-results
+msgid "검색 결과가 없습니다"
+msgstr "No results found"
+
+#. next-intl key: page-search.search-placeholder
+msgid "페이지 제목이나 내용을 검색하세요..."
+msgstr "Search by page title or content..."
+
+#. next-intl key: page-search.searching
+msgid "검색 중..."
+msgstr "Searching..."
+
+#. next-intl key: page-search.select
+msgid "선택"
+msgstr "Select"
+
+#. next-intl key: page.publish
+msgid "발행하기"
+msgstr "Publish"
+
+#. next-intl key: read.published
+#. next-intl key: page.published
+msgid "발행됨"
+msgstr "Published"
+
+#. next-intl key: pricing-table.features.ai-functions
+#. next-intl key: read.features.ai-functions
+msgid "AI 기능"
+msgstr "AI Functions"
+
+#. next-intl key: pricing-table.features.image-upload
+#. next-intl key: read.features.image-upload
+msgid "이미지 업로드"
+msgstr "Image Upload"
+
+#. next-intl key: pricing-table.features.memo
+#. next-intl key: read.features.memo
+msgid "메모"
+msgstr "Memo"
+
+#. next-intl key: pricing-table.features.price
+#. next-intl key: read.features.price
+msgid "가격"
+msgstr "Price"
+
+#. next-intl key: pricing-table.tiers.basic.features
+msgid "[\"무제한 텍스트 메모\",\"제한된 AI 기능(채팅/검색/자동제목/편집)\",\"제한된 이미지 업로드 및 OCR 기능\"]"
+msgstr ""
+"[\"Unlimited text notes\",\"Limited AI features (chat/search/auto title/edit"
+"ing)\",\"Limited image upload and OCR features\"]"
+
+#. next-intl key: pricing-table.tiers.basic.name
+msgid "Basic"
+msgstr "Basic"
+
+#. next-intl key: pricing-table.tiers.basic.price
+msgid "Free"
+msgstr "Free"
+
+#. next-intl key: pricing-table.tiers.plus-annually.features
+#. next-intl key: pricing-table.tiers.plus-weekly.features
+msgid "[\"무제한 텍스트 메모\",\"AI 기능 (채팅, 검색, 자동제목, 편집기)\",\"이미지 업로드 및 OCR 기능\"]"
+msgstr ""
+"[\"Unlimited text notes\",\"AI features (chat, search, auto title, editor)\""
+",\"Image upload and OCR features\"]"
+
+#. next-intl key: pricing-table.tiers.plus-monthly.name
+#. next-intl key: pricing-table.tiers.plus-annually.name
+msgid "Plus"
+msgstr "Plus"
+
+#. next-intl key: pricing-table.tiers.plus-annually.price
+msgid "$50"
+msgstr "$50"
+
+#. next-intl key: pricing-table.tiers.plus-annually.sufixPrice
+msgid "/ year"
+msgstr "/ year"
+
+#. next-intl key: pricing-table.tiers.plus-monthly.features
+msgid "[\"무제한 텍스트 메모\",\"AI 기능 (채팅, 검색, 자동제목, 편집기)\",\"이미지 업로드 및 OCR 기능 \"]"
+msgstr ""
+"[\"Unlimited text notes\",\"AI features (chat, search, auto title, editor)\""
+",\"Image upload and OCR features\"]"
+
+#. next-intl key: pricing-table.tiers.plus-monthly.price
+msgid "$5"
+msgstr "$5"
+
+#. next-intl key: pricing-table.tiers.plus-monthly.sufixPrice
+msgid "/ month"
+msgstr "/ month"
+
+#. next-intl key: pricing-table.tiers.plus-weekly.name
+msgid "주간 플러스"
+msgstr "Plus"
+
+#. next-intl key: pricing-table.tiers.plus-weekly.price
+msgid "$2.5"
+msgstr "$2.5"
+
+#. next-intl key: pricing-table.tiers.plus-weekly.sufixPrice
+msgid "/ week"
+msgstr "/ week"
+
+#. next-intl key: pricing-table.values.credits
+msgid "500 크레딧"
+msgstr "500 Credits"
+
+#. next-intl key: pricing-table.values.monthly-uploads
+msgid "월 100개 업로드"
+msgstr "100 Monthly Uploads"
+
+#. next-intl key: pricing-table.values.sufficient
+msgid "충분한"
+msgstr "Sufficient"
+
+#. next-intl key: profile.nickname
+msgid "닉네임"
+msgstr "Nickname"
+
+#. next-intl key: profile.profile-saved
+msgid "프로필이 저장되었습니다"
+msgstr "Profile saved successfully"
+
+#. next-intl key: profile.recommended-size
+msgid "권장 크기: {width}×{height}"
+msgstr "Recommended size: {width}×{height}"
+
+#. next-intl key: profile.select-timezone
+msgid "타임존을 선택하세요"
+msgstr "Please select timezone"
+
+#. next-intl key: profile.timezone
+msgid "타임존"
+msgstr "Timezone"
+
+#. next-intl key: profile.timezone-description
+msgid "설정된 시간대 기준 밤 10시~아침 7시에는 리마인더 알람이 발송되지 않습니다"
+msgstr ""
+"Reminder alarms will not be sent between 10 PM and 7 AM based on the configu"
+"red timezone"
+
+#. next-intl key: profile.title
+msgid "프로필"
+msgstr "Profile"
+
+#. next-intl key: read.already-published
+msgid "이미 발행됨"
+msgstr "Already Published"
+
+#. next-intl key: read.back-to-search
+msgid "{keyword} 검색 페이지로 돌아가기"
+msgstr "Return to {keyword} search page"
+
+#. next-intl key: read.copied
+msgid "클립보드에 복사되었습니다."
+msgstr "Copied to clipboard."
+
+#. next-intl key: read.copy-link
+msgid "링크 복사"
+msgstr "Copy Link"
+
+#. next-intl key: read.currently-sharing
+msgid "현재 공유 중입니다."
+msgstr "Currently sharing."
+
+#. next-intl key: read.delete-complete
+msgid "삭제 완료"
+msgstr "Delete complete"
+
+#. next-intl key: read.delete-failed
+msgid "삭제에 실패했습니다."
+msgstr "Failed to delete."
+
+#. next-intl key: read.go-to-home
+msgid "홈으로 이동"
+msgstr "Go to Home"
+
+#. next-intl key: read.https-required
+msgid "이 기능은 HTTPS 혹은 localhost 환경에서만 사용할 수 있습니다."
+msgstr "This feature is only available in HTTPS or localhost environments."
+
+#. next-intl key: read.link-copied
+msgid "링크가 복사되었습니다."
+msgstr "Link copied to clipboard."
+
+#. next-intl key: read.no-content-found
+msgid "내용이 없습니다."
+msgstr "No content found."
+
+#. next-intl key: read.open-link
+msgid "링크 열기"
+msgstr "Open Link"
+
+#. next-intl key: read.page-not-found
+msgid "존재하지 않는 페이지입니다."
+msgstr "Page does not exist."
+
+#. next-intl key: read.publish
+msgid "발행"
+msgstr "Publish"
+
+#. next-intl key: read.publish-confirmation
+msgid "링크가 있는 모든 사용자가 볼 수 있습니다. 발행하시겠습니까?"
+msgstr "Anyone with the link can view this content. Do you want to publish?"
+
+#. next-intl key: read.publish-error
+msgid "발행 중 오류가 발생했습니다."
+msgstr "An error occurred during publishing."
+
+#. next-intl key: read.publish-nickname-required
+msgid "최초 발행시 닉네임과 이미지를 설정해야 합니다."
+msgstr "You need to set a nickname and profile image for the first publication."
+
+#. next-intl key: read.publish-success
+msgid "발행되었습니다."
+msgstr "Successfully published."
+
+#. next-intl key: read.published-info-title
+msgid "발행 정보"
+msgstr "Publication Information"
+
+#. next-intl key: read.published-url
+msgid "발행 주소"
+msgstr "Published URL"
+
+#. next-intl key: read.related-content-title
+msgid "관련글"
+msgstr "Related Content"
+
+#. next-intl key: read.related-similarity
+msgid "관련성 : {similarity}%"
+msgstr "Similarity: {similarity}%"
+
+#. next-intl key: read.setup-profile
+msgid "프로필 설정"
+msgstr "Setup Profile"
+
+#. next-intl key: read.share
+msgid "공유"
+msgstr "Share"
+
+#. next-intl key: read.share-not-supported
+msgid "이 기능은 현재 브라우저에서 지원되지 않습니다."
+msgstr "This feature is not supported in the current browser."
+
+#. next-intl key: read.shared
+msgid "공유되었습니다."
+msgstr "Shared."
+
+#. next-intl key: read.unpublish
+msgid "발행 취소"
+msgstr "Unpublish"
+
+#. next-intl key: read.unpublish-confirmation
+msgid "발행을 취소하시겠습니까? 다른 사용자는 더 이상 이 콘텐츠를 볼 수 없게 됩니다."
+msgstr ""
+"Do you want to unpublish? Other users will no longer be able to view this co"
+"ntent."
+
+#. next-intl key: read.unpublish-error
+msgid "발행 취소 중 오류가 발생했습니다."
+msgstr "An error occurred while canceling publication."
+
+#. next-intl key: read.unpublish-success
+msgid "발행이 취소되었습니다."
+msgstr "Publication has been canceled."
+
+#. next-intl key: reminder.inDays
+msgid "in {count} day(s)"
+msgstr "in {count} day(s)"
+
+#. next-intl key: reminder.inHours
+msgid "in {count} hour(s)"
+msgstr "in {count} hour(s)"
+
+#. next-intl key: reminder.now
+msgid "지금"
+msgstr "now"
+
+#. next-intl key: sample.body
+msgid ""
+"<p>이 페이지는 OTU의 샘플 메모예요. 확인 후 필요 없으면 삭제하셔도 됩니다.</p><p>&nbsp;</p><h3>OTU를 소개합니"
+"다.</h3><blockquote><p>\"앱의 이름은 OTU입니다. 노트 앱입니다. OpenTUtorials의 줄임말입니다. 일기부터 "
+"원고까지, 무엇이든 자유롭게 담을 수 있는 간단한 메모장입니다.\"</p></blockquote><p>&nbsp;</p><p>저희가 이 "
+"노트에 담기기를 은근히 기대하는 주제는 '지식'입니다.</p><ul><li><p>지금은 공부할 시간이 없지만, 언젠가 내 것으로 만들고 "
+"싶은 지식.</p></li><li><p>당장은 필요 없지만 언젠가 다시 꺼내야 할 지식.</p></li></ul><p>&nbsp;</p>"
+"<p>그런 것들을 OTU에 툭 던져 놓으면, 알아서 정리하고 보관해드립니다.</p><p>&nbsp;</p><ul><li><p>비슷한 글이"
+" 있다면 연결해드립니다.</p></li><li><p>기억하고 싶은 내용은 리마인드해드립니다.</p></li><li><p>제목이 없다면 대"
+"신 지어드립니다.</p></li><li><p>사진이라면, 사진 속 정보를 분석해 설명해드립니다.</p></li><li><p>채팅으로 물어"
+"보면, 내 기록을 바탕으로 답하고 찾아드립니다.</p></li></ul><p>&nbsp;</p><p style=\"text-align: "
+"center;\"><img src=\"https://ucarecdn.com/c6aa5cb1-cbb9-4a43-ba4c-b090ed2345"
+"9d/-/preview/564x1200/\" alt=\"\" width=\"427\"></p><p>&nbsp;</p><h3>OTU 사용법"
+"</h3><p>&nbsp;</p><p>→ <a href=\"https://github.com/opentutorials-org/otu.ai"
+"\" target=\"_blank\" rel=\"noopener noreferrer\">OTU GitHub Repository</a></"
+"p><p>&nbsp;</p><p>앱 이용 중 문의사항이나 궁금한 점이 있으시면, <a href=\"https://github.com/op"
+"entutorials-org/otu.ai/issues\" target=\"_blank\" rel=\"noopener noreferrer\"
+"">GitHub Issues</a>에 남겨주세요.</p><p>&nbsp;</p><h3>앱 다운로드</h3><p>&nbsp;</p><p>→"
+" <a href=\"https://apps.apple.com/kr/app/otu-ai/id6473810282\" target=\"_bla"
+"nk\" rel=\"noopener noreferrer\">iOS - App Store</a></p><p>→ <a href=\"https"
+"://play.google.com/store/apps/details?id=ai.otu.app\" target=\"_blank\" rel="
+"\"noopener noreferrer\">안드로이드 - Google play</a></p><p>&nbsp;</p><h3>오픈튜토리얼스<"
+"/h3><blockquote><p>\"비영리 단체 오픈튜토리얼스는 '내가 할 수 있는 일을 남도 할 수 있게, 남이 할 수 있는 일을 나"
+"도 할 수 있게'라는 슬로건을 가진 교육 단체입니다. 기술로 사람을 더 똑똑하게 만드는 방법을 연구합니다.\"</p></blockquot"
+"e>"
+msgstr ""
+"<p>This is a sample note from OTU. Feel free to delete it after reviewing.</"
+"p><p>&nbsp;</p><h3>Introducing OTU.</h3><blockquote><p>\"The app's name is O"
+"TU. It's a note-taking app. Short for OpenTUtorials. It's a simple memo pad "
+"where you can freely store anything from diaries to manuscripts.\"</p></bloc"
+"kquote><p>&nbsp;</p><p>The theme we secretly hope you'll capture in this not"
+"e is 'knowledge.'</p><ul><li><p>Knowledge you don't have time to study now, "
+"but want to make yours someday.</p></li><li><p>Knowledge you don't need righ"
+"t now, but will need to revisit later.</p></li></ul><p>&nbsp;</p><p>Just tos"
+"s those things into OTU, and we'll organize and store them for you.</p><p>&n"
+"bsp;</p><ul><li><p>If there are similar posts, we'll connect them.</p></li><"
+"li><p>We'll remind you of content you want to remember.</p></li><li><p>If th"
+"ere's no title, we'll create one for you.</p></li><li><p>If it's a photo, we"
+"'ll analyze and describe the information in it.</p></li><li><p>If you ask vi"
+"a chat, we'll answer and search based on your records.</p></li></ul><p>&nbsp"
+";</p><p style=\"text-align: center;\"><img src=\"https://ucarecdn.com/c6aa5c"
+"b1-cbb9-4a43-ba4c-b090ed23459d/-/preview/564x1200/\" alt=\"\" width=\"427\">"
+"</p><p>&nbsp;</p><h3>OTU Usage and Download</h3><p>&nbsp;</p><ul><li><p><a h"
+"ref=\"https://github.com/opentutorials-org/otu.ai\" target=\"_blank\" rel=\""
+"noopener noreferrer\">OTU GitHub Repository</a></p></li><li><p><a href=\"htt"
+"ps://apps.apple.com/kr/app/otu-ai/id6473810282\" target=\"_blank\" rel=\"noo"
+"pener noreferrer\">iOS - App Store</a></p></li><li><p><a href=\"https://play"
+".google.com/store/apps/details?id=ai.otu.app\" target=\"_blank\" rel=\"noope"
+"ner noreferrer\">Android - Google Play</a></p></li></ul><p>&nbsp;</p><p>If y"
+"ou have any questions or inquiries while using the app, please leave a messa"
+"ge on <a href=\"https://github.com/opentutorials-org/otu.ai/issues\" target="
+"\"_blank\" rel=\"noopener noreferrer\">GitHub Issues</a>.</p><p>&nbsp;</p><h"
+"3>OpenTutorials</h3><blockquote><p>\"OpenTutorials is a non-profit education"
+"al organization with the slogan 'What I can do, others can do; what others c"
+"an do, I can do.'\"</p></blockquote>"
+
+#. next-intl key: sample.title
+msgid "환영합니다! (OTU 샘플 메모)"
+msgstr "Welcome! (OTU Sample Note)"
+
+#. next-intl key: selection.items-selected
+msgid "{count}개의 항목 선택됨"
+msgstr "{count} items selected"
+
+#. next-intl key: setting.body-description
+msgid "페이지 내용입니다. 텍스트 형식으로 저장되며 페이지에 대한 자세한 정보를 포함합니다."
+msgstr ""
+"The content of the page. Stored in text format and contains detailed informa"
+"tion about the page."
+
+#. next-intl key: setting.boolean
+msgid "불리언"
+msgstr "Boolean"
+
+#. next-intl key: setting.column
+msgid "열"
+msgstr "Column"
+
+#. next-intl key: setting.confirm-download-json
+msgid "JSON 파일을 다운로드하시겠습니까?"
+msgstr "Do you want to download the JSON file?"
+
+#. next-intl key: setting.confirm-withdrawal
+msgid "탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+msgstr "Are you sure you want to withdraw? This action is irreversible."
+
+#. next-intl key: setting.created_at
+msgid "생성일"
+msgstr "Created At"
+
+#. next-intl key: setting.created_at-description
+msgid "페이지가 생성된 날짜와 시간입니다. 페이지의 최초 생성 시간을 나타냅니다."
+msgstr ""
+"The date and time when the page was created. Indicates the first creation ti"
+"me of the page."
+
+#. next-intl key: setting.critical-error-contact-admin
+msgid "치명적 오류입니다. 관리자에게 문의하십시오."
+msgstr "Critical error. Please contact the administrator."
+
+#. next-intl key: setting.custom-prompt.default-picture-prompt
+msgid ""
+"이미지의 초점이 문자라면 문자만 출력해주세요. 그렇지 않다면, 보이는 사물을 단어로 나열해주세요. 설명형 문장 사용 금지. 예: 컵, 꽃"
+", 바다, 갈매기"
+msgstr ""
+"If the image's focus is on text, output only the text. Otherwise, list visib"
+"le objects as words only. No descriptive sentences allowed. Example: cup, fl"
+"ower, sea, seagull"
+
+#. next-intl key: setting.custom-prompt.error-saving-prompt
+msgid "프롬프트 저장 중 오류가 발생했습니다"
+msgstr "Error saving prompt"
+
+#. next-intl key: setting.custom-prompt.title
+#. next-intl key: setting.custom-prompt.photo-prompt
+msgid "사진 프롬프트"
+msgstr "Photo Prompt"
+
+#. next-intl key: setting.custom-prompt.photo-prompt-description
+msgid "이미지 업로드 시 AI가 이미지를 분석해 정보를 제공합니다. 여기서 AI의 이미지 설명 방식을 설정할 수 있습니다."
+msgstr ""
+"AI analyzes uploaded images and provides information about them. Configure h"
+"ow AI should describe your images here."
+
+#. next-intl key: setting.custom-prompt.prompt-saved
+msgid "프롬프트가 저장되었습니다"
+msgstr "Prompt saved successfully"
+
+#. next-intl key: setting.data-type
+msgid "데이터 유형"
+msgstr "Data Type"
+
+#. next-intl key: setting.delete-all.clear-storage-message
+msgid "익명 사용자 모드에서 모든 데이터 삭제"
+msgstr "Delete all data in anonymous user mode"
+
+#. next-intl key: setting.delete-all.confirm-message
+msgid "정말 삭제하시겠습니까? 복원이 불가능합니다."
+msgstr "Are you sure you want to delete? This cannot be undone."
+
+#. next-intl key: setting.delete-all.description
+msgid "모든 데이터를 삭제 합니다."
+msgstr "Delete all data."
+
+#. next-intl key: setting.delete-all.instruction
+msgid "'삭제' 버튼을 클릭하면, 추가적인 확인 절차를 거쳐 삭제가 진행됩니다."
+msgstr "Click the 'Delete' button to proceed with additional verification steps."
+
+#. next-intl key: setting.delete-all.title
+msgid "데이터 삭제"
+msgstr "Delete Data"
+
+#. next-intl key: setting.description
+msgid "설명"
+msgstr "Description"
+
+#. next-intl key: setting.download
+msgid "다운로드"
+msgstr "Download"
+
+#. next-intl key: setting.export-data
+msgid "데이터 내보내기"
+msgstr "Export Data"
+
+#. next-intl key: setting.failed-to-fetch-data
+msgid "데이터를 가져오는 데 실패했습니다."
+msgstr "Failed to fetch the data."
+
+#. next-intl key: setting.id
+msgid "ID"
+msgstr "ID"
+
+#. next-intl key: setting.id-description
+msgid "각 페이지의 고유 식별자입니다. 자동으로 생성되며 페이지를 구별하는 데 사용됩니다."
+msgstr ""
+"A unique identifier for each page. Automatically generated and used to disti"
+"nguish pages."
+
+#. next-intl key: setting.integer
+msgid "정수"
+msgstr "Integer"
+
+#. next-intl key: setting.is_public
+msgid "공개 여부"
+msgstr "Is Public"
+
+#. next-intl key: setting.is_public-description
+msgid "페이지가 공개 여부를 나타냅니다. `true`이면 페이지가 공개됩니다."
+msgstr "Indicates whether the page is public. If `true`, the page is public."
+
+#. next-intl key: setting.language
+msgid "언어 (Language)"
+msgstr "Language"
+
+#. next-intl key: setting.last_viewed_at
+msgid "마지막 조회 시간"
+msgstr "Last Viewed At"
+
+#. next-intl key: setting.last_viewed_at-description
+msgid "소유자가 마지막으로 페이지를 본 날짜와 시간입니다. 사용자 활동을 추적합니다."
+msgstr "The date and time when the owner last viewed the page. Tracks user activity."
+
+#. next-intl key: setting.learn-more-about-file-formats
+msgid "파일 형식에 대해 자세히 알아보기"
+msgstr "Learn more about file formats"
+
+#. next-intl key: setting.no-data-to-download
+msgid "다운로드할 데이터가 없습니다."
+msgstr "There is no data to download."
+
+#. next-intl key: setting.password
+msgid "비밀번호"
+msgstr "Password"
+
+#. next-intl key: setting.privacy-policy
+msgid "개인정보 처리방침"
+msgstr "Privacy Policy"
+
+#. next-intl key: setting.registered-email
+msgid "등록된 이메일 주소"
+msgstr "Registered Email Address"
+
+#. next-intl key: setting.service-withdrawal
+msgid "서비스 탈퇴"
+msgstr "Service Withdrawal"
+
+#. next-intl key: setting.terms-of-service
+msgid "서비스 이용 약관"
+msgstr "Terms of Service"
+
+#. next-intl key: setting.text
+msgid "텍스트"
+msgstr "Text"
+
+#. next-intl key: setting.timestamp
+msgid "타임스탬프 (시간대 포함)"
+msgstr "Timestamp (with timezone)"
+
+#. next-intl key: setting.title-description
+msgid "페이지 제목입니다. 페이지의 주제나 내용을 간략하게 표현합니다."
+msgstr "The title of the page. Briefly expresses the topic or content of the page."
+
+#. next-intl key: setting.updated_at
+msgid "수정일"
+msgstr "Updated At"
+
+#. next-intl key: setting.updated_at-description
+msgid "페이지가 마지막으로 수정된 날짜와 시간입니다. 최신 변경 사항을 나타냅니다."
+msgstr ""
+"The date and time when the page was last modified. Indicates the latest chan"
+"ges to the page."
+
+#. next-intl key: setting.user-generated-pages
+msgid "사용자가 생성한 페이지 및 관련 모든 정보"
+msgstr "User-generated pages and all related information"
+
+#. next-intl key: setting.user-id
+msgid "사용자 ID"
+msgstr "User ID"
+
+#. next-intl key: setting.we-provide-all-the-data
+msgid ""
+"생성한 모든 데이터를 제공합니다. 서비스 필요에 의해 생성된 일부 데이터는 제공되지 않습니다. 현재 데이터는 JSON 형식으로 제공됩니다"
+". 이미지는 파일로 제공되지 않습니다. 콘텐츠에서 추출하십시오."
+msgstr ""
+"We provide all the data you have created. Some data generated for service ne"
+"eds is not provided. Currently, data is provided in JSON format.Images are n"
+"ot provided as files. Please extract them from the content."
+
+#. next-intl key: setting.withdraw.failed
+msgid "탈퇴에 실패했습니다. 관리자에게 문의 해주세요."
+msgstr "Withdrawal failed. Please contact administrator."
+
+#. next-intl key: setting.withdraw.success
+msgid "성공적으로 처리했습니다. 그 동안 이용해주셔서 감사합니다."
+msgstr "Successfully processed. Thank you for using our service."
+
+#. next-intl key: setting.withdrawal
+msgid "탈퇴"
+msgstr "Withdraw"
+
+#. next-intl key: setting.withdrawal-info
+msgid "서비스 탈퇴 시 다음 개인 정보가 영구적으로 삭제됩니다:"
+msgstr ""
+"Upon service withdrawal, the following personal information will be permanen"
+"tly deleted:"
+
+#. next-intl key: setting.withdrawal-process-info
+msgid "'탈퇴 확인' 버튼을 클릭하여 추가 확인 단계를 진행하십시오."
+msgstr ""
+"Click the 'Confirm Withdrawal' button to proceed with additional verificatio"
+"n steps."
+
+#. next-intl key: subscription.billing-history.billing-info
+msgid ""
+"시작일: {startDate}<br></br>다음 결제일: {endDate}<br></br>결제 금액: {amount} {currency"
+"}"
+msgstr ""
+"Start date: {startDate}<br></br>Next payment date: {endDate}<br></br>Payment"
+" amount: {amount} {currency}"
+
+#. next-intl key: subscription.billing-history.payment-history
+msgid "결제 내역"
+msgstr "Payment history"
+
+#. next-intl key: subscription.cancel.cancel
+msgid "구독취소"
+msgstr "Cancel subscription"
+
+#. next-intl key: subscription.cancel.canceled
+msgid "구독이 취소된 상태입니다."
+msgstr "Subscription has been canceled."
+
+#. next-intl key: subscription.cancel.error
+msgid "구독 취소를 위한 페이지를 열 수 없습니다. 관리자에게 문의 해주세요."
+msgstr "Cannot open subscription cancellation page. Please contact administrator."
+
+#. next-intl key: subscription.cancel.fail
+msgid "구독 취소에 실패했습니다. 다시 시도해 주세요."
+msgstr "Failed to cancel subscription. Please contact administrator."
+
+#. next-intl key: subscription.cancel.success
+msgid "구독이 취소되었습니다. 다음 결제일까지 사용 가능하며, 이후에는 요금이 청구되지 않습니다."
+msgstr ""
+"Your subscription has been canceled. You can continue to use the service unt"
+"il the next billing date, and you will not be charged further."
+
+#. next-intl key: subscription.cancel.unpause
+msgid "구독 일시 정지 철회"
+msgstr "Cancel subscription pause"
+
+#. next-intl key: subscription.cancel.withdraw
+msgid "구독 취소 철회"
+msgstr "Withdraw subscription cancellation"
+
+#. next-intl key: subscription.checking-status
+msgid "구독 상태를 체크 중입니다. 잠시만 기다려 주세요."
+msgstr "Checking subscription status. Please wait."
+
+#. next-intl key: subscription.contact-support.usage-exceeded
+msgid "사용량이 초과되었습니다. 초기화를 원하시면 <email>help@opentutorials.org</email>로 연락해주세요."
+msgstr ""
+"Usage limit exceeded. For reset, please contact <email>help@opentutorials.or"
+"g</email>."
+
+#. next-intl key: subscription.error-contact-message
+msgid "연락을 취하고 싶다면 <email>help@opentutorials.org</email>로 연락해주세요."
+msgstr ""
+"If you wish to contact us, please email <email>help@opentutorials.org</email"
+">."
+
+#. next-intl key: subscription.error.contact
+msgid "문의사항: help@opentutorials.org"
+msgstr "Contact: help@opentutorials.org"
+
+#. next-intl key: subscription.error.generic
+msgid "죄송합니다. 오류가 발생했습니다. 신속하게 문제를 해결하겠습니다."
+msgstr "Sorry, an error occurred. We will fix it promptly."
+
+#. next-intl key: subscription.error.load-failed
+msgid "죄송합니다. 구독 정보를 불러오지 못했습니다. 문제가 반복되면 지원팀에 문의해 주세요. help@opentutorials.org"
+msgstr ""
+"Sorry, we couldn't load your subscription information. Please contact suppor"
+"t if the problem persists. help@opentutorials.org"
+
+#. next-intl key: subscription.failed-message
+msgid "구독에 실패했습니다. 다시 시도해 주세요."
+msgstr "Subscription failed. Please try again."
+
+#. next-intl key: subscription.info.canceled-notice
+msgid "구독을 취소했기 때문에 만료일까지 사용 가능하며, 앞으로 결제가 되지 않습니다."
+msgstr ""
+"Your subscription is canceled and will be available until expiration date. N"
+"o further charges will be made."
+
+#. next-intl key: subscription.info.current-status
+msgid "현재 상태: {status}"
+msgstr "Current status: {status}"
+
+#. next-intl key: subscription.info.current-usage
+msgid "현재 사용량: {percentage}%"
+msgstr "Current usage: {percentage}%"
+
+#. next-intl key: subscription.info.current-usage-help
+msgid ""
+"일부 기능은 월별 사용량 제한이 있으며, 사용량이 100%에 도달하면 해당 기능이 일시적으로 비활성화됩니다. 다음 사용량 초기화까지 남은"
+" 시간: {daysRemaining}"
+msgstr ""
+"Some features have monthly usage limits. Once usage reaches 100%, the featur"
+"e will be temporarily disabled. Time remaining until the next usage reset: {"
+"daysRemaining}"
+
+#. next-intl key: subscription.info.free-plan
+msgid "무료 요금제"
+msgstr "Free plan"
+
+#. next-intl key: subscription.info.limit-reached.available-features.text-memo
+msgid "텍스트 메모"
+msgstr "Text Memo"
+
+#. next-intl key: subscription.info.limit-reached.available-label
+msgid "계속 사용 가능한 기능"
+msgstr "Features still available"
+
+#. next-intl key: subscription.info.limit-reached.desc
+msgid "{date}까지 일부 기능이 잠시 제한됩니다."
+msgstr "Some features will be temporarily restricted until {date}."
+
+#. next-intl key: subscription.info.limit-reached.restricted-features.ai-chat
+msgid "AI 채팅"
+msgstr "AI Chat"
+
+#. next-intl key: subscription.info.limit-reached.restricted-features.ai-writing
+msgid "AI 글쓰기"
+msgstr "AI Writing"
+
+#. next-intl key: subscription.info.limit-reached.restricted-features.image-upload
+msgid "이미지 업로드 및 이미지 OCR"
+msgstr "Image Upload & Image OCR"
+
+#. next-intl key: subscription.info.limit-reached.restricted-label
+msgid "제한되는 기능"
+msgstr "Restricted features"
+
+#. next-intl key: subscription.info.limit-reached.title
+msgid "이번 달 무료 사용량이 모두 소진되었어요."
+msgstr "You have used up all your free usage for this month."
+
+#. next-intl key: subscription.info.loading
+msgid "구독 정보를 불러오는 중입니다..."
+msgstr "Loading subscription information..."
+
+#. next-intl key: subscription.info.monthly-plan
+msgid "월간 요금제"
+msgstr "Monthly plan"
+
+#. next-intl key: subscription.info.next-payment
+msgid "다음 결제"
+msgstr "Next payment"
+
+#. next-intl key: subscription.info.paused-notice
+msgid "정기 결제가 일시정지되었습니다."
+msgstr "Recurring payment is paused."
+
+#. next-intl key: subscription.info.status.active
+msgid "현재 활성 상태입니다."
+msgstr "Currently active."
+
+#. next-intl key: subscription.info.status.inactive-free-exceeded
+msgid "사용량 초과로 비활성화되었습니다."
+msgstr "Deactivated due to usage limit."
+
+#. next-intl key: subscription.info.status.inactive-payment-failed
+msgid ""
+"여러분 덕분에 서비스를 성장시킬 수 있었습니다. 구독이 만료되어 무료 플랜으로 전환되었지만, 핵심 기능은 그대로 제공됩니다. 프리미엄 기"
+"능이 그리우시다면 한 번의 클릭으로 구독을 연장하실 수 있어요!"
+msgstr ""
+"Thanks to your support, we've been able to grow our service. Your subscripti"
+"on has expired and you've been switched to the free plan, but core features "
+"remain available. If you miss premium features, you can extend your subscrip"
+"tion with just one click!"
+
+#. next-intl key: subscription.info.status.inactive-subscription-exceeded
+msgid "구독 사용량 초과로 비활성화되었습니다."
+msgstr "Deactivated due to subscription usage limit."
+
+#. next-intl key: subscription.info.store
+msgid "결제처: {store}"
+msgstr "Payment store: {store}"
+
+#. next-intl key: subscription.info.weekly-plan
+msgid "주간 요금제"
+msgstr "Weekly plan"
+
+#. next-intl key: subscription.info.yearly-plan
+msgid "년간 요금제"
+msgstr "Yearly plan"
+
+#. next-intl key: subscription.install-app.install-guide
+msgid "아래 버튼을 눌러 앱을 설치해 주세요. 설치 후 자동으로 결제 페이지로 이동됩니다."
+msgstr ""
+"Please click the button below to install the app. You'll be automatically re"
+"directed to the payment page after installation."
+
+#. next-intl key: subscription.install-app.title
+msgid "앱 설치 안내"
+msgstr "App Installation Guide"
+
+#. next-intl key: subscription.install-app.web-payment-notice
+msgid ""
+"현재 웹에서는 결제를 진행할 수 없습니다. 앱을 설치하시면 모든 기기(앱과 웹)에서 유료 혜택을 누리실 수 있습니다. 앱은 더 많은 기능"
+"을 제공합니다."
+msgstr ""
+"Payment cannot be processed on the web. Install the app to enjoy paid benefi"
+"ts on all devices (app and web). The app provides more features."
+
+#. next-intl key: subscription.payment-issue.billing-page-error
+msgid "결제 수단 변경을 위한 페이지를 열 수 없습니다. 관리자에게 문의 해주세요."
+msgstr "Cannot open payment method change page. Please contact administrator."
+
+#. next-intl key: subscription.payment-issue.cancel-request
+msgid "구독 취소 및 환불을 원하시면 help@opentutorials.org로 문의해 주세요. 즉시 처리해 드리겠습니다."
+msgstr ""
+"If you would like to cancel your subscription and request a refund, please c"
+"ontact us at help@opentutorials.org. We will process your request immediatel"
+"y."
+
+#. next-intl key: subscription.payment-issue.change-to-free
+msgid "무료 회원으로 변경"
+msgstr "Switch to free membership"
+
+#. next-intl key: subscription.payment-issue.change-to-free-error
+msgid ""
+"무료 회원 전환 중 오류가 발생했습니다. 추가 결제가 이루어지지 않으니 안심하셔도 되며, 해당 오류는 담당자에게 전달되었습니다. 문의사항"
+"이 있으시면 언제든지 help@opentutorials.org로 연락해 주세요."
+msgstr ""
+"Error during free membership conversion. No additional charges will be made."
+" This error has been reported. For inquiries, please contact help@opentutori"
+"als.org anytime."
+
+#. next-intl key: subscription.payment-issue.change-to-free-success
+msgid "무료 회원으로 전환되었습니다. 그동안 지원해 주셔서 감사합니다."
+msgstr "Successfully converted to free membership. Thank you for your support."
+
+#. next-intl key: subscription.payment-issue.fetch-error
+msgid "결제 정보를 조회하는 과정에서 오류가 발생했습니다. 문제가 지속되면 관리자에게 문의 해주세요."
+msgstr ""
+"Error occurred while retrieving payment information. Please contact administ"
+"rator if the problem persists."
+
+#. next-intl key: subscription.payment-issue.payment-method-change
+msgid "결제 수단 변경"
+msgstr "Change payment method"
+
+#. next-intl key: subscription.payment-issue.retry
+msgid "재시도"
+msgstr "Retry"
+
+#. next-intl key: subscription.payment-issue.retry-payment
+msgid "다시 결제하기"
+msgstr "Retry Payment"
+
+#. next-intl key: subscription.payment-issue.store-info-error
+msgid "결제 정보를 가져오는 중 오류가 발생했습니다. 문제가 지속되면 관리자에게 문의 해주세요."
+msgstr ""
+"Error occurred while fetching payment information. Please contact administra"
+"tor if the problem persists."
+
+#. next-intl key: subscription.payment-issue.store-missing
+msgid "store 정보가 없습니다."
+msgstr "Store information is missing."
+
+#. next-intl key: subscription.payment-issue.switch-to-free
+msgid "무료 사용자로 전환"
+msgstr "Switch to Free User"
+
+#. next-intl key: subscription.pricing-header.title
+msgctxt "pricing-header"
+msgid "가격"
+msgstr "Pricing"
+
+#. next-intl key: subscription.pricing-info
+msgid "업그레이드 및 요금안내"
+msgstr "Upgrade and Pricing Information"
+
+#. next-intl key: subscription.privacy
+msgid "개인정보 보호정책"
+msgstr "Privacy Policy"
+
+#. next-intl key: subscription.retry-check
+msgid "다시 확인 시도"
+msgstr "Try checking again"
+
+#. next-intl key: subscription.start
+msgid "시작하기"
+msgstr "Get Started"
+
+#. next-intl key: subscription.success-message
+msgid "구독에 성공했습니다! 지원에 감사드립니다."
+msgstr "Successfully subscribed! Thank you for your support."
+
+#. next-intl key: subscription.terms
+msgid "서비스 약관"
+msgstr "Terms of Service"
+
+#. next-intl key: subscription.title
+msgid "내 요금제"
+msgstr "My plans"
+
+#. next-intl key: subscription.title-plans
+msgid "요금제"
+msgstr "Plans"
+
+#. next-intl key: subscription.upgrade
+msgid "유료 요금제로 업그레이드"
+msgstr "Upgrade to paid plan"
+
+#. next-intl key: uploader.couldnt-generate-a-title-automatically-please-enter-a-title
+msgid "제목을 자동으로 생성할 수 없습니다. 제목을 입력해 주세요."
+msgstr "Couldn't generate a title automatically. Please enter a title."
+
+#. next-intl key: uploader.drop-here-to-upload
+msgid "여기에 파일을 드롭하여 업로드"
+msgstr "Drop files here to upload"
+
+#. next-intl key: uploader.drop-to-save-as-memo
+msgid "파일을 놓아서 새 메모로 자동 저장"
+msgstr "Drop files to save as a new memo automatically"
+
+#. next-intl key: uploader.file-upload-failed
+msgid "파일 업로드에 실패했습니다."
+msgstr "File upload failed."
+
+#. next-intl key: uploader.text-processing-failed
+msgid "텍스트 처리에 실패했습니다."
+msgstr "Text processing failed."
+
+#. next-intl key: uploader.writing-a-title
+msgid "제목 작성 중..."
+msgstr "Writing a title..."
+
+#. next-intl key: user.anonymous-user-title
+msgid "익명 사용자로 로그인 하셨습니다."
+msgstr "You are logged in as an anonymous user"
+
+#. next-intl key: validation.body-length-exceeded
+msgid "본문이 {maxLength}자를 초과했습니다. (현재: {currentLength}자)"
+msgstr "Body exceeds {maxLength} characters. (Current: {currentLength} characters)"
+
+#. next-intl key: validation.target-size-exceeded
+msgid "제목과 본문의 합계가 {maxLength}자를 초과했습니다. (현재: {currentLength}자)"
+msgstr ""
+"The sum of title and body exceeds {maxLength} characters. (Current: {current"
+"Length} characters)"
+
+#. next-intl key: validation.title-length-exceeded
+msgid "제목이 {maxLength}자를 초과했습니다. (현재: {currentLength}자)"
+msgstr "Title exceeds {maxLength} characters. (Current: {currentLength} characters)"

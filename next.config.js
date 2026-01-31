@@ -35,6 +35,7 @@ const nextConfig = {
         ],
     },
     experimental: {
+        swcPlugins: [['@lingui/swc-plugin', {}]],
         optimizePackageImports: [
             // UI 라이브러리
             '@emotion/react',
@@ -58,6 +59,14 @@ const nextConfig = {
         ],
         // SWC 사용 강제 (Babel 비활성화)
         forceSwcTransforms: true,
+    },
+    turbopack: {
+        rules: {
+            '*.po': {
+                loaders: ['@lingui/loader'],
+                as: '*.js',
+            },
+        },
     },
     transpilePackages: [],
     // Babel 대신 SWC 사용 명시

@@ -1,0 +1,100 @@
+name: i18n PO Check
+
+on:
+    workflow_dispatch:
+
+permissions:
+    contents: write
+    pull-requests: write
+
+jobs:
+    i18n-po-check:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.ref }}
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Extract translations
+              run: npm run lingui:extract
+
+            - name: Check for changes
+              id: diff
+              run: |
+                  git add -A
+                  if git diff --cached --quiet; then
+                    echo "has_changes=false" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "has_changes=true" >> "$GITHUB_OUTPUT"
+                  fi
+
+            - name: Get branch name
+              id: branch
+              run: |
+                  BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+                  echo "name=${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
+                  echo "pr_branch=i18n-po/${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
+
+            - name: Create PR if changes exist
+              if: steps.diff.outputs.has_changes == 'true'
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  PR_BRANCH="${{ steps.branch.outputs.pr_branch }}"
+                  BASE_BRANCH="${{ steps.branch.outputs.name }}"
+
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+                  git checkout -B "$PR_BRANCH"
+                  git commit -m "chore(i18n): update translation PO files"
+                  git push --force origin "$PR_BRANCH"
+
+                  EXISTING_PR=$(gh pr list --head "$PR_BRANCH" --base "$BASE_BRANCH" --json number --jq '.[0].number')
+
+                  if [ -z "$EXISTING_PR" ]; then
+                    gh pr create \
+                      --title "chore(i18n): update translation PO files" \
+                      --body "$(cat <<'EOF'
+                  ## Summary
+                  - `npm run lingui:extract` 실행 후 변경된 번역 파일을 반영합니다.
+                  - 자동 생성된 PR입니다. 번역 파일을 확인 후 머지해주세요.
+
+                  ## Test plan
+                  - [ ] PO 파일 변경사항 확인
+                  - [ ] 빌드 정상 동작 확인
+                  EOF
+                  )" \
+                      --head "$PR_BRANCH" \
+                      --base "$BASE_BRANCH"
+                  else
+                    echo "PR #$EXISTING_PR already exists, updated branch."
+                  fi
+
+            - name: Close PR if no changes
+              if: steps.diff.outputs.has_changes == 'false'
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  PR_BRANCH="${{ steps.branch.outputs.pr_branch }}"
+                  BASE_BRANCH="${{ steps.branch.outputs.name }}"
+
+                  EXISTING_PR=$(gh pr list --head "$PR_BRANCH" --base "$BASE_BRANCH" --json number --jq '.[0].number')
+
+                  if [ -n "$EXISTING_PR" ]; then
+                    gh pr close "$EXISTING_PR" --comment "번역 파일이 최신 상태입니다. PR을 닫습니다."
+                    git push origin --delete "$PR_BRANCH" || true
+                  else
+                    echo "No changes and no existing PR. Nothing to do."
+                  fi

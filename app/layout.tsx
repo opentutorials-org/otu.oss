@@ -1,7 +1,10 @@
 import React from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import { setI18n } from '@lingui/react/server';
 import { renderLogger } from '@/debug/render';
+import { LinguiClientProvider } from '@/components/LinguiClientProvider';
+import { loadCatalog, i18n } from '@/lib/lingui';
 import { Viewport } from 'next';
 
 import './globals.css';
@@ -81,6 +84,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     // side is the easiest way to get started
     const messages = await getMessages();
 
+    // LinguiJS 초기화 - 컴파일된 카탈로그 로드
+    const { messages: linguiMessages } = await import(`../src/locales/${locale}/messages.po`);
+    loadCatalog(locale, linguiMessages);
+    setI18n(i18n);
+
     return (
         <html lang={locale} suppressHydrationWarning>
             <head>
@@ -91,7 +99,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 />
             </head>
             <body>
-                <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+                <LinguiClientProvider initialLocale={locale} initialMessages={linguiMessages}>
+                    <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+                </LinguiClientProvider>
             </body>
         </html>
     );

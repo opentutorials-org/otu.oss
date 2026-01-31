@@ -1,5 +1,17 @@
 {
     "name": "otu.ai.web",
+    "description": "AI-powered smart memo application - Write, organize, and recall with AI.",
+    "homepage": "https://github.com/opentutorials-org/otu.oss#readme",
+    "bugs": {
+        "url": "https://github.com/opentutorials-org/otu.oss/issues",
+        "email": "contact@opentutorials.org"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/opentutorials-org/otu.oss.git"
+    },
+    "license": "MIT",
+    "author": "OpenTutorials <contact@opentutorials.org>",
     "private": true,
     "version": "0.5.201",
     "scripts": {

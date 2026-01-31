@@ -26,13 +26,6 @@ CREATE EXTENSION IF NOT EXISTS "pgroonga" WITH SCHEMA "extensions";
 
 
 
-CREATE EXTENSION IF NOT EXISTS "pgsodium";
-
-
-
-
-
-
 COMMENT ON SCHEMA "public" IS 'standard public schema';
 
 
@@ -100,15 +93,6 @@ CREATE EXTENSION IF NOT EXISTS "vector" WITH SCHEMA "extensions";
 
 
 
-CREATE TYPE "public"."currency" AS ENUM (
-    'USD',
-    'KRW'
-);
-
-
-ALTER TYPE "public"."currency" OWNER TO "postgres";
-
-
 CREATE TYPE "public"."job_status" AS ENUM (
     'PENDING',
     'RUNNING',
@@ -119,19 +103,6 @@ CREATE TYPE "public"."job_status" AS ENUM (
 ALTER TYPE "public"."job_status" OWNER TO "postgres";
 
 
-CREATE TYPE "public"."order_status" AS ENUM (
-    'SUCCESS',
-    'ON-HOLD',
-    'PENDING',
-    'FAILED',
-    'CANCEL',
-    'REFUND'
-);
-
-
-ALTER TYPE "public"."order_status" OWNER TO "postgres";
-
-
 CREATE TYPE "public"."page_type" AS ENUM (
     'text',
     'draw'
@@ -139,78 +110,6 @@ CREATE TYPE "public"."page_type" AS ENUM (
 
 
 ALTER TYPE "public"."page_type" OWNER TO "postgres";
-
-
-CREATE TYPE "public"."payment_cycle" AS ENUM (
-    'none',
-    'day',
-    'week',
-    'month',
-    'year'
-);
-
-
-ALTER TYPE "public"."payment_cycle" OWNER TO "postgres";
-
-
-CREATE TYPE "public"."pg" AS ENUM (
-    'PAYPAL',
-    'APPLE',
-    'GOOGLE',
-    'TOSS',
-    'NAVER'
-);
-
-
-ALTER TYPE "public"."pg" OWNER TO "postgres";
-
-
-CREATE TYPE "public"."store_type" AS ENUM (
-    'app_store',
-    'play_store',
-    'stripe'
-);
-
-
-ALTER TYPE "public"."store_type" OWNER TO "postgres";
-
-
-CREATE TYPE "public"."subscription_active_status" AS ENUM (
-    'ACTIVE',
-    'ACTIVE_PENDING_PAYMENT_RETRY',
-    'INACTIVE_EXPIRED_NO_AUTO_RENEWAL',
-    'INACTIVE_REFUNDED',
-    'INACTIVE_EXPIRED_CANCELLED',
-    'INACTIVE_EXPIRED_AUTO_RENEWAL_FAILED',
-    'INACTIVE_TERMINATED_DUE_TO_VIOLATION',
-    'INACTIVE_PENDING_BILLING_KEY',
-    'INACTIVE_PENDING_FIRST_PAY'
-);
-
-
-ALTER TYPE "public"."subscription_active_status" OWNER TO "postgres";
-
-
-CREATE TYPE "public"."subscription_plan" AS ENUM (
-    'FREE',
-    'MONTHLY',
-    'YEARLY',
-    'WEEKLY'
-);
-
-
-ALTER TYPE "public"."subscription_plan" OWNER TO "postgres";
-
-
-CREATE TYPE "public"."subscription_status" AS ENUM (
-    'ACTIVE',
-    'INACTIVE_EXPIRED_AUTO_RENEW_FAIL',
-    'INACTIVE_FREE_USAGE_EXCEEDED',
-    'INACTIVE_SUBSCRIPTION_USAGE_EXCEEDED'
-);
-
-
-ALTER TYPE "public"."subscription_status" OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."adjust_for_sleep_time"("p_time" timestamp with time zone, "p_timezone" "text") RETURNS timestamp with time zone
@@ -415,7 +314,7 @@ $$;
 ALTER FUNCTION "public"."folder_delete_trigger_func"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."get_dynamic_pages_chunk"("last_created_at" timestamp with time zone, "last_id" "text", "target_size" integer DEFAULT 1048576, "max_limit" integer DEFAULT 50) RETURNS "json"
+CREATE OR REPLACE FUNCTION "public"."get_dynamic_pages_chunk"("last_created_at" timestamp with time zone, "last_id" "text", "target_size" integer DEFAULT 700000, "max_limit" integer DEFAULT 50) RETURNS "json"
     LANGUAGE "plpgsql" SECURITY DEFINER
     SET "search_path" TO 'public'
     AS $$
@@ -440,8 +339,7 @@ BEGIN
     WHERE user_id = v_user_id
     AND (
       last_created_at IS NULL 
-      OR created_at > last_created_at 
-      OR (created_at = last_created_at AND id > last_id)
+      OR (created_at, id) > (last_created_at, last_id)
     )
     ORDER BY created_at ASC, id ASC
     LIMIT max_limit + 1 -- 다음 데이터 존재 여부 확인을 위해 1개 더 조회
@@ -452,15 +350,22 @@ BEGIN
       EXIT;
     END IF;
 
-    -- 용량 누적 계산
-    -- length가 null이면 body 길이로 대체, body도 null이면 0
-    v_current_size := v_current_size + COALESCE(v_row.length, LENGTH(COALESCE(v_row.body, '')), 0);
+    -- 용량 누적 계산 (문자 수 기준)
+    -- page.length는 title.length + body.length로 저장된 문자 수
+    -- body는 원본 HTML 문자열(태그 포함)의 길이를 사용 (동기화 시 실제 전송되는 데이터 크기 반영)
+    -- length가 null이면 title.length + body.length로 대체, 둘 다 null이면 0
+    -- 단위: 문자 수(character count), 바이트가 아님
+    v_current_size := v_current_size + COALESCE(
+      v_row.length, 
+      (LENGTH(COALESCE(v_row.title, '')) + LENGTH(COALESCE(v_row.body, ''))), 
+      0
+    );
     
     -- 페이지 배열에 추가
     v_pages := array_append(v_pages, v_row);
     v_count := v_count + 1;
 
-    -- 목표 크기에 도달했는지 확인
+    -- 목표 크기에 도달했는지 확인 (문자 수 기준)
     IF v_current_size >= target_size THEN
       -- 용량 때문에 멈추는 경우, 뒤에 데이터가 더 있는지 별도로 확인
       -- 현재 v_row가 max_limit보다는 적은 상태에서 멈춘 것임
@@ -468,10 +373,7 @@ BEGIN
         SELECT 1
         FROM public.page
         WHERE user_id = v_user_id
-        AND (
-          created_at > v_row.created_at 
-          OR (created_at = v_row.created_at AND id > v_row.id)
-        )
+        AND (created_at, id) > (v_row.created_at, v_row.id)
         LIMIT 1
       ) INTO v_has_more;
       
@@ -511,112 +413,6 @@ $$;
 
 
 ALTER FUNCTION "public"."get_page_parents"("page_id" bigint) OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."increment_quota"("p_user_id" "uuid", "p_amount" numeric, "p_free_plan_limit" numeric, "p_subscription_plan_limit" numeric) RETURNS "void"
-    LANGUAGE "plpgsql"
-    AS $$
-DECLARE
-    v_updated_quota numeric;
-BEGIN
-    UPDATE usage
-    SET current_quota = current_quota + p_amount,
-        status = CASE
-                    WHEN current_quota + p_amount >
-                         CASE
-                             WHEN plan_type = 'FREE' THEN p_free_plan_limit
-                             ELSE p_subscription_plan_limit
-                         END
-                    THEN CASE
-                             WHEN plan_type = 'FREE' THEN 'INACTIVE_FREE_USAGE_EXCEEDED'::subscription_status
-                             ELSE 'INACTIVE_SUBSCRIPTION_USAGE_EXCEEDED'::subscription_status
-                         END
-                    ELSE status
-                 END
-    WHERE user_id = p_user_id
-    RETURNING current_quota INTO v_updated_quota;
-
-    IF NOT FOUND THEN
-        RAISE EXCEPTION 'User with ID % not found in usage table', p_user_id;
-    END IF;
-END;
-$$;
-
-
-ALTER FUNCTION "public"."increment_quota"("p_user_id" "uuid", "p_amount" numeric, "p_free_plan_limit" numeric, "p_subscription_plan_limit" numeric) OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."log_usage_changes"() RETURNS "trigger"
-    LANGUAGE "plpgsql"
-    AS $$
-BEGIN
-    IF (TG_OP = 'DELETE') THEN
-        -- DELETE 처리
-        INSERT INTO public.usage_audit (
-            user_id, current_quota, status, plan_type, last_reset_date, next_reset_date, store, data, 
-            premium_expires_date, premium_grace_period_expires_date, premium_product_identifier, 
-            premium_purchase_date, premium_product_plan_identifier, is_subscription_canceled, 
-            is_subscription_paused, changed_at, operation_type
-        )
-        VALUES (
-            OLD.user_id, OLD.current_quota, OLD.status, OLD.plan_type, OLD.last_reset_date, OLD.next_reset_date, OLD.store, OLD.data, 
-            OLD.premium_expires_date, OLD.premium_grace_period_expires_date, OLD.premium_product_identifier, 
-            OLD.premium_purchase_date, OLD.premium_product_plan_identifier, OLD.is_subscription_canceled,
-            OLD.is_subscription_paused, now(), 'DELETE'
-        );
-
-        RETURN OLD;
-
-    ELSIF (TG_OP = 'UPDATE') THEN
-        -- 특정 컬럼을 제외하고 나머지 컬럼이 변경되었는지 확인
-        IF (ROW(NEW.user_id, NEW.status, NEW.plan_type, NEW.last_reset_date, NEW.next_reset_date, NEW.store, 
-               NEW.data, NEW.premium_expires_date, NEW.premium_grace_period_expires_date, NEW.premium_product_identifier, 
-               NEW.premium_purchase_date, NEW.premium_product_plan_identifier, NEW.is_subscription_canceled, 
-               NEW.is_subscription_paused)
-            IS NOT DISTINCT FROM
-            ROW(OLD.user_id, OLD.status, OLD.plan_type, OLD.last_reset_date, OLD.next_reset_date, OLD.store, 
-                OLD.data, OLD.premium_expires_date, OLD.premium_grace_period_expires_date, OLD.premium_product_identifier, 
-                OLD.premium_purchase_date, OLD.premium_product_plan_identifier, OLD.is_subscription_canceled, 
-                OLD.is_subscription_paused)) THEN
-            RETURN NEW; -- 변화가 없으면 로그를 남기지 않고 바로 리턴
-        END IF;
-
-        INSERT INTO public.usage_audit (
-            user_id, current_quota, status, plan_type, last_reset_date, next_reset_date, store, data, 
-            premium_expires_date, premium_grace_period_expires_date, premium_product_identifier, 
-            premium_purchase_date, premium_product_plan_identifier, is_subscription_canceled, 
-            is_subscription_paused, changed_at, operation_type
-        )
-        VALUES (
-            NEW.user_id, NEW.current_quota, NEW.status, NEW.plan_type, NEW.last_reset_date, NEW.next_reset_date, NEW.store, NEW.data, 
-            NEW.premium_expires_date, NEW.premium_grace_period_expires_date, NEW.premium_product_identifier, 
-            NEW.premium_purchase_date, NEW.premium_product_plan_identifier, NEW.is_subscription_canceled,
-            NEW.is_subscription_paused, now(), 'UPDATE'
-        );
-
-        RETURN NEW;
-
-    ELSIF (TG_OP = 'INSERT') THEN
-        INSERT INTO public.usage_audit (
-            user_id, current_quota, status, plan_type, last_reset_date, next_reset_date, store, data, 
-            premium_expires_date, premium_grace_period_expires_date, premium_product_identifier, 
-            premium_purchase_date, premium_product_plan_identifier, is_subscription_canceled, 
-            is_subscription_paused, changed_at, operation_type
-        )
-        VALUES (
-            NEW.user_id, NEW.current_quota, NEW.status, NEW.plan_type, NEW.last_reset_date, NEW.next_reset_date, NEW.store, NEW.data, 
-            NEW.premium_expires_date, NEW.premium_grace_period_expires_date, NEW.premium_product_identifier, 
-            NEW.premium_purchase_date, NEW.premium_product_plan_identifier, NEW.is_subscription_canceled,
-            NEW.is_subscription_paused, now(), 'INSERT'
-        );
-
-        RETURN NEW;
-    END IF;
-END;
-$$;
-
-
-ALTER FUNCTION "public"."log_usage_changes"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."match_documents"("query_embedding" "extensions"."vector", "match_threshold" double precision, "match_count" integer, "input_page_id" "text" DEFAULT NULL::"text") RETURNS TABLE("id" bigint, "content" "text", "metadata" "jsonb", "similarity" double precision, "page_id" "text")
@@ -1474,35 +1270,10 @@ CREATE TABLE IF NOT EXISTS "public"."page_deleted" (
 ALTER TABLE "public"."page_deleted" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."product_payment_type" (
-    "id" bigint NOT NULL,
-    "name" "text" NOT NULL,
-    "description" "text",
-    "platform" "text" NOT NULL,
-    "payment_cycle" "public"."payment_cycle" NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
-);
-
-
-ALTER TABLE "public"."product_payment_type" OWNER TO "postgres";
-
-
-ALTER TABLE "public"."product_payment_type" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME "public"."product_payment_type_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
-
 CREATE TABLE IF NOT EXISTS "public"."product_payment_type_price" (
     "id" bigint NOT NULL,
     "product_payment_type_id" bigint NOT NULL,
     "amount" numeric NOT NULL,
-    "currency" "public"."currency" NOT NULL,
     "end_date" timestamp with time zone,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
 );
@@ -1522,106 +1293,12 @@ ALTER TABLE "public"."product_payment_type_price" ALTER COLUMN "id" ADD GENERATE
 
 
 
-CREATE TABLE IF NOT EXISTS "public"."subscriptions" (
-    "id" bigint NOT NULL,
-    "product_payment_type_price_id" bigint NOT NULL,
-    "issue_id" "text",
-    "billing_key" "text",
-    "pg" "public"."pg" NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "active_status" "public"."subscription_active_status",
-    "inactive_at" timestamp with time zone,
-    "billing_date" timestamp with time zone,
-    "user_id" "uuid" DEFAULT "auth"."uid"() NOT NULL
-);
-
-
-ALTER TABLE "public"."subscriptions" OWNER TO "postgres";
-
-
-ALTER TABLE "public"."subscriptions" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME "public"."subscriptions_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
-
 CREATE TABLE IF NOT EXISTS "public"."superuser" (
     "user_id" "uuid" NOT NULL
 );
 
 
 ALTER TABLE "public"."superuser" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."usage" (
-    "user_id" "uuid" DEFAULT "auth"."uid"() NOT NULL,
-    "current_quota" numeric(15,11) DEFAULT 0.00,
-    "status" "public"."subscription_status" NOT NULL,
-    "plan_type" "public"."subscription_plan" NOT NULL,
-    "last_reset_date" timestamp with time zone NOT NULL,
-    "next_reset_date" timestamp with time zone NOT NULL,
-    "store" "public"."store_type",
-    "data" "jsonb",
-    "premium_expires_date" timestamp with time zone,
-    "premium_grace_period_expires_date" timestamp with time zone,
-    "premium_product_identifier" "text",
-    "premium_purchase_date" timestamp with time zone,
-    "premium_product_plan_identifier" "text",
-    "is_subscription_canceled" boolean DEFAULT false,
-    "is_subscription_paused" boolean DEFAULT false,
-    "management_url" "text",
-    "last_transaction_id" "text"
-);
-
-
-ALTER TABLE "public"."usage" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."usage_audit" (
-    "audit_id" integer NOT NULL,
-    "user_id" "uuid" NOT NULL,
-    "current_quota" numeric(15,11),
-    "status" "public"."subscription_status" NOT NULL,
-    "plan_type" "public"."subscription_plan" NOT NULL,
-    "last_reset_date" timestamp with time zone NOT NULL,
-    "next_reset_date" timestamp with time zone NOT NULL,
-    "store" "public"."store_type",
-    "data" "jsonb",
-    "premium_expires_date" timestamp with time zone,
-    "premium_grace_period_expires_date" timestamp with time zone,
-    "premium_product_identifier" "text",
-    "premium_purchase_date" timestamp with time zone,
-    "premium_product_plan_identifier" "text",
-    "is_subscription_canceled" boolean,
-    "changed_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "operation_type" "text" NOT NULL,
-    "is_subscription_paused" boolean DEFAULT false
-);
-
-
-ALTER TABLE "public"."usage_audit" OWNER TO "postgres";
-
-
-CREATE SEQUENCE IF NOT EXISTS "public"."usage_audit_audit_id_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE "public"."usage_audit_audit_id_seq" OWNER TO "postgres";
-
-
-ALTER SEQUENCE "public"."usage_audit_audit_id_seq" OWNED BY "public"."usage_audit"."audit_id";
-
 
 
 CREATE TABLE IF NOT EXISTS "public"."user_info" (
@@ -1656,10 +1333,6 @@ ALTER TABLE "public"."user_info" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS I
 
 
 ALTER TABLE ONLY "public"."documents" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."documents_id_seq"'::"regclass");
-
-
-
-ALTER TABLE ONLY "public"."usage_audit" ALTER COLUMN "audit_id" SET DEFAULT "nextval"('"public"."usage_audit_audit_id_seq"'::"regclass");
 
 
 
@@ -1733,23 +1406,8 @@ ALTER TABLE ONLY "public"."page"
 
 
 
-ALTER TABLE ONLY "public"."product_payment_type"
-    ADD CONSTRAINT "product_payment_type_pkey" PRIMARY KEY ("id");
-
-
-
 ALTER TABLE ONLY "public"."product_payment_type_price"
     ADD CONSTRAINT "prouduct_payment_type_price_pkey" PRIMARY KEY ("id");
-
-
-
-ALTER TABLE ONLY "public"."subscriptions"
-    ADD CONSTRAINT "subscriptions_pkey" PRIMARY KEY ("id");
-
-
-
-ALTER TABLE ONLY "public"."subscriptions"
-    ADD CONSTRAINT "subscriptions_user_id_unique" UNIQUE ("user_id");
 
 
 
@@ -1760,16 +1418,6 @@ ALTER TABLE ONLY "public"."superuser"
 
 ALTER TABLE ONLY "public"."alarm"
     ADD CONSTRAINT "unique_page_alarm" UNIQUE ("page_id");
-
-
-
-ALTER TABLE ONLY "public"."usage_audit"
-    ADD CONSTRAINT "usage_audit_pkey" PRIMARY KEY ("audit_id");
-
-
-
-ALTER TABLE ONLY "public"."usage"
-    ADD CONSTRAINT "usage_user_id_pkey" PRIMARY KEY ("user_id");
 
 
 
@@ -1847,10 +1495,6 @@ CREATE OR REPLACE TRIGGER "folder_updated_at_trigger" BEFORE UPDATE ON "public".
 
 
 
-CREATE OR REPLACE TRIGGER "handle_subscriptions_updated_at" BEFORE UPDATE ON "public"."subscriptions" FOR EACH ROW EXECUTE FUNCTION "extensions"."moddatetime"('updated_at');
-
-
-
 CREATE OR REPLACE TRIGGER "page_before_delete_trigger" BEFORE DELETE ON "public"."page" FOR EACH ROW EXECUTE FUNCTION "public"."page_delete_trigger_func"();
 
 
@@ -1876,10 +1520,6 @@ CREATE OR REPLACE TRIGGER "update_consent_times_trigger_insert" BEFORE INSERT ON
 
 
 CREATE OR REPLACE TRIGGER "update_consent_times_trigger_update" BEFORE UPDATE ON "public"."user_info" FOR EACH ROW EXECUTE FUNCTION "public"."update_consent_times"();
-
-
-
-CREATE OR REPLACE TRIGGER "usage_audit_trigger" AFTER INSERT OR DELETE OR UPDATE ON "public"."usage" FOR EACH ROW EXECUTE FUNCTION "public"."log_usage_changes"();
 
 
 
@@ -1928,21 +1568,6 @@ ALTER TABLE ONLY "public"."page"
 
 
 
-ALTER TABLE ONLY "public"."product_payment_type_price"
-    ADD CONSTRAINT "public_prouduct_payment_type_price_product_payment_type_id_fkey" FOREIGN KEY ("product_payment_type_id") REFERENCES "public"."product_payment_type"("id");
-
-
-
-ALTER TABLE ONLY "public"."subscriptions"
-    ADD CONSTRAINT "public_subscriptions_product_payment_type_price_id_fkey" FOREIGN KEY ("product_payment_type_price_id") REFERENCES "public"."product_payment_type_price"("id");
-
-
-
-ALTER TABLE ONLY "public"."subscriptions"
-    ADD CONSTRAINT "subscriptions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
-
-
-
 ALTER TABLE ONLY "public"."superuser"
     ADD CONSTRAINT "superuser_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
@@ -1981,15 +1606,7 @@ CREATE POLICY "Enable delete for users based on user_id" ON "public"."job_queue"
 
 
 
-CREATE POLICY "Enable delete for users based on user_id" ON "public"."subscriptions" FOR DELETE TO "authenticated" USING ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
-
-
-
 CREATE POLICY "Enable delete for users based on user_id" ON "public"."superuser" FOR DELETE TO "authenticated" USING ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
-
-
-
-CREATE POLICY "Enable insert for owner" ON "public"."subscriptions" FOR INSERT WITH CHECK ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
 
 
 
@@ -2002,14 +1619,6 @@ CREATE POLICY "Enable insert for users based on user_id" ON "public"."custom_pro
 
 
 CREATE POLICY "Enable insert for users based on user_id" ON "public"."folder_deleted" FOR INSERT WITH CHECK (("auth"."uid"() = "user_id"));
-
-
-
-CREATE POLICY "Enable insert for users based on user_id" ON "public"."usage" FOR INSERT WITH CHECK ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
-
-
-
-CREATE POLICY "Enable insert for users based on user_id" ON "public"."usage_audit" FOR INSERT WITH CHECK ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
 
 
 
@@ -2029,23 +1638,11 @@ CREATE POLICY "Enable read access for all users" ON "public"."beta_tester" FOR S
 
 
 
-CREATE POLICY "Enable read access for all users" ON "public"."product_payment_type" FOR SELECT USING (true);
-
-
-
 CREATE POLICY "Enable read access for all users" ON "public"."product_payment_type_price" FOR SELECT USING (true);
 
 
 
-CREATE POLICY "Enable read access for all users" ON "public"."subscriptions" FOR SELECT USING ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
-
-
-
 CREATE POLICY "Enable read access for all users" ON "public"."superuser" FOR SELECT USING (true);
-
-
-
-CREATE POLICY "Enable read access for self" ON "public"."usage" FOR SELECT TO "authenticated" USING ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
 
 
 
@@ -2057,15 +1654,7 @@ CREATE POLICY "Enable read for users based on user_id" ON "public"."folder_delet
 
 
 
-CREATE POLICY "Enable update for service role" ON "public"."usage" FOR UPDATE TO "service_role" USING (true);
-
-
-
 CREATE POLICY "Enable update for users based on email" ON "public"."custom_prompts" FOR UPDATE USING ((( SELECT "auth"."uid"() AS "uid") = "user_id")) WITH CHECK ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
-
-
-
-CREATE POLICY "Enable update for users based on user_id" ON "public"."subscriptions" FOR UPDATE USING ((( SELECT "auth"."uid"() AS "uid") = "user_id")) WITH CHECK ((( SELECT "auth"."uid"() AS "uid") = "user_id"));
 
 
 
@@ -2164,9 +1753,6 @@ ALTER TABLE "public"."page" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."page_deleted" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "public"."product_payment_type" ENABLE ROW LEVEL SECURITY;
-
-
 ALTER TABLE "public"."product_payment_type_price" ENABLE ROW LEVEL SECURITY;
 
 
@@ -2190,9 +1776,6 @@ CREATE POLICY "select_user_data_by_user_id_on_user_info" ON "public"."user_info"
 
 
 
-ALTER TABLE "public"."subscriptions" ENABLE ROW LEVEL SECURITY;
-
-
 ALTER TABLE "public"."superuser" ENABLE ROW LEVEL SECURITY;
 
 
@@ -2212,12 +1795,6 @@ CREATE POLICY "update_user_data_by_email_on_job_queue" ON "public"."job_queue" F
 
 
 
-ALTER TABLE "public"."usage" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."usage_audit" ENABLE ROW LEVEL SECURITY;
-
-
 ALTER TABLE "public"."user_info" ENABLE ROW LEVEL SECURITY;
 
 
@@ -2233,6 +1810,72 @@ GRANT USAGE ON SCHEMA "public" TO "postgres";
 GRANT USAGE ON SCHEMA "public" TO "anon";
 GRANT USAGE ON SCHEMA "public" TO "authenticated";
 GRANT USAGE ON SCHEMA "public" TO "service_role";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7744,12 +7387,6 @@ GRANT ALL ON FUNCTION "public"."in_todo"() TO "service_role";
 
 
 
-GRANT ALL ON FUNCTION "public"."increment_quota"("p_user_id" "uuid", "p_amount" numeric, "p_free_plan_limit" numeric, "p_subscription_plan_limit" numeric) TO "anon";
-GRANT ALL ON FUNCTION "public"."increment_quota"("p_user_id" "uuid", "p_amount" numeric, "p_free_plan_limit" numeric, "p_subscription_plan_limit" numeric) TO "authenticated";
-GRANT ALL ON FUNCTION "public"."increment_quota"("p_user_id" "uuid", "p_amount" numeric, "p_free_plan_limit" numeric, "p_subscription_plan_limit" numeric) TO "service_role";
-
-
-
 GRANT ALL ON FUNCTION "public"."index_is_primary"("name") TO "postgres";
 GRANT ALL ON FUNCTION "public"."index_is_primary"("name") TO "anon";
 GRANT ALL ON FUNCTION "public"."index_is_primary"("name") TO "authenticated";
@@ -9168,12 +8805,6 @@ GRANT ALL ON FUNCTION "public"."lives_ok"("text", "text") TO "postgres";
 GRANT ALL ON FUNCTION "public"."lives_ok"("text", "text") TO "anon";
 GRANT ALL ON FUNCTION "public"."lives_ok"("text", "text") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."lives_ok"("text", "text") TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."log_usage_changes"() TO "anon";
-GRANT ALL ON FUNCTION "public"."log_usage_changes"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."log_usage_changes"() TO "service_role";
 
 
 
@@ -10921,18 +10552,6 @@ GRANT ALL ON TABLE "public"."page_deleted" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."product_payment_type" TO "anon";
-GRANT ALL ON TABLE "public"."product_payment_type" TO "authenticated";
-GRANT ALL ON TABLE "public"."product_payment_type" TO "service_role";
-
-
-
-GRANT ALL ON SEQUENCE "public"."product_payment_type_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."product_payment_type_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."product_payment_type_id_seq" TO "service_role";
-
-
-
 GRANT ALL ON TABLE "public"."product_payment_type_price" TO "anon";
 GRANT ALL ON TABLE "public"."product_payment_type_price" TO "authenticated";
 GRANT ALL ON TABLE "public"."product_payment_type_price" TO "service_role";
@@ -10945,39 +10564,9 @@ GRANT ALL ON SEQUENCE "public"."prouduct_payment_type_price_id_seq" TO "service_
 
 
 
-GRANT ALL ON TABLE "public"."subscriptions" TO "anon";
-GRANT ALL ON TABLE "public"."subscriptions" TO "authenticated";
-GRANT ALL ON TABLE "public"."subscriptions" TO "service_role";
-
-
-
-GRANT ALL ON SEQUENCE "public"."subscriptions_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."subscriptions_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."subscriptions_id_seq" TO "service_role";
-
-
-
 GRANT ALL ON TABLE "public"."superuser" TO "anon";
 GRANT ALL ON TABLE "public"."superuser" TO "authenticated";
 GRANT ALL ON TABLE "public"."superuser" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."usage" TO "anon";
-GRANT ALL ON TABLE "public"."usage" TO "authenticated";
-GRANT ALL ON TABLE "public"."usage" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."usage_audit" TO "anon";
-GRANT ALL ON TABLE "public"."usage_audit" TO "authenticated";
-GRANT ALL ON TABLE "public"."usage_audit" TO "service_role";
-
-
-
-GRANT ALL ON SEQUENCE "public"."usage_audit_audit_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."usage_audit_audit_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."usage_audit_audit_id_seq" TO "service_role";
 
 
 
@@ -10990,6 +10579,12 @@ GRANT ALL ON TABLE "public"."user_info" TO "service_role";
 GRANT ALL ON SEQUENCE "public"."user_info_id_seq" TO "anon";
 GRANT ALL ON SEQUENCE "public"."user_info_id_seq" TO "authenticated";
 GRANT ALL ON SEQUENCE "public"."user_info_id_seq" TO "service_role";
+
+
+
+
+
+
 
 
 

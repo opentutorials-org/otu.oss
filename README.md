@@ -156,6 +156,7 @@ app/
 
 src/
 ├── components/         # React 컴포넌트
+├── hooks/              # 커스텀 React 훅
 ├── functions/          # 유틸리티 함수
 ├── watermelondb/       # 로컬 DB (오프라인 지원)
 └── debug/              # 디버그 로거들

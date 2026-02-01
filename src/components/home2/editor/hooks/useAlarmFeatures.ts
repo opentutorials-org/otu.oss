@@ -325,7 +325,7 @@ export function useAlarmFeatures({ title, body, pageId }: UseAlarmFeaturesProps)
                 error: error instanceof Error ? error.message : 'Unknown error',
             });
             setIsAlarmActive(previousAlarmActive);
-            openSnackbar({ message: '알람 정보 저장 중 오류가 발생했습니다.' });
+            openSnackbar({ message: t`알람 정보 저장 중 오류가 발생했습니다.` });
             console.error('알람 활성화 처리 실패:', error);
         }
     };
@@ -479,7 +479,7 @@ export function useAlarmFeatures({ title, body, pageId }: UseAlarmFeaturesProps)
 
         if (!title && !body) {
             alarmLogger('제목과 본문이 모두 비어있어서 알람 설정 불가');
-            openSnackbar({ message: '제목이나 본문을 입력한 후 알람을 설정해주세요.' });
+            openSnackbar({ message: t`제목이나 본문을 입력한 후 알람을 설정해주세요.` });
             return;
         }
 
@@ -513,8 +513,8 @@ export function useAlarmFeatures({ title, body, pageId }: UseAlarmFeaturesProps)
                     // 프로덕션 환경에서는 기존 메시지
                     alarmLogger('프로덕션 환경에서 일반 사용자 - 준비중 메시지 표시');
                     openConfirm({
-                        message: '준비 중입니다. 곧 공개하겠습니다!',
-                        yesLabel: '확인',
+                        message: t`준비 중입니다. 곧 공개하겠습니다!`,
+                        yesLabel: t`확인`,
                         noLabel: '',
                         onYes: () => {},
                         onNo: null,

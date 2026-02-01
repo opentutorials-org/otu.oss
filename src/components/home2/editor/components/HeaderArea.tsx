@@ -99,7 +99,7 @@ export const HeaderArea = memo(function HeaderArea({
             delete: t`삭제`,
             exit: t`나가기`,
             cancel: t`취소`,
-            unsavedChangesWarning: '저장하지 않은 변경사항이 있습니다.<br />나가시겠습니까?',
+            unsavedChangesWarning: t`저장하지 않은 변경사항이 있습니다.<br />나가시겠습니까?`,
             // share: t`공유`,
             copy: t`복사`,
             reminder: t`리마인더`,
@@ -270,11 +270,11 @@ export const HeaderArea = memo(function HeaderArea({
                     triggerAutoSave();
                 }
 
-                openSnackbar({ message: '날짜가 수정되었습니다' });
+                openSnackbar({ message: t`날짜가 수정되었습니다` });
                 editorViewLogger('날짜 수정 완료 - 새 날짜:', new Date(newDate).toISOString());
             } catch (error) {
                 console.error('날짜 수정 실패:', error);
-                openSnackbar({ message: '날짜 수정에 실패했습니다' });
+                openSnackbar({ message: t`날짜 수정에 실패했습니다` });
             }
         },
         [content, triggerAutoSave, openSnackbar]

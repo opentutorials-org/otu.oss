@@ -652,6 +652,14 @@ msgstr ""
 #~ msgid "나중에"
 #~ msgstr ""
 
+#: src/components/home2/editor/components/HeaderArea.tsx
+msgid "날짜 수정에 실패했습니다"
+msgstr "날짜 수정에 실패했습니다"
+
+#: src/components/home2/editor/components/HeaderArea.tsx
+msgid "날짜가 수정되었습니다"
+msgstr "날짜가 수정되었습니다"
+
 #: app/(ui)/(welcome)/welcome/page.tsx
 msgid "남이 할 수 있는 걸 나도 할 수 있게<0/>내가 할 수 있는 걸 남도 할 수 있게"
 msgstr "남이 할 수 있는 걸 나도 할 수 있게<0/>내가 할 수 있는 걸 남도 할 수 있게"
@@ -1530,6 +1538,10 @@ msgstr ""
 msgid "알람 미설정"
 msgstr ""
 
+#: src/components/home2/editor/hooks/useAlarmFeatures.ts
+msgid "알람 정보 저장 중 오류가 발생했습니다."
+msgstr "알람 정보 저장 중 오류가 발생했습니다."
+
 #. next-intl key: alarm.cancel-notification-failed
 #~ msgid "알람 취소 요청에 실패했습니다. 설정은 저장되었지만 예약된 알람이 남아있을 수 있습니다."
 #~ msgstr ""
@@ -1918,6 +1930,10 @@ msgstr "저장에 실패했습니다. 다시 시도해주세요."
 msgid "저장전"
 msgstr ""
 
+#: src/components/home2/editor/components/HeaderArea.tsx
+msgid "저장하지 않은 변경사항이 있습니다.<br />나가시겠습니까?"
+msgstr "저장하지 않은 변경사항이 있습니다.<br />나가시겠습니까?"
+
 #: src/components/core/Setting/sub/CustomPrompt/index.tsx
 #: src/components/core/Setting/sub/Profile/index.tsx
 #: src/components/home2/sections/folder/FolderDetailPageList.tsx
@@ -2071,6 +2087,10 @@ msgstr "제목이 {0}자를 초과했습니다. (현재: {1}자)"
 msgid "제목이나 내용을 입력하세요."
 msgstr ""
 
+#: src/components/home2/editor/hooks/useAlarmFeatures.ts
+msgid "제목이나 본문을 입력한 후 알람을 설정해주세요."
+msgstr "제목이나 본문을 입력한 후 알람을 설정해주세요."
+
 #. next-intl key: subscription.info.limit-reached.restricted-label
 #~ msgid "제한되는 기능"
 #~ msgstr ""
@@ -2100,6 +2120,10 @@ msgstr ""
 #. next-intl key: subscription.info.weekly-plan
 #~ msgid "주간 요금제"
 #~ msgstr ""
+
+#: src/components/home2/editor/hooks/useAlarmFeatures.ts
+msgid "준비 중입니다. 곧 공개하겠습니다!"
+msgstr "준비 중입니다. 곧 공개하겠습니다!"
 
 #. next-intl key: editor.ios-enter-problem-title
 #~ msgid "줄바꿈에 문제가 있나요?"
@@ -2638,6 +2662,7 @@ msgstr ""
 #: src/components/common/ConfirmDialog/index.tsx
 #: src/components/common/Notice.tsx
 #: src/components/core/Setting/sub/DeleteAll/index.tsx
+#: src/components/home2/editor/hooks/useAlarmFeatures.ts
 #: src/components/layout/Login.tsx
 #: src/components/layout/Login.tsx
 #: src/components/layout/Login.tsx

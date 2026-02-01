@@ -16,7 +16,7 @@ msgstr ""
 #~ msgid "'복원'을 클릭하여 저장되지 않은 변경사항을 적용합니다."
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/DeleteAll/index.tsx
+#: src/components/core/Setting/sub/DeleteAll/index.tsx
 msgid "'삭제' 버튼을 클릭하면, 추가적인 확인 절차를 거쳐 삭제가 진행됩니다."
 msgstr ""
 
@@ -24,12 +24,12 @@ msgstr ""
 #~ msgid "'삭제'를 클릭하여 저장되지 않은 변경사항을 제거합니다."
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "'탈퇴 확인' 버튼을 클릭하여 추가 확인 단계를 진행하십시오."
 msgstr ""
 
 #. placeholder {0}: folder.page_count
-#: src/components/home/logined/DisplayType/FolderGrid/index.tsx
+#: src/components/home2/shared/displayType/FolderGrid/index.tsx
 msgid "({0})"
 msgstr "({0})"
 
@@ -115,23 +115,23 @@ msgstr "{0}개의 항목 선택됨"
 msgid "{deletedCount}개 페이지의 알림이 꺼졌습니다."
 msgstr "{deletedCount}개 페이지의 알림이 꺼졌습니다."
 
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
 #: src/components/home2/sections/reminder/Container.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
 msgid "{diffDays}일 후"
 msgstr "{diffDays}일 후"
 
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
 #: src/components/home2/sections/reminder/Container.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
 msgid "{diffHours}시간 후"
 msgstr "{diffHours}시간 후"
 
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
 #: src/components/home2/sections/reminder/Container.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
 msgid "{diffMinutes}분 후"
 msgstr "{diffMinutes}분 후"
 
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
 #: src/components/home2/sections/reminder/Container.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
 msgid "{diffWeeks}주 후"
 msgstr "{diffWeeks}주 후"
 
@@ -160,8 +160,8 @@ msgstr "{titlePart}에 내용을 추가했습니다"
 msgid "{titlePart}의 앞에 내용을 추가했습니다"
 msgstr "{titlePart}의 앞에 내용을 추가했습니다"
 
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
 #: src/components/home2/sections/reminder/Container.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
 msgid "{year}년 {month}월 {day}일 {hours}:{minutes}"
 msgstr ""
 
@@ -254,7 +254,7 @@ msgstr ""
 #~ msgid "Apple로 시작하기"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Language/index.tsx
+#: src/components/core/Setting/sub/Language/index.tsx
 msgid "English"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgstr ""
 #~ msgid "https://otu.ai/share/01K293BXD01DMFZ6DZV5DSZXE6"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "ID"
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr ""
 #~ msgid "가격"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "각 페이지의 고유 식별자입니다. 자동으로 생성되며 페이지를 구별하는 데 사용됩니다."
 msgstr ""
 
@@ -383,12 +383,11 @@ msgstr ""
 #~ msgstr ""
 
 #: app/(ui)/(welcome)/layout.tsx
-#: src/components/home/logouted/AgreementForm.tsx
 #: src/components/layout/bottom/agreement/AgreementForm.tsx
 msgid "개인정보 수집 및 이용"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/terms/index.tsx
+#: src/components/core/Setting/sub/terms/index.tsx
 msgid "개인정보 처리방침"
 msgstr ""
 
@@ -400,7 +399,7 @@ msgstr ""
 #~ msgid "건설적인"
 #~ msgstr ""
 
-#: src/components/home/logined/page/DocumentTitleUpdater.tsx
+#: src/components/core/DocumentTitleUpdater.tsx
 #: src/components/layout/bottom/main/index.tsx
 msgid "검색"
 msgstr ""
@@ -495,7 +494,7 @@ msgstr ""
 #~ msgid "공감적인"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "공개 여부"
 msgstr ""
 
@@ -511,7 +510,7 @@ msgstr ""
 msgid "공유된 페이지"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/RelatedPosts.tsx
+#: src/components/home2/editor/components/RelatedPosts.tsx
 msgid "관련글"
 msgstr ""
 
@@ -524,7 +523,7 @@ msgstr ""
 #~ msgid "관련성 : {similarity}%"
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/RelatedItem.tsx
+#: src/components/home2/editor/components/RelatedItem.tsx
 msgid "관련성 : {similarityValue}%"
 msgstr "관련성 : {similarityValue}%"
 
@@ -598,7 +597,7 @@ msgstr "관련성 : {similarityValue}%"
 
 #. placeholder {0}: PROFILE_IMAGE_SIZE.width
 #. placeholder {1}: PROFILE_IMAGE_SIZE.height
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "권장 크기: {0}×{1}"
 msgstr "권장 크기: {0}×{1}"
 
@@ -644,7 +643,7 @@ msgstr ""
 msgid "나"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 #: src/components/layout/bottom/main/index.tsx
 msgid "나가기"
 msgstr ""
@@ -690,7 +689,7 @@ msgstr "너무 빠른 입력입니다. {0}초 후에 다시 시도해주세요."
 #~ msgid "년간 요금제"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "닉네임"
 msgstr ""
 
@@ -701,6 +700,10 @@ msgstr ""
 #. next-intl key: subscription.payment-issue.retry-payment
 #~ msgid "다시 결제하기"
 #~ msgstr ""
+
+#: src/components/common/ErrorBoundary.tsx
+msgid "다시 시도"
+msgstr "다시 시도"
 
 #. next-intl key: editor.dont-show-again
 #~ msgid "다시 표시하지 않음"
@@ -752,9 +755,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/common/FolderManagementDialog.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/Setting/view.tsx
-#: src/components/home/logouted/docs/docDialog.tsx
+#: src/components/core/Setting/view.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 #: src/components/layout/bottom/agreement/docDialog.tsx
 #: src/components/layout/Login.tsx
 msgid "닫기"
@@ -780,16 +782,16 @@ msgstr ""
 msgid "더 쉽게 넣고, 더 유용하게 꺼낼 수 있습니다.<0/><1>도움말 보기</1>"
 msgstr "더 쉽게 넣고, 더 유용하게 꺼낼 수 있습니다.<0/><1>도움말 보기</1>"
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "데이터 내보내기"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/DeleteAll/index.tsx
-#: src/components/home/logined/Setting/sub/DeleteAll/index.tsx
+#: src/components/core/Setting/sub/DeleteAll/index.tsx
+#: src/components/core/Setting/sub/DeleteAll/index.tsx
 msgid "데이터 삭제"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "데이터 유형"
 msgstr ""
 
@@ -818,13 +820,10 @@ msgstr "데이터를 동기화하고 있습니다.<br/>{0}"
 #~ msgid "동영상 설명"
 #~ msgstr ""
 
-#: src/components/home/logouted/AgreementForm.tsx
 #: src/components/layout/bottom/agreement/AgreementForm.tsx
 msgid "동의 (옵션)"
 msgstr ""
 
-#: src/components/home/logouted/AgreementForm.tsx
-#: src/components/home/logouted/AgreementForm.tsx
 #: src/components/layout/bottom/agreement/AgreementForm.tsx
 #: src/components/layout/bottom/agreement/AgreementForm.tsx
 msgid "동의 (필수)"
@@ -835,7 +834,7 @@ msgstr ""
 msgid "뒤로"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "등록된 이메일 주소"
 msgstr ""
 
@@ -904,27 +903,27 @@ msgstr ""
 #~ msgid "로그인하면 데이터가 서버에 안전하게 저장됩니다. 기존 계정에 데이터가 있는 경우 현재 데이터와 자동으로 병합됩니다. 계속하시겠습니까?"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "로딩 중..."
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 #: src/components/home2/editor/EditorContainer.tsx
 msgid "로딩중"
 msgstr ""
 
-#: src/components/home/logined/ContentTypeSwitcher.tsx
-#: src/components/home/logined/page/CreateUpdate/components/buttons/ReminderButton.tsx
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/buttons/ReminderButton.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
+#: src/components/home2/shared/controls/ContentTypeSwitcher.tsx
 msgid "리마인더"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/buttons/ReminderButton.tsx
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/buttons/ReminderButton.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 msgid "리마인더 끄기"
 msgstr ""
 
-#: src/components/home/logined/page/DocumentTitleUpdater.tsx
+#: src/components/core/DocumentTitleUpdater.tsx
 msgid "리마인더 목록"
 msgstr ""
 
@@ -948,8 +947,8 @@ msgstr ""
 #~ msgid "리마인더 설정이 저장되었습니다"
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/buttons/ReminderButton.tsx
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/buttons/ReminderButton.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 msgid "리마인더 시작"
 msgstr ""
 
@@ -961,11 +960,11 @@ msgstr ""
 #~ msgid "리마인더 활성화됨"
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/hooks/useAlarmFeatures.ts
+#: src/components/home2/editor/hooks/useAlarmFeatures.ts
 msgid "리마인더가 시작되었습니다."
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/hooks/useAlarmFeatures.ts
+#: src/components/home2/editor/hooks/useAlarmFeatures.ts
 msgid "리마인더가 중지되었습니다."
 msgstr ""
 
@@ -973,20 +972,20 @@ msgstr ""
 #~ msgid "리셋 테스트를 리셋했습니다."
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "링크 복사"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "링크 열기"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "링크가 복사되었습니다."
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "링크가 있는 모든 사용자가 볼 수 있습니다. 발행하시겠습니까?"
 msgstr ""
 
@@ -994,11 +993,10 @@ msgstr ""
 #~ msgid "마지막"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "마지막 조회 시간"
 msgstr ""
 
-#: src/components/home/logouted/AgreementForm.tsx
 #: src/components/layout/bottom/agreement/AgreementForm.tsx
 msgid "마케팅 수신"
 msgstr ""
@@ -1027,7 +1025,7 @@ msgstr ""
 #~ msgid "모두 바꾸기"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/DeleteAll/index.tsx
+#: src/components/core/Setting/sub/DeleteAll/index.tsx
 msgid "모든 데이터를 삭제 합니다."
 msgstr ""
 
@@ -1063,7 +1061,7 @@ msgstr ""
 #~ msgid "무료 회원으로 전환되었습니다. 그동안 지원해 주셔서 감사합니다."
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
 msgid "무시"
 msgstr ""
 
@@ -1096,11 +1094,11 @@ msgstr ""
 #~ msgid "바꾸기"
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "발행"
 msgstr ""
 
@@ -1116,8 +1114,8 @@ msgstr ""
 #~ msgid "발행 중 오류가 발생했습니다."
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "발행 취소"
 msgstr ""
 
@@ -1125,15 +1123,15 @@ msgstr ""
 #~ msgid "발행 취소 중 오류가 발생했습니다."
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "발행되었습니다."
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/buttons/PublishButton.tsx
-#: src/components/home/logined/page/CreateUpdate/components/buttons/PublishButton.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/components/buttons/PublishButton.tsx
+#: src/components/home2/editor/components/buttons/PublishButton.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "발행됨"
 msgstr ""
 
@@ -1141,12 +1139,12 @@ msgstr ""
 #~ msgid "발행을 취소하시겠습니까? 다른 사용자는 더 이상 이 콘텐츠를 볼 수 없게 됩니다."
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "발행이 취소되었습니다."
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/buttons/PublishButton.tsx
-#: src/components/home/logined/page/CreateUpdate/components/buttons/PublishButton.tsx
+#: src/components/home2/editor/components/buttons/PublishButton.tsx
+#: src/components/home2/editor/components/buttons/PublishButton.tsx
 msgid "발행하기"
 msgstr ""
 
@@ -1174,15 +1172,15 @@ msgstr ""
 #~ msgid "변경사항이 없습니다."
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
 msgid "복구"
 msgstr "복구"
 
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 msgid "복사"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 msgid "복사됨"
 msgstr "복사됨"
 
@@ -1190,7 +1188,7 @@ msgstr "복사됨"
 #~ msgid "복원"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "본문"
 msgstr ""
 
@@ -1204,7 +1202,7 @@ msgstr ""
 
 #. placeholder {0}: MAX_BODY_LENGTH.toLocaleString()
 #. placeholder {1}: bodyLength.toLocaleString()
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
 msgid "본문이 {0}자를 초과했습니다. (현재: {1}자)"
 msgstr "본문이 {0}자를 초과했습니다. (현재: {1}자)"
 
@@ -1212,7 +1210,7 @@ msgstr "본문이 {0}자를 초과했습니다. (현재: {1}자)"
 #~ msgid "본문이 {maxLength}자를 초과했습니다. (현재: {currentLength}자)"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "불리언"
 msgstr ""
 
@@ -1225,7 +1223,7 @@ msgstr ""
 msgid "비공개 페이지"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "비밀번호"
 msgstr ""
 
@@ -1257,25 +1255,25 @@ msgstr ""
 #~ msgid "사용량이 초과되었습니다. 초기화를 원하시면 <email>help@opentutorials.org</email>로 연락해주세요."
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "사용자 ID"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "사용자 정보가 없습니다. 다시 로그인해주세요."
 msgstr "사용자 정보가 없습니다. 다시 로그인해주세요."
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "사용자가 생성한 페이지 및 관련 모든 정보"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/CustomPrompt/index.tsx
+#: src/components/core/Setting/sub/CustomPrompt/index.tsx
 msgid "사진 프롬프트"
 msgstr ""
 
 #: src/components/Chat/CleanMessage.tsx
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
-#: src/components/home/logined/Setting/sub/DeleteAll/index.tsx
+#: src/components/core/Setting/sub/DeleteAll/index.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 #: src/components/home2/editor/hooks/usePageSave.ts
 #: src/components/home2/sections/folder/FolderDetailPageList.tsx
 #: src/components/layout/bottom/selection/index.tsx
@@ -1303,11 +1301,15 @@ msgstr ""
 msgid "삭제에 실패했습니다."
 msgstr ""
 
+#: src/components/home2/editor/hooks/usePageSave.ts
+msgid "삭제에 실패했습니다. 다시 시도해주세요."
+msgstr "삭제에 실패했습니다. 다시 시도해주세요."
+
 #. next-intl key: editor.ai-detailed
 #~ msgid "상세하게"
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "상태 변경 중 오류가 발생했습니다"
 msgstr "상태 변경 중 오류가 발생했습니다"
 
@@ -1315,7 +1317,7 @@ msgstr "상태 변경 중 오류가 발생했습니다"
 #~ msgid "새 페이지"
 #~ msgstr ""
 
-#: src/components/home/logined/DisplayType/FolderGrid/index.tsx
+#: src/components/home2/shared/displayType/FolderGrid/index.tsx
 msgid "새 폴더"
 msgstr ""
 
@@ -1323,9 +1325,9 @@ msgstr ""
 #~ msgid "새 폴더 만들기"
 #~ msgstr ""
 
-#. next-intl key: notice.refresh
-#~ msgid "새로고침"
-#~ msgstr ""
+#: src/components/home2/shared/DynamicLoadError.tsx
+msgid "새로고침"
+msgstr ""
 
 #: src/components/common/FolderCreationDialog.tsx
 msgid "생성"
@@ -1343,11 +1345,11 @@ msgstr ""
 #~ msgid "생성됨"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "생성일"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "생성한 모든 데이터를 제공합니다. 서비스 필요에 의해 생성된 일부 데이터는 제공되지 않습니다. 현재 데이터는 JSON 형식으로 제공됩니다. 이미지는 파일로 제공되지 않습니다. 콘텐츠에서 추출하십시오."
 msgstr ""
 
@@ -1355,17 +1357,17 @@ msgstr ""
 #~ msgid "서비스 약관"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/terms/index.tsx
-#: src/components/home/logined/Setting/sub/terms/index.tsx
+#: src/components/core/Setting/sub/terms/index.tsx
+#: src/components/core/Setting/sub/terms/index.tsx
 #: src/components/layout/Login.tsx
 msgid "서비스 이용 약관"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "서비스 탈퇴"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "서비스 탈퇴 시 다음 개인 정보가 영구적으로 삭제됩니다:"
 msgstr ""
 
@@ -1420,7 +1422,7 @@ msgstr "선택한 {0}개의 페이지가 소속될 폴더를 선택하세요"
 msgid "선택한 페이지가 소속될 폴더를 선택하세요"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "설명"
 msgstr ""
 
@@ -1436,7 +1438,7 @@ msgstr ""
 msgid "설정된 리마인더가 없습니다"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "설정된 시간대 기준 밤 10시~아침 7시에는 리마인더 알람이 발송되지 않습니다"
 msgstr ""
 
@@ -1452,7 +1454,7 @@ msgstr ""
 msgid "성공적으로 처리했습니다. 그 동안 이용해주셔서 감사합니다."
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "소유자가 마지막으로 페이지를 본 날짜와 시간입니다. 사용자 활동을 추적합니다."
 msgstr ""
 
@@ -1474,7 +1476,7 @@ msgstr ""
 #~ msgid "수정"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "수정일"
 msgstr ""
 
@@ -1510,17 +1512,21 @@ msgstr ""
 #~ msgid "아래 버튼을 눌러 앱을 설치해 주세요. 설치 후 자동으로 결제 페이지로 이동됩니다."
 #~ msgstr ""
 
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
+#: src/components/common/ErrorBoundary.tsx
+msgid "알 수 없는 오류"
+msgstr "알 수 없는 오류"
+
 #: src/components/home2/sections/reminder/Container.tsx
 #: src/components/home2/sections/reminder/Container.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
 msgid "알람 대기 중"
 msgstr ""
 
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
 #: src/components/home2/sections/reminder/Container.tsx
 #: src/components/home2/sections/reminder/Container.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
 msgid "알람 미설정"
 msgstr ""
 
@@ -1558,7 +1564,6 @@ msgstr ""
 #~ msgstr ""
 
 #: app/(ui)/(welcome)/layout.tsx
-#: src/components/home/logouted/AgreementForm.tsx
 #: src/components/layout/bottom/agreement/AgreementForm.tsx
 msgid "약관"
 msgstr ""
@@ -1567,7 +1572,7 @@ msgstr ""
 msgid "약관과 개인정보 수집 및 이용에 동의해 주세요."
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Language/index.tsx
+#: src/components/core/Setting/sub/Language/index.tsx
 msgid "언어 (Language)"
 msgstr ""
 
@@ -1595,7 +1600,7 @@ msgstr ""
 #~ msgid "연락을 취하고 싶다면 <email>help@opentutorials.org</email>로 연락해주세요."
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "열"
 msgstr ""
 
@@ -1607,14 +1612,15 @@ msgstr ""
 #~ msgid "영감을 주는"
 #~ msgstr ""
 
-#: src/components/home/shared/Sort.tsx
+#: src/components/home2/shared/controls/Sort.tsx
 msgid "오래된 순"
 msgstr ""
 
 #: app/share/[id]/page.tsx
 #: app/share/[id]/page.tsx
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
+#: src/components/common/ErrorBoundary.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
 #: src/components/home2/sections/folder/Presentation.tsx
 msgid "오류가 발생했습니다"
 msgstr ""
@@ -1746,7 +1752,7 @@ msgstr ""
 #~ msgid "이미지 업로드 및 이미지 OCR"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/CustomPrompt/index.tsx
+#: src/components/core/Setting/sub/CustomPrompt/index.tsx
 msgid "이미지 업로드 시 AI가 이미지를 분석해 정보를 제공합니다. 여기서 AI의 이미지 설명 방식을 설정할 수 있습니다."
 msgstr ""
 
@@ -1762,12 +1768,12 @@ msgstr ""
 #~ msgid "이미지가 없습니다."
 #~ msgstr ""
 
-#: src/components/home/logined/DisplayType/Grid/index.tsx
+#: src/components/home2/shared/displayType/Grid/index.tsx
 msgid "이미지는 온라인에서만 보여집니다."
 msgstr ""
 
 #: app/api/ai/captioning/route.ts
-#: src/components/home/logined/Setting/sub/CustomPrompt/index.tsx
+#: src/components/core/Setting/sub/CustomPrompt/index.tsx
 msgid "이미지의 초점이 문자라면 문자만 출력해주세요. 그렇지 않다면, 보이는 사물을 단어로 나열해주세요. 설명형 문장 사용 금지. 예: 컵, 꽃, 바다, 갈매기"
 msgstr ""
 
@@ -1795,7 +1801,7 @@ msgstr ""
 msgid "익명 사용자 기능 출시"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/DeleteAll/index.tsx
+#: src/components/core/Setting/sub/DeleteAll/index.tsx
 msgid "익명 사용자 모드에서 모든 데이터 삭제"
 msgstr ""
 
@@ -1842,7 +1848,7 @@ msgstr ""
 #~ msgid "일치하는 항목 없음"
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 msgid "읽기 모드"
 msgstr ""
 
@@ -1850,7 +1856,7 @@ msgstr ""
 msgid "자동 제목 생성"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/hooks/useAlarmFeatures.ts
+#: src/components/home2/editor/hooks/useAlarmFeatures.ts
 msgid "자세히 보기"
 msgstr "자세히 보기"
 
@@ -1904,12 +1910,16 @@ msgstr ""
 msgid "저장됨"
 msgstr ""
 
+#: src/components/home2/editor/hooks/usePageSave.ts
+msgid "저장에 실패했습니다. 다시 시도해주세요."
+msgstr "저장에 실패했습니다. 다시 시도해주세요."
+
 #: src/components/home2/editor/components/EditorControls.tsx
 msgid "저장전"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/CustomPrompt/index.tsx
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/CustomPrompt/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 #: src/components/home2/sections/folder/FolderDetailPageList.tsx
 msgid "적용"
 msgstr ""
@@ -1938,7 +1948,7 @@ msgstr ""
 #~ msgid "정기 결제가 일시정지되었습니다."
 #~ msgstr ""
 
-#: src/components/home/shared/Sort.tsx
+#: src/components/home2/shared/controls/Sort.tsx
 msgid "정렬"
 msgstr ""
 
@@ -1946,7 +1956,7 @@ msgstr ""
 msgid "정말 삭제하시겠습니까?"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/DeleteAll/index.tsx
+#: src/components/core/Setting/sub/DeleteAll/index.tsx
 msgid "정말 삭제하시겠습니까? 복원이 불가능합니다."
 msgstr ""
 
@@ -1979,7 +1989,7 @@ msgstr ""
 "\n"
 "폴더가 삭제되면 폴더 안의 페이지들은 폴더 없음 상태로 변경됩니다."
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "정수"
 msgstr ""
 
@@ -1991,8 +2001,8 @@ msgstr ""
 #~ msgid "제거됨."
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 msgid "제목"
 msgstr ""
 
@@ -2005,22 +2015,22 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/common/ReminderTicker/index.tsx
+#: src/components/core/fileUploader/index.tsx
 #: src/components/core/GlobalDragDrop.tsx
 #: src/components/core/GlobalDragDrop.tsx
 #: src/components/core/GlobalDragDrop.tsx
 #: src/components/GlobalInput/page/index.tsx
-#: src/components/home/logined/DisplayType/Grid/index.tsx
-#: src/components/home/logined/DisplayType/List/TableRow.tsx
-#: src/components/home/logined/DisplayType/ReminderPageList/index.tsx
-#: src/components/home/logined/fileUploader/index.tsx
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
 #: src/components/home2/sections/reminder/Container.tsx
+#: src/components/home2/shared/displayType/Grid/index.tsx
+#: src/components/home2/shared/displayType/List/TableRow.tsx
+#: src/components/home2/shared/displayType/ReminderPageList/index.tsx
 msgid "제목 없음"
 msgstr ""
 
+#: src/components/core/fileUploader/index.tsx
+#: src/components/core/fileUploader/index.tsx
 #: src/components/GlobalInput/page/index.tsx
-#: src/components/home/logined/fileUploader/index.tsx
-#: src/components/home/logined/fileUploader/index.tsx
 msgid "제목 작성 중..."
 msgstr ""
 
@@ -2034,7 +2044,7 @@ msgstr ""
 
 #. placeholder {0}: TARGET_SIZE.toLocaleString()
 #. placeholder {1}: totalLength.toLocaleString()
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
 msgid "제목과 본문의 합계가 {0}자를 초과했습니다. (현재: {1}자)"
 msgstr "제목과 본문의 합계가 {0}자를 초과했습니다. (현재: {1}자)"
 
@@ -2042,14 +2052,14 @@ msgstr "제목과 본문의 합계가 {0}자를 초과했습니다. (현재: {1}
 #~ msgid "제목과 본문의 합계가 {maxLength}자를 초과했습니다. (현재: {currentLength}자)"
 #~ msgstr ""
 
+#: src/components/core/fileUploader/index.tsx
 #: src/components/GlobalInput/page/index.tsx
-#: src/components/home/logined/fileUploader/index.tsx
 msgid "제목을 자동으로 생성할 수 없습니다. 제목을 입력해 주세요."
 msgstr ""
 
 #. placeholder {0}: MAX_TITLE_LENGTH.toLocaleString()
 #. placeholder {1}: titleLength.toLocaleString()
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
 msgid "제목이 {0}자를 초과했습니다. (현재: {1}자)"
 msgstr "제목이 {0}자를 초과했습니다. (현재: {1}자)"
 
@@ -2057,7 +2067,7 @@ msgstr "제목이 {0}자를 초과했습니다. (현재: {1}자)"
 #~ msgid "제목이 {maxLength}자를 초과했습니다. (현재: {currentLength}자)"
 #~ msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/useCreate.tsx
+#: src/components/home2/editor/hooks/useCreate.tsx
 msgid "제목이나 내용을 입력하세요."
 msgstr ""
 
@@ -2153,11 +2163,11 @@ msgstr ""
 #~ msgid "최신 버전을 사용하려면 새로고침해주세요"
 #~ msgstr ""
 
-#: src/components/home/shared/Sort.tsx
+#: src/components/home2/shared/controls/Sort.tsx
 msgid "최신 순"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "최초 발행시 닉네임과 이미지를 설정해야 합니다."
 msgstr ""
 
@@ -2168,10 +2178,10 @@ msgstr ""
 #: src/components/common/button/ExportButton.tsx
 #: src/components/common/ConfirmDialog/index.tsx
 #: src/components/common/FolderCreationDialog.tsx
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 #: src/components/home2/editor/hooks/usePageSave.ts
+#: src/components/home2/editor/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 #: src/components/home2/sections/folder/FolderDetailPageList.tsx
 #: src/components/home2/sections/folder/FolderDetailPageList.tsx
 #: src/components/layout/bottom/main/index.tsx
@@ -2199,15 +2209,19 @@ msgstr ""
 #~ msgid "커서를 다른 곳으로 이동한 후 다시 줄바꿈을 시도해보세요."
 #~ msgstr ""
 
+#: src/components/home2/shared/DynamicLoadError.tsx
+msgid "컴포넌트를 불러오는 중 오류가 발생했습니다."
+msgstr "컴포넌트를 불러오는 중 오류가 발생했습니다."
+
 #. next-intl key: alarm.reminder-setting-enable
 #~ msgid "켜기"
 #~ msgstr ""
 
-#: src/components/home/logined/fileUploader/index.tsx
+#: src/components/core/fileUploader/index.tsx
 msgid "콘텐츠 생성에 실패했습니다."
 msgstr "콘텐츠 생성에 실패했습니다."
 
-#: src/components/home/logined/page/CreateUpdate/RelatedItem.tsx
+#: src/components/home2/editor/components/RelatedItem.tsx
 msgid "콘텐츠를 찾을 수 없습니다"
 msgstr "콘텐츠를 찾을 수 없습니다"
 
@@ -2227,22 +2241,22 @@ msgstr ""
 #~ msgid "클립보드에 복사되었습니다."
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
-#: src/components/home/logined/Setting/sub/Export/index.tsx
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "타임스탬프 (시간대 포함)"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "타임존"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "타임존을 선택하세요"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "탈퇴"
 msgstr ""
 
@@ -2250,7 +2264,7 @@ msgstr ""
 msgid "탈퇴에 실패했습니다. 관리자에게 문의 해주세요."
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Withdraw/index.tsx
+#: src/components/core/Setting/sub/Withdraw/index.tsx
 msgid "탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다."
 msgstr ""
 
@@ -2262,8 +2276,8 @@ msgstr ""
 #~ msgid "테스트 준비작업을 위한 데이터베이스 쿼리 중 오류가 발생했습니다: {error}"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "텍스트"
 msgstr ""
 
@@ -2288,7 +2302,7 @@ msgstr ""
 msgid "파일 업로드에 실패했습니다."
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "파일 형식에 대해 자세히 알아보기"
 msgstr ""
 
@@ -2296,7 +2310,7 @@ msgstr ""
 #~ msgid "파일을 놓아서 새 메모로 자동 저장"
 #~ msgstr ""
 
-#: src/components/home/logined/ContentTypeSwitcher.tsx
+#: src/components/home2/shared/controls/ContentTypeSwitcher.tsx
 msgid "페이지"
 msgstr ""
 
@@ -2308,7 +2322,7 @@ msgstr ""
 #~ msgid "페이지 검색 및 추가"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "페이지 내용입니다. 텍스트 형식으로 저장되며 페이지에 대한 자세한 정보를 포함합니다."
 msgstr ""
 
@@ -2320,7 +2334,7 @@ msgstr ""
 #~ msgid "페이지 제목이나 내용을 검색하세요..."
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "페이지 제목입니다. 페이지의 주제나 내용을 간략하게 표현합니다."
 msgstr ""
 
@@ -2333,15 +2347,15 @@ msgstr ""
 #~ msgid "페이지 추가에 실패했습니다"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "페이지가 공개 여부를 나타냅니다. `true`이면 페이지가 공개됩니다."
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "페이지가 마지막으로 수정된 날짜와 시간입니다. 최신 변경 사항을 나타냅니다."
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Export/index.tsx
+#: src/components/core/Setting/sub/Export/index.tsx
 msgid "페이지가 생성된 날짜와 시간입니다. 페이지의 최초 생성 시간을 나타냅니다."
 msgstr ""
 
@@ -2382,11 +2396,11 @@ msgstr ""
 #~ msgid "편집됨"
 #~ msgstr ""
 
-#: src/components/home/logined/ContentTypeSwitcher.tsx
+#: src/components/home2/shared/controls/ContentTypeSwitcher.tsx
 msgid "폴더"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/components/HeaderArea.tsx
+#: src/components/home2/editor/components/HeaderArea.tsx
 #: src/components/home2/sections/folder/FolderDetailPageList.tsx
 msgid "폴더 관리"
 msgstr ""
@@ -2396,8 +2410,8 @@ msgstr ""
 #~ msgid "폴더 관리"
 #~ msgstr ""
 
-#: src/components/home/logined/page/DocumentTitleUpdater.tsx
-#: src/components/home/logined/page/DocumentTitleUpdater.tsx
+#: src/components/core/DocumentTitleUpdater.tsx
+#: src/components/core/DocumentTitleUpdater.tsx
 msgid "폴더 목록"
 msgstr ""
 
@@ -2501,29 +2515,29 @@ msgstr ""
 msgid "폴더에서 제외"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "프로필"
 msgstr ""
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "프로필 설정"
 msgstr ""
 
 #: app/share/[id]/SharePageContent.tsx
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "프로필 이미지"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/Profile/index.tsx
+#: src/components/core/Setting/sub/Profile/index.tsx
 msgid "프로필이 저장되었습니다"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/CustomPrompt/index.tsx
+#: src/components/core/Setting/sub/CustomPrompt/index.tsx
 msgid "프롬프트 저장 중 오류가 발생했습니다"
 msgstr ""
 
-#: src/components/home/logined/Setting/sub/CustomPrompt/index.tsx
+#: src/components/core/Setting/sub/CustomPrompt/index.tsx
 msgid "프롬프트가 저장되었습니다"
 msgstr ""
 
@@ -2548,7 +2562,7 @@ msgstr ""
 #~ msgid "한 줄로 요약"
 #~ msgstr ""
 
-#: src/components/home/logined/Setting/sub/Language/index.tsx
+#: src/components/core/Setting/sub/Language/index.tsx
 msgid "한국어"
 msgstr ""
 
@@ -2560,7 +2574,7 @@ msgstr ""
 msgid "해당 페이지를 온라인에서 한번 접속해 주세요.<0/>한번 접속하면 페이지가 저장돼 오프라인에서도 접속 가능해집니다."
 msgstr "해당 페이지를 온라인에서 한번 접속해 주세요.<0/>한번 접속하면 페이지가 저장돼 오프라인에서도 접속 가능해집니다."
 
-#: src/components/home/logined/page/CreateUpdate/PublishFeatures.tsx
+#: src/components/home2/editor/PublishFeatures.tsx
 msgid "현재 공유 중입니다."
 msgstr ""
 
@@ -2623,7 +2637,7 @@ msgstr ""
 #: src/components/common/button/ExportButton.tsx
 #: src/components/common/ConfirmDialog/index.tsx
 #: src/components/common/Notice.tsx
-#: src/components/home/logined/Setting/sub/DeleteAll/index.tsx
+#: src/components/core/Setting/sub/DeleteAll/index.tsx
 #: src/components/layout/Login.tsx
 #: src/components/layout/Login.tsx
 #: src/components/layout/Login.tsx

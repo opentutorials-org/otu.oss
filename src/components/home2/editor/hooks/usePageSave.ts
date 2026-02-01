@@ -83,19 +83,31 @@ export function usePageSave(
             // 신규 페이지인지 확인 (mode가 'create'이면 신규 페이지)
             const isNewPage = mode === 'create';
 
-            const result = await editSubmitHandler(title, body, is_public, id, 'text', folderId);
+            try {
+                const result = await editSubmitHandler(
+                    title,
+                    body,
+                    is_public,
+                    id,
+                    'text',
+                    folderId
+                );
 
-            // editSubmitHandler 내부에서 이미 refreshList와 triggerSync를 호출하므로 중복 호출 제거
-            const action = isNewPage ? 'create' : 'update';
-            editorIndexLogger('submit 완료', { result, action });
+                // editSubmitHandler 내부에서 이미 refreshList와 triggerSync를 호출하므로 중복 호출 제거
+                const action = isNewPage ? 'create' : 'update';
+                editorIndexLogger('submit 완료', { result, action });
 
-            // 신규 페이지 저장 성공 시 mode를 'update'로 변경하여 제어 버튼 활성화
-            if (isNewPage && setMode) {
-                setMode('update');
-                editorIndexLogger('신규 페이지 저장 완료 - mode를 update로 변경');
+                // 신규 페이지 저장 성공 시 mode를 'update'로 변경하여 제어 버튼 활성화
+                if (isNewPage && setMode) {
+                    setMode('update');
+                    editorIndexLogger('신규 페이지 저장 완료 - mode를 update로 변경');
+                }
+            } catch (error) {
+                console.error('페이지 저장 실패:', error);
+                openSnackbar({ message: t`저장에 실패했습니다. 다시 시도해주세요.` });
             }
         },
-        [editSubmitHandler, folderId, mode, setMode]
+        [editSubmitHandler, folderId, mode, setMode, openSnackbar, t]
     );
 
     return {

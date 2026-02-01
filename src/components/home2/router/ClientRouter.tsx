@@ -21,23 +21,12 @@ export default function ClientRouter() {
                 <ErrorBoundary>
                     <Suspense fallback={<Loading />}>
                         <Routes>
-                            {/* 홈 레이아웃 - 메인 페이지 */}
-
-                            {/* 공통 상단 컨트롤을 가진 공통 레이아웃 */}
                             <Route element={<CommonLayout />}>
-                                {/* 페이지 섹션 라우트 */}
                                 <Route path="/page/*" element={<PageSection />} />
-
-                                {/* 폴더 섹션 라우트 */}
                                 <Route path="/folder/*" element={<FolderSection />} />
-
-                                {/* 검색 섹션 라우트 (URL이 단일 진실 소스) */}
+                                {/* URL이 단일 진실 소스 (Jotai atom 대신 URL 파라미터 사용) */}
                                 <Route path="/search/*" element={<SearchSection />} />
-
-                                {/* 리마인더 섹션 라우트 */}
                                 <Route path="/reminder/*" element={<ReminderSection />} />
-
-                                {/* 일치하지 않는 모든 경로는 /page로 리디렉션 */}
                                 <Route path="*" element={<Navigate to="/page" replace />} />
                             </Route>
                         </Routes>

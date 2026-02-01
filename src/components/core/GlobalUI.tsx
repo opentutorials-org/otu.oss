@@ -7,7 +7,7 @@ import {
     folderCreationDialogState,
     contentListMessageState,
 } from '@/lib/jotai';
-import FileUploaderLoader from '../home/logined/fileUploader/loader';
+import FileUploaderLoader from './fileUploader/loader';
 
 const Snackbar = lazy(() => import('@/components/common/Snackbar'));
 const ConfirmDialog = lazy(() => import('@/components/common/ConfirmDialog'));
@@ -15,7 +15,7 @@ const FolderManagementDialog = lazy(() => import('@/components/common/FolderMana
 const FolderCreationDialog = lazy(() => import('@/components/common/FolderCreationDialog'));
 const ContentListMessage = lazy(() => import('@/components/common/ContentListMessage'));
 const GlobalDragDrop = lazy(() => import('@/components/core/GlobalDragDrop'));
-const Setting = lazy(() => import('../home/logined/Setting'));
+const Setting = lazy(() => import('./Setting'));
 const Chat = lazy(() => import('../Chat').then((module) => ({ default: module.Chat })));
 
 export default function GlobalUI() {

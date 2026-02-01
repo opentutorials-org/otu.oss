@@ -16,7 +16,7 @@ import { runSyncState } from '@/lib/jotai';
 import { useSetAtom } from 'jotai';
 import { usePathname } from 'next/navigation';
 import { navPageLogger } from '@/debug/nav';
-import FileUploaderLoader from '@/components/home/logined/fileUploader/loader';
+import FileUploaderLoader from '@/components/core/fileUploader/loader';
 // Chat/UI/Setting은 ClientRouter 내부로 이동
 import { useFoldersData } from '@/hooks/useFoldersData';
 

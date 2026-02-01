@@ -14,7 +14,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import s from './MainLayout.module.css';
-import { DocumentTitleUpdater } from '../home/logined/page/DocumentTitleUpdater';
+import { DocumentTitleUpdater } from '../core/DocumentTitleUpdater';
 import { navPageLogger } from '@/debug/nav';
 import { Top } from './top';
 import { chatOpenState, drawerWidthState } from '@/lib/jotai';

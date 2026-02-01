@@ -1,5 +1,5 @@
 'use client';
-import DebugInfo from '@/components/home/logined/Setting/sub/DebugInfo';
+import DebugInfo from './sub/DebugInfo';
 import Export from './sub/Export';
 import { Withdraw } from './sub/Withdraw';
 import { settingState } from '@/lib/jotai';

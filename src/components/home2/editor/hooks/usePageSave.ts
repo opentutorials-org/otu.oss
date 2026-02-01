@@ -37,34 +37,39 @@ export function usePageSave(
 
                     const pageId = content.id;
 
-                    await remove(pageId);
-                    openSnackbar({ message: t`삭제가 완료되었습니다.` });
+                    try {
+                        await remove(pageId);
+                        openSnackbar({ message: t`삭제가 완료되었습니다.` });
 
-                    // 외과수술적 업데이트: 삭제된 페이지 ID와 action 전달
-                    refreshList({
-                        source: 'components/home2/editor/hooks/usePageSave:handleDelete',
-                        pageId: pageId,
-                        action: 'delete',
-                    });
-
-                    // React Router 호환 네비게이션 사용
-                    if (navigate) {
-                        editorIndexLogger('React Router로 홈 페이지 리디렉션', { pageId });
-                        setTimeout(() => {
-                            navigate('/page');
+                        // 외과수술적 업데이트: 삭제된 페이지 ID와 action 전달
+                        refreshList({
+                            source: 'components/home2/editor/hooks/usePageSave:handleDelete',
+                            pageId: pageId,
+                            action: 'delete',
                         });
+
+                        // React Router 호환 네비게이션 사용
+                        if (navigate) {
+                            editorIndexLogger('React Router로 홈 페이지 리디렉션', { pageId });
+                            setTimeout(() => {
+                                navigate('/page');
+                            });
+                        }
+
+                        // 페이지 삭제 시 폴더 정보도 업데이트
+                        const { triggerSync } = await import('@/functions/sync');
+                        triggerSync('components/home2/editor/hooks/usePageSave:handleDelete');
+                        editorIndexLogger('페이지 삭제 완료', { id: pageId });
+
+                        const supabase = createClient();
+                        await supabase.from('documents').delete().eq('page_id', pageId);
+                        editorIndexLogger('Supabase에서 문서 삭제 완료', {
+                            page_id: pageId,
+                        });
+                    } catch (error) {
+                        console.error('페이지 삭제 실패:', error);
+                        openSnackbar({ message: t`삭제에 실패했습니다. 다시 시도해주세요.` });
                     }
-
-                    // 페이지 삭제 시 폴더 정보도 업데이트
-                    const { triggerSync } = await import('@/functions/sync');
-                    triggerSync('components/home2/editor/hooks/usePageSave:handleDelete');
-                    editorIndexLogger('페이지 삭제 완료', { id: pageId });
-
-                    const supabase = createClient();
-                    await supabase.from('documents').delete().eq('page_id', pageId);
-                    editorIndexLogger('Supabase에서 문서 삭제 완료', {
-                        page_id: pageId,
-                    });
                 },
             });
         },

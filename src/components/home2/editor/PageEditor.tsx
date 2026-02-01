@@ -5,7 +5,7 @@ import { Screen } from '@/components/common/scene/Screen';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { EditorLoadingErrorFallback } from '@/components/common/BlockNoteEditor/EditorLoadingErrorFallback';
-import { HeaderArea } from '@/components/home/logined/page/CreateUpdate/components/HeaderArea';
+import { HeaderArea } from './components/HeaderArea';
 import { EditorControls } from './components/EditorControls';
 import { usePageData } from './hooks/usePageData';
 import { usePageSave } from './hooks/usePageSave';
@@ -13,7 +13,7 @@ import { useEditorState } from './hooks/useEditorState';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { runEmbedding } from '@/functions/ai/runEmbedding';
 import { editorStateType } from '@/types';
-import RelatedPosts from '@/components/home/logined/page/CreateUpdate/RelatedPosts';
+import RelatedPosts from './components/RelatedPosts';
 
 // Dynamically import EditorContainer to isolate BlockNote dependencies
 const EditorContainer = dynamic(() => import('./EditorContainer'), {

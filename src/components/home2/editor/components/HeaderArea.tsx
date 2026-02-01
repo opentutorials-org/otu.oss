@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { useAtomValue, useSetAtom } from 'jotai';
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { LinkifiedTitle } from './LinkifiedTitle';
-import { content, contentType, editorStateType } from '../../../../../../types';
+import { content, contentType, editorStateType } from '@/types';
 import {
     currentPageState,
     isDarkModeAtom,
@@ -20,12 +20,12 @@ import {
 import { getPageFolder, type Folder, addPageToFolder, getFolders } from '@/functions/folder';
 import { useNavigation } from '@/hooks/useNavigation';
 import FolderIcon from '@mui/icons-material/Folder';
-import { HeaderAreaDummy, HeaderAreaTemplate } from '../../HeaderAreaTemplate';
+import { HeaderAreaDummy, HeaderAreaTemplate } from '../HeaderAreaTemplate';
 import { editorViewLogger } from '@/debug/editor';
 import Image from 'next/image';
 import { useLingui } from '@lingui/react/macro';
 import { useRouter } from 'next/navigation';
-import { DeleteButton, ReadButton } from '../../SharedButtons';
+import { DeleteButton, ReadButton } from './SharedButtons';
 import {
     /*ShareButton,*/ CopyButton,
     ReminderButton,

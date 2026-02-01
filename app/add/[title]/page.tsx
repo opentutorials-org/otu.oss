@@ -6,7 +6,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useEffect, use } from 'react';
 import '@/app/globals.css';
 import { createClient } from '@/supabase/utils/client';
-import { useCreate } from '@/components/home/logined/page/CreateUpdate/useCreate';
+import { useCreate } from '@/components/home2/editor/hooks/useCreate';
 import { ulid } from 'ulid';
 import { DELIMITER_TITLE_BODY } from '@/functions/constants';
 import { parseTitleAndBody } from '@/components/GlobalInput/page/parseTitleAndBody';

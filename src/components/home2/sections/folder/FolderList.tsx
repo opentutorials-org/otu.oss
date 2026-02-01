@@ -3,7 +3,7 @@
 import { Outlet } from 'react-router-dom';
 import Container from './Container';
 import { enhancedRenderLogger } from '@/debug/render';
-import TopControls from '@/components/home/shared/TopControls';
+import TopControls from '@/components/home2/shared/controls/TopControls';
 
 // FolderList 컴포넌트 - Container/Presentation 패턴 사용
 export function FolderList() {

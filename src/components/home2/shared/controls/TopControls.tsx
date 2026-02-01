@@ -1,8 +1,8 @@
 'use client';
 
 import GlobalInput from '@/components/GlobalInput';
-import ContentTypeSwitcher from '@/components/home/logined/ContentTypeSwitcher';
-import { Selection } from '@/components/home/shared/Selection';
+import ContentTypeSwitcher from './ContentTypeSwitcher';
+import { Selection } from './Selection';
 import Sort from './Sort';
 import ListType from './ListType';
 export default function TopControls({

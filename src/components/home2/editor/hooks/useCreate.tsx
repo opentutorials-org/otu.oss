@@ -13,7 +13,7 @@ import {
 import { useAtom, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef } from 'react';
-import { extractBodyInfo } from '../../../../../functions/extractBodyInfo';
+import { extractBodyInfo } from '@/functions/extractBodyInfo';
 import { create, get, update } from '@/watermelondb/control/Page';
 const { convert } = require('html-to-text');
 

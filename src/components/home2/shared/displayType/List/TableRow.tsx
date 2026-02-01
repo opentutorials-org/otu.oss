@@ -2,7 +2,7 @@ import { convertDateFormat } from '@/functions/date';
 import s from './style.module.css';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { CircleIcon } from '@/components/common/icons/CircleIcon';
-import { getDisplayTitle } from '../../page/CreateUpdate/utils/textUtils';
+import { getDisplayTitle } from '@/components/home2/editor/utils/textUtils';
 import { FolderTag } from '@/components/common/FolderTag';
 import { useLingui } from '@lingui/react/macro';
 import BellIcon from '@/public/icon/BellIcon';

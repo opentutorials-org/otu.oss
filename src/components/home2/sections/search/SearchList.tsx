@@ -4,7 +4,7 @@ import { enhancedRenderLogger } from '@/debug/render';
 import { useCallback } from 'react';
 import { list } from '@/watermelondb/control/Page';
 import { searchLogger } from '@/debug/search';
-import TopControls from '@/components/home/shared/TopControls';
+import TopControls from '@/components/home2/shared/controls/TopControls';
 
 export function SearchList() {
     enhancedRenderLogger('SearchList');

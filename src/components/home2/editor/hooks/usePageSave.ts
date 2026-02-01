@@ -5,7 +5,7 @@ import { remove } from '@/watermelondb/control/Page';
 import { editorIndexLogger } from '@/debug/editor';
 import { createClient } from '@/supabase/utils/client';
 import { useLingui } from '@lingui/react/macro';
-import { useCreate } from '@/components/home/logined/page/CreateUpdate/useCreate';
+import { useCreate } from './useCreate';
 import { content, contentType } from '@/types';
 
 /**

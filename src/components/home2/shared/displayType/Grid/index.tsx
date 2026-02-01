@@ -11,7 +11,7 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react/macro';
-import { getDisplayTitle } from '../../page/CreateUpdate/utils/textUtils';
+import { getDisplayTitle } from '@/components/home2/editor/utils/textUtils';
 import { CircleIcon } from '@/components/common/icons/CircleIcon';
 import { FolderTag } from '@/components/common/FolderTag';
 import { Add as AddIcon } from '@mui/icons-material';

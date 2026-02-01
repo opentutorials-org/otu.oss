@@ -25,7 +25,7 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import { reminderLogger } from '@/debug/reminder';
 import { loadLogger } from '@/debug/load';
 
-import s from '@/components/home/logined/DisplayType/ReminderPageList/style.module.css';
+import s from '@/components/home2/shared/displayType/ReminderPageList/style.module.css';
 import { BellSlashIcon, BellSnoozeIcon } from '@heroicons/react/20/solid';
 
 // Reminder Container - Container/Presentation 패턴을 따른 컴포넌트

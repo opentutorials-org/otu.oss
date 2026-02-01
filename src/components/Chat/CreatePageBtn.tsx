@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { currentPageState, runSyncState, isModifiedState } from '@/lib/jotai';
 import { useSetAtom } from 'jotai';
 import { useState } from 'react';
-import { useCreate } from '../home/logined/page/CreateUpdate/useCreate';
+import { useCreate } from '@/components/home2/editor/hooks/useCreate';
 import { ulid } from 'ulid';
 import { useNavigate } from 'react-router-dom';
 import { chatLogger } from '@/debug/chat';

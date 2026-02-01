@@ -2,8 +2,8 @@
 import { displayModeState, searchMethodState } from '@/lib/jotai';
 import { useAtom } from 'jotai';
 // import useInfiniteScroll from 'react-infinite-scroll-hook'; // 직접 구현으로 대체
-import List from '@/components/home/logined/DisplayType/List';
-import Grid from '@/components/home/logined/DisplayType/Grid';
+import List from '@/components/home2/shared/displayType/List';
+import Grid from '@/components/home2/shared/displayType/Grid';
 import { enhancedRenderLogger } from '@/debug/render';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useEffect, useState, useMemo } from 'react';

@@ -36,7 +36,7 @@ import {
     Fade,
     Button,
 } from '@mui/material';
-import TopControls from '@/components/home/shared/TopControls';
+import TopControls from '@/components/home2/shared/controls/TopControls';
 
 // FolderDetailPageList 컴포넌트 - 폴더 상세 정보 및 페이지 리스트 (모달)
 export function FolderDetailPageList() {

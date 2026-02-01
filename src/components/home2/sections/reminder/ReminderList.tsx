@@ -7,7 +7,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { currentPageState } from '@/lib/jotai';
 import { enhancedRenderLogger } from '@/debug/render';
 import { reminderLogger } from '@/debug/reminder';
-import TopControls from '@/components/home/shared/TopControls';
+import TopControls from '@/components/home2/shared/controls/TopControls';
 
 export function ReminderList() {
     const [currentPage, setCurrentPage] = useAtom(currentPageState);

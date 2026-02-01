@@ -1,4 +1,4 @@
-import { useCreate } from '@/components/home/logined/page/CreateUpdate/useCreate';
+import { useCreate } from '@/components/home2/editor/hooks/useCreate';
 import {
     isDarkModeAtom,
     openSnackbarState,

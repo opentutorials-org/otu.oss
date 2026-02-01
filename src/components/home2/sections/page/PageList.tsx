@@ -7,7 +7,7 @@ import { useCallback, useEffect } from 'react';
 import { useNavigation } from '@/hooks/useNavigation';
 import { getSearchKeywordFromUrl } from '@/utils/urlUtils';
 import { list } from '@/watermelondb/control/Page';
-import TopControls from '@/components/home/shared/TopControls';
+import TopControls from '@/components/home2/shared/controls/TopControls';
 import { useSetAtom } from 'jotai';
 import { updateCurrentPageContentState, currentPageState } from '@/lib/jotai';
 

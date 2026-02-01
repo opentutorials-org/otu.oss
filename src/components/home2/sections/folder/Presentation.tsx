@@ -1,5 +1,5 @@
 'use client';
-import FolderGrid from '@/components/home/logined/DisplayType/FolderGrid';
+import FolderGrid from '@/components/home2/shared/displayType/FolderGrid';
 import { enhancedRenderLogger } from '@/debug/render';
 import { useLingui } from '@lingui/react/macro';
 

@@ -290,7 +290,7 @@ msgstr ""
 #~ msgid "in {count} hour(s)"
 #~ msgstr ""
 
-#: src/functions/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
 msgid "IndexedDB 테스트 데이터베이스 생성 중 문제가 발생했습니다. 브라우저나 기기 설정을 확인해주세요."
 msgstr ""
 
@@ -816,7 +816,7 @@ msgid "데이터를 가져오는 중 오류가 발생했습니다."
 msgstr ""
 
 #. placeholder {0}: progress ?? 0
-#: src/functions/hooks/useSync.tsx
+#: src/hooks/useSync.tsx
 msgid "데이터를 동기화하고 있습니다.<br/>{0}"
 msgstr "데이터를 동기화하고 있습니다.<br/>{0}"
 
@@ -846,11 +846,11 @@ msgstr ""
 msgid "등록된 이메일 주소"
 msgstr ""
 
-#: src/functions/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
 msgid "디바이스가 앱의 일부 기능을 지원하지 않고 있습니다. 다른 장치를 사용해주세요."
 msgstr ""
 
-#: src/functions/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
 msgid "디바이스의 저장 공간이 부족하여 IndexedDB 기능에 문제가 발생할 수 있습니다. 필요하지 않은 파일을 삭제하거나 기기를 업그레이드해 주세요."
 msgstr ""
 
@@ -1567,7 +1567,7 @@ msgstr ""
 #~ msgid "앞으로는 Enter를 누르기 전에 마지막에 마침표나 공백을 입력하세요."
 #~ msgstr ""
 
-#: src/functions/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
 msgid "앱 사용을 위해 브라우저 업데이트가 필요합니다. 최신 버전으로 변경해 주시면 모든 기능을 원활하게 이용하실 수 있습니다."
 msgstr ""
 
@@ -1898,7 +1898,7 @@ msgstr ""
 msgid "저장"
 msgstr ""
 
-#: src/functions/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
 msgid "저장 공간 확인 중 오류가 발생했습니다. 기기 설정을 확인해주세요."
 msgstr ""
 
@@ -2669,11 +2669,11 @@ msgstr ""
 #: src/components/layout/Login.tsx
 #: src/components/layout/Login.tsx
 #: src/components/layout/LoginedMenu.tsx
-#: src/functions/hooks/useCheckWatermelondb.ts
-#: src/functions/hooks/useCheckWatermelondb.ts
-#: src/functions/hooks/useCheckWatermelondb.ts
-#: src/functions/hooks/useCheckWatermelondb.ts
-#: src/functions/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
+#: src/hooks/useCheckWatermelondb.ts
 msgid "확인"
 msgstr ""
 

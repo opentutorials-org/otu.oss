@@ -16,9 +16,11 @@ import { getServerI18n } from '@/lib/lingui';
 import { msg } from '@lingui/core/macro';
 import { logHeader } from '@/functions/logHeader';
 import { parseLocaleFromAcceptLanguage } from '@/functions/constants';
-import { canUseAI, getAIDisabledReason } from '@/functions/ai/config';
+import { canUseAI, getAIDisabledReason, getAIProvider } from '@/functions/ai/config';
 
-export const runtime = 'edge';
+// 셀프호스팅 환경에서 edge runtime은 Node.js 전용 모듈(pg 등)과 호환되지 않으므로
+// nodejs runtime을 사용합니다. Vercel 배포 시에도 nodejs runtime으로 동작합니다.
+export const runtime = 'nodejs';
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
@@ -86,12 +88,13 @@ export async function POST(req: NextRequest) {
     try {
         aiLogger(`Before streamText: ${Date.now() - startTime}ms`);
 
-        // 로컬 환경에서는 OpenAI 직접 사용, 프로덕션에서는 Gateway 사용
-        const isDevelopment = process.env.NODE_ENV === 'development';
+        // AI Provider에 따라 모델 선택
+        const provider = getAIProvider();
 
-        const model = isDevelopment
-            ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })('gpt-4o')
-            : gateway(TEXT_MODEL_NAME);
+        const model =
+            provider === 'openai'
+                ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })(TEXT_MODEL_NAME || 'gpt-4o')
+                : gateway(TEXT_MODEL_NAME);
 
         const result = streamText({
             model: model as any,

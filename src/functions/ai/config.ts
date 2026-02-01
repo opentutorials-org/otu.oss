@@ -3,7 +3,30 @@
  *
  * ENABLE_AI 환경변수로 AI 기능을 선택적으로 활성화/비활성화할 수 있습니다.
  * API 키가 없는 환경에서도 앱이 정상 동작하도록 graceful fallback을 제공합니다.
+ *
+ * AI Provider:
+ * - 'gateway': Vercel AI Gateway (Vercel 배포 시 기본값)
+ * - 'openai': OpenAI 직접 호출 (셀프호스팅 시 사용)
  */
+
+/**
+ * AI Provider 타입
+ * - 'gateway': Vercel AI Gateway 사용 (Vercel 배포 환경)
+ * - 'openai': OpenAI API 직접 호출 (셀프호스팅 환경)
+ */
+export type AIProvider = 'gateway' | 'openai';
+
+/**
+ * 현재 AI Provider를 반환
+ * AI_PROVIDER 환경변수로 설정, 기본값은 'gateway' (Vercel 배포 호환)
+ */
+export function getAIProvider(): AIProvider {
+    const provider = process.env.AI_PROVIDER;
+    if (provider === 'openai') {
+        return 'openai';
+    }
+    return 'gateway';
+}
 
 /**
  * AI 기능이 활성화되어 있는지 확인
@@ -23,32 +46,33 @@ export function isOpenAIConfigured(): boolean {
 
 /**
  * 임베딩 API가 설정되어 있는지 확인
- * 개발 환경에서는 OpenAI API 키, 프로덕션에서는 Vercel AI Gateway 사용
+ * Provider에 따라 검증 방법이 다름:
+ * - openai: OPENAI_API_KEY 필요
+ * - gateway: Vercel AI Gateway를 사용하므로 항상 true
  */
 export function isEmbeddingConfigured(): boolean {
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (isDevelopment) {
+    const provider = getAIProvider();
+    if (provider === 'openai') {
         return !!process.env.OPENAI_API_KEY;
     }
-    // 프로덕션에서는 Gateway를 사용하므로 항상 true
+    // Gateway 모드에서는 Vercel이 제공하므로 항상 true
     return true;
 }
 
 /**
- * AI 기능을 사용할 수 있는지 확인 (활성화 + API 키 설정)
- * 개발 환경에서는 OpenAI 직접 호출, 프로덕션에서는 Gateway 사용
+ * AI 기능을 사용할 수 있는지 확인 (활성화 + Provider별 키 설정)
  */
 export function canUseAI(): boolean {
     if (!isAIEnabled()) {
         return false;
     }
 
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (isDevelopment) {
+    const provider = getAIProvider();
+    if (provider === 'openai') {
         return isOpenAIConfigured();
     }
 
-    // 프로덕션에서는 Gateway를 사용하므로 TEXT_MODEL_NAME만 확인
+    // Gateway 모드에서는 TEXT_MODEL_NAME만 확인
     return !!process.env.TEXT_MODEL_NAME;
 }
 
@@ -67,12 +91,12 @@ export function getAIDisabledReason(): string {
         return 'AI_DISABLED';
     }
 
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (isDevelopment && !isOpenAIConfigured()) {
+    const provider = getAIProvider();
+    if (provider === 'openai' && !isOpenAIConfigured()) {
         return 'OPENAI_API_KEY_NOT_SET';
     }
 
-    if (!process.env.TEXT_MODEL_NAME) {
+    if (provider === 'gateway' && !process.env.TEXT_MODEL_NAME) {
         return 'TEXT_MODEL_NAME_NOT_SET';
     }
 
@@ -87,8 +111,8 @@ export function getEmbeddingsDisabledReason(): string {
         return 'AI_DISABLED';
     }
 
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (isDevelopment && !isOpenAIConfigured()) {
+    const provider = getAIProvider();
+    if (provider === 'openai' && !isOpenAIConfigured()) {
         return 'OPENAI_API_KEY_NOT_SET';
     }
 

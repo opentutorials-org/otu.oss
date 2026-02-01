@@ -8,7 +8,9 @@ import { msg } from '@lingui/core/macro';
 import { parseLocaleFromAcceptLanguage } from '@/functions/constants';
 import { canUseEmbeddings, getEmbeddingsDisabledReason } from '@/functions/ai/config';
 
-export const runtime = 'edge';
+// 셀프호스팅 환경에서 edge runtime은 Node.js 전용 모듈과 호환되지 않으므로
+// nodejs runtime을 사용합니다.
+export const runtime = 'nodejs';
 
 export async function POST(req: Request) {
     const locale = parseLocaleFromAcceptLanguage(req.headers.get('accept-language'));

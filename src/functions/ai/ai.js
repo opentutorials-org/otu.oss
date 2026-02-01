@@ -5,7 +5,7 @@ import { gateway } from '@ai-sdk/gateway';
 // @ts-ignore
 import { createOpenAI } from '@ai-sdk/openai';
 // @ts-ignore
-import { EMBEDDING_MODEL_NAME } from './constants';
+import { EMBEDDING_MODEL_NAME } from '../constants';
 
 /**
  * Vercel AI Gateway를 사용하여 텍스트 임베딩을 생성합니다.

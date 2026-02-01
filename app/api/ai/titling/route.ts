@@ -9,7 +9,7 @@ import { generateObject } from 'ai';
 import { gateway } from '@ai-sdk/gateway';
 import { createOpenAI } from '@ai-sdk/openai';
 import { z } from 'zod';
-import { canUseAI, getAIDisabledReason } from '@/functions/ai/config';
+import { canUseAI, getAIDisabledReason, getAIProvider } from '@/functions/ai/config';
 
 export const maxDuration = 60;
 export const runtime = 'nodejs';
@@ -115,12 +115,13 @@ async function generateTitle(contentBody: string, locale: string | null) {
     });
 
     try {
-        // 로컬 환경에서는 OpenAI 직접 사용, 프로덕션에서는 Gateway 사용
-        const isDevelopment = process.env.NODE_ENV === 'development';
+        // AI Provider에 따라 모델 선택
+        const provider = getAIProvider();
 
-        const model = isDevelopment
-            ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })('gpt-4o')
-            : gateway(TEXT_MODEL_NAME);
+        const model =
+            provider === 'openai'
+                ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })(TEXT_MODEL_NAME || 'gpt-4o')
+                : gateway(TEXT_MODEL_NAME);
 
         const { object, usage } = await generateObject({
             model: model as any,

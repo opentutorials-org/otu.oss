@@ -1,0 +1,68 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build output
+.next
+out
+build
+
+# Version control
+.git
+.gitignore
+
+# Environment files
+.env
+.env*.local
+.env.dev
+.env.real
+.env.test
+.env.backup
+.envrc
+
+# Tests
+*.test.ts
+*.test.tsx
+*.test.js
+*.test.jsx
+__tests__
+coverage
+test-results
+playwright-report
+blob-report
+
+# IDE
+.cursor
+.vscode
+.idea
+
+# Analysis
+analyze
+
+# Documentation (not needed in image)
+CLAUDE.md
+SELF_HOSTING_STRATEGY.md
+*.md
+!docs/self-hosting.md
+
+# Docker (prevent recursive copy)
+docker-compose.yml
+Dockerfile
+
+# Misc
+.DS_Store
+*.pem
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+.vercel
+.sentryclirc
+.swc
+.playwright-mcp
+playwright/.auth
+certificates
+copilot-instructions.md
+*.orig
+log.log

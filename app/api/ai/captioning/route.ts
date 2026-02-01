@@ -8,7 +8,7 @@ import {
 import { createClient } from '@/supabase/utils/server';
 import { getServerI18n } from '@/lib/lingui';
 import { msg } from '@lingui/core/macro';
-import { canUseAI, getAIDisabledReason } from '@/functions/ai/config';
+import { canUseAI, getAIDisabledReason, getAIProvider } from '@/functions/ai/config';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -42,12 +42,13 @@ async function processImage(
 
         captionLogger('Vercel AI SDK 호출 시작', { model: TEXT_MODEL_NAME, detail });
 
-        // 로컬 환경에서는 OpenAI 직접 사용, 프로덕션에서는 Gateway 사용
-        const isDevelopment = process.env.NODE_ENV === 'development';
+        // AI Provider에 따라 모델 선택
+        const provider = getAIProvider();
 
-        const model = isDevelopment
-            ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })('gpt-4o')
-            : gateway(TEXT_MODEL_NAME);
+        const model =
+            provider === 'openai'
+                ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })(TEXT_MODEL_NAME || 'gpt-4o')
+                : gateway(TEXT_MODEL_NAME);
 
         const { object: parsed, usage } = await generateObject({
             model: model as any,

@@ -1,0 +1,293 @@
+# =============================================================================
+# OTU — Docker Compose 셀프호스팅 설정
+#
+# 사용법:
+#   1. docker/generate-keys.sh 로 키 생성
+#   2. docker/.env.example → docker/.env 복사 후 값 채우기
+#   3. docker compose --env-file docker/.env up -d
+#
+# 아키텍처:
+#   인터넷 → Caddy(:80/:443) → app(:3000) / kong(:8000)
+#   DOMAIN     → Next.js 앱
+#   API_DOMAIN → Supabase API Gateway
+# =============================================================================
+
+services:
+    # ---------------------------------------------------------------
+    # Caddy (리버스 프록시 + 자동 HTTPS)
+    # ---------------------------------------------------------------
+    caddy:
+        image: caddy:2-alpine
+        ports:
+            - '80:80'
+            - '443:443'
+            - '443:443/udp' # HTTP/3 (QUIC)
+        environment:
+            DOMAIN: ${DOMAIN:-localhost}
+            API_DOMAIN: ${API_DOMAIN:-api.localhost}
+        volumes:
+            - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+            - caddy-data:/data
+            - caddy-config:/config
+        depends_on:
+            app:
+                condition: service_started
+            kong:
+                condition: service_started
+        networks:
+            - otu-network
+        restart: unless-stopped
+
+    # ---------------------------------------------------------------
+    # OTU Next.js App
+    # ---------------------------------------------------------------
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                NEXT_PUBLIC_SUPABASE_URL: ${API_EXTERNAL_URL}
+                NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+                NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY: ${NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY:-}
+                NEXT_PUBLIC_HOST: ${SITE_URL:-http://localhost}
+        # 포트는 Caddy를 통해서만 외부 접근 (직접 노출하지 않음)
+        expose:
+            - '3000'
+        environment:
+            # Supabase 연결
+            NEXT_PUBLIC_SUPABASE_URL: ${API_EXTERNAL_URL}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+            SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+            # DB 연결 (마이그레이션용)
+            DB_HOST: db
+            DB_PORT: 5432
+            POSTGRES_USER: supabase_admin
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: postgres
+            # AI 설정
+            ENABLE_AI: ${ENABLE_AI:-false}
+            AI_PROVIDER: ${AI_PROVIDER:-openai}
+            OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+            TEXT_MODEL_NAME: ${TEXT_MODEL_NAME:-gpt-4o}
+            # 소셜 로그인
+            ENABLE_GITHUB_AUTH: ${ENABLE_GITHUB_AUTH:-false}
+            ENABLE_GOOGLE_AUTH: ${ENABLE_GOOGLE_AUTH:-false}
+            ENABLE_APPLE_AUTH: ${ENABLE_APPLE_AUTH:-false}
+            # Uploadcare
+            NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY: ${NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY:-}
+            UPLOADCARE_PRIVATE_KEY: ${UPLOADCARE_PRIVATE_KEY:-}
+            # 기타
+            NODE_ENV: production
+            SITE_URL: ${SITE_URL:-http://localhost}
+            NEXT_PUBLIC_HOST: ${SITE_URL:-http://localhost}
+        depends_on:
+            db:
+                condition: service_healthy
+            auth:
+                condition: service_started
+            rest:
+                condition: service_started
+            kong:
+                condition: service_started
+        networks:
+            - otu-network
+        restart: unless-stopped
+
+    # ---------------------------------------------------------------
+    # PostgreSQL (Supabase 호환 + pgvector + pgroonga)
+    # ---------------------------------------------------------------
+    db:
+        build:
+            context: ./docker/db
+            dockerfile: Dockerfile
+        # 외부 접근 시 로컬호스트에만 바인딩 (보안)
+        ports:
+            - '127.0.0.1:${DB_EXTERNAL_PORT:-54322}:5432'
+        environment:
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: postgres
+            JWT_SECRET: ${JWT_SECRET}
+            JWT_EXP: 3600
+        volumes:
+            - db-data:/var/lib/postgresql/data
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U supabase_admin -d postgres']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+        networks:
+            - otu-network
+        restart: unless-stopped
+
+    # ---------------------------------------------------------------
+    # GoTrue (Supabase Auth)
+    # ---------------------------------------------------------------
+    auth:
+        image: supabase/gotrue:v2.164.0
+        depends_on:
+            db:
+                condition: service_healthy
+        environment:
+            GOTRUE_API_HOST: 0.0.0.0
+            GOTRUE_API_PORT: 9999
+            API_EXTERNAL_URL: ${API_EXTERNAL_URL}
+            GOTRUE_DB_DRIVER: postgres
+            GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:${POSTGRES_PASSWORD}@db:5432/postgres
+            GOTRUE_SITE_URL: ${SITE_URL:-http://localhost}
+            GOTRUE_URI_ALLOW_LIST: ${ADDITIONAL_REDIRECT_URLS:-}
+            GOTRUE_DISABLE_SIGNUP: ${DISABLE_SIGNUP:-false}
+            GOTRUE_JWT_ADMIN_ROLES: service_role
+            GOTRUE_JWT_AUD: authenticated
+            GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+            GOTRUE_JWT_EXP: ${JWT_EXPIRY:-3600}
+            GOTRUE_JWT_SECRET: ${JWT_SECRET}
+            # Email Auth
+            GOTRUE_EXTERNAL_EMAIL_ENABLED: true
+            GOTRUE_MAILER_AUTOCONFIRM: ${MAILER_AUTOCONFIRM:-true}
+            GOTRUE_MAILER_SECURE_EMAIL_CHANGE_ENABLED: true
+            GOTRUE_SMTP_HOST: ${SMTP_HOST:-}
+            GOTRUE_SMTP_PORT: ${SMTP_PORT:-587}
+            GOTRUE_SMTP_USER: ${SMTP_USER:-}
+            GOTRUE_SMTP_PASS: ${SMTP_PASS:-}
+            GOTRUE_SMTP_ADMIN_EMAIL: ${SMTP_ADMIN_EMAIL:-admin@localhost}
+            GOTRUE_SMTP_SENDER_NAME: ${SMTP_SENDER_NAME:-OTU}
+            # GitHub OAuth
+            GOTRUE_EXTERNAL_GITHUB_ENABLED: ${ENABLE_GITHUB_AUTH:-false}
+            GOTRUE_EXTERNAL_GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+            GOTRUE_EXTERNAL_GITHUB_SECRET: ${GITHUB_CLIENT_SECRET:-}
+            GOTRUE_EXTERNAL_GITHUB_REDIRECT_URI: ${API_EXTERNAL_URL}/auth/v1/callback
+            # Google OAuth
+            GOTRUE_EXTERNAL_GOOGLE_ENABLED: ${ENABLE_GOOGLE_AUTH:-false}
+            GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+            GOTRUE_EXTERNAL_GOOGLE_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+            GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI: ${API_EXTERNAL_URL}/auth/v1/callback
+            # Apple OAuth
+            GOTRUE_EXTERNAL_APPLE_ENABLED: ${ENABLE_APPLE_AUTH:-false}
+            GOTRUE_EXTERNAL_APPLE_CLIENT_ID: ${APPLE_CLIENT_ID:-}
+            GOTRUE_EXTERNAL_APPLE_SECRET: ${APPLE_CLIENT_SECRET:-}
+            GOTRUE_EXTERNAL_APPLE_REDIRECT_URI: ${API_EXTERNAL_URL}/auth/v1/callback
+        networks:
+            - otu-network
+        restart: unless-stopped
+
+    # ---------------------------------------------------------------
+    # PostgREST (Supabase REST API)
+    # ---------------------------------------------------------------
+    rest:
+        image: postgrest/postgrest:v12.2.3
+        depends_on:
+            db:
+                condition: service_healthy
+        environment:
+            PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@db:5432/postgres
+            PGRST_DB_SCHEMAS: public,storage,graphql_public
+            PGRST_DB_ANON_ROLE: anon
+            PGRST_JWT_SECRET: ${JWT_SECRET}
+            PGRST_DB_USE_LEGACY_GUCS: 'false'
+        networks:
+            - otu-network
+        restart: unless-stopped
+
+    # ---------------------------------------------------------------
+    # Realtime
+    # ---------------------------------------------------------------
+    realtime:
+        image: supabase/realtime:v2.30.34
+        depends_on:
+            db:
+                condition: service_healthy
+        environment:
+            PORT: 4000
+            DB_HOST: db
+            DB_PORT: 5432
+            DB_USER: supabase_admin
+            DB_PASSWORD: ${POSTGRES_PASSWORD}
+            DB_NAME: postgres
+            DB_AFTER_CONNECT_QUERY: 'SET search_path TO _realtime'
+            DB_ENC_KEY: ${DB_ENC_KEY}
+            API_JWT_SECRET: ${JWT_SECRET}
+            SECRET_KEY_BASE: ${JWT_SECRET}
+            ERL_AFLAGS: '-proto_dist inet_tcp'
+            DNS_NODES: "''"
+            RLIMIT_NOFILE: 10000
+            APP_NAME: realtime
+            SEED_SELF_HOST: 'true'
+        networks:
+            - otu-network
+        restart: unless-stopped
+
+    # ---------------------------------------------------------------
+    # Storage
+    # ---------------------------------------------------------------
+    storage:
+        image: supabase/storage-api:v1.11.13
+        depends_on:
+            db:
+                condition: service_healthy
+            rest:
+                condition: service_started
+        environment:
+            ANON_KEY: ${ANON_KEY}
+            SERVICE_KEY: ${SERVICE_ROLE_KEY}
+            POSTGREST_URL: http://rest:3000
+            PGRST_JWT_SECRET: ${JWT_SECRET}
+            DATABASE_URL: postgres://supabase_storage_admin:${POSTGRES_PASSWORD}@db:5432/postgres
+            FILE_SIZE_LIMIT: 52428800
+            STORAGE_BACKEND: file
+            FILE_STORAGE_BACKEND_PATH: /var/lib/storage
+            TENANT_ID: stub
+            REGION: local
+            GLOBAL_S3_BUCKET: stub
+            IS_MULTITENANT: 'false'
+        volumes:
+            - storage-data:/var/lib/storage
+        networks:
+            - otu-network
+        restart: unless-stopped
+
+    # ---------------------------------------------------------------
+    # Kong (API Gateway)
+    # ---------------------------------------------------------------
+    kong:
+        image: kong:2.8.1
+        depends_on:
+            auth:
+                condition: service_started
+            rest:
+                condition: service_started
+        # 포트는 Caddy를 통해서만 외부 접근 (직접 노출하지 않음)
+        expose:
+            - '8000'
+        entrypoint: /var/lib/kong/entrypoint.sh
+        environment:
+            KONG_DATABASE: 'off'
+            KONG_DECLARATIVE_CONFIG: /var/lib/kong/kong.yml
+            KONG_DNS_ORDER: LAST,A,CNAME
+            KONG_PLUGINS: request-transformer,cors,key-auth,acl
+            KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
+            KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
+            ANON_KEY: ${ANON_KEY}
+            SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+        volumes:
+            - ./docker/kong/kong.yml:/var/lib/kong/kong.yml.template:ro
+            - ./docker/kong/entrypoint.sh:/var/lib/kong/entrypoint.sh:ro
+        networks:
+            - otu-network
+        restart: unless-stopped
+
+# =============================================================================
+# Volumes & Networks
+# =============================================================================
+volumes:
+    db-data:
+        driver: local
+    storage-data:
+        driver: local
+    caddy-data:
+        driver: local
+    caddy-config:
+        driver: local
+
+networks:
+    otu-network:
+        driver: bridge

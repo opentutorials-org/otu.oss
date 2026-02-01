@@ -96,3 +96,7 @@ copilot-instructions.md
 # Build/cache
 .swc/
 .playwright-mcp/
+
+# Docker
+docker/.env
+backups/

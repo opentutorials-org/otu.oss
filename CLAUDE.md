@@ -123,9 +123,12 @@ src/
 ├── components/
 │   ├── Chat/          # AI 채팅
 │   ├── common/        # 공유 컴포넌트
-│   ├── home/          # 홈 페이지 컴포넌트 (레거시)
 │   ├── home2/         # 홈 페이지 컴포넌트 (React Router 기반)
-│   ├── core/          # 핵심 컴포넌트
+│   │   ├── editor/    # 페이지 에디터
+│   │   ├── sections/  # 페이지/폴더/리마인더/검색 섹션
+│   │   ├── shared/    # 공유 컴포넌트 (controls, displayType)
+│   │   └── router/    # React Router 설정
+│   ├── core/          # 핵심 컴포넌트 (Setting, fileUploader 등)
 │   └── layout/        # 레이아웃 컴포넌트
 │
 ├── functions/
@@ -313,15 +316,14 @@ OPENAI_API_KEY=                 # ENABLE_AI=true일 때 필요 (개발 환경)
 - **증분 동기화**: `gt` (초과) 연산자로 중복 방지
 - **라우트 진입 동기화**: 특정 페이지 진입 시 자동 동기화 트리거
 
-### React Router 마이그레이션
+### React Router 아키텍처
 
-- **Home2 섹션**: React Router DOM 기반 신규 아키텍처
+- **home2 섹션**: React Router DOM 기반 아키텍처 (마이그레이션 완료)
     - URL 기반 상태 관리 (atom 의존성 제거)
     - Lazy Loading 및 코드 스플리팅
-    - 섹션별 독립적인 라우팅
-- **레거시 시스템**: 점진적 마이그레이션 진행 중
-    - 기존 atom 기반 상태는 `@deprecated` 처리
-    - fallback 패턴으로 하위 호환성 유지
+    - 섹션별 독립적인 라우팅 (page, folder, reminder, search)
+    - 에디터 컴포넌트: `home2/editor/`
+    - 공유 컴포넌트: `home2/shared/` (controls, displayType)
 
 ### 성능 최적화
 

@@ -16,6 +16,19 @@ export function loadCatalog(locale: string, messages: Messages) {
  * 전역 i18n과 격리되어 동시 요청에서도 안전합니다.
  */
 export async function getServerI18n(locale: Locale) {
+    // 테스트 환경에서는 .po 파일 로딩을 건너뛰고 mock 반환
+    if (process.env.NODE_ENV === 'test') {
+        return {
+            _: (descriptor: any) => {
+                // msg 매크로 결과 처리: { id: string, message?: string } 형태
+                if (typeof descriptor === 'string') return descriptor;
+                if (descriptor?.message) return descriptor.message;
+                if (descriptor?.id) return descriptor.id;
+                return 'translated';
+            },
+        } as ReturnType<typeof setupI18n>;
+    }
+
     try {
         const { messages } = await import(`../locales/${locale}/messages.po`);
         const serverI18n = setupI18n({

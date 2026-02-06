@@ -22,7 +22,7 @@
         "dev:inspect": "git config commit.template commit.template; npm run check-updates; NODE_OPTIONS=--inspect next dev",
         "dev:inspect-brk": "git config commit.template commit.template; npm run check-updates; NODE_OPTIONS=--inspect-brk next dev",
         "test": "node scripts/test.js && npm run test:db",
-        "test:integration": "jest --testPathPattern='(\\.integration\\.test\\.|sync-database|route\\.next_alarm_time_update|route\\.reminder_processed_at_concurrency|updateNotificationIdsBatch|calculate_progressive_interval|withdraw/route)' --runInBand",
+        "test:integration": "jest --testPathIgnorePatterns='/node_modules/' --testPathPatterns='(\\.integration\\.test\\.|sync-database|route\\.next_alarm_time_update|route\\.reminder_processed_at_concurrency|updateNotificationIdsBatch|calculate_progressive_interval|withdraw/__tests__/route)' --runInBand",
         "test:e2e": "npx playwright test",
         "test:all": "npm run test && npm run test:e2e",
         "build": "next build",

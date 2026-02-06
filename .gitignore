@@ -59,8 +59,8 @@ pnpm-lock.yaml
 .idea
 .vscode
 
-# Claude Code local settings
-.claude/settings.local.json
+# Claude Code
+.claude/
 
 # custom
 supabase/ddl

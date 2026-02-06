@@ -1,3 +1,11 @@
+// LinguiJS 전역 모킹 (통합 테스트용)
+jest.mock('@/lib/lingui', () => ({
+    getServerI18n: jest.fn().mockResolvedValue({
+        _: (descriptor) =>
+            typeof descriptor === 'string' ? descriptor : descriptor.id || 'translated',
+    }),
+}));
+
 // Mock environment variables
 process.env.NEXT_PUBLIC_SUPABASE_URL = 'http://localhost:54321';
 process.env.SUPABASE_SERVICE_ROLE_KEY =

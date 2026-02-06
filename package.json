@@ -69,7 +69,7 @@
         "@blocknote/core": "0.44.0",
         "@blocknote/mantine": "0.44.0",
         "@blocknote/react": "0.44.0",
-        "@blocknote/xl-ai": "0.44.0",
+        "@blocknote/xl-ai": "0.46.2",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
         "@headlessui/react": "^2.2.0",

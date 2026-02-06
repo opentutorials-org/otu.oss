@@ -117,7 +117,7 @@
         "openai": "^4.77.4",
         "p-map": "^7.0.4",
         "pg": "^8.13.3",
-        "postgres": "^3.4.5",
+        "postgres": "^3.4.8",
         "react": "19.1.0",
         "react-dom": "19.1.0",
         "react-infinite-scroll-hook": "^5.0.1",

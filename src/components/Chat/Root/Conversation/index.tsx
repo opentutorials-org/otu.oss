@@ -150,7 +150,7 @@ function NoticeMessage({ id, name, children }: { id: string; name: string; child
     return (
         <Root id={id}>
             <Name name={name}></Name>
-            <div dangerouslySetInnerHTML={{ __html: children }}></div>
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(children) }}></div>
         </Root>
     );
 }
@@ -186,7 +186,7 @@ function SimilarityStartMessage({
     return (
         <Root id={id}>
             <Name name={name} justifyContent="start"></Name>
-            <div dangerouslySetInnerHTML={{ __html: children === null ? '' : children }}></div>
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(children ?? '') }}></div>
         </Root>
     );
 }

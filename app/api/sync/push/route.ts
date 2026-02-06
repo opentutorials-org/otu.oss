@@ -1,11 +1,9 @@
 export const maxDuration = 300;
 import { syncLogger } from '@/debug/sync';
+import { Database } from '@/lib/database/types';
 import { createClient, fetchUserId } from '@/supabase/utils/server';
 import { createSuperClient } from '@/supabase/utils/super';
-import { sync } from '@/watermelondb/sync';
-import { createServerClient } from '@supabase/ssr';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { cookies } from 'next/headers';
 import { revalidateTag } from 'next/cache';
 
 if (process.env.NEXT_PUBLIC_HOST === undefined) throw new Error('NEXT_PUBLIC_HOST is not defined');
@@ -61,8 +59,7 @@ export async function POST(req: Request) {
 
             for (const deletedId of folder.deleted) {
                 syncLogger('Deleted folder', deletedId);
-                // @ts-ignore
-                const { error: deleteError } = await (supabase as any)
+                const { error: deleteError } = await supabase
                     .from('folder')
                     .delete()
                     .eq('id', deletedId)
@@ -250,7 +247,7 @@ export async function POST(req: Request) {
             isDevelopment: process.env.NODE_ENV === 'development',
         });
 
-        console.error('Sync push error:', error);
+        syncLogger('Sync push error:', error);
         syncLogger('동기화 푸시 중 오류 발생:', error);
 
         const body = JSON.stringify({ error: error.message });
@@ -279,7 +276,7 @@ async function isExistingJobs(
             updatedItemId: updatedItemId,
             operation: 'select_existing_jobs',
         });
-        console.error('Sync push error:', error);
+        syncLogger('Sync push error:', error);
         throw new Error('큐를 생성하는 과정에서 오류가 발생했습니다:' + error);
     }
 
@@ -310,7 +307,7 @@ async function updateExistingJob(
             minutesOffset: minutesOffset,
             operation: 'update_existing_job',
         });
-        console.error('Sync push error:', error);
+        syncLogger('Sync push error:', error);
         syncLogger('Error updating job:', error);
         throw error;
     }
@@ -343,7 +340,7 @@ async function updateNoExistJob(
             minutesOffset: minutesOffset,
             operation: 'insert_new_job',
         });
-        console.error('Sync push error:', error);
+        syncLogger('Sync push error:', error);
         syncLogger('Error inserting new job:', error);
         throw error;
     }
@@ -351,18 +348,32 @@ async function updateNoExistJob(
     return data;
 }
 
-// @ts-ignore
-async function isExistingPage(supabase, id) {
-    const { data: existingPage, error: existingPageError } = await supabase
-        .from('page')
-        .select('id')
-        .eq('id', id)
-        .single();
-    return existingPage === null ? false : true;
+async function isExistingPage(
+    supabase: SupabaseClient<Database, 'public'>,
+    id: string
+): Promise<boolean> {
+    const { data: existingPage } = await supabase.from('page').select('id').eq('id', id).single();
+    return existingPage !== null;
 }
 
-// @ts-ignore
-async function createPage(supabase, newItem, lastPulledAt, user_id) {
+async function createPage(
+    supabase: SupabaseClient<Database, 'public'>,
+    newItem: {
+        id: string;
+        title: string;
+        body: string;
+        is_public: boolean;
+        img_url: string | null;
+        length: number;
+        type: Database['public']['Enums']['page_type'];
+        folder_id: string | null;
+        created_at: number;
+        updated_at: number;
+        last_viewed_at: number;
+    },
+    lastPulledAt: number,
+    user_id: string
+) {
     const createdAt = new Date(newItem.created_at).toISOString();
     const updatedAt = new Date(Math.min(newItem.updated_at, lastPulledAt - 1)).toISOString();
     const lastViewedAt = new Date(newItem.last_viewed_at).toISOString();
@@ -391,7 +402,7 @@ async function createPage(supabase, newItem, lastPulledAt, user_id) {
         });
         // 23505 에러는 상위에서 처리하므로 throw하지 않음
         if (result.error.code !== '23505') {
-            console.error('Sync push error:', result.error);
+            syncLogger('Sync push error:', result.error);
             throw result.error;
         }
     }
@@ -399,8 +410,23 @@ async function createPage(supabase, newItem, lastPulledAt, user_id) {
     return result;
 }
 
-// @ts-ignore
-async function updatePage(supabase, updatedItem, lastPulledAt, user_id) {
+async function updatePage(
+    supabase: SupabaseClient<Database, 'public'>,
+    updatedItem: {
+        id: string;
+        title: string;
+        body: string;
+        is_public: boolean;
+        img_url: string | null;
+        length: number;
+        folder_id: string | null;
+        created_at: number;
+        updated_at: number;
+        last_viewed_at: number;
+    },
+    lastPulledAt: number,
+    user_id: string
+) {
     const lastViewedAt = new Date(updatedItem.last_viewed_at).toISOString();
     const updatedAt = new Date(Math.min(updatedItem.updated_at, lastPulledAt - 1)).toISOString();
     const createdAt = new Date(updatedItem.created_at).toISOString();
@@ -426,7 +452,7 @@ async function updatePage(supabase, updatedItem, lastPulledAt, user_id) {
             user_id: user_id,
             operation: 'update_page',
         });
-        console.error('Update error:', updateError);
+        syncLogger('Update error:', updateError);
         throw updateError;
     }
 
@@ -443,21 +469,36 @@ async function updatePage(supabase, updatedItem, lastPulledAt, user_id) {
     return { data, updateError };
 }
 
-// @ts-ignore
-async function cancelDeletePage(supabase, id, user_id) {
+async function cancelDeletePage(
+    supabase: SupabaseClient<Database, 'public'>,
+    id: string,
+    user_id: string
+) {
     return await supabase.from('page_deleted').delete().eq('user_id', user_id).eq('id', id);
 }
 
-// @ts-ignore
-async function createFolder(supabase, newItem, lastPulledAt, user_id) {
+async function createFolder(
+    supabase: SupabaseClient<Database, 'public'>,
+    newItem: {
+        id: string;
+        name: string;
+        description: string | null;
+        thumbnail_url: string | null;
+        page_count: number;
+        created_at: number;
+        updated_at: number;
+        last_page_added_at: number | null;
+    },
+    lastPulledAt: number,
+    user_id: string
+) {
     const createdAt = new Date(newItem.created_at).toISOString();
     const updatedAt = new Date(Math.min(newItem.updated_at, lastPulledAt - 1)).toISOString();
     const lastPageAddedAt = newItem.last_page_added_at
         ? new Date(newItem.last_page_added_at).toISOString()
         : null;
 
-    // @ts-ignore
-    const result = await (supabase as any).from('folder').insert({
+    const result = await supabase.from('folder').insert({
         id: newItem.id,
         user_id,
         name: newItem.name,
@@ -478,7 +519,7 @@ async function createFolder(supabase, newItem, lastPulledAt, user_id) {
         });
         // 23505 에러는 상위에서 처리하므로 throw하지 않음
         if (result.error.code !== '23505') {
-            console.error('Sync push error:', result.error);
+            syncLogger('Sync push error:', result.error);
             throw result.error;
         }
     }
@@ -486,15 +527,26 @@ async function createFolder(supabase, newItem, lastPulledAt, user_id) {
     return result;
 }
 
-// @ts-ignore
-async function updateFolder(supabase, updatedItem, lastPulledAt, user_id) {
+async function updateFolder(
+    supabase: SupabaseClient<Database, 'public'>,
+    updatedItem: {
+        id: string;
+        name: string;
+        description: string | null;
+        thumbnail_url: string | null;
+        page_count: number;
+        updated_at: number;
+        last_page_added_at: number | null;
+    },
+    lastPulledAt: number,
+    user_id: string
+) {
     const updatedAt = new Date(Math.min(updatedItem.updated_at, lastPulledAt - 1)).toISOString();
     const lastPageAddedAt = updatedItem.last_page_added_at
         ? new Date(updatedItem.last_page_added_at).toISOString()
         : null;
 
-    // @ts-ignore
-    const { data, error: updateError } = await (supabase as any)
+    const { data, error: updateError } = await supabase
         .from('folder')
         .update({
             name: updatedItem.name,
@@ -513,37 +565,48 @@ async function updateFolder(supabase, updatedItem, lastPulledAt, user_id) {
             user_id: user_id,
             operation: 'update_folder',
         });
-        console.error('Update error:', updateError);
+        syncLogger('Update error:', updateError);
         throw updateError;
     }
 
     return { data, updateError };
 }
 
-// @ts-ignore
-async function cancelDeleteFolder(supabase, id, user_id) {
-    // @ts-ignore
-    return await (supabase as any)
-        .from('folder_deleted')
-        .delete()
-        .eq('user_id', user_id)
-        .eq('id', id);
+async function cancelDeleteFolder(
+    supabase: SupabaseClient<Database, 'public'>,
+    id: string,
+    user_id: string
+) {
+    return await supabase.from('folder_deleted').delete().eq('user_id', user_id).eq('id', id);
 }
 
-// @ts-ignore
-async function isExistingFolder(supabase, id) {
-    // @ts-ignore
-    const { data: existingFolder, error: existingFolderError } = await (supabase as any)
+async function isExistingFolder(
+    supabase: SupabaseClient<Database, 'public'>,
+    id: string
+): Promise<boolean> {
+    const { data: existingFolder } = await supabase
         .from('folder')
         .select('id')
         .eq('id', id)
         .single();
-    return existingFolder === null ? false : true;
+    return existingFolder !== null;
 }
 
 // 알람 관련 유틸리티 함수들
-// @ts-ignore
-async function createAlarm(supabase, newItem, lastPulledAt, user_id) {
+async function createAlarm(
+    supabase: SupabaseClient<Database, 'public'>,
+    newItem: {
+        id: string;
+        next_alarm_time: number | null;
+        page_id: string;
+        last_notification_id: string | null;
+        sent_count: number | null;
+        created_at: number;
+        updated_at: number;
+    },
+    lastPulledAt: number,
+    user_id: string
+) {
     const createdAt = new Date(newItem.created_at).toISOString();
     const updatedAt = new Date(Math.min(newItem.updated_at, lastPulledAt - 1)).toISOString();
     const nextAlarmTime = newItem.next_alarm_time
@@ -576,7 +639,7 @@ async function createAlarm(supabase, newItem, lastPulledAt, user_id) {
         });
         // 23505 에러는 상위에서 처리하므로 throw하지 않음
         if (result.error.code !== '23505') {
-            console.error('Sync push error:', result.error);
+            syncLogger('Sync push error:', result.error);
             throw result.error;
         }
     }
@@ -585,8 +648,19 @@ async function createAlarm(supabase, newItem, lastPulledAt, user_id) {
     return result;
 }
 
-// @ts-ignore
-async function updateAlarm(supabase, updatedItem, lastPulledAt, user_id) {
+async function updateAlarm(
+    supabase: SupabaseClient<Database, 'public'>,
+    updatedItem: {
+        id: string;
+        next_alarm_time: number | null;
+        page_id: string;
+        last_notification_id: string | null;
+        sent_count: number | null;
+        updated_at: number;
+    },
+    lastPulledAt: number,
+    user_id: string
+) {
     const updatedAt = new Date(Math.min(updatedItem.updated_at, lastPulledAt - 1)).toISOString();
     const nextAlarmTime = updatedItem.next_alarm_time
         ? new Date(updatedItem.next_alarm_time).toISOString()
@@ -615,7 +689,7 @@ async function updateAlarm(supabase, updatedItem, lastPulledAt, user_id) {
             user_id: user_id,
             operation: 'update_alarm',
         });
-        console.error('Update error:', updateError);
+        syncLogger('Update error:', updateError);
         throw updateError;
     }
 
@@ -623,14 +697,12 @@ async function updateAlarm(supabase, updatedItem, lastPulledAt, user_id) {
     return { data, updateError };
 }
 
-// @ts-ignore
-async function isExistingAlarm(supabase, id) {
-    const { data: existingAlarm, error: existingAlarmError } = await supabase
-        .from('alarm')
-        .select('id')
-        .eq('id', id)
-        .single();
-    return existingAlarm === null ? false : true;
+async function isExistingAlarm(
+    supabase: SupabaseClient<Database, 'public'>,
+    id: string
+): Promise<boolean> {
+    const { data: existingAlarm } = await supabase.from('alarm').select('id').eq('id', id).single();
+    return existingAlarm !== null;
 }
 
 /*

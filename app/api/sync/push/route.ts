@@ -5,6 +5,36 @@ import { createClient, fetchUserId } from '@/supabase/utils/server';
 import { createSuperClient } from '@/supabase/utils/super';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { revalidateTag } from 'next/cache';
+import { z } from 'zod';
+
+/**
+ * 동기화 엔티티 스키마 (folder, alarm 공통)
+ * created, updated, deleted 배열을 포함하며, 각각 선택적이고 기본값은 빈 배열
+ */
+const syncEntitySchema = z.object({
+    created: z.array(z.any()).optional().default([]),
+    updated: z.array(z.any()).optional().default([]),
+    deleted: z.array(z.string()).optional().default([]),
+});
+
+/**
+ * 페이지 동기화 엔티티 스키마
+ * - type: 페이지 타입 (DRAW 등), 선택적
+ */
+const pageSyncEntitySchema = syncEntitySchema.extend({
+    type: z.string().optional(),
+});
+
+/**
+ * sync/push API 요청 body 스키마
+ * - page: 필수
+ * - folder, alarm: 선택적
+ */
+const syncPushBodySchema = z.object({
+    page: pageSyncEntitySchema,
+    folder: syncEntitySchema.optional(),
+    alarm: syncEntitySchema.optional(),
+});
 
 if (process.env.NEXT_PUBLIC_HOST === undefined) throw new Error('NEXT_PUBLIC_HOST is not defined');
 
@@ -29,8 +59,35 @@ export async function POST(req: Request) {
     const { searchParams } = new URL(req.url);
     const lastPulledAt = parseInt(searchParams.get('last_pulled_at') || '0');
 
-    let body = await req.json();
-    const { page, folder, alarm } = body;
+    // JSON 파싱
+    let rawBody;
+    try {
+        rawBody = await req.json();
+    } catch {
+        syncLogger('sync/push: Invalid JSON body');
+        return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // 유효성 검사
+    const parseResult = syncPushBodySchema.safeParse(rawBody);
+    if (!parseResult.success) {
+        syncLogger('sync/push: Invalid request body', parseResult.error.format());
+        return new Response(
+            JSON.stringify({
+                error: 'Invalid request body',
+                details: parseResult.error.format(),
+            }),
+            {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' },
+            }
+        );
+    }
+
+    const { page, folder, alarm } = parseResult.data;
 
     try {
         // 폴더 처리 (folder가 있는 경우에만)

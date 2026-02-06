@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { useLingui } from '@lingui/react/macro';
+import DOMPurify from 'dompurify';
 import { confirmState, closeConfirmState } from '@/lib/jotai'; // 경로는 프로젝트 설정에 맞게 조정하세요.
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -63,7 +64,7 @@ export default function ConfirmDialog() {
 
                 // 내용물의 실제 너비를 계산하기 위해 텍스트를 복제하여 임시로 측정
                 const tempSpan = document.createElement('span');
-                tempSpan.innerHTML = confirm.message;
+                tempSpan.innerHTML = DOMPurify.sanitize(confirm.message);
                 tempSpan.style.position = 'absolute';
                 tempSpan.style.visibility = 'hidden';
                 tempSpan.style.whiteSpace = 'nowrap';
@@ -137,7 +138,7 @@ export default function ConfirmDialog() {
                         ref={contentRef}
                         className={`${s.content} ${isCentered ? s.contentCentered : ''} ${isContentVisible ? s.visible : s.hidden}`}
                         dangerouslySetInnerHTML={{
-                            __html: confirm.message,
+                            __html: DOMPurify.sanitize(confirm.message),
                         }}
                     ></div>
                     {confirm.customContent && (

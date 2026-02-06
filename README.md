@@ -93,7 +93,7 @@ npm run dev
 | ----------------- | ------------------------------------ |
 | **프론트엔드**    | Next.js 16, React 19, TypeScript 5.7 |
 | **데이터베이스**  | Supabase (PostgreSQL), WatermelonDB  |
-| **상태 관리**     | Jotai, React Query                   |
+| **상태 관리**     | Jotai                                |
 | **UI 라이브러리** | Material-UI, Tailwind CSS            |
 | **에디터**        | BlockNote 0.44.0 + XL-AI 확장        |
 | **AI 서비스**     | OpenAI GPT-4o, Vercel AI Gateway     |
@@ -192,6 +192,7 @@ supabase/               # Supabase 설정 및 마이그레이션
 ├── CLAUDE.md                  # AI 코딩 규칙 + 아키텍처 요약
 └── docs/
     ├── installation.md        # 상세 설치 가이드
+    ├── deployment.md          # 프로덕션 배포 가이드
     ├── functionality.md       # 전체 기능 명세
     ├── CONTRIBUTING.md        # 기여 가이드
     ├── CODE_OF_CONDUCT.md     # 행동 강령

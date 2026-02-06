@@ -117,39 +117,7 @@ GitHub에서 "Compare & pull request" 버튼을 클릭하여 PR을 생성합니�
 
 ## 개발 환경 설정
 
-### 필수 요구사항
-
-- **Node.js**: v20.5.0 이상
-- **npm**: 10.8.1 이상
-- **Docker**: Supabase 로컬 개발용
-- **Git**: 버전 관리
-
-### 설정 단계
-
-```bash
-# 1. 저장소 포크 및 클론
-git clone https://github.com/YOUR_USERNAME/otu.oss.git
-cd otu.oss
-
-# 2. 원본 저장소를 upstream으로 추가
-git remote add upstream https://github.com/opentutorials-org/otu.oss.git
-
-# 3. 의존성 설치
-npm install
-
-# 4. 환경 변수 설정
-cp .env.template .env.local
-# .env.local 파일을 열어 필요한 값 설정
-
-# 5. 로컬 Supabase 시작
-npx supabase start
-
-# 6. 데이터베이스 초기화
-npm run db-sync
-
-# 7. 개발 서버 시작
-npm run dev
-```
+상세한 개발 환경 설정 방법은 [설치 가이드](./installation.md)를 참고하세요.
 
 ### 주요 npm 스크립트
 

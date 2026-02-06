@@ -2,9 +2,9 @@
 
 이 문서는 Claude Code (claude.ai/code)가 이 저장소의 코드를 작업할 때 참고하는 가이드입니다.
 
-## 중요: Cursor Rules 참고
+## 참고: Cursor Rules
 
-이 문서와 함께 **반드시** `.cursor/rules/*.mdc` 파일들을 참고해야 합니다.
+Cursor IDE 사용 시에만 `.cursor/rules/*.mdc` 파일들을 추가로 참고하세요.
 
 ### 핵심 규칙 (from 01_general.mdc)
 
@@ -131,7 +131,7 @@ src/
 ├── __tests__/         # 프로젝트 레벨 테스트 (통합/크로스 도메인)
 ├── components/
 │   ├── Chat/          # AI 채팅
-│   ├── common/        # 공유 컴포넌트
+│   ├── common/        # 공유 컴포넌트 (버튼, 모달 등)
 │   ├── home2/         # 홈 페이지 컴포넌트 (React Router 기반)
 │   │   ├── editor/    # 페이지 에디터
 │   │   ├── sections/  # 페이지/폴더/리마인더/검색 섹션

@@ -111,6 +111,7 @@
         "jsonwebtoken": "^9.0.2",
         "jszip": "^3.10.1",
         "langchain": "^0.3.27",
+        "langfuse": "^3.38.6",
         "lodash": "^4.17.21",
         "marked": "^15.0.7",
         "next": "^16.0.7",

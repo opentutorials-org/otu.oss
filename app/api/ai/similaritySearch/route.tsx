@@ -23,6 +23,7 @@ import { getServerI18n } from '@/lib/lingui';
 import { msg } from '@lingui/core/macro';
 import { parseLocaleFromAcceptLanguage } from '@/functions/constants';
 import { canUseEmbeddings, getEmbeddingsDisabledReason } from '@/functions/ai/config';
+import { startRAGTrace } from '@/functions/ai/langfuse';
 
 export const runtime = 'edge';
 
@@ -55,6 +56,14 @@ export async function POST(req: Request) {
     const count = body.count || 3;
     const threshold = body.threshold || 0.55;
 
+    const userId = user.data.user?.id ?? 'anonymous';
+    const trace = startRAGTrace({
+        userId,
+        query: body.inputMessage,
+        metadata: { page_id, count, threshold },
+    });
+
+    const searchStartTime = Date.now();
     let embedQuery;
     try {
         const embeddings = await createEmbedding(body.inputMessage);
@@ -92,6 +101,20 @@ export async function POST(req: Request) {
             result.error
         );
     }
+
+    // Langfuse 검색 단계 트레이싱
+    const searchResults = result.data ?? [];
+    trace.logRetrieval({
+        query: body.inputMessage,
+        resultCount: searchResults.length,
+        latencyMs: Date.now() - searchStartTime,
+        results: searchResults.slice(0, 3).map((r: any) => ({
+            content: (r.content ?? '').substring(0, 100),
+            similarity: r.similarity ?? 0,
+        })),
+    });
+    trace.complete().catch(() => {});
+
     return new Response(JSON.stringify(result), {
         headers: { 'Content-Type': 'application/json' },
     });

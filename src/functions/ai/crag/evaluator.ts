@@ -2,7 +2,8 @@
  * CRAG 검색 결과 평가기
  *
  * 검색된 문서가 질문과 얼마나 관련이 있는지 평가합니다.
- * LLM을 사용하여 관련성을 판단하고, 필요시 쿼리를 재작성합니다.
+ * 규칙 기반으로 관련성을 판단하고 (유사도 점수 + 키워드 오버랩),
+ * 필요시 쿼리를 재작성합니다.
  */
 
 import { similarityResponse } from '@/lib/jotai';
@@ -61,8 +62,7 @@ function calculateAverageSimilarity(results: similarityResponse[]): number {
     if (results.length === 0) return 0;
 
     const totalSimilarity = results.reduce((sum, result) => {
-        // similarity 필드가 있으면 사용, 없으면 0.5 기본값
-        const similarity = (result as any).similarity ?? 0.5;
+        const similarity = result.similarity ?? 0.5;
         return sum + similarity;
     }, 0);
 

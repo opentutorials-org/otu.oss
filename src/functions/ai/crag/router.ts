@@ -4,7 +4,7 @@
  * 질문의 복잡도를 분석하여 적절한 처리 경로를 결정합니다.
  * - simple: 직접 검색 (기존 방식)
  * - moderate: CRAG 검증
- * - complex: Multi-step 다단계 추론 (ReAct 패턴)
+ * - complex: Multi-step (서브쿼리 분해 → 개별 검색 → 결과 병합)
  */
 
 import { AdaptiveRoutingResult, QueryComplexity } from './types';

@@ -10,20 +10,20 @@
 import { Langfuse } from 'langfuse';
 
 /**
- * Langfuse 설정 인터페이스
+ * Langfuse 설정 (discriminated union)
+ *
+ * enabled=true일 때만 publicKey/secretKey가 존재하도록 타입 보장합니다.
+ * 이를 통해 non-null assertion(!) 없이 안전하게 키에 접근할 수 있습니다.
  */
-export interface LangfuseConfig {
-    /** Langfuse 활성화 여부 */
-    enabled: boolean;
-    /** Public Key */
-    publicKey?: string;
-    /** Secret Key */
-    secretKey?: string;
-    /** Langfuse 서버 URL (Self-hosted인 경우) */
-    baseUrl?: string;
-    /** 디버그 모드 */
-    debug?: boolean;
-}
+export type LangfuseConfig =
+    | { enabled: false }
+    | {
+          enabled: true;
+          publicKey: string;
+          secretKey: string;
+          baseUrl?: string;
+          debug?: boolean;
+      };
 
 /**
  * 환경 변수에서 Langfuse 설정을 로드합니다.
@@ -33,12 +33,16 @@ export function loadLangfuseConfig(): LangfuseConfig {
     const secretKey = process.env.LANGFUSE_SECRET_KEY;
     const baseUrl = process.env.LANGFUSE_HOST;
 
-    // 환경 변수가 없으면 비활성화
+    // 환경 변수가 없거나 명시적으로 비활성화되면 disabled 반환
     const enabled =
         process.env.LANGFUSE_ENABLED !== 'false' && Boolean(publicKey) && Boolean(secretKey);
 
+    if (!enabled || !publicKey || !secretKey) {
+        return { enabled: false };
+    }
+
     return {
-        enabled,
+        enabled: true,
         publicKey,
         secretKey,
         baseUrl,
@@ -65,8 +69,8 @@ export function getLangfuse(): Langfuse | null {
 
     if (langfuseInstance === null) {
         langfuseInstance = new Langfuse({
-            publicKey: langfuseConfig.publicKey!,
-            secretKey: langfuseConfig.secretKey!,
+            publicKey: langfuseConfig.publicKey,
+            secretKey: langfuseConfig.secretKey,
             baseUrl: langfuseConfig.baseUrl,
         });
     }
@@ -96,15 +100,16 @@ export function getLangfuseDisabledReason(): string | null {
         return null;
     }
 
+    // enabled: false일 때 환경 변수에서 직접 원인 판별
     if (process.env.LANGFUSE_ENABLED === 'false') {
         return 'LANGFUSE_ENABLED is set to false';
     }
 
-    if (!langfuseConfig.publicKey) {
+    if (!process.env.LANGFUSE_PUBLIC_KEY) {
         return 'LANGFUSE_PUBLIC_KEY is not set';
     }
 
-    if (!langfuseConfig.secretKey) {
+    if (!process.env.LANGFUSE_SECRET_KEY) {
         return 'LANGFUSE_SECRET_KEY is not set';
     }
 
@@ -120,4 +125,5 @@ export async function shutdownLangfuse(): Promise<void> {
         await langfuseInstance.shutdownAsync();
         langfuseInstance = null;
     }
+    langfuseConfig = null;
 }

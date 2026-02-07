@@ -100,7 +100,7 @@ export async function runCRAGPipeline(
         };
     }
 
-    // 3. Multi-step 경로: 복잡 질문 (다중 검색, ReAct 패턴)
+    // 3. Multi-step 경로: 복잡 질문 (서브쿼리 분해 → 개별 검색 → 결과 병합)
     if (routingResult.route === 'multi_step' && routingResult.subQueries) {
         return await handleMultiStepRoute(
             query,
@@ -130,64 +130,70 @@ async function handleCRAGRoute(
     let results: similarityResponse[] = [];
     let evaluation: CRAGEvaluationResult | undefined;
 
-    while (state.retryCount <= state.maxRetries) {
-        // 검색 수행
-        updateStage(state.retryCount === 0 ? 'searching' : 'retrying');
-        results = await searchFn(currentQuery);
-        state.searchResults = results;
+    try {
+        while (state.retryCount <= state.maxRetries) {
+            // 검색 수행
+            updateStage(state.retryCount === 0 ? 'searching' : 'retrying');
+            results = await searchFn(currentQuery);
+            state.searchResults = results;
 
-        // 결과 평가
-        updateStage('evaluating');
-        evaluation = evaluateRelevance(query, results, config);
-        state.evaluation = evaluation;
-        chatLogger('CRAG evaluation', evaluation);
+            // 결과 평가
+            updateStage('evaluating');
+            evaluation = evaluateRelevance(query, results, config);
+            state.evaluation = evaluation;
+            chatLogger('CRAG evaluation', evaluation);
 
-        // correct: 결과 사용
-        if (evaluation.grade === 'correct') {
-            updateStage('complete');
-            return {
-                results,
-                state: { ...state, stage: 'complete' },
-                useReferences: true,
-                route: 'crag',
-            };
+            // correct: 결과 사용
+            if (evaluation.grade === 'correct') {
+                updateStage('complete');
+                return {
+                    results,
+                    state: { ...state, stage: 'complete' },
+                    useReferences: true,
+                    route: 'crag',
+                };
+            }
+
+            // incorrect: 참조 없이 진행
+            if (evaluation.grade === 'incorrect') {
+                updateStage('complete');
+                return {
+                    results: [],
+                    state: { ...state, stage: 'complete' },
+                    useReferences: false,
+                    route: 'crag',
+                };
+            }
+
+            // ambiguous: 쿼리 재작성 후 재시도
+            if (state.retryCount < state.maxRetries) {
+                updateStage('rewriting');
+                currentQuery = rewriteQuery(currentQuery, results);
+                state.currentQuery = currentQuery;
+                state.retryCount++;
+                chatLogger('CRAG query rewritten', { original: query, rewritten: currentQuery });
+            } else {
+                break;
+            }
         }
 
-        // incorrect: 참조 없이 진행
-        if (evaluation.grade === 'incorrect') {
-            updateStage('complete');
-            return {
-                results: [],
-                state: { ...state, stage: 'complete' },
-                useReferences: false,
-                route: 'crag',
-            };
-        }
-
-        // ambiguous: 쿼리 재작성 후 재시도
-        if (state.retryCount < state.maxRetries) {
-            updateStage('rewriting');
-            currentQuery = rewriteQuery(currentQuery, results);
-            state.currentQuery = currentQuery;
-            state.retryCount++;
-            chatLogger('CRAG query rewritten', { original: query, rewritten: currentQuery });
-        } else {
-            break;
-        }
+        // 최대 재시도 후에도 ambiguous이면 결과 사용
+        updateStage('complete');
+        return {
+            results,
+            state: { ...state, stage: 'complete' },
+            useReferences: results.length > 0,
+            route: 'crag',
+        };
+    } catch (error) {
+        updateStage('complete');
+        chatLogger('CRAG pipeline error', { query, error });
+        throw error;
     }
-
-    // 최대 재시도 후에도 ambiguous이면 결과 사용
-    updateStage('complete');
-    return {
-        results,
-        state: { ...state, stage: 'complete' },
-        useReferences: results.length > 0,
-        route: 'crag',
-    };
 }
 
 /**
- * Multi-step 경로를 처리합니다 (다중 검색, ReAct 패턴).
+ * Multi-step 경로를 처리합니다 (서브쿼리별 개별 검색 + 결과 병합).
  */
 async function handleMultiStepRoute(
     query: string,
@@ -197,51 +203,70 @@ async function handleMultiStepRoute(
     state: CRAGPipelineState,
     updateStage: (stage: CRAGStage, message?: string) => void
 ): Promise<CRAGPipelineResult> {
-    updateStage('searching', `Searching ${subQueries.length} sub-queries`);
+    try {
+        updateStage('searching', `Searching ${subQueries.length} sub-queries`);
 
-    // 각 서브 쿼리에 대해 검색 수행
-    const allResults: similarityResponse[] = [];
-    const seenIds = new Set<string>();
+        // 각 서브 쿼리에 대해 검색 수행
+        const allResults: similarityResponse[] = [];
+        const seenIds = new Set<string>();
 
-    for (const subQuery of subQueries) {
-        const results = await searchFn(subQuery);
+        for (const subQuery of subQueries) {
+            const results = await searchFn(subQuery);
 
-        // 중복 제거하며 결과 병합
-        for (const result of results) {
-            const id = result.metadata?.page_id || result.content?.substring(0, 50);
-            if (id && !seenIds.has(id)) {
-                seenIds.add(id);
-                allResults.push(result);
+            // 중복 제거하며 결과 병합
+            for (const result of results) {
+                const id = result.page_id || result.content?.substring(0, 50);
+                if (id && !seenIds.has(id)) {
+                    seenIds.add(id);
+                    allResults.push(result);
+                }
             }
         }
+
+        state.searchResults = allResults;
+
+        // 결합된 결과 평가
+        updateStage('evaluating');
+        const evaluation = evaluateRelevance(query, allResults, config);
+        state.evaluation = evaluation;
+        chatLogger('Multi-step evaluation', evaluation);
+
+        updateStage('complete');
+        return {
+            results: evaluation.grade !== 'incorrect' ? allResults : [],
+            state: { ...state, stage: 'complete' },
+            useReferences: evaluation.grade !== 'incorrect' && allResults.length > 0,
+            route: 'multi_step',
+        };
+    } catch (error) {
+        updateStage('complete');
+        chatLogger('Multi-step pipeline error', { query, error });
+        throw error;
     }
-
-    state.searchResults = allResults;
-
-    // 결합된 결과 평가
-    updateStage('evaluating');
-    const evaluation = evaluateRelevance(query, allResults, config);
-    state.evaluation = evaluation;
-    chatLogger('Multi-step evaluation', evaluation);
-
-    updateStage('complete');
-    return {
-        results: evaluation.grade !== 'incorrect' ? allResults : [],
-        state: { ...state, stage: 'complete' },
-        useReferences: evaluation.grade !== 'incorrect' && allResults.length > 0,
-        route: 'multi_step',
-    };
 }
 
 /**
  * CRAG 설정을 환경 변수에서 로드합니다.
+ * NaN 방어: 잘못된 환경 변수 값이 들어오면 기본값으로 fallback합니다.
  */
 export function loadCRAGConfig(): CRAGConfig {
+    const parseFloatSafe = (value: string | undefined, fallback: number): number => {
+        if (!value) return fallback;
+        const parsed = parseFloat(value);
+        return Number.isNaN(parsed) ? fallback : parsed;
+    };
+
+    const parseIntSafe = (value: string | undefined, fallback: number): number => {
+        if (!value) return fallback;
+        const parsed = parseInt(value, 10);
+        return Number.isNaN(parsed) ? fallback : parsed;
+    };
+
     return {
-        enabled: process.env.CRAG_ENABLED !== 'false',
-        relevanceThreshold: parseFloat(process.env.CRAG_RELEVANCE_THRESHOLD ?? '0.7'),
-        ambiguousThreshold: parseFloat(process.env.CRAG_AMBIGUOUS_THRESHOLD ?? '0.4'),
-        maxRetries: parseInt(process.env.CRAG_MAX_RETRIES ?? '2', 10),
+        enabled: process.env.CRAG_ENABLED === 'true',
+        relevanceThreshold: parseFloatSafe(process.env.CRAG_RELEVANCE_THRESHOLD, 0.7),
+        ambiguousThreshold: parseFloatSafe(process.env.CRAG_AMBIGUOUS_THRESHOLD, 0.4),
+        maxRetries: parseIntSafe(process.env.CRAG_MAX_RETRIES, 2),
         adaptiveRoutingEnabled: process.env.CRAG_ADAPTIVE_ROUTING !== 'false',
     };
 }

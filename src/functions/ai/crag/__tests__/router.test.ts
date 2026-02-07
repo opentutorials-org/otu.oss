@@ -35,14 +35,18 @@ describe('CRAG Router', () => {
                 const result = classifyQuery('React와 Vue 비교해줘');
                 expect(result.complexity).toBe('complex');
                 expect(result.route).toBe('multi_step');
-                expect(result.subQueries).toContain('React');
-                expect(result.subQueries).toContain('Vue');
+                if (result.complexity === 'complex') {
+                    expect(result.subQueries).toContain('React');
+                    expect(result.subQueries).toContain('Vue');
+                }
             });
 
             test('차이점 질문은 complex로 분류', () => {
                 const result = classifyQuery('TypeScript와 JavaScript의 차이점');
                 expect(result.complexity).toBe('complex');
-                expect(result.subQueries).toBeDefined();
+                if (result.complexity === 'complex') {
+                    expect(result.subQueries).toBeDefined();
+                }
             });
 
             test('장단점 질문은 complex로 분류', () => {

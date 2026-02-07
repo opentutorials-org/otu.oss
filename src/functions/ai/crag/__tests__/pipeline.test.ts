@@ -16,24 +16,30 @@ describe('CRAG Pipeline', () => {
         return jest.fn<(q: string) => Promise<similarityResponse[]>>().mockResolvedValue(results);
     };
 
-    const createHighRelevanceResults = (): (similarityResponse & { similarity: number })[] => [
+    const createHighRelevanceResults = (): similarityResponse[] => [
         {
+            id: 'id-1',
             content: 'React 사용법을 알아봅시다. React는 Facebook이 개발한 UI 라이브러리입니다.',
-            metadata: { title: 'React 사용법 가이드', page_id: 'page-1' },
+            metadata: { type: 'page', title: 'React 사용법 가이드' },
             similarity: 0.85,
+            page_id: 'page-1',
         },
         {
+            id: 'id-2',
             content: 'React Hooks 사용법과 useState를 활용한 상태 관리 방법을 설명합니다.',
-            metadata: { title: 'React Hooks 사용법', page_id: 'page-2' },
+            metadata: { type: 'page', title: 'React Hooks 사용법' },
             similarity: 0.8,
+            page_id: 'page-2',
         },
     ];
 
-    const createLowRelevanceResults = (): (similarityResponse & { similarity: number })[] => [
+    const createLowRelevanceResults = (): similarityResponse[] => [
         {
+            id: 'id-3',
             content: '오늘 날씨가 좋습니다.',
-            metadata: { title: '날씨', page_id: 'page-3' },
+            metadata: { type: 'page', title: '날씨' },
             similarity: 0.2,
+            page_id: 'page-3',
         },
     ];
 
@@ -131,6 +137,10 @@ describe('CRAG Pipeline', () => {
             process.env = { ...originalEnv };
         });
 
+        afterAll(() => {
+            process.env = originalEnv;
+        });
+
         test('환경 변수에서 설정 로드', () => {
             process.env.CRAG_ENABLED = 'true';
             process.env.CRAG_RELEVANCE_THRESHOLD = '0.8';
@@ -145,13 +155,13 @@ describe('CRAG Pipeline', () => {
             expect(config.maxRetries).toBe(3);
         });
 
-        test('환경 변수 없으면 기본값 사용', () => {
+        test('환경 변수 없으면 기본값 사용 (opt-in이므로 disabled)', () => {
             delete process.env.CRAG_ENABLED;
             delete process.env.CRAG_RELEVANCE_THRESHOLD;
 
             const config = loadCRAGConfig();
 
-            expect(config.enabled).toBe(true);
+            expect(config.enabled).toBe(false);
             expect(config.relevanceThreshold).toBe(0.7);
         });
 
@@ -161,6 +171,19 @@ describe('CRAG Pipeline', () => {
             const config = loadCRAGConfig();
 
             expect(config.enabled).toBe(false);
+        });
+
+        test('NaN 환경 변수는 기본값으로 fallback', () => {
+            process.env.CRAG_ENABLED = 'true';
+            process.env.CRAG_RELEVANCE_THRESHOLD = 'not-a-number';
+            process.env.CRAG_AMBIGUOUS_THRESHOLD = 'invalid';
+            process.env.CRAG_MAX_RETRIES = 'abc';
+
+            const config = loadCRAGConfig();
+
+            expect(config.relevanceThreshold).toBe(0.7);
+            expect(config.ambiguousThreshold).toBe(0.4);
+            expect(config.maxRetries).toBe(2);
         });
     });
 });

@@ -8,6 +8,7 @@
  */
 
 import { getLangfuse, isLangfuseEnabled } from './config';
+import { aiLogger } from '@/debug/ai';
 import type { CRAGPipelineResult } from '../crag/pipeline';
 
 /**
@@ -76,7 +77,7 @@ export interface GenerationSpanParams {
 }
 
 export interface TraceCompleteParams {
-    /** 사용자 피드백 점수 (1-5) */
+    /** 사용자 피드백 점수 (0-1, recordUserFeedback과 동일 스케일) */
     score?: number;
     /** 피드백 코멘트 */
     comment?: string;
@@ -225,5 +226,7 @@ export function traceLLMCall(params: {
     });
 
     // 비동기로 전송 (에러 무시)
-    langfuse.flushAsync().catch(() => {});
+    langfuse.flushAsync().catch((error) => {
+        aiLogger('Langfuse flush failed: %s', error?.message);
+    });
 }

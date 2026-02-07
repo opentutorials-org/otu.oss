@@ -19,10 +19,7 @@ export type RelevanceGrade = 'correct' | 'ambiguous' | 'incorrect';
  * 질문 복잡도 분류
  * - simple: 단순 질문 (예: "오늘 할 일 뭐야?") → Direct 방식 (검색 1회)
  * - moderate: 중간 복잡도 (예: "프로젝트 관련 메모 정리해줘") → CRAG 검증
- * - complex: 복잡 질문 (예: "A와 B 비교해서 정리해줘") → Multi-step 다단계 추론
- *
- * @note 'multi_step'은 ReAct(Reasoning + Acting) 에이전트 패턴을 구현합니다.
- *       Facebook의 React 프레임워크와 무관합니다.
+ * - complex: 복잡 질문 (예: "A와 B 비교해서 정리해줘") → Multi-step (서브쿼리 분해 후 개별 검색)
  */
 export type QueryComplexity = 'simple' | 'moderate' | 'complex';
 
@@ -41,16 +38,17 @@ export interface CRAGEvaluationResult {
 }
 
 /**
- * Adaptive 라우팅 결과
+ * Adaptive 라우팅 결과 (discriminated union)
+ *
+ * complexity-route 매핑이 타입 레벨에서 보장됩니다:
+ * - simple → direct (단순 검색)
+ * - moderate → crag (CRAG 검증)
+ * - complex → multi_step (다중 서브쿼리 검색 + 결과 병합)
  */
-export interface AdaptiveRoutingResult {
-    /** 질문 복잡도 */
-    complexity: QueryComplexity;
-    /** 라우팅 경로 */
-    route: 'direct' | 'crag' | 'multi_step';
-    /** 추출된 서브 쿼리 (complex인 경우) */
-    subQueries?: string[];
-}
+export type AdaptiveRoutingResult =
+    | { complexity: 'simple'; route: 'direct' }
+    | { complexity: 'moderate'; route: 'crag' }
+    | { complexity: 'complex'; route: 'multi_step'; subQueries: string[] };
 
 /**
  * CRAG 파이프라인 상태

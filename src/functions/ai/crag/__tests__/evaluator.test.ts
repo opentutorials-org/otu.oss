@@ -12,10 +12,12 @@ describe('CRAG Evaluator', () => {
             content: string,
             title: string,
             similarity: number = 0.7
-        ): similarityResponse & { similarity: number } => ({
+        ): similarityResponse => ({
+            id: `id-${Math.random()}`,
             content,
-            metadata: { title, page_id: `page-${Math.random()}` },
+            metadata: { type: 'page', title },
             similarity,
+            page_id: `page-${Math.random()}`,
         });
 
         test('검색 결과가 없으면 incorrect 등급 반환', () => {
@@ -114,11 +116,13 @@ describe('CRAG Evaluator', () => {
         });
 
         test('검색 결과에서 관련 키워드 추출하여 보강', () => {
-            const results: (similarityResponse & { similarity: number })[] = [
+            const results: similarityResponse[] = [
                 {
+                    id: 'id-rewrite',
                     content: 'React Hooks와 useState를 사용한 상태 관리',
-                    metadata: { title: 'React Hooks' },
+                    metadata: { type: 'page', title: 'React Hooks' },
                     similarity: 0.7,
+                    page_id: 'page-rewrite',
                 },
             ];
 

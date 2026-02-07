@@ -6,6 +6,7 @@
  */
 
 import { getLangfuse, isLangfuseEnabled } from './config';
+import { aiLogger } from '@/debug/ai';
 
 /**
  * RAGAS 평가 메트릭
@@ -58,7 +59,9 @@ export function recordScore(input: ScoreInput): void {
     });
 
     // 비동기로 전송
-    langfuse.flushAsync().catch(() => {});
+    langfuse.flushAsync().catch((error) => {
+        aiLogger('Langfuse flush failed: %s', error?.message);
+    });
 }
 
 /**
@@ -112,7 +115,9 @@ export function recordRAGASMetrics(traceId: string, metrics: RAGASMetrics): void
     }
 
     // 비동기로 전송
-    langfuse.flushAsync().catch(() => {});
+    langfuse.flushAsync().catch((error) => {
+        aiLogger('Langfuse flush failed: %s', error?.message);
+    });
 }
 
 /**
@@ -144,7 +149,9 @@ export function recordUserFeedback(
     });
 
     // 비동기로 전송
-    langfuse.flushAsync().catch(() => {});
+    langfuse.flushAsync().catch((error) => {
+        aiLogger('Langfuse flush failed: %s', error?.message);
+    });
 }
 
 /**
@@ -191,5 +198,7 @@ export function recordUsage(
     });
 
     // 비동기로 전송
-    langfuse.flushAsync().catch(() => {});
+    langfuse.flushAsync().catch((error) => {
+        aiLogger('Langfuse flush failed: %s', error?.message);
+    });
 }

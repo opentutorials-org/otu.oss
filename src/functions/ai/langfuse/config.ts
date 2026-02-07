@@ -8,6 +8,7 @@
  */
 
 import { Langfuse } from 'langfuse';
+import { aiLogger } from '@/debug/ai';
 
 /**
  * Langfuse 설정 (discriminated union)
@@ -68,11 +69,16 @@ export function getLangfuse(): Langfuse | null {
     }
 
     if (langfuseInstance === null) {
-        langfuseInstance = new Langfuse({
-            publicKey: langfuseConfig.publicKey,
-            secretKey: langfuseConfig.secretKey,
-            baseUrl: langfuseConfig.baseUrl,
-        });
+        try {
+            langfuseInstance = new Langfuse({
+                publicKey: langfuseConfig.publicKey,
+                secretKey: langfuseConfig.secretKey,
+                baseUrl: langfuseConfig.baseUrl,
+            });
+        } catch (error) {
+            aiLogger('Langfuse initialization failed: %s', (error as Error)?.message);
+            return null;
+        }
     }
 
     return langfuseInstance;

@@ -5,6 +5,7 @@ import { describe, test, expect, beforeEach, afterAll } from '@jest/globals';
 import {
     loadLangfuseConfig,
     isLangfuseEnabled,
+    getLangfuse,
     getLangfuseDisabledReason,
     shutdownLangfuse,
 } from '../config';
@@ -76,6 +77,39 @@ describe('Langfuse Config', () => {
             delete process.env.LANGFUSE_SECRET_KEY;
 
             expect(isLangfuseEnabled()).toBe(false);
+        });
+
+        test('키가 설정되면 true', () => {
+            process.env.LANGFUSE_PUBLIC_KEY = 'pk-test';
+            process.env.LANGFUSE_SECRET_KEY = 'sk-test';
+
+            expect(isLangfuseEnabled()).toBe(true);
+        });
+    });
+
+    describe('getLangfuse', () => {
+        test('비활성화 시 null 반환', () => {
+            delete process.env.LANGFUSE_PUBLIC_KEY;
+            delete process.env.LANGFUSE_SECRET_KEY;
+
+            expect(getLangfuse()).toBeNull();
+        });
+
+        test('활성화 시 Langfuse 인스턴스 반환', () => {
+            process.env.LANGFUSE_PUBLIC_KEY = 'pk-test';
+            process.env.LANGFUSE_SECRET_KEY = 'sk-test';
+
+            const instance = getLangfuse();
+            expect(instance).not.toBeNull();
+        });
+
+        test('싱글톤 — 동일 인스턴스 반환', () => {
+            process.env.LANGFUSE_PUBLIC_KEY = 'pk-test';
+            process.env.LANGFUSE_SECRET_KEY = 'sk-test';
+
+            const instance1 = getLangfuse();
+            const instance2 = getLangfuse();
+            expect(instance1).toBe(instance2);
         });
     });
 

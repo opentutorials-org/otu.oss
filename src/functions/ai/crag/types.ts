@@ -104,7 +104,7 @@ export interface CRAGConfig {
  * 기본 CRAG 설정
  */
 export const DEFAULT_CRAG_CONFIG: CRAGConfig = {
-    enabled: true,
+    enabled: false,
     relevanceThreshold: 0.7,
     ambiguousThreshold: 0.4,
     maxRetries: 2,

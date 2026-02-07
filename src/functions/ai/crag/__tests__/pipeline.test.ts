@@ -12,6 +12,9 @@ jest.mock('@/debug/chat', () => ({
 }));
 
 describe('CRAG Pipeline', () => {
+    // CRAG 활성화된 config (DEFAULT_CRAG_CONFIG는 opt-in이므로 enabled: false)
+    const ENABLED_CRAG_CONFIG = { ...DEFAULT_CRAG_CONFIG, enabled: true };
+
     const createMockSearchFn = (results: similarityResponse[]) => {
         return jest.fn<(q: string) => Promise<similarityResponse[]>>().mockResolvedValue(results);
     };
@@ -58,7 +61,7 @@ describe('CRAG Pipeline', () => {
         test('단순 질문은 direct 경로로 처리', async () => {
             const searchFn = createMockSearchFn(createHighRelevanceResults());
 
-            const result = await runCRAGPipeline('오늘 할 일', searchFn);
+            const result = await runCRAGPipeline('오늘 할 일', searchFn, ENABLED_CRAG_CONFIG);
 
             expect(result.route).toBe('direct');
             expect(searchFn).toHaveBeenCalledWith('오늘 할 일');
@@ -67,7 +70,11 @@ describe('CRAG Pipeline', () => {
         test('중간 복잡도 질문은 CRAG 검증 수행', async () => {
             const searchFn = createMockSearchFn(createHighRelevanceResults());
 
-            const result = await runCRAGPipeline('React 사용법 알려줘', searchFn);
+            const result = await runCRAGPipeline(
+                'React 사용법 알려줘',
+                searchFn,
+                ENABLED_CRAG_CONFIG
+            );
 
             expect(result.route).toBe('crag');
             expect(result.useReferences).toBe(true);
@@ -78,7 +85,11 @@ describe('CRAG Pipeline', () => {
         test('낮은 관련성이면 참조 없이 진행', async () => {
             const searchFn = createMockSearchFn(createLowRelevanceResults());
 
-            const result = await runCRAGPipeline('React 사용법 알려줘', searchFn);
+            const result = await runCRAGPipeline(
+                'React 사용법 알려줘',
+                searchFn,
+                ENABLED_CRAG_CONFIG
+            );
 
             expect(result.route).toBe('crag');
             expect(result.useReferences).toBe(false);
@@ -89,7 +100,11 @@ describe('CRAG Pipeline', () => {
         test('비교 질문은 multi_step 경로로 처리 (다중 검색)', async () => {
             const searchFn = createMockSearchFn(createHighRelevanceResults());
 
-            const result = await runCRAGPipeline('TypeScript와 JavaScript 비교해줘', searchFn);
+            const result = await runCRAGPipeline(
+                'TypeScript와 JavaScript 비교해줘',
+                searchFn,
+                ENABLED_CRAG_CONFIG
+            );
 
             expect(result.route).toBe('multi_step');
             // multi_step은 서브 쿼리 수만큼 검색 호출
@@ -101,7 +116,7 @@ describe('CRAG Pipeline', () => {
             const stages: CRAGStage[] = [];
             const onStageChange = (stage: CRAGStage) => stages.push(stage);
 
-            await runCRAGPipeline('React 사용법', searchFn, DEFAULT_CRAG_CONFIG, onStageChange);
+            await runCRAGPipeline('React 사용법', searchFn, ENABLED_CRAG_CONFIG, onStageChange);
 
             expect(stages).toContain('analyzing');
             expect(stages).toContain('searching');
@@ -112,7 +127,7 @@ describe('CRAG Pipeline', () => {
         test('검색 결과가 없으면 incorrect 평가', async () => {
             const searchFn = createMockSearchFn([]);
 
-            const result = await runCRAGPipeline('React 사용법', searchFn);
+            const result = await runCRAGPipeline('React 사용법', searchFn, ENABLED_CRAG_CONFIG);
 
             expect(result.useReferences).toBe(false);
             expect(result.state.evaluation?.grade).toBe('incorrect');
@@ -121,7 +136,7 @@ describe('CRAG Pipeline', () => {
         test('파이프라인 상태 정보 포함', async () => {
             const searchFn = createMockSearchFn(createHighRelevanceResults());
 
-            const result = await runCRAGPipeline('React 사용법', searchFn);
+            const result = await runCRAGPipeline('React 사용법', searchFn, ENABLED_CRAG_CONFIG);
 
             expect(result.state.originalQuery).toBe('React 사용법');
             expect(result.state.searchResults).toHaveLength(2);
@@ -184,6 +199,18 @@ describe('CRAG Pipeline', () => {
             expect(config.relevanceThreshold).toBe(0.7);
             expect(config.ambiguousThreshold).toBe(0.4);
             expect(config.maxRetries).toBe(2);
+        });
+
+        test('threshold 순서 역전 시 기본값으로 fallback', () => {
+            process.env.CRAG_ENABLED = 'true';
+            process.env.CRAG_RELEVANCE_THRESHOLD = '0.3';
+            process.env.CRAG_AMBIGUOUS_THRESHOLD = '0.5';
+
+            const config = loadCRAGConfig();
+
+            // relevance < ambiguous이면 기본값으로 복원
+            expect(config.relevanceThreshold).toBe(0.7);
+            expect(config.ambiguousThreshold).toBe(0.4);
         });
     });
 });

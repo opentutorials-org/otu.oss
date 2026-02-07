@@ -262,10 +262,14 @@ export function loadCRAGConfig(): CRAGConfig {
         return Number.isNaN(parsed) ? fallback : parsed;
     };
 
+    const relevanceThreshold = parseFloatSafe(process.env.CRAG_RELEVANCE_THRESHOLD, 0.7);
+    const ambiguousThreshold = parseFloatSafe(process.env.CRAG_AMBIGUOUS_THRESHOLD, 0.4);
+
     return {
         enabled: process.env.CRAG_ENABLED === 'true',
-        relevanceThreshold: parseFloatSafe(process.env.CRAG_RELEVANCE_THRESHOLD, 0.7),
-        ambiguousThreshold: parseFloatSafe(process.env.CRAG_AMBIGUOUS_THRESHOLD, 0.4),
+        // threshold 순서 보장: relevance > ambiguous (역전 시 기본값 사용)
+        relevanceThreshold: relevanceThreshold > ambiguousThreshold ? relevanceThreshold : 0.7,
+        ambiguousThreshold: relevanceThreshold > ambiguousThreshold ? ambiguousThreshold : 0.4,
         maxRetries: parseIntSafe(process.env.CRAG_MAX_RETRIES, 2),
         adaptiveRoutingEnabled: process.env.CRAG_ADAPTIVE_ROUTING !== 'false',
     };

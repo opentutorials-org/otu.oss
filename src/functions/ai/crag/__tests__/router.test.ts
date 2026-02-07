@@ -49,12 +49,22 @@ describe('CRAG Router', () => {
                 }
             });
 
-            test('장단점 질문은 complex로 분류', () => {
-                expect(classifyQuery('React의 장단점').complexity).toBe('complex');
+            test('장단점 질문은 complex로 분류 (원본 쿼리가 서브쿼리로)', () => {
+                const result = classifyQuery('React의 장단점');
+                expect(result.complexity).toBe('complex');
+                if (result.complexity === 'complex') {
+                    // 비교/관계 패턴이 아닌 경우 원본 쿼리가 서브쿼리로 반환
+                    expect(result.subQueries).toHaveLength(1);
+                    expect(result.subQueries[0]).toBe('React의 장단점');
+                }
             });
 
-            test('종합 분석 질문은 complex로 분류', () => {
-                expect(classifyQuery('프로젝트 전체적으로 요약해줘').complexity).toBe('complex');
+            test('종합 분석 질문은 complex로 분류 (원본 쿼리가 서브쿼리로)', () => {
+                const result = classifyQuery('프로젝트 전체적으로 요약해줘');
+                expect(result.complexity).toBe('complex');
+                if (result.complexity === 'complex') {
+                    expect(result.subQueries).toHaveLength(1);
+                }
             });
         });
 

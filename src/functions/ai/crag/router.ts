@@ -51,9 +51,8 @@ export function classifyQuery(query: string): AdaptiveRoutingResult {
 
     // 2. 복잡 질문 체크
     for (const pattern of COMPLEXITY_PATTERNS.complex) {
-        const match = normalizedQuery.match(pattern);
-        if (match) {
-            const subQueries = extractSubQueries(query, match);
+        if (pattern.test(normalizedQuery)) {
+            const subQueries = extractSubQueries(query);
             return {
                 complexity: 'complex',
                 route: 'multi_step',
@@ -73,27 +72,23 @@ export function classifyQuery(query: string): AdaptiveRoutingResult {
  * 복잡 질문에서 서브 쿼리를 추출합니다.
  *
  * 예: "React와 Vue 비교해줘" → ["React", "Vue"]
+ * 서브쿼리를 추출할 수 없는 경우 원본 쿼리를 반환합니다.
  */
-function extractSubQueries(query: string, match: RegExpMatchArray): string[] {
-    const subQueries: string[] = [];
-
+function extractSubQueries(query: string): string[] {
     // 비교 패턴: A와 B 비교
     const compareMatch = query.match(/(.+?)(와|과|랑)\s*(.+?)\s*(비교|차이|다른\s*점)/);
     if (compareMatch) {
-        subQueries.push(compareMatch[1].trim());
-        subQueries.push(compareMatch[3].trim());
-        return subQueries;
+        return [compareMatch[1].trim(), compareMatch[3].trim()];
     }
 
     // 관계 패턴: A와 B의 관계
     const relationMatch = query.match(/(.+?)(와|과|랑)\s*(.+?)\s*(연결|관계|연관)/);
     if (relationMatch) {
-        subQueries.push(relationMatch[1].trim());
-        subQueries.push(relationMatch[3].trim());
-        return subQueries;
+        return [relationMatch[1].trim(), relationMatch[3].trim()];
     }
 
-    return subQueries;
+    // 서브쿼리를 추출할 수 없으면 원본 쿼리를 단일 항목으로 반환
+    return [query];
 }
 
 /**

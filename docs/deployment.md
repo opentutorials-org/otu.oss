@@ -246,19 +246,23 @@ UPLOADCARE_PRIVATE_KEY=<your-private-key>
 
 ### 전체 환경 변수 목록
 
-| 변수명                                 | 필수              | 설명                                                            |
-| -------------------------------------- | ----------------- | --------------------------------------------------------------- |
-| `NEXT_PUBLIC_SUPABASE_URL`             | O                 | Supabase 프로젝트 URL                                           |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY`        | O                 | Supabase 공개 키                                                |
-| `SUPABASE_SERVICE_ROLE_KEY`            | O                 | Supabase 서비스 역할 키 (서버 전용)                             |
-| `SUPABASE_DATABASE_URL`                | O                 | PostgreSQL 연결 URL (DB 직접 연결 시)                           |
-| `NEXT_PUBLIC_SOCIAL_LOGIN_REDIRECT_TO` | O                 | 소셜 로그인 후 리디렉션 URL                                     |
-| `OPENAI_API_KEY`                       | AI 사용 시 (개발) | OpenAI API 키 (설정 시 AI 자동 활성화, 프로덕션은 Gateway 사용) |
-| `NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY`    | 이미지 업로드 시  | Uploadcare 공개 키                                              |
-| `UPLOADCARE_PRIVATE_KEY`               | 이미지 삭제 시    | Uploadcare 비공개 키                                            |
-| `NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN`      | -                 | 소셜 로그인 표시 여부 (`true`/`false`, 기본값: `false`)         |
-| `CRAG_ENABLED`                         | -                 | CRAG 파이프라인 활성화 (`true`/`false`, 기본값: `false`)        |
-| `LANGFUSE_ENABLED`                     | -                 | Langfuse LLM 모니터링 활성화 (키 미설정 시 자동 비활성화)       |
+| 변수명                                 | 필수              | 설명                                                                |
+| -------------------------------------- | ----------------- | ------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`             | O                 | Supabase 프로젝트 URL                                               |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`        | O                 | Supabase 공개 키                                                    |
+| `SUPABASE_SERVICE_ROLE_KEY`            | O                 | Supabase 서비스 역할 키 (서버 전용)                                 |
+| `SUPABASE_DATABASE_URL`                | O                 | PostgreSQL 연결 URL (DB 직접 연결 시)                               |
+| `NEXT_PUBLIC_SOCIAL_LOGIN_REDIRECT_TO` | O                 | 소셜 로그인 후 리디렉션 URL                                         |
+| `OPENAI_API_KEY`                       | AI 사용 시 (개발) | OpenAI API 키 (설정 시 AI 자동 활성화, 프로덕션은 Gateway 사용)     |
+| `NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY`    | 이미지 업로드 시  | Uploadcare 공개 키                                                  |
+| `UPLOADCARE_PRIVATE_KEY`               | 이미지 삭제 시    | Uploadcare 비공개 키                                                |
+| `NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN`      | -                 | 소셜 로그인 표시 여부 (`true`/`false`, 기본값: `false`)             |
+| `NEXT_PUBLIC_CRAG_ENABLED`             | -                 | 클라이언트 CRAG 파이프라인 활성화 (`true`/`false`, 기본값: `false`) |
+| `CRAG_ENABLED`                         | -                 | 서버 CRAG 파이프라인 활성화 (`true`/`false`, 기본값: `false`)       |
+| `LANGFUSE_ENABLED`                     | -                 | Langfuse LLM 모니터링 활성화 (키 미설정 시 자동 비활성화)           |
+| `LANGFUSE_PUBLIC_KEY`                  | Langfuse 사용 시  | Langfuse 공개 키                                                    |
+| `LANGFUSE_SECRET_KEY`                  | Langfuse 사용 시  | Langfuse 비공개 키                                                  |
+| `LANGFUSE_HOST`                        | -                 | Langfuse 호스트 URL (기본값: `https://cloud.langfuse.com`)          |
 
 ### 환경별 설정 권장 사항
 

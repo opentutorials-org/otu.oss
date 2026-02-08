@@ -30,9 +30,7 @@ jobs:
               run: npm run type-check
 
             - name: Run Jest tests
-              run: npx jest --silent --forceExit --maxWorkers=2 --workerIdleMemoryLimit=512MB
-              env:
-                  NODE_OPTIONS: --max-old-space-size=4096
+              run: npx jest --silent --forceExit --workerIdleMemoryLimit=512MB
 
     build:
         runs-on: ubuntu-latest

@@ -89,8 +89,9 @@ export async function POST(req: Request) {
 
     try {
         // NOTE: 각 엔티티는 개별 Supabase 호출로 처리됩니다.
-        // 중간 실패 시 이미 완료된 작업은 롤백되지 않지만,
-        // 23505 duplicate 핸들링으로 재시도 시 자동 복구됩니다.
+        // 중간 실패 시 이미 완료된 작업은 롤백되지 않습니다.
+        // created 항목은 23505 duplicate 핸들링으로 재시도 시 안전하지만,
+        // updated/deleted 항목의 부분 실패는 자동 복구되지 않습니다.
 
         // 폴더 처리 (folder가 있는 경우에만)
         if (folder) {

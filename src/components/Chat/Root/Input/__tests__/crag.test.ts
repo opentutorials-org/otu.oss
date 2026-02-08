@@ -1,7 +1,7 @@
 /**
  * @jest-environment node
  */
-import { describe, test, expect, beforeEach, jest } from '@jest/globals';
+import { describe, test, expect, beforeEach, afterAll, jest } from '@jest/globals';
 import { testLogger } from '@/debug/test';
 import { runCRAGPipeline, DEFAULT_CRAG_CONFIG } from '@/functions/ai/crag';
 import type { similarityResponse } from '@/lib/jotai';

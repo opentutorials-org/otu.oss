@@ -69,6 +69,7 @@ export async function POST(req: Request) {
         const embeddings = await createEmbedding(body.inputMessage);
         embedQuery = embeddings.embeddings[0];
     } catch (error) {
+        trace.complete().catch(() => {});
         return errorResponse(
             {
                 status: 500,
@@ -92,6 +93,7 @@ export async function POST(req: Request) {
     };
     const result = await supabase.rpc('match_documents', match_documents_options);
     if (result.error) {
+        trace.complete().catch(() => {});
         return errorResponse(
             {
                 message: i18n._(
@@ -102,18 +104,23 @@ export async function POST(req: Request) {
         );
     }
 
-    // Langfuse 검색 단계 트레이싱
-    const searchResults = result.data ?? [];
-    trace.logRetrieval({
-        query: body.inputMessage,
-        resultCount: searchResults.length,
-        latencyMs: Date.now() - searchStartTime,
-        results: searchResults.slice(0, 3).map((r: any) => ({
-            content: (r.content ?? '').substring(0, 100),
-            similarity: r.similarity ?? 0,
-        })),
-    });
-    trace.complete().catch(() => {});
+    // Langfuse 검색 단계 트레이싱 - 실패해도 검색 결과 반환에 영향 없음
+    try {
+        const searchResults = result.data ?? [];
+        trace.logRetrieval({
+            query: body.inputMessage,
+            resultCount: searchResults.length,
+            latencyMs: Date.now() - searchStartTime,
+            results: searchResults.slice(0, 3).map((r: any) => ({
+                content: (r.content ?? '').substring(0, 100),
+                similarity: r.similarity ?? 0,
+            })),
+        });
+    } catch (error) {
+        chatLogger('Langfuse tracing failed (non-critical):', error);
+    } finally {
+        trace.complete().catch(() => {});
+    }
 
     return new Response(JSON.stringify(result), {
         headers: { 'Content-Type': 'application/json' },

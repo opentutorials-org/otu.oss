@@ -102,24 +102,28 @@ export async function POST(req: NextRequest) {
             messages: coreMessages,
             onFinish: ({ text, usage }) => {
                 const latencyMs = Date.now() - startTime;
-                traceLLMCall({
-                    userId,
-                    model: modelName,
-                    prompt: prompt,
-                    completion: text,
-                    usage: usage
-                        ? {
-                              promptTokens: usage.inputTokens ?? 0,
-                              completionTokens: usage.outputTokens ?? 0,
-                              totalTokens: usage.totalTokens ?? 0,
-                          }
-                        : undefined,
-                    latencyMs,
-                    metadata: {
-                        referenceCount: references?.length ?? 0,
-                        historyLength: history?.length ?? 0,
-                    },
-                });
+                try {
+                    traceLLMCall({
+                        userId,
+                        model: modelName,
+                        prompt,
+                        completion: text,
+                        usage: usage
+                            ? {
+                                  promptTokens: usage.inputTokens ?? 0,
+                                  completionTokens: usage.outputTokens ?? 0,
+                                  totalTokens: usage.totalTokens ?? 0,
+                              }
+                            : undefined,
+                        latencyMs,
+                        metadata: {
+                            referenceCount: references?.length ?? 0,
+                            historyLength: history?.length ?? 0,
+                        },
+                    });
+                } catch (error) {
+                    aiLogger('Langfuse tracing failed in onFinish:', error);
+                }
                 aiLogger(`Completed: ${latencyMs}ms, tokens: ${usage?.totalTokens ?? 'N/A'}`);
             },
         });

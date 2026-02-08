@@ -115,27 +115,21 @@ export default function Input({ showScrollButton }: { showScrollButton: boolean 
 
         let result: similarityResponse[];
         try {
-            if (cragConfig.enabled) {
-                // CRAG 파이프라인을 통한 검색 (평가 + 재시도 포함)
-                const searchFn = (q: string) => getSimilarity(q, page_id);
-                const cragResult = await runCRAGPipeline(
-                    message,
-                    searchFn,
-                    cragConfig,
-                    (stage: CRAGStage) => {
-                        chatLogger('runReference', 'CRAG stage', stage);
-                    }
-                );
-                chatLogger('runReference', 'CRAG result', {
-                    route: cragResult.route,
-                    useReferences: cragResult.useReferences,
-                    grade: cragResult.state.evaluation?.grade,
-                });
-                result = cragResult.useReferences ? cragResult.results : [];
-            } else {
-                // 기존 직접 검색
-                result = await getSimilarity(message, page_id);
-            }
+            const searchFn = (q: string) => getSimilarity(q, page_id);
+            const cragResult = await runCRAGPipeline(
+                message,
+                searchFn,
+                cragConfig,
+                (stage: CRAGStage) => {
+                    chatLogger('runReference', 'CRAG stage', stage);
+                }
+            );
+            chatLogger('runReference', 'CRAG result', {
+                route: cragResult.route,
+                useReferences: cragResult.useReferences,
+                grade: cragResult.state.evaluation?.grade,
+            });
+            result = cragResult.useReferences ? cragResult.results : [];
         } catch (error) {
             chatLogger('runReference', 'error', error);
             return [];

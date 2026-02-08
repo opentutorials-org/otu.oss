@@ -54,6 +54,7 @@ export function loadLangfuseConfig(): LangfuseConfig {
 // 싱글톤 Langfuse 인스턴스
 let langfuseInstance: Langfuse | null = null;
 let langfuseConfig: LangfuseConfig | null = null;
+let initWarned = false;
 
 /**
  * Langfuse 인스턴스를 가져옵니다.
@@ -76,6 +77,13 @@ export function getLangfuse(): Langfuse | null {
                 baseUrl: langfuseConfig.baseUrl,
             });
         } catch (error) {
+            if (!initWarned) {
+                console.warn(
+                    '[Langfuse] Initialization failed, tracing disabled:',
+                    (error as Error)?.message
+                );
+                initWarned = true;
+            }
             aiLogger('Langfuse initialization failed: %s', (error as Error)?.message);
             return null;
         }
@@ -151,8 +159,14 @@ export function withLangfuse(callback: (langfuse: Langfuse) => void): void {
  */
 export async function shutdownLangfuse(): Promise<void> {
     if (langfuseInstance) {
-        await langfuseInstance.shutdownAsync();
-        langfuseInstance = null;
+        try {
+            await langfuseInstance.shutdownAsync();
+        } catch (error) {
+            aiLogger('Langfuse shutdown failed: %s', (error as Error)?.message);
+        } finally {
+            langfuseInstance = null;
+        }
     }
     langfuseConfig = null;
+    initWarned = false;
 }

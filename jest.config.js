@@ -46,7 +46,9 @@ const customJestConfig = {
         'updateNotificationIdsBatch\.test\.ts',
         'calculate_progressive_interval\.test\.ts',
         'withdraw/__tests__/route\.test\.ts',
-        'langfuse/__tests__/',
+        'langfuse/__tests__/config\.test\.ts',
+        'langfuse/__tests__/tracing\.test\.ts',
+        'langfuse/__tests__/metrics\.test\.ts',
         'langfuse\.test\.ts',
     ],
     testTimeout: 30000, // 30초

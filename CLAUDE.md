@@ -76,7 +76,7 @@ Cursor IDE 사용 시에만 `.cursor/rules/*.mdc` 파일들을 추가로 참고�
 - Supabase (DB/Auth), WatermelonDB 0.28.0 (로컬 동기화)
 - Jotai 2.11.3 (상태 관리), Material-UI 7.3.7 (UI)
 - BlockNote 0.46.2 (에디터), OpenAI (AI 기능)
-- Langfuse 3.x (AI 트레이싱/메트릭), Langchain (CRAG 평가)
+- Langfuse 3.x (AI 트레이싱/메트릭), Langchain (텍스트 분할)
 - React Router DOM 7.8.2 (홈 영역 내비게이션)
 - Vercel AI Gateway (AI API 표준화)
 - **Jest 30.0.4** (테스트 프레임워크) - ⚠️ Vitest 아님!
@@ -84,24 +84,12 @@ Cursor IDE 사용 시에만 `.cursor/rules/*.mdc` 파일들을 추가로 참고�
 
 ### 주요 명령어
 
-```bash
-# 개발
-npm run dev                  # 개발 서버
-npm run dev:ip              # 모바일 테스트용
+기본 명령어는 [README.md](README.md#주요-명령어) 참조. 아래는 AI/코드 품질 관련 추가 정보:
 
-# 코드 품질 (Jest 사용, Vitest 아님!)
-npm run test                # Jest 단위 테스트
-npm run test:e2e            # Playwright E2E 테스트
-npm run test:all            # 단위 + E2E 전체 테스트
-npm run test:integration    # 통합 테스트 (로컬 Supabase 필요)
-npm run type-check          # 타입 체킹
-npm run prettier            # Prettier 포맷팅 적용
-
-# 빌드/배포
-npm run build
-npm run deploy_preview      # 개발 환경 배포
-npm run deploy              # 프로덕션 배포
-```
+- ⚠️ 테스트 프레임워크는 **Jest** (Vitest 아님!)
+- `npm run test:integration` — 로컬 Supabase 필요
+- `npm run prettier` — 코드 작성 후 반드시 실행
+- `npm run type-check` — 커밋 전 반드시 실행
 
 ## 아키텍처
 
@@ -119,6 +107,7 @@ app/
 │   ├── error/               # 에러 페이지
 │   ├── test/                # 테스트 페이지
 │   └── ~fallback/           # 폴백 라우트
+├── add/                     # 빠른 메모 추가 ([title] 동적 라우트)
 ├── api/                     # API 라우트
 │   ├── ai/                  # AI 엔드포인트
 │   ├── sync/                # 데이터 동기화
@@ -129,6 +118,10 @@ app/
 │   ├── refresh_token_check/ # 토큰 갱신 체크
 │   └── test/                # 테스트 엔드포인트
 ├── auth/                    # 인증 관련
+├── bye/                     # 회원 탈퇴 완료
+├── login/                   # 로그인 페이지
+├── login-callback/          # OAuth 콜백 (레거시 호환)
+├── p/                       # 페이지 단축 URL
 └── share/                   # 페이지 공유 UI
 
 src/
@@ -233,36 +226,15 @@ e2e/                   # Playwright E2E 테스트
     - Evaluator → Router → Pipeline 구조
     - 환경변수 `NEXT_PUBLIC_CRAG_ENABLED`로 클라이언트 활성화
 - **Langfuse**: AI 호출 트레이싱 및 메트릭 수집
-    - Fire-and-forget 패턴 (`.catch(() => {})`)으로 앱 성능에 영향 없음
+    - `withLangfuse()` 헬퍼로 가드 + 에러 처리 + flush를 공통 처리
+    - Fire-and-forget 패턴으로 앱 성능에 영향 없음
     - 키 미설정 시 자동 비활성화 (no-op)
 
 ## 코드 스타일
 
 ### Prettier 포맷팅 (필수)
 
-⚠️ **중요**: 이 프로젝트는 Prettier 포맷팅을 엄격하게 준수합니다.
-
-**작업 전 반드시 확인**:
-
-```bash
-npm run prettier    # 모든 파일 포맷팅 적용
-```
-
-**Prettier 설정** (`.prettierrc`):
-
-- `printWidth: 100` - 한 줄 최대 100자
-- `tabWidth: 4` - 들여쓰기 4칸
-- `useTabs: false` - 스페이스 사용
-- `semi: true` - 세미콜론 필수
-- `singleQuote: true` - 싱글 쿼트 사용
-- `trailingComma: 'es5'` - ES5 호환 trailing comma
-- `arrowParens: 'always'` - 화살표 함수 괄호 항상 사용
-
-**작업 규칙**:
-
-1. 코드 작성 후 `npm run prettier` 실행
-2. 커밋 전 포맷팅 확인
-3. IDE에 Prettier 플러그인 설정 권장 (저장 시 자동 포맷팅)
+⚠️ 코드 작성 후 반드시 `npm run prettier` 실행. 설정값은 `.prettierrc` 참조.
 
 ### 컴포넌트
 
@@ -347,9 +319,7 @@ return errorResponse(
 
 ### 브랜치 전략
 
-- `main`: 프로덕션 (직접 개발 금지)
-- `dev`: 개발 브랜치
-- `feature/*`: 기능 브랜치
+[README.md](README.md#브랜치-전략) 참조. `main` 직접 개발 금지.
 
 ### 데이터베이스
 
@@ -359,17 +329,10 @@ return errorResponse(
 
 ### 환경 변수
 
+필수/AI 환경 변수는 [README.md](README.md#환경-변수) 참조. 아래는 AI 전용 추가 설정:
+
 ```bash
-# 필수
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-
-# AI 설정 (선택)
-OPENAI_API_KEY=                 # 설정 시 AI 기능 자동 활성화 (개발 환경)
-# 프로덕션에서는 Vercel AI Gateway를 통해 AI 및 임베딩 기능이 제공됩니다.
-
-# CRAG 설정 (선택 - AI 기능 활성화 시 RAG 품질 개선)
+# CRAG 설정 (선택 - RAG 품질 개선)
 # NEXT_PUBLIC_CRAG_ENABLED=true  # 클라이언트 CRAG 파이프라인 (기본값: false)
 # CRAG_ENABLED=true              # 서버 CRAG 파이프라인 (기본값: false)
 

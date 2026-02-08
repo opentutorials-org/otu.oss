@@ -21,6 +21,11 @@ class ReminderScheduler {
         this.supabase = createSuperClient();
     }
 
+    /**
+     * TODO: process_alarms_atomically DB 함수를 호출하여 실제 알람 처리를 구현해야 합니다.
+     * 현재는 로그만 남기는 stub 구현입니다.
+     * @see supabase/migrations/20230807000000_initial_schema.sql (process_alarms_atomically)
+     */
     async schedule(): Promise<void> {
         try {
             // 1. 다음 정각 시간 계산
@@ -31,7 +36,7 @@ class ReminderScheduler {
             });
 
             // 2. 스케줄러 실행 로그
-            alarmLogger(this.config.requestId, '스케줄러 실행 중...', {
+            alarmLogger(this.config.requestId, '스케줄러 실행 중 (stub - 실제 처리 미구현)', {
                 timestamp: new Date().toISOString(),
                 nextHour: nextHourISO,
             });

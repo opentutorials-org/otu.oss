@@ -14,34 +14,26 @@ export function isOpenAIConfigured(): boolean {
 
 /**
  * AI 기능이 활성화되어 있는지 확인
- * 개발 환경에서는 OPENAI_API_KEY가 설정되어 있으면 활성화
  * 프로덕션에서는 Vercel AI Gateway를 사용하므로 항상 활성화
+ * 그 외 환경(development, test)에서는 OPENAI_API_KEY가 설정되어 있어야 활성화
  */
 export function isAIEnabled(): boolean {
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (isDevelopment) {
-        return isOpenAIConfigured();
-    }
-    // 프로덕션에서는 Gateway를 사용하므로 항상 활성화
-    return true;
+    if (process.env.NODE_ENV === 'production') return true;
+    return isOpenAIConfigured();
 }
 
 /**
  * 임베딩 API가 설정되어 있는지 확인
- * 개발 환경에서는 OpenAI API 키, 프로덕션에서는 Vercel AI Gateway 사용
+ * 프로덕션에서는 Vercel AI Gateway, 그 외에서는 OpenAI API 키 필요
  */
 export function isEmbeddingConfigured(): boolean {
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (isDevelopment) {
-        return isOpenAIConfigured();
-    }
-    // 프로덕션에서는 Gateway를 사용하므로 항상 true
-    return true;
+    if (process.env.NODE_ENV === 'production') return true;
+    return isOpenAIConfigured();
 }
 
 /**
  * AI 기능을 사용할 수 있는지 확인
- * 개발 환경에서는 OPENAI_API_KEY 필요, 프로덕션에서는 Gateway 사용으로 항상 가능
+ * 현재 isAIEnabled()와 동일하지만, 향후 추가 조건(할당량 등) 확장을 위해 유지
  */
 export function canUseAI(): boolean {
     return isAIEnabled();
@@ -56,14 +48,12 @@ export function canUseEmbeddings(): boolean {
 
 /**
  * AI 비활성화 이유를 반환
+ * AI가 활성화되어 있으면 null을 반환
  */
-export function getAIDisabledReason(): string {
-    if (isAIEnabled()) {
-        return 'UNKNOWN';
-    }
+export function getAIDisabledReason(): string | null {
+    if (isAIEnabled()) return null;
 
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (isDevelopment && !isOpenAIConfigured()) {
+    if (!isOpenAIConfigured()) {
         return 'OPENAI_API_KEY_NOT_SET';
     }
 
@@ -72,14 +62,12 @@ export function getAIDisabledReason(): string {
 
 /**
  * 임베딩 비활성화 이유를 반환
+ * 임베딩이 활성화되어 있으면 null을 반환
  */
-export function getEmbeddingsDisabledReason(): string {
-    if (isAIEnabled()) {
-        return 'UNKNOWN';
-    }
+export function getEmbeddingsDisabledReason(): string | null {
+    if (canUseEmbeddings()) return null;
 
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    if (isDevelopment && !isOpenAIConfigured()) {
+    if (!isOpenAIConfigured()) {
         return 'OPENAI_API_KEY_NOT_SET';
     }
 

@@ -18,7 +18,12 @@ function withLangfuse(callback: (langfuse: Langfuse) => void): void {
     const langfuse = getLangfuse();
     if (!langfuse) return;
 
-    callback(langfuse);
+    try {
+        callback(langfuse);
+    } catch (error) {
+        aiLogger('Langfuse callback error: %s', (error as Error)?.message);
+        return;
+    }
 
     langfuse.flushAsync().catch((error) => {
         aiLogger('Langfuse flush failed: %s', error?.message);

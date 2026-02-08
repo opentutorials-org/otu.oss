@@ -179,34 +179,11 @@ npm run prettier
 
 ### Prettier 포맷팅 (필수)
 
-이 프로젝트는 Prettier를 사용합니다. 코드 작성 후 반드시 포맷팅을 적용하세요.
-
-```bash
-npm run prettier
-```
-
-### Prettier 설정
-
-- `printWidth: 100` - 한 줄 최대 100자
-- `tabWidth: 4` - 들여쓰기 4칸
-- `useTabs: false` - 스페이스 사용
-- `semi: true` - 세미콜론 필수
-- `singleQuote: true` - 싱글 쿼트 사용
-- `trailingComma: 'es5'` - ES5 호환 trailing comma
+코드 작성 후 반드시 `npm run prettier`를 실행하세요. 설정값은 `.prettierrc` 파일을 참조하세요.
 
 ### TypeScript 컴포넌트 패턴
 
-```typescript
-function ComponentName(): JSX.Element {
-    const [isLoading, setIsLoading] = useState(false);
-
-    const handleClick = (): void => {
-        // 구현
-    };
-
-    return <Box sx={{ padding: 2 }}>{/* 콘텐츠 */}</Box>;
-}
-```
+컴포넌트 작성 패턴은 [CLAUDE.md](../CLAUDE.md#컴포넌트)를 참조하세요.
 
 ### 다국어 처리
 

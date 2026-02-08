@@ -17,6 +17,7 @@ import { msg } from '@lingui/core/macro';
 import { logHeader } from '@/functions/api/logHeader';
 import { parseLocaleFromAcceptLanguage } from '@/functions/constants';
 import { canUseAI, getAIDisabledReason } from '@/functions/ai/config';
+import { traceLLMCall } from '@/functions/ai/langfuse';
 
 export const runtime = 'edge';
 export const maxDuration = 60;
@@ -93,9 +94,38 @@ export async function POST(req: NextRequest) {
             ? createOpenAI({ apiKey: process.env.OPENAI_API_KEY })('gpt-4o')
             : gateway(TEXT_MODEL_NAME);
 
+        const userId = user.data.user?.id ?? 'anonymous';
+        const modelName = isDevelopment ? 'gpt-4o' : TEXT_MODEL_NAME;
+
         const result = streamText({
             model: model as any,
             messages: coreMessages,
+            onFinish: ({ text, usage }) => {
+                const latencyMs = Date.now() - startTime;
+                try {
+                    traceLLMCall({
+                        userId,
+                        model: modelName,
+                        prompt,
+                        completion: text,
+                        usage: usage
+                            ? {
+                                  promptTokens: usage.inputTokens ?? 0,
+                                  completionTokens: usage.outputTokens ?? 0,
+                                  totalTokens: usage.totalTokens ?? 0,
+                              }
+                            : undefined,
+                        latencyMs,
+                        metadata: {
+                            referenceCount: references?.length ?? 0,
+                            historyLength: history?.length ?? 0,
+                        },
+                    });
+                } catch (error) {
+                    aiLogger('Langfuse tracing failed in onFinish:', error);
+                }
+                aiLogger(`Completed: ${latencyMs}ms, tokens: ${usage?.totalTokens ?? 'N/A'}`);
+            },
         });
 
         return result.toTextStreamResponse();

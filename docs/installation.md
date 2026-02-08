@@ -71,7 +71,7 @@ NEXT_PUBLIC_SOCIAL_LOGIN_REDIRECT_TO=http://localhost:3000
 # OAuth 앱 설정이 완료된 경우에만 true로 설정하세요.
 NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN=false       # true: Google/GitHub/Apple 로그인 표시
 
-# CRAG (Corrective RAG) 설정 (선택 - ENABLE_AI=true일 때 RAG 품질 개선)
+# CRAG (Corrective RAG) 설정 (선택 - AI 기능 활성화 시 RAG 품질 개선)
 # NEXT_PUBLIC_CRAG_ENABLED=true       # 클라이언트 CRAG 파이프라인 활성화 (기본값: false)
 # CRAG_ENABLED=true                   # 서버 CRAG 파이프라인 활성화 (기본값: false)
 

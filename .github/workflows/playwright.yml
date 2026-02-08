@@ -8,6 +8,9 @@ jobs:
     test:
         timeout-minutes: 60
         runs-on: ubuntu-latest
+        # Playwright E2E 테스트는 로컬 Supabase가 필요하므로
+        # PLAYWRIGHT_ENABLED 시크릿이 설정된 환경에서만 실행
+        if: ${{ vars.PLAYWRIGHT_ENABLED == 'true' }}
         steps:
             - uses: actions/checkout@v4
             - name: Check for E2E test files
@@ -25,13 +28,16 @@ jobs:
                   node-version: lts/*
             - name: Install dependencies
               if: steps.check-tests.outputs.has_tests == 'true'
-              run: npm ci
+              run: npm install
             - name: Install Playwright Browsers
               if: steps.check-tests.outputs.has_tests == 'true'
               run: npx playwright install --with-deps
             - name: Run Playwright tests
               if: steps.check-tests.outputs.has_tests == 'true'
               run: npx playwright test
+              env:
+                  NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+                  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
             - uses: actions/upload-artifact@v4
               if: ${{ !cancelled() && steps.check-tests.outputs.has_tests == 'true' }}
               with:

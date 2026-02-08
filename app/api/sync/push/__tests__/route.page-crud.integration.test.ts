@@ -10,9 +10,6 @@
 import { createSuperClient } from '@/supabase/utils/super';
 import { testLogger } from '@/debug/test';
 
-// route.ts 로드시 필요한 환경변수 세팅
-process.env.NEXT_PUBLIC_HOST = process.env.NEXT_PUBLIC_HOST || 'http://localhost:3000';
-
 const skipDatabaseTests = process.env.SKIP_DATABASE_TESTS === 'true';
 
 describe('Sync Push Route Integration - 페이지 CRUD', () => {

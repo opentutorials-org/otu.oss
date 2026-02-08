@@ -22,7 +22,7 @@ export function AIDisabledBanner() {
             <div className="text-sm text-yellow-800 dark:text-yellow-200">
                 <p className="font-medium">{t`AI 기능 비활성화`}</p>
                 <p className="mt-1 text-yellow-700 dark:text-yellow-300">
-                    {t`AI 기능이 비활성화되어 있습니다. AI 기능을 사용하려면 환경 변수 설정이 필요합니다. (ENABLE_AI=true, OPENAI_API_KEY) 메모 기능은 정상적으로 사용할 수 있습니다.`}
+                    {t`AI 기능이 비활성화되어 있습니다. AI 기능을 사용하려면 OPENAI_API_KEY 환경 변수 설정이 필요합니다. 메모 기능은 정상적으로 사용할 수 있습니다.`}
                 </p>
             </div>
         </div>

@@ -210,7 +210,7 @@ msgid "AI 기능 비활성화"
 msgstr ""
 
 #: src/components/Chat/Root/AIDisabledBanner.tsx
-msgid "AI 기능이 비활성화되어 있습니다. AI 기능을 사용하려면 환경 변수 설정이 필요합니다. (ENABLE_AI=true, OPENAI_API_KEY) 메모 기능은 정상적으로 사용할 수 있습니다."
+msgid "AI 기능이 비활성화되어 있습니다. AI 기능을 사용하려면 OPENAI_API_KEY 환경 변수 설정이 필요합니다. 메모 기능은 정상적으로 사용할 수 있습니다."
 msgstr ""
 
 #: app/api/ai/askLLM/openai/route.tsx

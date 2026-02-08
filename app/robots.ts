@@ -1,14 +1,14 @@
 import type { MetadataRoute } from 'next';
+import { getAppUrl } from '@/functions/utils/getAppUrl';
 
-const APP_URL = process.env.NEXT_PUBLIC_HOST || 'https://otu.ai';
-
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+    const appUrl = await getAppUrl();
     return {
         rules: {
             userAgent: '*',
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: `${APP_URL}/sitemap.xml`,
+        sitemap: `${appUrl}/sitemap.xml`,
     };
 }

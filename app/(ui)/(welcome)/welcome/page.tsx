@@ -19,7 +19,9 @@ import { isReactNativeWebView } from '@/functions/env/detectEnvironment';
 import { openExternalLink } from '@/utils/openExternalLink';
 import { GlobeAmericasIcon } from '@heroicons/react/24/solid';
 
-const APP_URL = process.env.NEXT_PUBLIC_HOST || 'https://otu.ai';
+function getAppUrl() {
+    return typeof window !== 'undefined' ? window.location.origin : 'https://otu.ai';
+}
 
 // const Slogan = lazy(() => import('@/public/etc/slogan'));
 
@@ -105,7 +107,7 @@ function Top() {
 
                     <Btn
                         onClick={() => {
-                            openExternalLink(`${APP_URL}/welcome`);
+                            openExternalLink(`${getAppUrl()}/welcome`);
                         }}
                     >
                         <GlobeAmericasIcon className="w-[20px] mr-1" />
@@ -241,7 +243,7 @@ function Content() {
                                     opentutorials.org
                                 </a>
                                 와 메모 서비스{' '}
-                                <a className="underline" href={APP_URL}>
+                                <a className="underline" href={getAppUrl()}>
                                     OTU
                                 </a>{' '}
                                 등이 있습니다.

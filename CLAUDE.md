@@ -147,7 +147,7 @@ src/
 ├── hooks/             # 커스텀 React 훅 (useSync, useNavigation 등)
 │
 ├── functions/         # 도메인별 비즈니스 로직
-│   ├── ai/            # AI 서비스 (임베딩, 타이틀링)
+│   ├── ai/            # AI 서비스 (임베딩, 타이틀링, CRAG, Langfuse 트레이싱)
 │   ├── api/           # API 응답 헬퍼 (response, error)
 │   ├── auth/          # 인증 관련 (requireLogin, checkSuperuser)
 │   ├── env/           # 환경 탐지 (detectEnvironment, isMobile)
@@ -340,8 +340,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 
 # AI 설정 (선택)
-ENABLE_AI=false                 # AI 기능 활성화 여부 (true: 활성화, false: 비활성화, 기본값 false)
-OPENAI_API_KEY=                 # ENABLE_AI=true일 때 필요 (개발 환경)
+OPENAI_API_KEY=                 # 설정 시 AI 기능 자동 활성화 (개발 환경)
 # 프로덕션에서는 Vercel AI Gateway를 통해 AI 및 임베딩 기능이 제공됩니다.
 
 # 디버그 설정 (선택)

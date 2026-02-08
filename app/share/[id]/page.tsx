@@ -8,8 +8,7 @@ import { publishLogger } from '@/debug/publish';
 import { getServerI18n } from '@/lib/lingui';
 import { msg } from '@lingui/core/macro';
 import { parseLocaleFromAcceptLanguage } from '@/functions/constants';
-
-const APP_URL = process.env.NEXT_PUBLIC_HOST || 'https://otu.ai';
+import { getAppUrl } from '@/functions/utils/getAppUrl';
 
 /*
 아래와 같이 스타일을 작업해줘. 
@@ -116,7 +115,7 @@ export async function generateMetadata(props: {
                 title: page.title || defaultTitle,
                 description: description || defaultDescription,
                 type: 'article',
-                url: `${APP_URL}/share/${params.id}`,
+                url: `${await getAppUrl()}/share/${params.id}`,
             },
             twitter: {
                 card: 'summary_large_image',

@@ -54,7 +54,7 @@ npm install
 cp .env.template .env.local
 ```
 
-> **참고**: AI 기능 없이도 대부분의 작업이 가능합니다. `.env.local`에서 `ENABLE_AI=false`로 설정하세요.
+> **참고**: AI 기능 없이도 대부분의 작업이 가능합니다. `OPENAI_API_KEY`를 설정하지 않으면 AI 기능이 비활성화됩니다.
 
 #### 3단계: 이슈 선택 및 할당
 

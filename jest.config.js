@@ -35,6 +35,8 @@ const customJestConfig = {
     ],
     // DB 의존 통합 테스트 제외 (npm run test:integration으로 별도 실행)
     // 오픈소스 환경에서는 Supabase 없이 기본 테스트 실행 가능해야 함
+    // Langfuse 테스트 제외 — SDK 의존성이 워커 메모리(512MB+) 초과하여 CI에서 OOM 발생
+    // 로컬에서 개별 실행: npx jest src/functions/ai/langfuse/__tests__/<파일>.test.ts --forceExit
     testPathIgnorePatterns: [
         '/node_modules/',
         '\.integration\.test\.',
@@ -44,6 +46,7 @@ const customJestConfig = {
         'updateNotificationIdsBatch\.test\.ts',
         'calculate_progressive_interval\.test\.ts',
         'withdraw/__tests__/route\.test\.ts',
+        'langfuse/__tests__/',
     ],
     testTimeout: 30000, // 30초
 };

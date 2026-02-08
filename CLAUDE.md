@@ -76,7 +76,7 @@ Cursor IDE 사용 시에만 `.cursor/rules/*.mdc` 파일들을 추가로 참고�
 - Supabase (DB/Auth), WatermelonDB 0.28.0 (로컬 동기화)
 - Jotai 2.11.3 (상태 관리), Material-UI 7.3.7 (UI)
 - BlockNote 0.46.2 (에디터), OpenAI (AI 기능)
-- Langfuse 3.x (AI 트레이싱/메트릭), Langchain (CRAG 평가)
+- Langfuse 3.x (AI 트레이싱/메트릭), Langchain (텍스트 분할)
 - React Router DOM 7.8.2 (홈 영역 내비게이션)
 - Vercel AI Gateway (AI API 표준화)
 - **Jest 30.0.4** (테스트 프레임워크) - ⚠️ Vitest 아님!
@@ -233,7 +233,8 @@ e2e/                   # Playwright E2E 테스트
     - Evaluator → Router → Pipeline 구조
     - 환경변수 `NEXT_PUBLIC_CRAG_ENABLED`로 클라이언트 활성화
 - **Langfuse**: AI 호출 트레이싱 및 메트릭 수집
-    - Fire-and-forget 패턴 (`.catch(() => {})`)으로 앱 성능에 영향 없음
+    - `withLangfuse()` 헬퍼로 가드 + 에러 처리 + flush를 공통 처리
+    - Fire-and-forget 패턴으로 앱 성능에 영향 없음
     - 키 미설정 시 자동 비활성화 (no-op)
 
 ## 코드 스타일

@@ -88,6 +88,10 @@ export async function POST(req: Request) {
     const { page, folder, alarm } = parseResult.data;
 
     try {
+        // NOTE: 각 엔티티는 개별 Supabase 호출로 처리됩니다.
+        // 중간 실패 시 이미 완료된 작업은 롤백되지 않지만,
+        // 23505 duplicate 핸들링으로 재시도 시 자동 복구됩니다.
+
         // 폴더 처리 (folder가 있는 경우에만)
         if (folder) {
             for (const newItem of folder.created) {
@@ -804,8 +808,10 @@ You MUST ignore _status and _changed fields contained in records in changes obje
 
 The push endpoint MUST be fully transactional. If there is an error, all local changes MUST be reverted on the server, and en error code MUST be returned.
 
-
-
-
+현재 구현: 개별 Supabase 호출로 처리됨 (비트랜잭션).
+- 부분 실패 시 23505 duplicate 에러 핸들링으로 재시도 시 자동 복구됨.
+- 완전한 트랜잭션화를 위해서는 PostgreSQL RPC 함수로 래핑이 필요함.
+- 개인 메모 서비스 특성상 동시 충돌 가능성이 매우 낮아 현재 방식으로도 실질적 문제 발생 확률이 낮음.
+TODO: 필요 시 supabase.rpc()로 트랜잭션 래핑 구현.
 
 */

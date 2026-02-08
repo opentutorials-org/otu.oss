@@ -21,8 +21,16 @@ function getUserIp(request: NextRequest): string {
     return ipAddress(request) || '0.0.0.0'; // 기본값으로 '0.0.0.0' 반환
 }
 
+// optimizeTokenFragments 반환 타입
+interface TokenOptimizationResult {
+    cookies: Array<{ name: string; value: string }>;
+    invalidFragmentNames: string[];
+}
+
 // 토큰 조각을 점진적으로 파싱하는 함수
-function optimizeTokenFragments(cookies: Array<{ name: string; value: string }>) {
+function optimizeTokenFragments(
+    cookies: Array<{ name: string; value: string }>
+): TokenOptimizationResult {
     cookieLogger('토큰 조각 최적화 시작');
 
     // Supabase auth-token 조각들 찾기
@@ -31,7 +39,7 @@ function optimizeTokenFragments(cookies: Array<{ name: string; value: string }>)
 
     if (authTokenCookies.length === 0) {
         cookieLogger('auth-token 조각이 없어 최적화 건너뜀');
-        return cookies;
+        return { cookies, invalidFragmentNames: [] };
     }
 
     // 조각들을 번호 순으로 정렬
@@ -94,9 +102,9 @@ function optimizeTokenFragments(cookies: Array<{ name: string; value: string }>)
             `🔧 토큰 조각 최적화: ${authTokenCookies.length}개 → ${validFragments.length}개`
         );
 
-        // 🔥 불필요한 조각들을 글로벌에 기록 (나중에 삭제하기 위해)
+        // 불필요한 조각 이름을 반환값으로 전달 (global 변수 사용 제거)
         const invalidFragments = authTokenCookies.slice(validFragments.length);
-        (global as any).invalidTokenFragments = invalidFragments.map((f) => f.name);
+        const invalidFragmentNames = invalidFragments.map((f) => f.name);
 
         invalidFragments.forEach((fragment) => {
             cookieLogger(`🗑️ 더미 조각 삭제 예약: ${fragment.name}`);
@@ -112,14 +120,14 @@ function optimizeTokenFragments(cookies: Array<{ name: string; value: string }>)
         });
 
         cookieLogger(`최종 쿠키 개수: ${cookies.length} → ${optimizedCookies.length}`);
-        cookieLogger(`🎯 삭제 예약된 더미 조각: ${invalidFragments.length}개`);
-        return optimizedCookies;
+        cookieLogger(`🎯 삭제 예약된 더미 조각: ${invalidFragmentNames.length}개`);
+        return { cookies: optimizedCookies, invalidFragmentNames };
     } else if (validFragments.length === 0) {
         cookieLogger('⚠️ 유효한 토큰 조각을 찾을 수 없음 - 원본 유지');
-        return cookies;
+        return { cookies, invalidFragmentNames: [] };
     } else {
         cookieLogger('모든 조각이 필요함 - 최적화 불필요');
-        return cookies;
+        return { cookies, invalidFragmentNames: [] };
     }
 }
 
@@ -128,6 +136,9 @@ export async function updateSession(request: NextRequest) {
     const cookieStore = await cookies();
     authLogger('updateSession', { path: request.nextUrl.pathname });
     authLogger('debug', process.env.DEBUG, debug);
+
+    // 요청 스코프 변수: global 대신 사용하여 race condition 방지
+    let invalidFragmentNamesToDelete: string[] = [];
 
     let supabaseResponse = NextResponse.next({
         request,
@@ -148,13 +159,14 @@ export async function updateSession(request: NextRequest) {
                         const rawData = request.cookies.getAll();
                         cookieLogger('getAll 시작 - 원본 쿠키 개수:', rawData.length);
 
-                        // 🔥 토큰 조각 최적화 적용
-                        const optimizedData = optimizeTokenFragments(rawData);
-                        cookieLogger('getAll - 최적화 후 쿠키 개수:', optimizedData.length);
+                        // 토큰 조각 최적화 적용 (결과를 요청 스코프 변수에 저장)
+                        const result = optimizeTokenFragments(rawData);
+                        invalidFragmentNamesToDelete = result.invalidFragmentNames;
+                        cookieLogger('getAll - 최적화 후 쿠키 개수:', result.cookies.length);
 
-                        authLogger('getAll', optimizedData);
+                        authLogger('getAll', result.cookies);
                         cookieLogger('getAll 완료 - 최적화된 쿠키 반환');
-                        return optimizedData;
+                        return result.cookies;
                     } catch (error) {
                         utf8Logger('getAll에서 치명적 오류 발생:', error);
                         cookieLogger('getAll 오류 상세:', error);
@@ -206,12 +218,11 @@ export async function updateSession(request: NextRequest) {
         }
     }
 
-    // 🔥 불필요한 토큰 조각들을 실제로 클라이언트에서 삭제
-    const invalidFragments = (global as any).invalidTokenFragments;
-    if (invalidFragments && invalidFragments.length > 0) {
-        cookieLogger(`🗑️ 더미 조각 삭제 실행: ${invalidFragments.length}개`);
+    // 불필요한 토큰 조각들을 실제로 클라이언트에서 삭제 (요청 스코프 변수 사용)
+    if (invalidFragmentNamesToDelete.length > 0) {
+        cookieLogger(`🗑️ 더미 조각 삭제 실행: ${invalidFragmentNamesToDelete.length}개`);
 
-        invalidFragments.forEach((fragmentName: string) => {
+        invalidFragmentNamesToDelete.forEach((fragmentName: string) => {
             supabaseResponse.cookies.set(fragmentName, '', {
                 path: '/',
                 maxAge: 0,
@@ -222,8 +233,6 @@ export async function updateSession(request: NextRequest) {
             cookieLogger(`  ✅ ${fragmentName} 삭제 완료`);
         });
 
-        // 글로벌 변수 정리
-        delete (global as any).invalidTokenFragments;
         cookieLogger(`🎉 모든 더미 조각 삭제 완료!`);
     }
 

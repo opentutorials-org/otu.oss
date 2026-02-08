@@ -5,6 +5,7 @@ import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteWrapper } from '@/components/common/BlockNoteEditor';
 import { useLocale } from '@/hooks/useLocale';
 import { ko, en } from '@blocknote/core/locales';
+import DOMPurify from 'dompurify';
 
 interface BlockNoteClientProps {
     body: string;
@@ -62,7 +63,12 @@ export default function BlockNoteClient({ body, onLog }: BlockNoteClientProps) {
 
     // 에디터가 준비되지 않았다면 HTML을 직접 렌더링
     if (!editorReady && body) {
-        return <div className="rendered-html-content" dangerouslySetInnerHTML={{ __html: body }} />;
+        return (
+            <div
+                className="rendered-html-content"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(body) }}
+            />
+        );
     }
 
     // 에디터가 준비되었다면 BlockNoteWrapper 렌더링

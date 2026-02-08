@@ -68,10 +68,10 @@ export async function POST(request: Request) {
         // alarm_settings 테이블이 삭제되었으므로 관련 로직 제거
         // 이제 alarm 테이블만 사용합니다.
 
-        // 기존 알람 확인
+        // 기존 알람 확인 (재등록 여부 판단용)
         const { data: existingAlarm, error: selectError } = await supabase
             .from('alarm')
-            .select('sent_count')
+            .select('id')
             .eq('page_id', page_id)
             .single();
 
@@ -80,7 +80,9 @@ export async function POST(request: Request) {
             throw selectError;
         }
 
-        const sentCount = existingAlarm?.sent_count || 0;
+        // 알람 재등록 시 sent_count를 0으로 리셋 (지수 백오프 주기 초기화)
+        // "더 자주 알림" 기능이 정상 작동하려면 sent_count가 리셋되어야 합니다.
+        const sentCount = 0;
         const currentTime = new Date();
 
         const alarmData = {
@@ -99,6 +101,7 @@ export async function POST(request: Request) {
             pageId: page_id,
             nextAlarmTime: currentTime.toISOString(),
             sentCount,
+            isReregistration: !!existingAlarm,
         });
 
         // 알람 데이터 저장

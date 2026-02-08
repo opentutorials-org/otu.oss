@@ -186,7 +186,9 @@ export function startRAGTrace(input: RAGTraceInput): RAGTraceHandle {
             }
 
             // 트레이스 데이터 전송
-            await langfuse.flushAsync();
+            await langfuse.flushAsync().catch((error) => {
+                aiLogger('Langfuse flush failed: %s', error?.message);
+            });
         },
     };
 }

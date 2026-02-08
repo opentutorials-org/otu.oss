@@ -14,7 +14,7 @@
 
 require('dotenv').config();
 
-const baseURL = process.env.NEXT_PUBLIC_HOST || 'http://localhost:3000';
+const baseURL = 'http://localhost:3000';
 
 // 테스트할 엔드포인트 목록
 const testCases = [

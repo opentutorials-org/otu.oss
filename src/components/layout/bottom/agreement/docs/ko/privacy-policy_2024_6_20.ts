@@ -1,11 +1,14 @@
 import { docs } from '../docs';
 
 export const privacyPolicy: docs = {
-    version: '2024-6-20',
+    version: '2026-2-7',
     title: '개인정보 처리방침',
     body: `
     <p>
       이 개인정보 처리방침은 비영리단체 오픈튜토리얼스(이하 "운영자")가 운영하는 OTU 서비스(이하 "서비스") 이용자의 개인정보를 보호하기 위해 운영자가 취하고 있는 조치를 설명하며, 관련 법령(대한민국 개인정보 보호법, 유럽연합 GDPR, 미국 캘리포니아 CCPA 등)에 근거하여 처리됩니다.
+    </p>
+    <p>
+      본 서비스의 소프트웨어는 <strong>MIT 라이선스</strong>에 따라 공개된 오픈소스 프로젝트입니다. 본 개인정보 처리방침은 운영자가 호스팅하는 서비스(otu.ai)에 적용되며, 소프트웨어를 자체 호스팅하는 경우에는 해당 호스팅 운영자의 정책이 적용됩니다.
     </p>
 
     <h2>제 1 조 (개인정보의 수집 및 이용)</h2>
@@ -34,17 +37,15 @@ export const privacyPolicy: docs = {
 
     <h2>제 3 조 (제3자에게 제공되는 데이터 및 처리업체)</h2>
     <ol>
-      <li>텍스트 데이터 저장: supabase database (SOC 2 Type 2)</li>
-      <li>이미지 파일 저장: uploadcare (SOC 2 Type 2 및 ISO 27001)</li>
-      <li>AI 채팅, AI를 통한 콘텐츠 생성: openai (SOC 2 Type 2)</li>
+      <li>텍스트 데이터 저장: Supabase (SOC 2 Type 2)</li>
+      <li>이미지 파일 저장: Uploadcare (SOC 2 Type 2 및 ISO 27001)</li>
+      <li>AI 채팅, AI를 통한 콘텐츠 생성: OpenAI (SOC 2 Type 2)</li>
       <li>
         AI 기반의 답변 제공을 위한 데이터 임베딩: Vercel AI Gateway (SOC 2 Type II)
       </li>
       <li>
         서비스 성능 모니터링 및 오류 분석:
         <ul>
-          <li>AWS Amplify (SOC 1, SOC 2, ISO 27001)</li>
-          <li>Google Analytics (SOC 2 Type 2 및 ISO 27001)</li>
           <li>Vercel Analytics (SOC 2 Type 2 및 GDPR 준수)</li>
         </ul>
       </li>
@@ -87,23 +88,28 @@ export const privacyPolicy: docs = {
       <li>접근 권한은 최소한의 인력에게만 부여되며, 정기적인 보안 점검을 수행합니다.</li>
     </ul>
 
-    <h2>제 7 조 (국제 데이터 전송)</h2>
+    <h2>제 7 조 (오픈소스 소프트웨어 관련)</h2>
+    <p>
+      본 서비스의 소스 코드는 <a href="https://github.com/opentutorials-org/otu.oss" target="_blank" rel="noopener">GitHub</a>에 공개되어 있습니다. 소프트웨어를 자체 호스팅하여 사용하는 경우, 해당 운영자가 독립적으로 개인정보 처리방침을 수립해야 하며, 본 방침은 적용되지 않습니다.
+    </p>
+
+    <h2>제 8 조 (국제 데이터 전송)</h2>
     <p>
       서비스 제공 과정에서 수집된 일부 개인정보는 미국 및 기타 국가의 서버에서 처리될 수 있습니다. 운영자는 이에 대해 적절한 보안 조치를 적용하며, 관련 법령에 따라 개인정보를 보호합니다.
     </p>
 
-    <h2>제 8 조 (개인정보 보호책임자 및 연락처)</h2>
+    <h2>제 9 조 (개인정보 보호책임자 및 연락처)</h2>
     <p>
       운영자는 개인정보 보호와 관련된 문의 및 불만을 처리하기 위해 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.
     </p>
     <p>담당자: 강두루</p>
     <p>이메일: duru@opentutorials.org</p>
 
-    <h2>제 9 조 (정책 변경에 따른 공지의무)</h2>
+    <h2>제 10 조 (정책 변경에 따른 공지의무)</h2>
     <p>
       본 개인정보 처리방침의 내용 추가, 삭제 및 수정이 있을 경우, 변경사항의 시행 최소 7일 전에 서비스 내 공지합니다.
     </p>
 
-    <p>본 개인정보 처리방침은 2024년 6월 20일부터 시행됩니다.</p>
+    <p>본 개인정보 처리방침은 2026년 2월 7일부터 시행됩니다.</p>
   `,
 };

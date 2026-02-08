@@ -366,8 +366,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 
 # AI 설정 (선택)
-ENABLE_AI=false                 # AI 기능 활성화 여부 (true: 활성화, false: 비활성화, 기본값 false)
-OPENAI_API_KEY=                 # ENABLE_AI=true일 때 필요 (개발 환경)
+OPENAI_API_KEY=                 # 설정 시 AI 기능 자동 활성화 (개발 환경)
 # 프로덕션에서는 Vercel AI Gateway를 통해 AI 및 임베딩 기능이 제공됩니다.
 
 # CRAG 설정 (선택 - AI 기능 활성화 시 RAG 품질 개선)

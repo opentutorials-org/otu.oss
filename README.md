@@ -130,17 +130,15 @@ npm run db-sync            # 로컬 DB 초기화 및 타입 생성
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-NEXT_PUBLIC_HOST=http://localhost:3000
 ```
 
 ### AI 기능 (선택)
 
 ```bash
-ENABLE_AI=true                    # AI 기능 활성화 (기본값: false)
-OPENAI_API_KEY=your_openai_key    # 개발 환경에서 필요
+OPENAI_API_KEY=your_openai_key    # 설정 시 AI 기능 자동 활성화 (개발 환경)
 ```
 
-> `ENABLE_AI=false`(기본값)일 경우, 앱은 정상 동작하지만 AI 관련 기능은 비활성화됩니다.
+> API 키가 설정되지 않으면 AI 관련 기능은 비활성화되지만 앱은 정상 동작합니다.
 
 ## 브랜치 전략
 
@@ -203,4 +201,6 @@ supabase/               # Supabase 설정 및 마이그레이션
 
 ## 라이선스
 
-MIT License - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+이 프로젝트는 [MIT License](LICENSE)에 따라 배포됩니다. 누구나 자유롭게 사용, 수정, 배포할 수 있습니다.
+
+호스팅 서비스(otu.ai)의 이용약관 및 개인정보처리방침은 서비스 내에서 확인할 수 있습니다.

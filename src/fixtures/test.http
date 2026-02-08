@@ -1,12 +1,12 @@
 ### embedding-scheduler
-GET {{$dotenv NEXT_PUBLIC_HOST}}/api/ai/embedding-scheduler
+GET http://localhost:3000/api/ai/embedding-scheduler
 
 ### 라마인더 갱신 (100개의 알람 처리)
 # next_alarm_time 이 13시간 전 - 발송안함, 11시간 전 - 발송함, 1시간 후 - 발송함.
 # processed_at의 값을 null로 저정해야 테스트가 됨
-GET {{$dotenv NEXT_PUBLIC_HOST}}/api/reminder/renew-alarms?fetch_limit=100
+GET http://localhost:3000/api/reminder/renew-alarms?fetch_limit=100
 Content-Type: application/json
 
 ### 리마인더 갱신 (100개, 5초 뒤에 실행)
-GET {{$dotenv NEXT_PUBLIC_HOST}}/api/reminder/renew-alarms?fetch_limit=100&delay_seconds=5
+GET http://localhost:3000/api/reminder/renew-alarms?fetch_limit=100&delay_seconds=5
 Content-Type: application/json

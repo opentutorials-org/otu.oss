@@ -36,8 +36,6 @@ const syncPushBodySchema = z.object({
     alarm: syncEntitySchema.optional(),
 });
 
-if (process.env.NEXT_PUBLIC_HOST === undefined) throw new Error('NEXT_PUBLIC_HOST is not defined');
-
 export async function POST(req: Request) {
     const minutesOffset = process.env.NODE_ENV === 'development' ? 0 : 30;
 

@@ -7,9 +7,6 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 // 통합 테스트는 실제 Supabase를 사용합니다. 환경변수 필요:
 // NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
 
-// route.ts 로드시 필요한 환경변수 세팅
-process.env.NEXT_PUBLIC_HOST = process.env.NEXT_PUBLIC_HOST || 'http://localhost:3000';
-
 const skipDatabaseTests = process.env.SKIP_DATABASE_TESTS === 'true';
 
 describe('Sync Push Route Integration - 폴더/페이지 동시 생성', () => {

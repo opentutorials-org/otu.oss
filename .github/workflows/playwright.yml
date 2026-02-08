@@ -8,6 +8,9 @@ jobs:
     test:
         timeout-minutes: 60
         runs-on: ubuntu-latest
+        # Playwright E2E 테스트는 로컬 Supabase가 필요하므로
+        # PLAYWRIGHT_ENABLED 시크릿이 설정된 환경에서만 실행
+        if: ${{ vars.PLAYWRIGHT_ENABLED == 'true' }}
         steps:
             - uses: actions/checkout@v4
 

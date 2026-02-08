@@ -15,8 +15,6 @@ import { publishLogger } from '@/debug/publish';
 import dynamic from 'next/dynamic';
 import { useLingui } from '@lingui/react/macro';
 
-const APP_URL = process.env.NEXT_PUBLIC_HOST || 'https://otu.ai';
-
 // BlockNote 관련 컴포넌트를 클라이언트 사이드에서만 로드하도록 설정
 const BlockNoteEditor = dynamic(() => import('./BlockNoteClient').then((mod) => mod.default), {
     ssr: false,
@@ -207,7 +205,7 @@ export default function SharePageContent({
                             </div>
                             <div className="relative">
                                 <a
-                                    href={`${APP_URL}/welcome`}
+                                    href="/welcome"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="opacity-50 hover:opacity-100"

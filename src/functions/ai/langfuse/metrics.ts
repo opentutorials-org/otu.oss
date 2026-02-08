@@ -7,6 +7,28 @@
 
 import { getLangfuse, isLangfuseEnabled } from './config';
 import { aiLogger } from '@/debug/ai';
+import type { Langfuse } from 'langfuse';
+
+/**
+ * Langfuse 가드 + flush 보일러플레이트를 공통 처리합니다.
+ * Langfuse가 비활성화되었거나 인스턴스를 얻을 수 없으면 콜백을 실행하지 않습니다.
+ */
+function withLangfuse(callback: (langfuse: Langfuse) => void): void {
+    if (!isLangfuseEnabled()) return;
+    const langfuse = getLangfuse();
+    if (!langfuse) return;
+
+    try {
+        callback(langfuse);
+    } catch (error) {
+        aiLogger('Langfuse callback error: %s', (error as Error)?.message);
+        return;
+    }
+
+    langfuse.flushAsync().catch((error) => {
+        aiLogger('Langfuse flush failed: %s', error?.message);
+    });
+}
 
 /**
  * RAGAS 평가 메트릭
@@ -42,25 +64,13 @@ export interface ScoreInput {
  * Langfuse에 평가 점수를 기록합니다.
  */
 export function recordScore(input: ScoreInput): void {
-    if (!isLangfuseEnabled()) {
-        return;
-    }
-
-    const langfuse = getLangfuse();
-    if (!langfuse) {
-        return;
-    }
-
-    langfuse.score({
-        traceId: input.traceId,
-        name: input.name,
-        value: input.value,
-        comment: input.comment,
-    });
-
-    // 비동기로 전송
-    langfuse.flushAsync().catch((error) => {
-        aiLogger('Langfuse flush failed: %s', error?.message);
+    withLangfuse((langfuse) => {
+        langfuse.score({
+            traceId: input.traceId,
+            name: input.name,
+            value: input.value,
+            comment: input.comment,
+        });
     });
 }
 
@@ -68,55 +78,43 @@ export function recordScore(input: ScoreInput): void {
  * RAGAS 메트릭을 Langfuse에 기록합니다.
  */
 export function recordRAGASMetrics(traceId: string, metrics: RAGASMetrics): void {
-    if (!isLangfuseEnabled()) {
-        return;
-    }
+    withLangfuse((langfuse) => {
+        // 각 메트릭을 개별 점수로 기록
+        if (metrics.faithfulness !== undefined) {
+            langfuse.score({
+                traceId,
+                name: 'ragas-faithfulness',
+                value: metrics.faithfulness,
+                comment: 'RAGAS: 응답이 컨텍스트에 기반하는 정도',
+            });
+        }
 
-    const langfuse = getLangfuse();
-    if (!langfuse) {
-        return;
-    }
+        if (metrics.answerRelevancy !== undefined) {
+            langfuse.score({
+                traceId,
+                name: 'ragas-answer-relevancy',
+                value: metrics.answerRelevancy,
+                comment: 'RAGAS: 응답이 질문에 적절한 정도',
+            });
+        }
 
-    // 각 메트릭을 개별 점수로 기록
-    if (metrics.faithfulness !== undefined) {
-        langfuse.score({
-            traceId,
-            name: 'ragas-faithfulness',
-            value: metrics.faithfulness,
-            comment: 'RAGAS: 응답이 컨텍스트에 기반하는 정도',
-        });
-    }
+        if (metrics.contextPrecision !== undefined) {
+            langfuse.score({
+                traceId,
+                name: 'ragas-context-precision',
+                value: metrics.contextPrecision,
+                comment: 'RAGAS: 검색된 문서의 관련성',
+            });
+        }
 
-    if (metrics.answerRelevancy !== undefined) {
-        langfuse.score({
-            traceId,
-            name: 'ragas-answer-relevancy',
-            value: metrics.answerRelevancy,
-            comment: 'RAGAS: 응답이 질문에 적절한 정도',
-        });
-    }
-
-    if (metrics.contextPrecision !== undefined) {
-        langfuse.score({
-            traceId,
-            name: 'ragas-context-precision',
-            value: metrics.contextPrecision,
-            comment: 'RAGAS: 검색된 문서의 관련성',
-        });
-    }
-
-    if (metrics.contextRecall !== undefined) {
-        langfuse.score({
-            traceId,
-            name: 'ragas-context-recall',
-            value: metrics.contextRecall,
-            comment: 'RAGAS: 필요한 정보의 검색 완전성',
-        });
-    }
-
-    // 비동기로 전송
-    langfuse.flushAsync().catch((error) => {
-        aiLogger('Langfuse flush failed: %s', error?.message);
+        if (metrics.contextRecall !== undefined) {
+            langfuse.score({
+                traceId,
+                name: 'ragas-context-recall',
+                value: metrics.contextRecall,
+                comment: 'RAGAS: 필요한 정보의 검색 완전성',
+            });
+        }
     });
 }
 
@@ -132,25 +130,13 @@ export function recordUserFeedback(
         comment?: string;
     }
 ): void {
-    if (!isLangfuseEnabled()) {
-        return;
-    }
-
-    const langfuse = getLangfuse();
-    if (!langfuse) {
-        return;
-    }
-
-    langfuse.score({
-        traceId,
-        name: 'user-feedback',
-        value: feedback.type === 'positive' ? 1 : 0,
-        comment: feedback.comment,
-    });
-
-    // 비동기로 전송
-    langfuse.flushAsync().catch((error) => {
-        aiLogger('Langfuse flush failed: %s', error?.message);
+    withLangfuse((langfuse) => {
+        langfuse.score({
+            traceId,
+            name: 'user-feedback',
+            value: feedback.type === 'positive' ? 1 : 0,
+            comment: feedback.comment,
+        });
     });
 }
 
@@ -177,28 +163,16 @@ export function recordUsage(
     usage: UsageStats,
     metadata?: Record<string, unknown>
 ): void {
-    if (!isLangfuseEnabled()) {
-        return;
-    }
-
-    const langfuse = getLangfuse();
-    if (!langfuse) {
-        return;
-    }
-
-    // 사용량 정보를 트레이스에 추가
-    langfuse.span({
-        traceId,
-        name: 'token-usage',
-        metadata: {
-            model,
-            ...usage,
-            ...metadata,
-        },
-    });
-
-    // 비동기로 전송
-    langfuse.flushAsync().catch((error) => {
-        aiLogger('Langfuse flush failed: %s', error?.message);
+    withLangfuse((langfuse) => {
+        // 사용량 정보를 트레이스에 추가
+        langfuse.span({
+            traceId,
+            name: 'token-usage',
+            metadata: {
+                model,
+                ...usage,
+                ...metadata,
+            },
+        });
     });
 }

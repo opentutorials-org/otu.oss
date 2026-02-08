@@ -1,20 +1,20 @@
 import type { MetadataRoute } from 'next';
+import { getAppUrl } from '@/functions/utils/getAppUrl';
 
-const APP_URL = process.env.NEXT_PUBLIC_HOST || 'https://otu.ai';
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const appUrl = await getAppUrl();
     return [
         {
-            url: APP_URL,
+            url: appUrl,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 1,
         },
         {
-            url: `${APP_URL}/welcome`,
+            url: `${appUrl}/welcome`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
-            priority: 2,
+            priority: 0.8,
         },
     ];
 }

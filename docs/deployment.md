@@ -201,32 +201,16 @@ NEXT_PUBLIC_SUPABASE_URL=https://<your-project-ref>.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-anon-key>
 SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
 
-# 호스트 설정
-NEXT_PUBLIC_HOST=https://your-domain.com
+# 소셜 로그인 리디렉션
 NEXT_PUBLIC_SOCIAL_LOGIN_REDIRECT_TO=https://your-domain.com
 ```
 
 #### AI 기능 환경 변수 (선택)
 
 ```bash
-# AI 기능 활성화
-ENABLE_AI=true
-
-# OpenAI API (개발 환경에서 필요)
+# OpenAI API (개발 환경에서 필요 - 설정하면 AI 기능이 자동 활성화됩니다)
 OPENAI_API_KEY=sk-<your-openai-key>
 # 프로덕션에서는 Vercel AI Gateway를 통해 AI 및 임베딩 기능이 제공됩니다.
-```
-
-#### Sentry 환경 변수 (선택 - 별도 설정 필요)
-
-> **참고**: 현재 코드베이스에서 Sentry SDK가 제거되었습니다. Sentry를 사용하려면 SDK를 별도로 설치하고 설정해야 합니다.
-
-```bash
-# Sentry 에러 모니터링 (SDK 설치 후 사용 가능)
-# NEXT_PUBLIC_ENABLE_SENTRY=true
-# NEXT_PUBLIC_SENTRY_DSN=<your-sentry-dsn>
-# SENTRY_AUTH_TOKEN=<your-sentry-auth-token>
-# NEXT_PUBLIC_SENTRY_PROJECT=<your-sentry-project-name>
 ```
 
 #### 이미지 업로드 환경 변수 (선택)
@@ -262,29 +246,27 @@ UPLOADCARE_PRIVATE_KEY=<your-private-key>
 
 ### 전체 환경 변수 목록
 
-| 변수명                                 | 필수              | 설명                                             |
-| -------------------------------------- | ----------------- | ------------------------------------------------ |
-| `NEXT_PUBLIC_SUPABASE_URL`             | O                 | Supabase 프로젝트 URL                            |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY`        | O                 | Supabase 공개 키                                 |
-| `SUPABASE_SERVICE_ROLE_KEY`            | O                 | Supabase 서비스 역할 키 (서버 전용)              |
-| `NEXT_PUBLIC_HOST`                     | O                 | 배포된 앱의 URL                                  |
-| `NEXT_PUBLIC_SOCIAL_LOGIN_REDIRECT_TO` | O                 | 소셜 로그인 후 리디렉션 URL                      |
-| `ENABLE_AI`                            | -                 | AI 기능 활성화 (`true`/`false`, 기본값: `false`) |
-| `OPENAI_API_KEY`                       | AI 사용 시 (개발) | OpenAI API 키 (프로덕션은 Gateway 사용)          |
-| `NEXT_PUBLIC_ENABLE_SENTRY`            | -                 | Sentry 활성화 (SDK 별도 설치 필요)               |
-| `NEXT_PUBLIC_SENTRY_DSN`               | -                 | Sentry DSN (SDK 별도 설치 필요)                  |
-| `SENTRY_AUTH_TOKEN`                    | -                 | Sentry 인증 토큰 (SDK 별도 설치 필요)            |
-| `NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY`    | 이미지 업로드 시  | Uploadcare 공개 키                               |
-| `UPLOADCARE_PRIVATE_KEY`               | 이미지 삭제 시    | Uploadcare 비공개 키                             |
-| `NEXT_PUBLIC_PWA_DISABLED`             | -                 | PWA 비활성화 (`true`/`false`, 기본값: `true`)    |
+| 변수명                                 | 필수              | 설명                                                            |
+| -------------------------------------- | ----------------- | --------------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`             | O                 | Supabase 프로젝트 URL                                           |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`        | O                 | Supabase 공개 키                                                |
+| `SUPABASE_SERVICE_ROLE_KEY`            | O                 | Supabase 서비스 역할 키 (서버 전용)                             |
+| `SUPABASE_DATABASE_URL`                | O                 | PostgreSQL 연결 URL (DB 직접 연결 시)                           |
+| `NEXT_PUBLIC_SOCIAL_LOGIN_REDIRECT_TO` | O                 | 소셜 로그인 후 리디렉션 URL                                     |
+| `OPENAI_API_KEY`                       | AI 사용 시 (개발) | OpenAI API 키 (설정 시 AI 자동 활성화, 프로덕션은 Gateway 사용) |
+| `NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY`    | 이미지 업로드 시  | Uploadcare 공개 키                                              |
+| `UPLOADCARE_PRIVATE_KEY`               | 이미지 삭제 시    | Uploadcare 비공개 키                                            |
+| `NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN`      | -                 | 소셜 로그인 표시 여부 (`true`/`false`, 기본값: `false`)         |
+| `CRAG_ENABLED`                         | -                 | CRAG 파이프라인 활성화 (`true`/`false`, 기본값: `false`)        |
+| `LANGFUSE_ENABLED`                     | -                 | Langfuse LLM 모니터링 활성화 (키 미설정 시 자동 비활성화)       |
 
 ### 환경별 설정 권장 사항
 
-| 환경       | ENABLE_AI | SOCIAL_LOGIN | PWA               |
-| ---------- | --------- | ------------ | ----------------- |
-| 로컬 개발  | `false`   | `false`      | `true` (비활성화) |
-| Preview    | `true`    | `true`       | `true` (비활성화) |
-| Production | `true`    | `true`       | `false` (활성화)  |
+| 환경       | OPENAI_API_KEY | SOCIAL_LOGIN |
+| ---------- | -------------- | ------------ |
+| 로컬 개발  | 선택 설정      | `false`      |
+| Preview    | Gateway 사용   | `true`       |
+| Production | Gateway 사용   | `true`       |
 
 > **참고**: `NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN`은 소셜 로그인(Google/GitHub/Apple) 표시 여부를 제어합니다. 이메일 로그인은 항상 활성화되어 있습니다.
 
@@ -301,7 +283,7 @@ UPLOADCARE_PRIVATE_KEY=<your-private-key>
 - [ ] 폴더 생성 및 페이지 이동
 - [ ] 데이터 동기화 (여러 기기에서 확인)
 - [ ] 이미지 업로드 (Uploadcare 설정 시)
-- [ ] AI 채팅 (ENABLE_AI=true 설정 시)
+- [ ] AI 채팅 (OPENAI_API_KEY 설정 시)
 - [ ] 리마인더 알람
 - [ ] PWA 설치 (모바일)
 

@@ -127,6 +127,8 @@
 - 텍스트 입력 및 전송
 - 채팅 내역 관리 및 탐색 (화살표 키로 이전 메시지 탐색)
 - RAG(Retrieval-Augmented Generation) 모드 선택 기능 (none/all/current)
+- CRAG(Corrective RAG) 파이프라인: 관련성 평가 → Adaptive 라우팅으로 RAG 검색 품질 자동 개선
+- Langfuse 트레이싱: LLM 호출 추적, 응답 품질 스코어링, RAGAS 메트릭 기록
 - 모바일과 데스크톱 환경에서의 다른 입력 동작 지원
 - 익명 사용자 제한 및 로그인 유도
 - 채팅 내용 페이지로 복사 (코드 블록 포맷 보존)

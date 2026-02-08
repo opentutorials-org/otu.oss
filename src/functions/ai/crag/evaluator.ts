@@ -94,6 +94,48 @@ function calculateKeywordOverlap(query: string, results: similarityResponse[]): 
     return matchedCount / queryKeywords.length;
 }
 
+/** 키워드 추출 시 제외할 불용어 */
+const STOP_WORDS = new Set([
+    // 한국어 불용어
+    '그리고',
+    '하지만',
+    '그래서',
+    '그러나',
+    '그런데',
+    '왜냐하면',
+    '때문에',
+    '그것',
+    '이것',
+    '저것',
+    '무엇',
+    '어떻게',
+    '언제',
+    '어디',
+    '누가',
+    '이런',
+    '저런',
+    '그런',
+    '어떤',
+    // 영어 불용어
+    'the',
+    'and',
+    'but',
+    'or',
+    'so',
+    'if',
+    'then',
+    'what',
+    'how',
+    'when',
+    'where',
+    'who',
+    'which',
+    'this',
+    'that',
+    'these',
+    'those',
+]);
+
 /**
  * 텍스트에서 키워드를 추출합니다.
  */
@@ -101,49 +143,7 @@ function extractKeywords(text: string): string[] {
     // 한국어와 영어 단어 추출 (2자 이상)
     const words = text.match(/[\uAC00-\uD7A3]{2,}|[a-zA-Z]{2,}/g) || [];
 
-    // 불용어 제거
-    const stopWords = new Set([
-        // 한국어 불용어
-        '그리고',
-        '하지만',
-        '그래서',
-        '그러나',
-        '그런데',
-        '왜냐하면',
-        '때문에',
-        '그것',
-        '이것',
-        '저것',
-        '무엇',
-        '어떻게',
-        '언제',
-        '어디',
-        '누가',
-        '이런',
-        '저런',
-        '그런',
-        '어떤',
-        // 영어 불용어
-        'the',
-        'and',
-        'but',
-        'or',
-        'so',
-        'if',
-        'then',
-        'what',
-        'how',
-        'when',
-        'where',
-        'who',
-        'which',
-        'this',
-        'that',
-        'these',
-        'those',
-    ]);
-
-    return words.filter((word) => !stopWords.has(word.toLowerCase()));
+    return words.filter((word) => !STOP_WORDS.has(word.toLowerCase()));
 }
 
 /**

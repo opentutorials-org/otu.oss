@@ -132,13 +132,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ```
 
-### AI 기능 (선택)
-
-```bash
-OPENAI_API_KEY=your_openai_key    # 설정 시 AI 기능 자동 활성화 (개발 환경)
-```
-
-> API 키가 설정되지 않으면 AI 관련 기능은 비활성화되지만 앱은 정상 동작합니다.
+> AI, 소셜 로그인, 파일 업로드 등 선택 환경 변수의 상세 설정은 [docs/installation.md](docs/installation.md#3단계-환경-변수-설정)를 참고하세요.
 
 ## 브랜치 전략
 
@@ -168,21 +162,7 @@ supabase/               # Supabase 설정 및 마이그레이션
 
 ## 기여하기
 
-1. **이슈 확인**: [GitHub Issues](https://github.com/opentutorials-org/otu.oss/issues)에서 작업할 이슈 선택
-2. **브랜치 생성**: `feature/이슈번호-간단한설명` 형식
-3. **개발**: 코딩 스타일 가이드 준수 (CLAUDE.md 참고)
-4. **테스트**: 모든 테스트 통과 확인
-5. **커밋**: Conventional Commits 형식 (한국어)
-6. **Pull Request**: `dev` 브랜치로 PR 생성
-
-### 커밋 메시지 형식
-
-- `feat`: 새로운 기능
-- `fix`: 버그 수정
-- `docs`: 문서 변경
-- `refactor`: 리팩토링
-- `test`: 테스트 추가/수정
-- `chore`: 빌드, 설정 변경
+프로젝트에 기여하는 방법은 [기여 가이드](docs/CONTRIBUTING.md)를 참고하세요. 브랜치 생성, 커밋 메시지 규칙, PR 제출 과정 등을 안내합니다.
 
 ## 문서 구조
 

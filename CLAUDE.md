@@ -329,7 +329,7 @@ return errorResponse(
 
 ### 환경 변수
 
-필수/AI 환경 변수는 [README.md](README.md#환경-변수) 참조. 아래는 AI 전용 추가 설정:
+필수 환경 변수 및 선택 환경 변수 상세는 [docs/installation.md](docs/installation.md#3단계-환경-변수-설정) 참조. 아래는 AI 전용 추가 설정:
 
 ```bash
 # CRAG 설정 (선택 - RAG 품질 개선)

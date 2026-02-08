@@ -71,6 +71,16 @@ NEXT_PUBLIC_SOCIAL_LOGIN_REDIRECT_TO=http://localhost:3000
 # OAuth 앱 설정이 완료된 경우에만 true로 설정하세요.
 NEXT_PUBLIC_ENABLE_SOCIAL_LOGIN=false       # true: Google/GitHub/Apple 로그인 표시
 
+# CRAG (Corrective RAG) 설정 (선택 - AI 기능 활성화 시 RAG 품질 개선)
+# NEXT_PUBLIC_CRAG_ENABLED=true       # 클라이언트 CRAG 파이프라인 활성화 (기본값: false)
+# CRAG_ENABLED=true                   # 서버 CRAG 파이프라인 활성화 (기본값: false)
+
+# Langfuse 설정 (선택 - AI 트레이싱/메트릭 수집)
+# LANGFUSE_ENABLED=true               # 키 미설정 시 자동 비활성화
+# LANGFUSE_PUBLIC_KEY=pk-lf-your-public-key
+# LANGFUSE_SECRET_KEY=sk-lf-your-secret-key
+# LANGFUSE_HOST=https://cloud.langfuse.com
+
 # 디버그 로깅 (기본값: 비활성화)
 # 개발 중 특정 모듈의 로그를 보려면 활성화하세요.
 # 예: DEBUG=sync (동기화), DEBUG=sync,chat (동기화+채팅), DEBUG=* (전체)

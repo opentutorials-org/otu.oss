@@ -89,15 +89,15 @@ npm run dev
 
 ## 핵심 기술 스택
 
-| 카테고리          | 기술 스택                            |
-| ----------------- | ------------------------------------ |
-| **프론트엔드**    | Next.js 16, React 19, TypeScript 5.7 |
-| **데이터베이스**  | Supabase (PostgreSQL), WatermelonDB  |
-| **상태 관리**     | Jotai                                |
-| **UI 라이브러리** | Material-UI, Tailwind CSS            |
-| **에디터**        | BlockNote 0.46.2 + XL-AI 확장        |
-| **AI 서비스**     | OpenAI GPT-4o, Vercel AI Gateway     |
-| **테스트**        | Jest (Vitest 사용 안함)              |
+| 카테고리          | 기술 스택                                        |
+| ----------------- | ------------------------------------------------ |
+| **프론트엔드**    | Next.js 16, React 19, TypeScript 5.7             |
+| **데이터베이스**  | Supabase (PostgreSQL), WatermelonDB              |
+| **상태 관리**     | Jotai                                            |
+| **UI 라이브러리** | Material-UI, Tailwind CSS                        |
+| **에디터**        | BlockNote 0.46.2 + XL-AI 확장                    |
+| **AI 서비스**     | OpenAI GPT-4o, Vercel AI Gateway, CRAG, Langfuse |
+| **테스트**        | Jest (단위), Playwright (E2E)                    |
 
 ## 주요 명령어
 
@@ -108,6 +108,8 @@ npm run dev:ip             # 모바일 테스트용
 
 # 테스트
 npm test                   # Jest 단위 테스트
+npm run test:e2e           # Playwright E2E 테스트
+npm run test:all           # 단위 + E2E 전체 테스트
 npm run test:integration   # 통합 테스트 (로컬 Supabase 필요)
 npm run type-check         # TypeScript 타입 체크
 

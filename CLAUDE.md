@@ -76,9 +76,11 @@ Cursor IDE 사용 시에만 `.cursor/rules/*.mdc` 파일들을 추가로 참고�
 - Supabase (DB/Auth), WatermelonDB 0.28.0 (로컬 동기화)
 - Jotai 2.11.3 (상태 관리), Material-UI 7.3.7 (UI)
 - BlockNote 0.46.2 (에디터), OpenAI (AI 기능)
+- Langfuse 3.x (AI 트레이싱/메트릭), Langchain (CRAG 평가)
 - React Router DOM 7.8.2 (홈 영역 내비게이션)
 - Vercel AI Gateway (AI API 표준화)
 - **Jest 30.0.4** (테스트 프레임워크) - ⚠️ Vitest 아님!
+- **Playwright** (E2E 테스트 프레임워크)
 
 ### 주요 명령어
 
@@ -89,6 +91,8 @@ npm run dev:ip              # 모바일 테스트용
 
 # 코드 품질 (Jest 사용, Vitest 아님!)
 npm run test                # Jest 단위 테스트
+npm run test:e2e            # Playwright E2E 테스트
+npm run test:all            # 단위 + E2E 전체 테스트
 npm run test:integration    # 통합 테스트 (로컬 Supabase 필요)
 npm run type-check          # 타입 체킹
 npm run prettier            # Prettier 포맷팅 적용
@@ -147,7 +151,9 @@ src/
 ├── hooks/             # 커스텀 React 훅 (useSync, useNavigation 등)
 │
 ├── functions/         # 도메인별 비즈니스 로직
-│   ├── ai/            # AI 서비스 (임베딩, 타이틀링, CRAG, Langfuse 트레이싱)
+│   ├── ai/            # AI 서비스 (임베딩, 타이틀링, CRAG, Langfuse)
+│   │   ├── crag/      # CRAG 파이프라인 (evaluator, router, pipeline, types)
+│   │   └── langfuse/  # Langfuse 트레이싱 (config, tracing, metrics)
 │   ├── api/           # API 응답 헬퍼 (response, error)
 │   ├── auth/          # 인증 관련 (requireLogin, checkSuperuser)
 │   ├── env/           # 환경 탐지 (detectEnvironment, isMobile)
@@ -178,6 +184,11 @@ src/
     ├── schema.ts      # 스키마 정의
     ├── sync.ts        # 동기화 로직 (40KB+)
     └── migrations.ts  # 마이그레이션
+
+e2e/                   # Playwright E2E 테스트
+├── auth.setup.ts      # 인증 셋업 (테스트 계정 로그인)
+├── *.spec.ts          # 테스트 파일 (auth, folder, page-crud, search, seed)
+└── specs/             # 테스트 계획 문서
 ```
 
 ### 주요 패턴
@@ -214,6 +225,16 @@ src/
 - `src/locales/` 디렉토리 (PO 카탈로그)
 - 클라이언트/RSC: `import { useLingui } from '@lingui/react/macro'` → `const { t } = useLingui()` → `` t`텍스트` ``
 - API 라우트: `import { getServerI18n } from '@/i18n-server'` → ``i18n._(msg`텍스트`)``
+
+#### AI 파이프라인 (CRAG + Langfuse)
+
+- **CRAG (Corrective RAG)**: 클라이언트 사이드에서 실행되는 RAG 품질 개선 파이프라인
+    - Strategy 패턴: `getSimilarity`를 `searchFn`으로 주입
+    - Evaluator → Router → Pipeline 구조
+    - 환경변수 `NEXT_PUBLIC_CRAG_ENABLED`로 클라이언트 활성화
+- **Langfuse**: AI 호출 트레이싱 및 메트릭 수집
+    - Fire-and-forget 패턴 (`.catch(() => {})`)으로 앱 성능에 영향 없음
+    - 키 미설정 시 자동 비활성화 (no-op)
 
 ## 코드 스타일
 
@@ -308,6 +329,11 @@ return errorResponse(
     - `@jest-environment node` 주석 사용 (서버 환경)
     - `@/debug/test`의 `testLogger` 사용
     - import 경로: `__tests__/` 이동 시 상대 경로 조정 필요 (`./ → ../`)
+- **E2E 테스트**: Playwright (`e2e/` 디렉토리)
+    - 테스트 계정: `test@opentutorials.org` / `111111` (`supabase/seed.sql`에서 생성)
+    - `auth.setup.ts`가 로그인 상태를 저장하여 다른 테스트에서 재사용
+    - CI: `.github/workflows/playwright.yml` (Supabase 로컬 인스턴스 포함)
+    - 로컬 실행: `npm run test:e2e` (로컬 Supabase 필요)
 
 ### 버그 수정 규칙 (필수)
 
@@ -342,6 +368,16 @@ SUPABASE_SERVICE_ROLE_KEY=
 # AI 설정 (선택)
 OPENAI_API_KEY=                 # 설정 시 AI 기능 자동 활성화 (개발 환경)
 # 프로덕션에서는 Vercel AI Gateway를 통해 AI 및 임베딩 기능이 제공됩니다.
+
+# CRAG 설정 (선택 - AI 기능 활성화 시 RAG 품질 개선)
+# NEXT_PUBLIC_CRAG_ENABLED=true  # 클라이언트 CRAG 파이프라인 (기본값: false)
+# CRAG_ENABLED=true              # 서버 CRAG 파이프라인 (기본값: false)
+
+# Langfuse 설정 (선택 - AI 트레이싱)
+# LANGFUSE_ENABLED=true          # 키 미설정 시 자동 비활성화
+# LANGFUSE_PUBLIC_KEY=
+# LANGFUSE_SECRET_KEY=
+# LANGFUSE_HOST=https://cloud.langfuse.com
 
 # 디버그 설정 (선택)
 # DEBUG=                        # 기본값 비활성화 (예: sync, chat, editor, alarm, * 전체)
@@ -391,4 +427,6 @@ OPENAI_API_KEY=                 # 설정 시 AI 기능 자동 활성화 (개발 
 - 테마: `app/RootLayoutProvider.tsx`
 - 자동저장: `src/components/home2/editor/hooks/useAutoSave.ts`
 - RAG 검색: `app/api/ai/similaritySearch/route.tsx`
+- CRAG 파이프라인: `src/functions/ai/crag/pipeline.ts`
+- Langfuse 트레이싱: `src/functions/ai/langfuse/tracing.ts`
 - 리마인더: `app/api/reminder/register-by-page/route.ts`

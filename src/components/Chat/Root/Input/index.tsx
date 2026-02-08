@@ -22,6 +22,8 @@ import { chatLogger } from '@/debug/chat';
 import { get } from '@/watermelondb/control/Page';
 import { RAG_SEARCH_MIN_LENGTH_THRESHOLD } from '@/functions/constants';
 import { useLingui } from '@lingui/react/macro';
+import { runCRAGPipeline, DEFAULT_CRAG_CONFIG } from '@/functions/ai/crag';
+import type { CRAGConfig, CRAGStage } from '@/functions/ai/crag';
 
 const welcomeMessages = [''];
 
@@ -104,9 +106,30 @@ export default function Input({ showScrollButton }: { showScrollButton: boolean 
             }
         }
 
-        let result;
+        // CRAG 파이프라인 사용 여부 결정
+        const cragEnabled = process.env.NEXT_PUBLIC_CRAG_ENABLED === 'true';
+        const cragConfig: CRAGConfig = {
+            ...DEFAULT_CRAG_CONFIG,
+            enabled: cragEnabled,
+        };
+
+        let result: similarityResponse[];
         try {
-            result = await getSimilarity(message, page_id);
+            const searchFn = (q: string) => getSimilarity(q, page_id);
+            const cragResult = await runCRAGPipeline(
+                message,
+                searchFn,
+                cragConfig,
+                (stage: CRAGStage) => {
+                    chatLogger('runReference', 'CRAG stage', stage);
+                }
+            );
+            chatLogger('runReference', 'CRAG result', {
+                route: cragResult.route,
+                useReferences: cragResult.useReferences,
+                grade: cragResult.state.evaluation?.grade,
+            });
+            result = cragResult.useReferences ? cragResult.results : [];
         } catch (error) {
             chatLogger('runReference', 'error', error);
             return [];

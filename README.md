@@ -95,7 +95,7 @@ npm run dev
 | **데이터베이스**  | Supabase (PostgreSQL), WatermelonDB  |
 | **상태 관리**     | Jotai                                |
 | **UI 라이브러리** | Material-UI, Tailwind CSS            |
-| **에디터**        | BlockNote 0.44.0 + XL-AI 확장        |
+| **에디터**        | BlockNote 0.46.2 + XL-AI 확장        |
 | **AI 서비스**     | OpenAI GPT-4o, Vercel AI Gateway     |
 | **테스트**        | Jest (Vitest 사용 안함)              |
 

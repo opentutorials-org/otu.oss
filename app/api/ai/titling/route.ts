@@ -107,9 +107,9 @@ async function authenticateUser(i18n: I18n) {
         return {
             error: errorResponse(
                 {
-                    status: 500,
+                    status: 401,
                     errorCode: 'NEED_LOGIN',
-                    message: i18n._(msg`AI가 제목을 짓지 못했습니다.`),
+                    message: i18n._(msg`로그인이 필요합니다.`),
                 },
                 new Error(
                     'AI 제목을 짓기 위해서는 로그인이 필요합니다. 이 문제는 로그인이 되어 있지 않아서 발생했습니다.'
@@ -168,6 +168,6 @@ async function generateTitle(contentBody: string, locale: string | null) {
         };
     } catch (error) {
         console.error('Tool call response parsing error:', error);
-        throw new Error('AI 응답을 파싱하는데 실패했습니다.');
+        throw error;
     }
 }

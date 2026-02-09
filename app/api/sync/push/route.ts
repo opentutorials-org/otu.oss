@@ -76,8 +76,8 @@ export async function POST(req: Request) {
     let rawBody;
     try {
         rawBody = await req.json();
-    } catch {
-        syncLogger('sync/push: Invalid JSON body');
+    } catch (parseError) {
+        syncLogger('sync/push: Invalid JSON body', parseError);
         return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
             status: 400,
             headers: { 'Content-Type': 'application/json' },
@@ -360,7 +360,7 @@ async function updateExistingJob(
     supabase: SupabaseClient<any, 'public', any>,
     jobId: string,
     minutesOffset: number,
-    user_id: string // 현재 시간으로부터 몇 분 후에 작업을 실행할지를 지정
+    user_id: string
 ) {
     const scheduledTime = new Date();
     scheduledTime.setMinutes(scheduledTime.getMinutes() + minutesOffset); // 현재 시간에 minutesOffset을 더함

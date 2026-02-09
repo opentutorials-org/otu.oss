@@ -48,6 +48,7 @@ const customJestConfig = {
         'withdraw/__tests__/route\.test\.ts',
         'langfuse/__tests__/config\.test\.ts',
         'langfuse/__tests__/tracing\.test\.ts',
+        'langfuse/__tests__/tracing-enabled\.test\.ts',
         'langfuse/__tests__/metrics\.test\.ts',
         'langfuse\.test\.ts',
     ],

@@ -59,7 +59,9 @@ export async function GET(req: Request) {
         message: 'success',
         data: pages,
         meta: {
-            ...(isTruncated && { warning: `Export limited to ${EXPORT_LIMIT} pages` }),
+            ...(isTruncated && {
+                warning: i18n._(msg`내보내기가 ${EXPORT_LIMIT}페이지로 제한되었습니다.`),
+            }),
         },
     });
 }

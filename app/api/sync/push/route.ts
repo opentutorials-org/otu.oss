@@ -18,7 +18,7 @@ const syncRecordSchema = z
             typeof val === 'object' &&
             val !== null &&
             typeof val.id === 'string' &&
-            'updated_at' in val,
+            typeof val.updated_at === 'number',
         { message: 'Sync record must be an object with id (string) and updated_at' }
     );
 

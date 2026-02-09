@@ -38,20 +38,27 @@ export async function POST(req: NextRequest) {
     let body: askLLMRequestType;
     try {
         body = await req.json();
-    } catch {
+    } catch (parseError) {
         return errorResponse(
             {
                 status: 400,
                 errorCode: 'INVALID_JSON',
                 message: i18n._(msg`잘못된 요청 형식입니다.`),
             },
-            new Error('Invalid JSON body')
+            parseError instanceof Error ? parseError : new Error('Invalid JSON body')
         );
     }
     aiLogger(`req.json() completed: ${Date.now() - startTime}ms`);
     const { message, references, history } = body;
     if (!message) {
-        return responseByStream(i18n._(msg`메시지를 입력해주세요.`));
+        return errorResponse(
+            {
+                status: 400,
+                errorCode: 'EMPTY_MESSAGE',
+                message: i18n._(msg`메시지를 입력해주세요.`),
+            },
+            new Error('message is required')
+        );
     }
     // AI 기능 활성화 여부 확인
     if (!canUseAI()) {

@@ -41,14 +41,14 @@ export async function POST(req: Request) {
     let body;
     try {
         body = await req.json();
-    } catch {
+    } catch (parseError) {
         return errorResponse(
             {
                 status: 400,
                 errorCode: 'INVALID_JSON',
                 message: i18n._(msg`잘못된 요청 형식입니다.`),
             },
-            new Error('Invalid JSON body')
+            parseError instanceof Error ? parseError : new Error('Invalid JSON body')
         );
     }
     const contentBody = body.body;

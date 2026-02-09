@@ -23,7 +23,7 @@ export function useChatProcess() {
     const abortControllerRef = useRef<AbortController | null>(null);
     const [chatSession, setChatSession] = useAtom(chatSessionState);
     const setChatScrollToBottom = useSetAtom(chatScrollToBottomState);
-    let reader: ReadableStreamDefaultReader<Uint8Array>;
+    const readerRef = useRef<ReadableStreamDefaultReader<Uint8Array> | null>(null);
     // jotai 상태를 이용하면 컴포넌트 랜더링 타임에 따라서 데이터가 제대로 적재되지 않는 문제가 있어서 useRef를 이용합니다.
     // const llmContextRef = useRef<{
     //     message:string,
@@ -40,6 +40,10 @@ export function useChatProcess() {
         return () => {
             if (abortControllerRef.current) {
                 abortControllerRef.current.abort();
+            }
+            if (readerRef.current) {
+                readerRef.current.cancel();
+                readerRef.current = null;
             }
         };
     }, []);
@@ -121,18 +125,20 @@ export function useChatProcess() {
         }
     }
     async function readResponse(response: Response) {
-        if (reader) {
-            reader.cancel();
+        if (readerRef.current) {
+            readerRef.current.cancel();
         }
-        if (response.body) {
-            reader = response.body.getReader();
+        if (!response.body) {
+            chatLogger('readResponse: response.body is null');
+            return;
         }
+        readerRef.current = response.body.getReader();
         let result = '';
         const decoder = new TextDecoder();
 
         let first = true;
         while (true) {
-            const { value, done } = await reader.read();
+            const { value, done } = await readerRef.current.read();
             if (done) {
                 break;
             }

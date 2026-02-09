@@ -328,15 +328,17 @@ export default function Input({ showScrollButton }: { showScrollButton: boolean 
         if (readerRef.current) {
             readerRef.current.cancel();
         }
-        if (response.body) {
-            readerRef.current = response.body.getReader();
+        if (!response.body) {
+            chatLogger('readResponse: response.body is null');
+            return '';
         }
+        readerRef.current = response.body.getReader();
         let result = '';
         const decoder = new TextDecoder();
 
         let first = true;
         while (true) {
-            const { value, done } = await readerRef.current!.read();
+            const { value, done } = await readerRef.current.read();
             if (done) {
                 chatLogger('readResponse done', 'result', result);
                 return result;

@@ -12,6 +12,8 @@ const customJestConfig = {
     moduleNameMapper: {
         // 테스트용 모킹 모듈 (실제 모듈보다 우선)
         '^@/lib/lingui$': '<rootDir>/src/lib/__mocks__/lingui.ts',
+        // langfuse SDK 경량 모킹 — CI 워커 OOM 방지 (#143)
+        '^langfuse$': '<rootDir>/src/__mocks__/langfuse.ts',
         // 실제 모듈 매핑
         '^@/lib/(.*)$': '<rootDir>/src/lib/$1',
         '^@/components/(.*)$': '<rootDir>/src/components/$1',
@@ -35,8 +37,6 @@ const customJestConfig = {
     ],
     // DB 의존 통합 테스트 제외 (npm run test:integration으로 별도 실행)
     // 오픈소스 환경에서는 Supabase 없이 기본 테스트 실행 가능해야 함
-    // Langfuse/AI API 테스트 제외 — SDK 의존성이 워커 메모리(512MB+) 초과하여 CI에서 OOM 발생
-    // 로컬에서 개별 실행: NODE_OPTIONS="--max-old-space-size=4096" npx jest <파일경로> --forceExit
     testPathIgnorePatterns: [
         '/node_modules/',
         '\.integration\.test\.',
@@ -46,12 +46,6 @@ const customJestConfig = {
         'updateNotificationIdsBatch\.test\.ts',
         'calculate_progressive_interval\.test\.ts',
         'withdraw/__tests__/route\.test\.ts',
-        'langfuse/__tests__/config\.test\.ts',
-        'langfuse/__tests__/tracing\.test\.ts',
-        'langfuse/__tests__/tracing-enabled\.test\.ts',
-        'langfuse/__tests__/metrics\.test\.ts',
-        'langfuse\.test\.ts',
-        'ai/__tests__/input-validation\.test\.ts',
     ],
     testTimeout: 30000, // 30초
 };
@@ -67,6 +61,7 @@ module.exports = async () => {
     // 테스트용 모킹 모듈을 moduleNameMapper 앞에 추가 (우선순위 보장)
     jestConfig.moduleNameMapper = {
         '^@/lib/lingui$': '<rootDir>/src/lib/__mocks__/lingui.ts',
+        '^langfuse$': '<rootDir>/src/__mocks__/langfuse.ts',
         ...jestConfig.moduleNameMapper,
     };
     return jestConfig;

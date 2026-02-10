@@ -37,13 +37,13 @@ export async function POST(req: NextRequest) {
             withdrawLogger('사용자 인증 실패 - 탈퇴 프로세스 중단');
             return errorResponse(
                 {
-                    status: 500,
+                    status: 401,
                     errorCode: 'NO_USER_INFO',
                     data: {},
                     meta: {},
                     message: i18n._(msg`로그인이 필요합니다. 사용자 정보를 찾지 못했습니다.`),
                 },
-                new Error()
+                new Error('Authentication failed: user not found')
             );
         }
     }

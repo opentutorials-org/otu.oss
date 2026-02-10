@@ -46,9 +46,10 @@ export async function POST(req: Request) {
     if (user.data.user === null) {
         return errorResponse(
             {
+                status: 401,
                 message: i18n._(msg`로그인이 필요합니다.`),
             },
-            new Error('session.data.session is null')
+            new Error('Authentication failed: user is null')
         );
     }
     let body;

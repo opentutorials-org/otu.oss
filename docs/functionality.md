@@ -128,6 +128,7 @@
 - 채팅 내역 관리 및 탐색 (화살표 키로 이전 메시지 탐색)
 - RAG(Retrieval-Augmented Generation) 모드 선택 기능 (none/all/current)
 - CRAG(Corrective RAG) 파이프라인: 관련성 평가 → Adaptive 라우팅으로 RAG 검색 품질 자동 개선
+- RAG/CRAG 검색 실패 시 사용자에게 토스트 알림으로 안내 (참조 없이 답변 진행)
 - Langfuse 트레이싱: LLM 호출 추적, 응답 품질 스코어링, RAGAS 메트릭 기록
 - 모바일과 데스크톱 환경에서의 다른 입력 동작 지원
 - 익명 사용자 제한 및 로그인 유도

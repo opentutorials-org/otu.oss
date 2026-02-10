@@ -195,7 +195,7 @@ e2e/                   # Playwright E2E 테스트
     - 다양한 UI 상태 atom들
 - **WatermelonDB**: 로컬 데이터 + 오프라인 동기화
     - 복잡한 동기화 로직 (`src/watermelondb/sync.ts` - 40KB+)
-    - 동시 동기화 처리 (`src/watermelondb/sync.concurrent.test.ts`)
+    - 동시 동기화 처리 (`src/watermelondb/__tests__/sync.concurrent.test.ts`)
 - **Supabase**: 서버 데이터 + 실시간
 
 #### 페이지 내비게이션

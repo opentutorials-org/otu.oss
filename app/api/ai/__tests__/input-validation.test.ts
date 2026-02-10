@@ -35,6 +35,25 @@ jest.mock('@supabase/ssr', () => ({
     })),
 }));
 
+// AI SDK + Langfuse 로드를 차단하여 CI 워커 OOM 방지 (#143)
+// 이 테스트는 입력 검증 로직만 검증하므로 실제 AI SDK 동작은 불필요
+jest.mock('langfuse', () => ({
+    Langfuse: jest.fn(),
+}));
+
+jest.mock('@ai-sdk/openai', () => ({
+    createOpenAI: jest.fn(() => jest.fn()),
+}));
+
+jest.mock('@ai-sdk/gateway', () => ({
+    gateway: jest.fn(() => jest.fn()),
+}));
+
+jest.mock('ai', () => ({
+    streamText: jest.fn(),
+    generateObject: jest.fn(),
+}));
+
 describe('AI API 입력 검증', () => {
     beforeAll(() => {
         // AI 기능 활성화 (OPENAI_API_KEY 필요)

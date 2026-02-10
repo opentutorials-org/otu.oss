@@ -2,6 +2,19 @@
  * @jest-environment node
  */
 import { describe, test, expect, beforeEach, afterAll, jest } from '@jest/globals';
+
+// langfuse SDK 로드를 차단하여 CI 워커 OOM 방지 (#143)
+jest.mock('langfuse', () => ({
+    Langfuse: jest.fn().mockImplementation(() => ({
+        trace: jest.fn(),
+        generation: jest.fn(),
+        span: jest.fn(),
+        score: jest.fn(),
+        flushAsync: jest.fn<() => Promise<void>>().mockResolvedValue(undefined),
+        shutdownAsync: jest.fn<() => Promise<void>>().mockResolvedValue(undefined),
+    })),
+}));
+
 import {
     loadLangfuseConfig,
     isLangfuseEnabled,

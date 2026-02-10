@@ -9,6 +9,11 @@
  */
 import { describe, test, expect, beforeEach, afterAll, jest } from '@jest/globals';
 
+// langfuse SDK 로드를 차단하여 CI 워커 OOM 방지 (#143)
+jest.mock('langfuse', () => ({
+    Langfuse: jest.fn(),
+}));
+
 const mockGetLangfuse = jest.fn();
 const mockIsEnabled = jest.fn();
 

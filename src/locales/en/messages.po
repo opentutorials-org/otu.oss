@@ -242,7 +242,6 @@ msgid "AI 챗봇"
 msgstr "AI Chatbot"
 
 #: app/api/ai/titling/route.ts
-#: app/api/ai/titling/route.ts
 msgid "AI가 제목을 짓지 못했습니다."
 msgstr "AI couldn't generate a title."
 
@@ -423,6 +422,10 @@ msgstr "Search term"
 #. next-intl key: page-search.enter-search-keyword
 #~ msgid "검색어를 입력하세요"
 #~ msgstr "Enter search keyword"
+
+#: app/api/ai/similaritySearch/route.tsx
+msgid "검색할 메시지가 필요합니다."
+msgstr ""
 
 #: src/components/layout/LoginedMenu.tsx
 msgid "검정"
@@ -676,6 +679,10 @@ msgstr "AI responds based on your records."
 #~ msgid "내 요금제"
 #~ msgstr "My plans"
 
+#: app/api/setting/export/route.tsx
+msgid "내보내기가 {EXPORT_LIMIT}페이지로 제한되었습니다."
+msgstr ""
+
 #. next-intl key: read.no-content-found
 #~ msgid "내용이 없습니다."
 #~ msgstr "No content found."
@@ -899,6 +906,7 @@ msgid "로그인을 시작하기 전에 스토리지를 초기화"
 msgstr "Clear storage before login"
 
 #: app/api/ai/similaritySearch/route.tsx
+#: app/api/ai/titling/route.ts
 msgid "로그인이 필요합니다."
 msgstr "Login required."
 
@@ -1024,6 +1032,10 @@ msgstr "Prepend"
 #. next-intl key: read.features.memo
 #~ msgid "메모"
 #~ msgstr "Memo"
+
+#: app/api/ai/askLLM/openai/route.tsx
+msgid "메시지를 입력해주세요."
+msgstr ""
 
 #: app/api/ai/askLLM/openai/route.tsx
 msgid "모델 정보가 잘못되었습니다."
@@ -1885,6 +1897,12 @@ msgstr ""
 msgid "작업에 실패했습니다"
 msgstr "Operation failed"
 
+#: app/api/ai/askLLM/openai/route.tsx
+#: app/api/ai/similaritySearch/route.tsx
+#: app/api/ai/titling/route.ts
+msgid "잘못된 요청 형식입니다."
+msgstr ""
+
 #. next-intl key: common.please-wait
 #. next-intl key: login.please-wait
 #~ msgid "잠시만 기다려주세요."
@@ -2061,6 +2079,10 @@ msgstr ""
 #. next-intl key: validation.target-size-exceeded
 #~ msgid "제목과 본문의 합계가 {maxLength}자를 초과했습니다. (현재: {currentLength}자)"
 #~ msgstr "The sum of title and body exceeds {maxLength} characters. (Current: {currentLength} characters)"
+
+#: app/api/ai/titling/route.ts
+msgid "제목을 생성할 본문이 필요합니다."
+msgstr ""
 
 #: src/components/core/fileUploader/index.tsx
 #: src/components/GlobalInput/page/index.tsx

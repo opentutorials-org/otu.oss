@@ -62,11 +62,22 @@ export async function POST(req: Request) {
         user_id = process.env.TEST_USER_ID;
     } else {
         supabase = await createClient();
-        user_id = await fetchUserId();
+        try {
+            user_id = await fetchUserId();
+        } catch (error) {
+            syncLogger('❌ 인증 실패', error);
+            return new Response('Unauthorized', {
+                status: 401,
+                statusText: 'Unauthorized',
+            });
+        }
     }
 
     if (!user_id) {
-        throw new Error('User ID is not set');
+        return new Response('Unauthorized', {
+            status: 401,
+            statusText: 'Unauthorized',
+        });
     }
 
     const { searchParams } = new URL(req.url);

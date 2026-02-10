@@ -140,6 +140,9 @@ export default function Input({ showScrollButton }: { showScrollButton: boolean 
             result = cragResult.useReferences ? cragResult.results : [];
         } catch (error) {
             chatLogger('runReference', 'error', error);
+            openSnackbar({
+                message: t`참조 검색에 실패하여 참조 없이 답변합니다.`,
+            });
             return [];
         }
 
@@ -340,44 +343,53 @@ export default function Input({ showScrollButton }: { showScrollButton: boolean 
             chatLogger('readResponse: response.body is null');
             return '';
         }
-        readerRef.current = response.body.getReader();
+        const reader = response.body.getReader();
+        readerRef.current = reader;
         let result = '';
         const decoder = new TextDecoder();
 
         let first = true;
-        while (true) {
-            const { value, done } = await readerRef.current.read();
-            if (done) {
-                chatLogger('readResponse done', 'result', result);
-                return result;
-            }
+        try {
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) {
+                    chatLogger('readResponse done', 'result', result);
+                    return result;
+                }
 
-            result += decoder.decode(value, { stream: true });
+                result += decoder.decode(value, { stream: true });
 
-            // UI 업데이트
-            if (result) {
-                setChatMessages((draft: MessageItem[]) => {
-                    const index = draft.findIndex((item) => item.id === id);
-                    if (index === -1) {
-                        draft.push({
-                            id: id,
-                            type: MessageType.LLMResponse,
-                            name: 'OTU',
-                            content: result,
-                        });
-                    } else {
-                        draft[index].content = result;
+                // UI 업데이트
+                if (result) {
+                    setChatMessages((draft: MessageItem[]) => {
+                        const index = draft.findIndex((item) => item.id === id);
+                        if (index === -1) {
+                            draft.push({
+                                id: id,
+                                type: MessageType.LLMResponse,
+                                name: 'OTU',
+                                content: result,
+                            });
+                        } else {
+                            draft[index].content = result;
+                        }
+                    });
+
+                    if (first) {
+                        setTimeout(() => {
+                            scroll({ smooth: true });
+                            chatLogger('readResponse first stream', value);
+                        }, 100);
+                        first = false;
                     }
-                });
-
-                if (first) {
-                    setTimeout(() => {
-                        scroll({ smooth: true });
-                        chatLogger('readResponse first stream', value);
-                    }, 100);
-                    first = false;
                 }
             }
+        } catch (error) {
+            chatLogger('readResponse stream error', error);
+            if (readerRef.current === reader) {
+                readerRef.current = null;
+            }
+            throw error;
         }
     }
 
@@ -481,6 +493,9 @@ const getSimilarity = async (
                 page_id,
             }),
         });
+        if (!response.ok) {
+            throw new Error(`Similarity search failed: ${response.status}`);
+        }
         const result = await response.json();
         return result.data;
     } catch (error) {

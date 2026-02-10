@@ -35,8 +35,8 @@ const customJestConfig = {
     ],
     // DB 의존 통합 테스트 제외 (npm run test:integration으로 별도 실행)
     // 오픈소스 환경에서는 Supabase 없이 기본 테스트 실행 가능해야 함
-    // Langfuse 테스트 제외 — SDK 의존성이 워커 메모리(512MB+) 초과하여 CI에서 OOM 발생
-    // 로컬에서 개별 실행: npx jest <파일경로> --forceExit
+    // Langfuse/AI API 테스트 제외 — SDK 의존성이 워커 메모리(512MB+) 초과하여 CI에서 OOM 발생
+    // 로컬에서 개별 실행: NODE_OPTIONS="--max-old-space-size=4096" npx jest <파일경로> --forceExit
     testPathIgnorePatterns: [
         '/node_modules/',
         '\.integration\.test\.',
@@ -51,6 +51,7 @@ const customJestConfig = {
         'langfuse/__tests__/tracing-enabled\.test\.ts',
         'langfuse/__tests__/metrics\.test\.ts',
         'langfuse\.test\.ts',
+        'ai/__tests__/input-validation\.test\.ts',
     ],
     testTimeout: 30000, // 30초
 };

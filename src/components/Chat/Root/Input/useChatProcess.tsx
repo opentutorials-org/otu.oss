@@ -68,6 +68,9 @@ export function useChatProcess() {
                 }),
                 signal: abortControllerRef.current.signal,
             });
+            if (!response.ok) {
+                throw new Error(`Similarity search failed: ${response.status}`);
+            }
             const result = await response.json();
             return result.data;
         } catch (error) {
@@ -132,26 +135,25 @@ export function useChatProcess() {
             chatLogger('readResponse: response.body is null');
             return;
         }
-        readerRef.current = response.body.getReader();
+        const reader = response.body.getReader();
+        readerRef.current = reader;
         let result = '';
         const decoder = new TextDecoder();
 
-        let first = true;
-        while (true) {
-            const { value, done } = await readerRef.current.read();
-            if (done) {
-                break;
+        try {
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) {
+                    break;
+                }
+                result += decoder.decode(value, { stream: true });
             }
-            result += decoder.decode(value, { stream: true });
-            //   setSearch((draft) => {
-            //     draft.ai[draft.ai.length - 1].responseMessage = result;
-            //   });
-            //   if(first){
-            //     setTimeout(()=>{
-            //       scrollToBottom();
-            //     }, 100);
-            //     first = false;
-            //   }
+        } catch (error) {
+            chatLogger('readResponse stream error', error);
+            if (readerRef.current === reader) {
+                readerRef.current = null;
+            }
+            throw error;
         }
     }
     const handlePrompt = useCallback((data: Prompt_data): MessageItem => {

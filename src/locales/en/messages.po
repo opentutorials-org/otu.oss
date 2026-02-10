@@ -425,7 +425,7 @@ msgstr "Search term"
 
 #: app/api/ai/similaritySearch/route.tsx
 msgid "검색할 메시지가 필요합니다."
-msgstr ""
+msgstr "A search message is required."
 
 #: src/components/layout/LoginedMenu.tsx
 msgid "검정"
@@ -681,7 +681,7 @@ msgstr "AI responds based on your records."
 
 #: app/api/setting/export/route.tsx
 msgid "내보내기가 {EXPORT_LIMIT}페이지로 제한되었습니다."
-msgstr ""
+msgstr "Export is limited to {EXPORT_LIMIT} pages."
 
 #. next-intl key: read.no-content-found
 #~ msgid "내용이 없습니다."
@@ -1035,7 +1035,7 @@ msgstr "Prepend"
 
 #: app/api/ai/askLLM/openai/route.tsx
 msgid "메시지를 입력해주세요."
-msgstr ""
+msgstr "Please enter a message."
 
 #: app/api/ai/askLLM/openai/route.tsx
 msgid "모델 정보가 잘못되었습니다."
@@ -1901,7 +1901,7 @@ msgstr "Operation failed"
 #: app/api/ai/similaritySearch/route.tsx
 #: app/api/ai/titling/route.ts
 msgid "잘못된 요청 형식입니다."
-msgstr ""
+msgstr "Invalid request format."
 
 #. next-intl key: common.please-wait
 #. next-intl key: login.please-wait
@@ -2082,7 +2082,7 @@ msgstr ""
 
 #: app/api/ai/titling/route.ts
 msgid "제목을 생성할 본문이 필요합니다."
-msgstr ""
+msgstr "Body text is required to generate a title."
 
 #: src/components/core/fileUploader/index.tsx
 #: src/components/GlobalInput/page/index.tsx
@@ -2162,6 +2162,10 @@ msgstr "None"
 #: src/components/Chat/Root/Input/useChatProcess.tsx
 msgid "질문과 관련된 자료를 찾고 있어요."
 msgstr "Searching for relevant materials."
+
+#: src/components/Chat/Root/Input/index.tsx
+msgid "참조 검색에 실패하여 참조 없이 답변합니다."
+msgstr "Reference search failed. Answering without references."
 
 #: src/components/Chat/Root/Conversation/index.tsx
 msgid "찾았습니다!"

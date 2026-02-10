@@ -40,7 +40,10 @@ export async function GET(request: Request) {
             authLogger('소셜 로그인 코드 교환', 'code:', maskedCode, 'result:', result);
         }
     } catch (error) {
-        console.error('Auth callback error:', error);
+        authLogger('소셜 로그인 코드 교환 실패', error);
+        const errorUrl = new URL('/error', requestUrl.origin);
+        errorUrl.searchParams.set('error', 'Social login failed. Please try again.');
+        return NextResponse.redirect(errorUrl.toString());
     }
     const { data: userData } = await supabase.auth.getUser();
     authLogger('사용자 정보', userData);

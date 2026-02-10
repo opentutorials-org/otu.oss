@@ -18,7 +18,7 @@ import { describe, it, expect, jest, beforeEach, beforeAll, afterAll } from '@je
 // next/headers cookies 모킹
 jest.mock('next/headers', () => ({
     cookies: jest.fn(() => ({
-        getAll: jest.fn().mockResolvedValue([]),
+        getAll: jest.fn<any>().mockResolvedValue([]),
         set: jest.fn(),
     })),
 }));
@@ -27,7 +27,7 @@ jest.mock('next/headers', () => ({
 jest.mock('@supabase/ssr', () => ({
     createServerClient: jest.fn(() => ({
         auth: {
-            getUser: jest.fn().mockResolvedValue({
+            getUser: jest.fn<any>().mockResolvedValue({
                 data: { user: { id: 'test-user-id' } },
                 error: null,
             }),
@@ -63,9 +63,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req as any);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('INVALID_JSON');
             expect(responseJson.message).toContain('잘못된 요청 형식');
         });
@@ -89,9 +89,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req as any);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('EMPTY_MESSAGE');
             expect(responseJson.message).toContain('메시지를 입력해주세요');
         });
@@ -115,9 +115,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req as any);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('EMPTY_MESSAGE');
         });
     });
@@ -136,9 +136,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('INVALID_JSON');
             expect(responseJson.message).toContain('잘못된 요청 형식');
         });
@@ -162,9 +162,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('EMPTY_MESSAGE');
             expect(responseJson.message).toContain('검색할 메시지가 필요합니다');
         });
@@ -187,9 +187,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('EMPTY_MESSAGE');
         });
     });
@@ -208,9 +208,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('INVALID_JSON');
             expect(responseJson.message).toContain('잘못된 요청 형식');
         });
@@ -233,9 +233,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('EMPTY_BODY');
             expect(responseJson.message).toContain('제목을 생성할 본문이 필요합니다');
         });
@@ -258,9 +258,9 @@ describe('AI API 입력 검증', () => {
             });
 
             const res = await POST(req);
-            expect(res.status).toBe(400);
+            expect(res!.status).toBe(400);
 
-            const responseJson = await res.json();
+            const responseJson = await res!.json();
             expect(responseJson.errorCode).toBe('EMPTY_BODY');
         });
     });
@@ -296,7 +296,7 @@ describe('AI API 입력 검증', () => {
                 });
 
                 const res = await api.module.POST(req as any);
-                const responseJson = await res.json();
+                const responseJson = await res!.json();
 
                 expect(responseJson).toHaveProperty('errorCode');
                 expect(responseJson).toHaveProperty('message');

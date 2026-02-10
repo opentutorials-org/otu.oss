@@ -15,7 +15,7 @@ import { describe, it, expect, jest, beforeEach } from '@jest/globals';
 
 // next/headers cookies 모킹
 const mockCookieStore = {
-    getAll: jest.fn().mockResolvedValue([]),
+    getAll: jest.fn<any>().mockResolvedValue([]),
     set: jest.fn(),
 };
 
@@ -24,7 +24,8 @@ jest.mock('next/headers', () => ({
 }));
 
 // Supabase 클라이언트 모킹
-let mockGetUser: jest.Mock;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let mockGetUser: jest.Mock<any>;
 
 jest.mock('@supabase/ssr', () => ({
     createServerClient: jest.fn(() => ({

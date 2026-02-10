@@ -18,7 +18,7 @@ describe('syncRecordSchema 검증', () => {
     const TEST_USER_ID = 'test-user-validation-' + Date.now();
 
     beforeAll(() => {
-        process.env.NODE_ENV = 'test';
+        (process.env as any).NODE_ENV = 'test';
         process.env.TEST_USER_ID = TEST_USER_ID;
         // Supabase 연결을 우회하기 위해 VERCEL_ENV를 설정하지 않음
     });

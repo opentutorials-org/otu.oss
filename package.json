@@ -85,7 +85,7 @@
         "@mui/material": "^7.3.7",
         "@nozbe/watermelondb": "^0.28.0",
         "@opentelemetry/api": "1.9.0",
-        "@supabase/ssr": "^0.7.0",
+        "@supabase/ssr": "^0.8.0",
         "@supabase/supabase-js": "^2.93.3",
         "@tiptap/extensions": "^3.18.0",
         "@types/dompurify": "^3.0.5",

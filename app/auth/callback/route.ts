@@ -42,10 +42,13 @@ export async function GET(request: Request) {
     } catch (error) {
         authLogger('소셜 로그인 코드 교환 실패', error);
         const errorUrl = new URL('/error', requestUrl.origin);
-        errorUrl.searchParams.set('error', 'Social login failed. Please try again.');
+        errorUrl.searchParams.set('error', 'social_login_failed');
         return NextResponse.redirect(errorUrl.toString());
     }
-    const { data: userData } = await supabase.auth.getUser();
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError) {
+        authLogger('사용자 정보 조회 실패', userError);
+    }
     authLogger('사용자 정보', userData);
     if (userData && userData.user) {
         const { data: betaData, error: betaError } = await addBetaTester(

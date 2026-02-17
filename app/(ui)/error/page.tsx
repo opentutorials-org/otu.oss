@@ -15,8 +15,12 @@ export default function Error() {
     const supabase = createClient();
     const searchParams = useSearchParams();
 
-    // URL 파라미터에서 error 값 가져오기
+    // URL 파라미터에서 error 코드 가져오기 → 다국어 메시지 매핑
     const errorParam = searchParams.get('error');
+    const errorMessages: Record<string, string> = {
+        social_login_failed: t`소셜 로그인에 실패했습니다. 다시 시도해주세요.`,
+    };
+    const errorMessage = errorParam ? (errorMessages[errorParam] ?? t`오류가 발생했습니다.`) : null;
 
     // 사용자 로그인 상태 확인
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,7 +65,7 @@ export default function Error() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
             <h1 className="text-3xl font-bold mb-10">{t`앗!`}</h1>
-            <h2 className="text-lg mb-10">{errorParam ? errorParam : t`오류가 발생했습니다.`}</h2>
+            <h2 className="text-lg mb-10">{errorMessage ?? t`오류가 발생했습니다.`}</h2>
 
             <div className="flex flex-col gap-2 w-full max-w-[200px]">
                 <Button variant="contained" onClick={handleRetry}>

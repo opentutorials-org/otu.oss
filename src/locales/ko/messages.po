@@ -1474,6 +1474,10 @@ msgstr ""
 msgid "성공적으로 처리했습니다. 그 동안 이용해주셔서 감사합니다."
 msgstr ""
 
+#: app/(ui)/error/page.tsx
+msgid "소셜 로그인에 실패했습니다. 다시 시도해주세요."
+msgstr "소셜 로그인에 실패했습니다. 다시 시도해주세요."
+
 #: src/components/core/Setting/sub/Export/index.tsx
 msgid "소유자가 마지막으로 페이지를 본 날짜와 시간입니다. 사용자 활동을 추적합니다."
 msgstr ""
@@ -1649,6 +1653,7 @@ msgstr ""
 msgid "오류가 발생했습니다"
 msgstr ""
 
+#: app/(ui)/error/page.tsx
 #: app/(ui)/error/page.tsx
 msgid "오류가 발생했습니다."
 msgstr ""

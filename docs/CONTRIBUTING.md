@@ -65,9 +65,9 @@ cp .env.template .env.local
 #### 4단계: 브랜치 생성 및 코드 작성
 
 ```bash
-# 최신 dev 브랜치로 업데이트
-git checkout dev
-git pull upstream dev
+# 최신 main 브랜치로 업데이트
+git checkout main
+git pull upstream main
 
 # 새 브랜치 생성
 git checkout -b feature/이슈번호-간단한설명
@@ -134,9 +134,9 @@ npm run build        # 프로덕션 빌드
 ### 1. 브랜치 생성
 
 ```bash
-# 최신 dev 브랜치로 업데이트
-git checkout dev
-git pull upstream dev
+# 최신 main 브랜치로 업데이트
+git checkout main
+git pull upstream main
 
 # 새 브랜치 생성
 git checkout -b feature/이슈번호-간단한설명
@@ -171,7 +171,7 @@ npm run prettier
 
 ### 4. Pull Request
 
-- `dev` 브랜치로 PR을 생성합니다
+- `main` 브랜치로 PR을 생성합니다
 - PR 템플릿을 작성합니다
 - 코드 리뷰를 기다립니다
 

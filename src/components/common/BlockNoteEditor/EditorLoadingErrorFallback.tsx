@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import s from './EditorLoadingErrorFallback.module.css';
-import DOMPurify from 'dompurify';
+import { safeSanitize } from '@/utils/sanitize';
 import { useLingui } from '@lingui/react/macro';
 
 interface EditorLoadingErrorFallbackProps {
@@ -11,7 +11,7 @@ export function EditorLoadingErrorFallback({ html }: EditorLoadingErrorFallbackP
     const { t } = useLingui();
 
     const sanitizedHtml = useMemo(() => {
-        return DOMPurify.sanitize(html);
+        return safeSanitize(html);
     }, [html]);
 
     return (

@@ -4,7 +4,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useLingui } from '@lingui/react/macro';
-import DOMPurify from 'dompurify';
+import { safeSanitize } from '@/utils/sanitize';
 import s from './docDialog.module.css';
 
 export function DocsDialog({
@@ -24,7 +24,7 @@ export function DocsDialog({
         <Dialog open={open} onClose={onClose} className={s.root}>
             <DialogTitle>{title}</DialogTitle>
             <DialogContent
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(body) }}
+                dangerouslySetInnerHTML={{ __html: safeSanitize(body) }}
             ></DialogContent>
             <DialogActions>
                 <Button variant="contained" onClick={onClose} color="secondary">

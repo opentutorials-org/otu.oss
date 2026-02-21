@@ -163,7 +163,7 @@
         "patch-package": "^8.0.1",
         "pgmock": "^1.0.3",
         "postinstall-postinstall": "^2.1.0",
-        "prettier": "3.4.2",
+        "prettier": "3.8.1",
         "supabase": "^2.75.5",
         "tailwindcss": "^3.4.17",
         "typescript": "5.7.3"

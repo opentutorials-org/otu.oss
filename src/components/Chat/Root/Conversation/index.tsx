@@ -17,7 +17,7 @@ import CopyAfterIcon from '@/public/icon/copyAfterIcon';
 import CopyBeforeIcon from '@/public/icon/copyBeforeIcon';
 import { useLingui } from '@lingui/react/macro';
 import { marked } from 'marked';
-import DOMPurify from 'dompurify';
+import { safeSanitize } from '@/utils/sanitize';
 import { CreatePageBtn } from '@/components/Chat/CreatePageBtn';
 
 export function Conversation({ onLeaveBottom }: { onLeaveBottom: (isLeave: boolean) => void }) {
@@ -150,7 +150,7 @@ function NoticeMessage({ id, name, children }: { id: string; name: string; child
     return (
         <Root id={id}>
             <Name name={name}></Name>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(children) }}></div>
+            <div dangerouslySetInnerHTML={{ __html: safeSanitize(children) }}></div>
         </Root>
     );
 }
@@ -186,7 +186,7 @@ function SimilarityStartMessage({
     return (
         <Root id={id}>
             <Name name={name} justifyContent="start"></Name>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(children ?? '') }}></div>
+            <div dangerouslySetInnerHTML={{ __html: safeSanitize(children ?? '') }}></div>
         </Root>
     );
 }
@@ -251,7 +251,7 @@ function LLMResponseMessage({
         if (!content) return '';
         // marked로 마크다운을 HTML로 변환하고 DOMPurify로 안전하게 정화
         const rawHtml = marked(content, markedOptions) as string;
-        return DOMPurify.sanitize(rawHtml);
+        return safeSanitize(rawHtml);
     };
 
     return (

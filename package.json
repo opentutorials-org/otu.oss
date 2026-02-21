@@ -89,7 +89,7 @@
         "@supabase/supabase-js": "^2.93.3",
         "@tiptap/extensions": "^3.18.0",
         "@types/dompurify": "^3.0.5",
-        "@uploadcare/react-uploader": "^1.11.0",
+        "@uploadcare/react-uploader": "^1.12.0",
         "@uploadcare/rest-client": "^6.17.0",
         "@vercel/flags": "^3.1.1",
         "@vercel/functions": "^2.0.3",

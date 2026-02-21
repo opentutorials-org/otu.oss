@@ -80,7 +80,7 @@
         "@lingui/react": "^5.9.0",
         "@mantine/core": "^8.3.6",
         "@mantine/hooks": "^8.3.6",
-        "@mui/icons-material": "^7.3.1",
+        "@mui/icons-material": "^7.3.8",
         "@mui/lab": "^7.0.0-beta.16",
         "@mui/material": "^7.3.7",
         "@nozbe/watermelondb": "^0.28.0",

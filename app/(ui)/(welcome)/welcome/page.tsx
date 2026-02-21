@@ -148,6 +148,11 @@ function Top() {
 // Content 컴포넌트: 콘텐츠 섹션을 정의합니다.
 function Content() {
     const { t } = useLingui();
+    const [appUrl, setAppUrl] = useState('https://otu.ai');
+
+    useEffect(() => {
+        setAppUrl(window.location.origin);
+    }, []);
     const accordionStyle = {
         boxShadow: 'none',
         margin: 0,
@@ -243,7 +248,7 @@ function Content() {
                                     opentutorials.org
                                 </a>
                                 와 메모 서비스{' '}
-                                <a className="underline" href={getAppUrl()}>
+                                <a className="underline" href={appUrl}>
                                     OTU
                                 </a>{' '}
                                 등이 있습니다.

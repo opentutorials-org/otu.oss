@@ -66,7 +66,7 @@
         "@ai-sdk/gateway": "^2.0.17",
         "@ai-sdk/openai": "^2.0.75",
         "@blocknote/code-block": "^0.46.2",
-        "@blocknote/core": "^0.46.2",
+        "@blocknote/core": "^0.47.0",
         "@blocknote/mantine": "^0.46.2",
         "@blocknote/react": "^0.46.2",
         "@blocknote/xl-ai": "^0.46.2",

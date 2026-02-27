@@ -155,7 +155,7 @@
         "dotenv": "^16.4.7",
         "jest": "^30.0.4",
         "jest-environment-jsdom": "^30.2.0",
-        "jotai-devtools": "^0.10.1",
+        "jotai-devtools": "^0.13.0",
         "jsdom": "^26.1.0",
         "node-loader": "^2.1.0",
         "npm-check-updates": "^17.1.16",

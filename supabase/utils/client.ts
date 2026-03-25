@@ -1,6 +1,7 @@
 import { Database } from '@/lib/database/types';
 import { createBrowserClient } from '@supabase/ssr';
 import { createServerClient } from '@supabase/ssr';
+import { getSupabaseConfig, SUPABASE_NOT_CONFIGURED_MESSAGE } from './config';
 // @ts-ignore
 
 let debug = false;
@@ -8,17 +9,18 @@ if (typeof window !== 'undefined') {
     debug = localStorage.getItem('debug')?.includes('auth') || false;
 }
 export function createClient() {
-    return createBrowserClient<Database>(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        {
-            auth: {
-                debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED
-                    ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED === 'true'
-                    : false,
-            },
-        }
-    );
+    const config = getSupabaseConfig();
+    if (!config) {
+        throw new Error(SUPABASE_NOT_CONFIGURED_MESSAGE);
+    }
+
+    return createBrowserClient<Database>(config.url, config.anonKey, {
+        auth: {
+            debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED
+                ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED === 'true'
+                : false,
+        },
+    });
 }
 
 // 쿠키 정보를 안전하게 가져오는 함수

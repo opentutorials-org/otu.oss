@@ -6,6 +6,7 @@ import { authLogger } from '@/debug/auth';
 import { utf8Logger, cookieLogger } from '@/debug/middleware';
 import { cookies } from 'next/headers';
 import { reportValue } from '@vercel/flags';
+import { getSupabaseConfig } from './config';
 
 function getUserIp(request: NextRequest): string {
     const xForwardedFor = request.headers.get('x-forwarded-for');
@@ -132,6 +133,13 @@ function optimizeTokenFragments(
 }
 
 export async function updateSession(request: NextRequest) {
+    const config = getSupabaseConfig();
+    if (!config) {
+        // Supabase 환경변수가 설정되지 않은 경우 세션 처리를 건너뛰고
+        // 요청을 그대로 통과시킵니다.
+        return NextResponse.next({ request });
+    }
+
     const debug = process.env.DEBUG?.includes('auth') || false;
     const cookieStore = await cookies();
     authLogger('updateSession', { path: request.nextUrl.pathname });
@@ -144,59 +152,55 @@ export async function updateSession(request: NextRequest) {
         request,
     });
 
-    const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        {
-            auth: {
-                debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED
-                    ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED === 'true'
-                    : false,
+    const supabase = createServerClient(config.url, config.anonKey, {
+        auth: {
+            debug: process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED
+                ? process.env.NEXT_PUBLIC_SUPABASE_AUTH_DEBUG_ENABLED === 'true'
+                : false,
+        },
+        cookies: {
+            getAll() {
+                try {
+                    const rawData = request.cookies.getAll();
+                    cookieLogger('getAll 시작 - 원본 쿠키 개수:', rawData.length);
+
+                    // 토큰 조각 최적화 적용 (결과를 요청 스코프 변수에 저장)
+                    const result = optimizeTokenFragments(rawData);
+                    invalidFragmentNamesToDelete = result.invalidFragmentNames;
+                    cookieLogger('getAll - 최적화 후 쿠키 개수:', result.cookies.length);
+
+                    authLogger('getAll', result.cookies);
+                    cookieLogger('getAll 완료 - 최적화된 쿠키 반환');
+                    return result.cookies;
+                } catch (error) {
+                    utf8Logger('getAll에서 치명적 오류 발생:', error);
+                    cookieLogger('getAll 오류 상세:', error);
+                    throw error;
+                }
             },
-            cookies: {
-                getAll() {
-                    try {
-                        const rawData = request.cookies.getAll();
-                        cookieLogger('getAll 시작 - 원본 쿠키 개수:', rawData.length);
+            setAll(cookiesToSet) {
+                try {
+                    cookieLogger('setAll 시작 - 설정할 쿠키 개수:', cookiesToSet.length);
 
-                        // 토큰 조각 최적화 적용 (결과를 요청 스코프 변수에 저장)
-                        const result = optimizeTokenFragments(rawData);
-                        invalidFragmentNamesToDelete = result.invalidFragmentNames;
-                        cookieLogger('getAll - 최적화 후 쿠키 개수:', result.cookies.length);
-
-                        authLogger('getAll', result.cookies);
-                        cookieLogger('getAll 완료 - 최적화된 쿠키 반환');
-                        return result.cookies;
-                    } catch (error) {
-                        utf8Logger('getAll에서 치명적 오류 발생:', error);
-                        cookieLogger('getAll 오류 상세:', error);
-                        throw error;
-                    }
-                },
-                setAll(cookiesToSet) {
-                    try {
-                        cookieLogger('setAll 시작 - 설정할 쿠키 개수:', cookiesToSet.length);
-
-                        authLogger('setAll', cookiesToSet);
-                        cookiesToSet.forEach(({ name, value, options }) =>
-                            request.cookies.set(name, value)
-                        );
-                        supabaseResponse = NextResponse.next({
-                            request,
-                        });
-                        cookiesToSet.forEach(({ name, value, options }) => {
-                            return supabaseResponse.cookies.set(name, value, options);
-                        });
-                        cookieLogger('setAll 완료');
-                    } catch (error) {
-                        utf8Logger('setAll에서 치명적 오류 발생:', error);
-                        cookieLogger('setAll 오류 상세:', error);
-                        throw error;
-                    }
-                },
+                    authLogger('setAll', cookiesToSet);
+                    cookiesToSet.forEach(({ name, value, options }) =>
+                        request.cookies.set(name, value)
+                    );
+                    supabaseResponse = NextResponse.next({
+                        request,
+                    });
+                    cookiesToSet.forEach(({ name, value, options }) => {
+                        return supabaseResponse.cookies.set(name, value, options);
+                    });
+                    cookieLogger('setAll 완료');
+                } catch (error) {
+                    utf8Logger('setAll에서 치명적 오류 발생:', error);
+                    cookieLogger('setAll 오류 상세:', error);
+                    throw error;
+                }
             },
-        }
-    );
+        },
+    });
     // 🔥 getUser 호출 시 UTF-8 오류 처리 추가
     let user;
     try {

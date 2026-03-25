@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-[![Deploy with Vercel](https://vercel.com/button)](<https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fopentutorials-org%2Fotu.oss&env=NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY,UPLOADCARE_PRIVATE_KEY,OPENAI_API_KEY&envDescription=Uploadcare%20keys%20for%20image%20upload%20(optional).%20OpenAI%20key%20for%20AI%20features%20(optional).&envLink=https%3A%2F%2Fgithub.com%2Fopentutorials-org%2Fotu.oss%2Fblob%2Fmain%2Fdocs%2Finstallation.md&project-name=otu&repository-name=otu&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6&external-id=https%3A%2F%2Fgithub.com%2Fopentutorials-org%2Fotu.oss%2Ftree%2Fmain>)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fopentutorials-org%2Fotu.oss&project-name=otu&repository-name=otu&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6&external-id=https%3A%2F%2Fgithub.com%2Fopentutorials-org%2Fotu.oss%2Ftree%2Fmain)
 
 **OTU**는 웹과 모바일을 지원하는 차세대 AI 메모 애플리케이션입니다. BlockNote 에디터와 OpenAI GPT-4o를 활용하여 자동 저장, AI 기반 제목 생성, 스마트 검색, 리마인더 시스템을 제공합니다.
 
